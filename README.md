@@ -1,4 +1,4 @@
-## CU Blood Component Template
+# CU Blood Component Template
 
 ### `npm go` or `yarn go`
 

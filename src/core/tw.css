@@ -1,0 +1,14 @@
+@import url('fonts/fonts.css');
+
+@tailwind preflight;
+@tailwind utilities;
+
+body {
+    font-size: 18px;
+    @apply leading-normal;
+    @apply antialiased;
+}
+
+.text-lg, .text-xl, .text-2xl, .text-3xl, .text-4xl, .text-5xl {
+    @apply leading-none;
+}

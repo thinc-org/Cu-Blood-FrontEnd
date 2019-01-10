@@ -17,6 +17,7 @@
     "bloodTypeAB": "BloodType AB",
     "totalDonors": "Total Donors",
     "donationDate": "Donation date",
+    "startOfRegistrationDate": "Start of Registration",
     "endOfRegistrationDate": "End of Registration",
     "left": "",
     "days": "days left"

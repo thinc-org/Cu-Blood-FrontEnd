@@ -15,7 +15,7 @@ class EventContainer extends Component {
             centerMode: true,
             responsive: [
                 {
-                    breakpoint: 1500,
+                    breakpoint: 1400,
                     settings: {
                         slidesToShow: 2,
                         slidesToScroll: 1,
@@ -24,7 +24,7 @@ class EventContainer extends Component {
                     }
                 },
                 {
-                    breakpoint: 1050,
+                    breakpoint: 768,
                     settings: {
                         slidesToShow: 1,
                         slidesToScroll: 1,

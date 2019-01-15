@@ -4,16 +4,11 @@ import Navbar from './component/Navbar';
 
 class App extends Component {
 
-  async getSomeData(obj) {
-    return await axios.post('./posts', obj)
-  }
-
   render() {
     return (
       <div>
         <Navbar />
-        <div className="">
-        
+        <div style={{height:'2000px', background: 'linear-gradient(to right bottom, #430089, #82ffa1)'}}>
         </div>
       </div>
     );

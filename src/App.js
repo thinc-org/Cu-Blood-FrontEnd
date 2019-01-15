@@ -1,16 +1,25 @@
 import React, { Component } from 'react';
-import Statistic from "./Component/Statistic";
+import Statistic from "./component/Statistic";
 //import axios from './core/core';
 import Navbar from './component/Navbar';
+import EventContainer from './component/EventContainer';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 
 class App extends Component {
 
   render() {
+
     return (
-    <div className="font-sans border-black" style={{height:'2000px', background: 'linear-gradient(to right bottom, #430089, #82ffa1)'}}>
+      <div className="font-sans border-black flex flex-col content-center w-screen" style={{ height: '2000px', background: 'linear-gradient(to right bottom, #ffffff, #000)' }}>
         <Navbar />
-        <Statistic />
-     </div>
+        <Statistic/>
+        <div >
+          <EventContainer/>
+        </div>
+
+      </div>
     );
   }
 }

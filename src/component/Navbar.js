@@ -3,7 +3,7 @@ import logo from '../asset/logo/logo1-small.png'
 
 export default () => {
     return (
-        <div className="font-cu-heading sticky pin-t pin-l w-full shadow">
+        <div className="font-cu-heading sticky pin-t pin-l w-full shadow z-40">
             <div className="flex justify-center py-3 bg-white">
                 <div className="flex justify-between w-3/4" style={{maxWidth:'1080px'}}>
                     <div className="flex items-center">

@@ -17,7 +17,6 @@ class App extends Component {
       .catch(console.log)
     return (
       <div className="font-sans">
-        <p>Hello.</p>
         <FacebookContainer />
       </div>
     );

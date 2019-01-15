@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Statistic from "./Component/Statistic";
+import Statistic from "./component/Statistic";
 //import axios from './core/core';
-import Navbar from './Component/Navbar';
+import Navbar from './component/Navbar';
 
 class App extends Component {
 

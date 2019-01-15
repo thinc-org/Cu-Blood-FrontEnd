@@ -1,4 +1,5 @@
 import React from 'react';
+import FacebookCard from './FacebookCard';
 
 class FacebookZone extends React.Component {
     // constructor(props) {
@@ -11,7 +12,7 @@ class FacebookZone extends React.Component {
     render () {
 
         return (
-            <div id="root" className="bg-indigo-lighter pt-10 flex flex-col items-center text-white">
+            <div id="root" className="bg-indigo-light pt-10 flex flex-col items-center text-white">
                 <div className=" ">
                     OUR ACTIVITY
                 </div>
@@ -22,8 +23,11 @@ class FacebookZone extends React.Component {
 
                 <hr className=""/>
 
-                <div>
-                    This is where the card should be
+                <div className="w-screen flex justify-around">
+                    
+                    <FacebookCard />
+                    <FacebookCard />
+                    <FacebookCard />
                 </div>
 
             </div>

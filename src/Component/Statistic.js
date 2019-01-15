@@ -45,16 +45,16 @@ class Statistic extends Component {
                 </div>
                 <div className="flex flex-wrap w-3/5 mb-10">
                     <div className="border-grey border-r border-b border-solid text-center w-1/2 pt-5 pb-10 pr-10 pl-10">
-                        {content[0]};
+                        {content[0]}
                     </div>
                     <div className="border-grey border-b border-solid text-center w-1/2 pt-5 pb-10 pr-10 pl-10">
-                        {content[1]};
+                        {content[1]}
                     </div>
                     <div className="border-grey border-r border-solid text-center w-1/2 pt-10 pr-10 pl-10">
-                        {content[2]};
+                        {content[2]}
                     </div>
                     <div className="text-center w-1/2 pt-10 pr-10 pl-10">
-                        {content[3]};
+                        {content[3]}
                     </div>
                 </div>
             </div>

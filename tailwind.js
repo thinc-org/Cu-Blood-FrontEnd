@@ -127,6 +127,14 @@ let colors = {
   'pink-light': '#fa7ea8',
   'pink-lighter': '#ffbbca',
   'pink-lightest': '#ffebef',
+
+  'cb-grey-light': '#efefef',
+  'cb-grey-lighter': '#fbfbfb',
+  'cb-red': '#c74851',
+  'cb-red-light': '#ffe5e7',
+  'cb-pink': '#f57aa7',
+  'cb-pink-light': '#fdedf3',
+  'cb-blue': '#8b9dc3'
 }
 
 module.exports = {

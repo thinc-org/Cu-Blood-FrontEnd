@@ -5,7 +5,6 @@ class App extends Component {
   render() {
     return (
       <div className="font-sans border-black">
-        <p>Hello.</p>
         <Statistic />
       </div>
     );

@@ -8,17 +8,6 @@ class App extends Component {
   }
 
   render() {
-    this.getSomeData( {
-      test: 'test'
-    })
-      .then(response => console.log(response.data))
-      // .then(result => console.log(result))
-      .catch(console.log)
-    return (
-      <div className="font-sans">
-        <p>Hello.</p>
-      </div>
-    );
   }
 }
 

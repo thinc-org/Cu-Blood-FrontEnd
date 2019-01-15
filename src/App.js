@@ -18,7 +18,6 @@ class App extends Component {
         <div >
           <EventContainer/>
         </div>
-
       </div>
     );
   }

@@ -40,7 +40,7 @@ class Statistic extends Component {
         let contentStyle = "border-grey border-solid border-b w-full sm:w-1/2 text-center pb-8 pr-10 pl-10";
 
         return (
-            <div className="flex flex-col items-center font-cu-heading">
+            <div className="flex flex-col items-center font-cu-heading bg-white">
                 <div className="border-sold border-red-dark border-b-8 text-center mt-10 mb-10" >
                     <h2 className="text-base tracking-wide mb-3 text-pink">STATISTICS</h2>
                     <h1 className="text-3xl mb-3">ข้อมูลทางสถิติ {}</h1> 

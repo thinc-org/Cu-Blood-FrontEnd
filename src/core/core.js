@@ -6,3 +6,9 @@ axios.interceptors.request.use(function (config) {
 }, function (error) {
     return Promise.reject(error)
 })
+
+const instance = axios.create({    
+    baseURL: 'https://jsonplaceholder.typicode.com'
+});
+
+export default instance; 

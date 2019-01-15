@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from './core/core';
+import FacebookContainer from './components/FacebookContainer';
 
 class App extends Component {
 
@@ -17,6 +18,7 @@ class App extends Component {
     return (
       <div className="font-sans">
         <p>Hello.</p>
+        <FacebookContainer />
       </div>
     );
   }

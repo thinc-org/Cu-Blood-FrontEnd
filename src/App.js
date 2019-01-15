@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Statistic from "./Component/Statistic";
 //import axios from './core/core';
 import Navbar from './component/Navbar';
+import EventCard from './component/EventCard';
 
 class App extends Component {
 
@@ -10,6 +11,7 @@ class App extends Component {
     <div className="font-sans border-black" style={{height:'2000px', background: 'linear-gradient(to right bottom, #430089, #82ffa1)'}}>
         <Navbar />
         <Statistic/>
+        <EventCard/>
       </div>
     );
   }

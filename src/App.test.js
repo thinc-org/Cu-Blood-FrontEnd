@@ -2,18 +2,13 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import App from './App'
-
 import Statistic from "./component/Statistic";
-
 import Navbar from './component/Navbar';
-
 import EventContainer from './component/EventContainer';
-
 import HomeHead from './component/HomeHead';
-
 import FacebookContainer from './component/FacebookContainer';
-
 import Footer from './component/Footer';
+
 it('renders without crashing', () => {
     shallow(<App />);
 });

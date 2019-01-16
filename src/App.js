@@ -26,7 +26,6 @@ class App extends Component {
         <EventContainer />
         <Statistic />
         <FacebookContainer />
-        {/* <EventCard/> */}
         <Footer />
       </div>
     );

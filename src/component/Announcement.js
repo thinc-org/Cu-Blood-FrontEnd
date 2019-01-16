@@ -50,7 +50,7 @@ class Announcement extends Component {
         return(
             <div className="bg-white flex flex-col items-center mb-10">
                 <Header borderColor="border-cb-red" english="ANNOUNCEMENT" thai="ข่าวประกาศ" englishColor="text-cb-pink"/>
-                <div className="font-cu-heading w-3/5">
+                <div className="font-cu-heading w-3/5 flex justify-center">
                     <div className=""><AnnouncementContent title={title} date={date}/></div>
                 </div>
             </div>

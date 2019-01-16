@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Slider from "react-slick";
+import Slider from 'react-slick';
 import EventCard from './EventCard'
 
 class EventContainer extends Component {

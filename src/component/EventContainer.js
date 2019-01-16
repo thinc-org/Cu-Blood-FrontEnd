@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Slider from 'react-slick';
 import EventCard from './EventCard'
+import Header from './PageHeader';
 
 class EventContainer extends Component {
     constructor() {
@@ -36,13 +37,16 @@ class EventContainer extends Component {
 
     render() {
         return (
-            <Slider {...this.settings}>
-                <EventCard id="1" />
-                <EventCard id="2" />
-                <EventCard id="3" />
-                <EventCard id="4" />
-                <EventCard id="5" />
-            </Slider>
+            <div className="bg-cb-grey-lighter">
+                <Header english="CALENDAR" thai="ปฏิทินกิจกรรม" borderColor="border-cb-red" englishColor="text-cb-red"/>
+                <Slider {...this.settings}>
+                    <EventCard id="1" />
+                    <EventCard id="2" />
+                    <EventCard id="3" />
+                    <EventCard id="4" />
+                    <EventCard id="5" />
+                </Slider>   
+            </div>
         );
     }
 }

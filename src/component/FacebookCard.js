@@ -11,13 +11,14 @@ class FacebookCard extends React.Component {
     
 
     render() {
+        let backgroundPhotoURL = "https://picsum.photos/400/400/?random";
         
         
         return(
             
             <div className="text-black lg:w-1/3 bg-transparent flex lg:justify-center  content-center overflow-hidden mb-12">
                 <div className="bg-white" style={{borderRadius: '1rem', width: "19rem"}}>
-                    <div className="bg-white flex bg-center" style={{ height: '150px', borderTopLeftRadius: '1rem', borderTopRightRadius: '1rem', backgroundImage: 'url("https://picsum.photos/400/400/?random")'}}>
+                    <div className="bg-white flex bg-center" style={{ height: '150px', borderTopLeftRadius: '1rem', borderTopRightRadius: '1rem', backgroundImage: 'url(' + backgroundPhotoURL + ')'}}>
                     </div>
                     <div className="flex flex-row px-3 bg-white mt-2">
                         <img src={clock} alt=""/>

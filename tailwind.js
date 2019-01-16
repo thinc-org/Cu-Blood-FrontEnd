@@ -134,7 +134,8 @@ let colors = {
   'cb-red-light': '#ffe5e7',
   'cb-pink': '#f57aa7',
   'cb-pink-light': '#fdedf3',
-  'cb-blue': '#8b9dc3'
+  'cb-blue': '#8b9dc3',
+  'cb-grey-border': '#eaeaea'
 }
 
 module.exports = {
@@ -782,7 +783,7 @@ module.exports = {
   */
 
   shadows: {
-    default: '0 2px 4px 0 rgba(0,0,0,0.10)',
+    default: '0 0 7px 0 rgba(0,0,0,0.05)',
     'md': '0 4px 8px 0 rgba(0,0,0,0.12), 0 2px 4px 0 rgba(0,0,0,0.08)',
     'lg': '0 15px 30px 0 rgba(0,0,0,0.11), 0 5px 15px 0 rgba(0,0,0,0.08)',
     'inner': 'inset 0 2px 4px 0 rgba(0,0,0,0.06)',

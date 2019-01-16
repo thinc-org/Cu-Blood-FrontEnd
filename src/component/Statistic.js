@@ -26,7 +26,7 @@ class Statistic extends Component {
             data: response.data,
             isFetched: true,
         }))
-        .catch(err => console.log(err))
+        .catch(console.log)
     }
 
     render() {

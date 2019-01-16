@@ -20,12 +20,12 @@ class App extends Component {
 
     return (
         
-      <div className="font-sans border-black flex flex-col content-center w-screen bg-grey-light" >
-        <div><Navbar /></div>
+      <div className="font-sans border-black flex flex-col content-center w-screen" >
+        <Navbar />
         <HomeHead />
         <UrgentAnnouncement />
         <Announcement />
-        <EventContainer />
+        <div className="bg-grey-light"><EventContainer /></div>
         <Statistic />
         <FacebookContainer />
         {/* <EventCard/> */}

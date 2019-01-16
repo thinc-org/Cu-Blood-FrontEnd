@@ -4,7 +4,7 @@ class UrgentAnnouncement extends Component {
   render() {
     return (
       <div className="w-full flex justify-center bg-white">
-        <div className="border-black border-b flex w-3/5 pb-8 mt-10">
+        <div className="border-black border-b flex w-3/5 pb-8 mt-10 font-cu-heading">
           <div className="border-black border-r w-1/2 pr-8 flex justify-end items-end">
             {this.contentDate(`18-21`, `มกราคม`)}
             {this.contentDesc(`วันบริจาคเลือด`, `อีก 3 วัน`)}
@@ -31,7 +31,7 @@ class UrgentAnnouncement extends Component {
   contentDesc = (title, time) => {
       return (
       <div>
-        <h2 className="text-3xl mb-3">{title}</h2>
+        <div className="text-3xl mb-3 font-black">{title}</div>
         <p className="text-xl font-semibold" style={{color: "#4c4c4c"}}>{time}</p>
       </div>
       )

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import AnnounceContent from './AnnounceContent';
+import AnnouncementContent from './AnnouncementContent';
 import axios from "../core/core";
 import Header from "./PageHeader";
 
@@ -26,7 +26,7 @@ class Announcement extends Component {
             data: response.data,
             isFetched: true,
         }))
-        .catch(err => console.log(err))
+        .catch(console.log)
     }
 
     render() {
@@ -35,21 +35,23 @@ class Announcement extends Component {
         } 
         
         //Save data of title and date from API as list
-        let title = []
-        for (let element of this.state.data) {
-            title.push(element.title);
-        }
+        let title = this.state.data.map(element => {
+            let a = [];
+            a.push(element.title);
+            return a;
+            });
 
-        let date = []
-        for (let element of this.state.data) {
-            date.push(`${element.id}`);
-        }
+        let date = this.state.data.map(element => {
+            let a = [];
+            a.push(element.id);
+            return a;
+            });
 
         return(
             <div className="bg-white flex justify-center">
                 <div className="font-cu-heading w-3/5 flex flex-col items-center mb-10">
                     <Header borderColor="border-cb-red" english="ANNOUNCEMENT" thai="ข่าวประกาศ" englishColor="text-cb-pink"/>
-                    <AnnounceContent title={title} date={date}/>
+                    <AnnouncementContent title={title} date={date}/>
                 </div>
             </div>
         );

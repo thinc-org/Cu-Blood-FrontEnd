@@ -2,6 +2,7 @@ import React from 'react';
 import FacebookCard from './FacebookCard';
 import FacebookButton from './FacebookButton'
 
+
 class FacebookZone extends React.Component {
     // constructor(props) {
     //     super(props);
@@ -25,7 +26,6 @@ class FacebookZone extends React.Component {
                 <hr className="border-2 w-32 mt-6 mb-12" />
 
                 <div className="w-screen flex justify-around">
-                    
                     <FacebookCard />
                     <FacebookCard />
                     <FacebookCard />

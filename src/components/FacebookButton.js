@@ -13,7 +13,7 @@ class FacebookButton extends React.Component {
                     height: 30,
                     width: 30,
                     marginRight: 10
-                }}/>
+                }} alt="Facebook Logo"/>
 
                 CU Blood
             </div>

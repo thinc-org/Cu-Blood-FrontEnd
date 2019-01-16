@@ -21,7 +21,7 @@ class App extends Component {
       <div className="font-sans border-black flex flex-col content-center w-screen bg-grey-light" >
         <Navbar />
         <HomeHead />
-        <EventContainer />
+        {/* <EventContainer /> */}
         <Statistic />
         <FacebookContainer />
         {/* <EventCard/> */}

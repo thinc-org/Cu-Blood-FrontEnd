@@ -10,14 +10,16 @@ class Statistic extends Component {
             isFetched: false,
         }
     }
+    
+    //Collect only the lastest 4 data from API
     async getSomeData() {
         return await axios.get('./posts')
         .then(response => response.data.length)
         .then(dataNumber => axios.get(`./posts?_start=${dataNumber-4}&_limit=4`));
-        // return await axios.get('./posts?_page=0&_limit=4')
     }
 
     componentDidMount() {
+        //Save data to state
         this.getSomeData()
         .then(response => this.setState({
             data: response.data,
@@ -31,18 +33,19 @@ class Statistic extends Component {
             return <div></div>
         } 
         
+        //Execute the content of each block
         let content = this.state.data.map(element => {
         let a = [];
         a.push(<StatCont number={element.id} content={element.title}/>);
         return a;
         });
 
-        let contentStyle = "border-grey border-solid border-b w-full sm:w-1/2 text-center pb-8 pr-10 pl-10";
+        let contentStyle = "border-cb-grey border-solid border-b w-full sm:w-1/2 text-center pb-8 pr-10 pl-10";
 
         return (
             <div className="flex flex-col items-center font-cu-heading bg-white">
-                <div className="border-sold border-red-dark border-b-8 text-center mt-10 mb-10" >
-                    <h2 className="text-base tracking-wide mb-3 text-pink">STATISTICS</h2>
+                <div className="border-sold border-cb-red border-b-8 text-center mt-10 mb-10" >
+                    <h2 className="text-base tracking-wide mb-3 text-cb-pink">STATISTICS</h2>
                     <h1 className="text-3xl mb-3">ข้อมูลทางสถิติ {}</h1> 
                 </div>
                 <div className="flex flex-wrap w-3/5 mb-10">

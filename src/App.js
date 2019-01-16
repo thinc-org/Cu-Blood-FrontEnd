@@ -3,6 +3,7 @@ import Statistic from "./component/Statistic";
 //import axios from './core/core';
 import Navbar from './component/Navbar';
 import EventContainer from './component/EventContainer';
+import HomeHead from './component/HomeHead';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -16,6 +17,7 @@ class App extends Component {
     return (
       <div className="font-sans border-black flex flex-col content-center w-screen bg-grey-light" style={{ height: '2000px'}}>
         <Navbar />
+        <HomeHead />
         <Statistic />
         <EventContainer />
         {/* <EventCard/> */}

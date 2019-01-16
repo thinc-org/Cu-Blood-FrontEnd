@@ -23,5 +23,10 @@ jobs:
           name: Run Test and Coverage
           command: |
             ./cc-test-reporter before-build
-            yarn test -- --coverage
+            yarn test --coverage
             ./cc-test-reporter after-build --exit-code $?
+      - store_artifacts:
+          path: target/surefire-reports
+          destination: tr1
+      - store_test_results:
+          path: target/surefire-reports

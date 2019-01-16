@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from "../core/core";
 import StatCont from "./StatCont";
+import Header from "./PageHeader";
 
 class Statistic extends Component {
     constructor(props) {
@@ -44,10 +45,7 @@ class Statistic extends Component {
 
         return (
             <div className="flex flex-col items-center font-cu-heading bg-white">
-                <div className="border-solid border-cb-red border-b-8 text-center mt-10 mb-10" >
-                    <h2 className="text-base tracking-wide mb-1 text-cb-pink">STATISTICS</h2>
-                    <h1 className="text-3xl mb-3">ข้อมูลทางสถิติ {}</h1> 
-                </div>
+                <Header borderColor="border-cb-red" text="Stat data" heading="STAT" headingColor="text-cb-pink"/>
                 <div className="flex flex-wrap w-3/5 mb-10">
                     <div className={`${contentStyle} sm:border-r sm:pt-5`}>
                         {content[0]}

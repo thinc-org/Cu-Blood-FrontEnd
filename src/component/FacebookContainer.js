@@ -25,7 +25,7 @@ class FacebookZone extends React.Component {
 
                 <hr className="border-2 w-32 mt-6 mb-12" />
 
-                <div className="flex lg:justify-around flex-col lg:flex-row w-screen">
+                <div className="flex flex-col items-center lg:flex-row w-screen" >
                     <FacebookCard />
                     <FacebookCard />
                     <FacebookCard />

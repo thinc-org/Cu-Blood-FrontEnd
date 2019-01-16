@@ -8,9 +8,10 @@ class FacebookCard extends React.Component {
 
     render() {
         
+        
         return(
             
-            <div className="text-black w-screen lg:w-1/3 bg-transparent px-10 overflow-hidden flex justify-center items-center flex-col mb-12" style={{ height: '6000x'}}>
+            <div className="text-black lg:w-1/3 bg-transparent flex lg:justify-center  content-center overflow-hidden mb-12">
                 <div className="bg-white" style={{borderRadius: '1rem', width: "19rem"}}>
                     <div className="bg-white flex bg-center" style={{ height: '150px', borderTopLeftRadius: '1rem', borderTopRightRadius: '1rem', backgroundImage: 'url("https://picsum.photos/400/400/?random")'}}>
                     </div>

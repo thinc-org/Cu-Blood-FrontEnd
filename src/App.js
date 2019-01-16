@@ -16,7 +16,7 @@ class App extends Component {
 
     return (
         
-      <div className="font-sans border-black flex flex-col content-center w-screen bg-grey-light" style={{ height: '2000px'}}>
+      <div className="font-sans border-black flex flex-col content-center w-screen bg-grey-light" >
         <Navbar />
         <Statistic />
         <EventContainer />

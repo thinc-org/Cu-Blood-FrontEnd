@@ -24,7 +24,7 @@ class Statistic extends Component {
         .then(response => this.setState({
             data: response.data,
             isFetched: true,
-        }, () => console.log(this.state.data)))
+        }))
         .catch(err => console.log(err))
     }
 

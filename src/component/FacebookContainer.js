@@ -26,7 +26,7 @@ class FacebookZone extends React.Component {
 
                 <hr className="border-2 w-32 mt-6 mb-12" /> */}
 
-                <PageHeader borderColor="border-transparent" thaiColor="white" thai="CU Blood on Facebook" englishColor="text-grey-light text-xs" english="OUR ACTIVITY" />
+                <PageHeader borderColor="border-white" thaiColor="white" thai="CU Blood on Facebook" englishColor="text-grey-light text-xs" english="OUR ACTIVITY" />
 
                 <div className="flex flex-col items-center lg:flex-row w-screen" >
                     <FacebookCard />

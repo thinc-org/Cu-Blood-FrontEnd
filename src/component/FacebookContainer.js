@@ -14,7 +14,7 @@ class FacebookZone extends React.Component {
     render () {
 
         return (
-            <div id="root" className=" pt-10 flex flex-col items-center text-white" style={{backgroundColor: '#8e9dc0'}}>
+            <div id="root" className=" pt-10 flex flex-col items-center text-white " style={{backgroundColor: '#8e9dc0'}}>
                 <div className=" ">
                     OUR ACTIVITY
                 </div>
@@ -25,14 +25,18 @@ class FacebookZone extends React.Component {
 
                 <hr className="border-2 w-32 mt-6 mb-12" />
 
-                <div className="w-screen flex justify-around">
+                <div className="flex lg:justify-around flex-col lg:flex-row w-screen">
                     <FacebookCard />
                     <FacebookCard />
                     <FacebookCard />
                 </div>
+                
+
+
                 <div className="my-12">
                     <FacebookButton />
                 </div>
+
 
             </div>
                 

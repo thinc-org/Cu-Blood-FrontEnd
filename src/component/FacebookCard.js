@@ -10,7 +10,7 @@ class FacebookCard extends React.Component {
         
         return(
             
-            <div className="text-black w-1/3 bg-transparent px-10 overflow-hidden flex justify-center items-center flex-col">
+            <div className="text-black w-screen lg:w-1/3 bg-transparent px-10 overflow-hidden flex justify-center items-center flex-col mb-12" style={{ height: '6000x'}}>
                 <div className="bg-white" style={{borderRadius: '1rem', width: "19rem"}}>
                     <div className="bg-white flex bg-center" style={{ height: '150px', borderTopLeftRadius: '1rem', borderTopRightRadius: '1rem', backgroundImage: 'url("https://picsum.photos/400/400/?random")'}}>
                     </div>
@@ -27,8 +27,7 @@ class FacebookCard extends React.Component {
                         <button className="" style={{color: '#8e9dc0'}}>View on Facebook</button>
                     </div>
                 </div>
-                <div>
-                </div>
+
             </div>
             
         );

@@ -9,7 +9,7 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: Setup Dependencies
-          command: npm install
+          command: yarn install
       - run:
           name: Setup Code Climate test-reporter
           command: |
@@ -23,5 +23,5 @@ jobs:
           name: Run Test and Coverage
           command: |
             ./cc-test-reporter before-build
-            npm test -- --coverage
+            yarn test -- --coverage
             ./cc-test-reporter after-build --exit-code $?

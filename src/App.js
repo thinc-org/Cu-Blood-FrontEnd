@@ -1,23 +1,27 @@
 import React, { Component } from 'react';
-import axios from './core/core';
-import FacebookContainer from './components/FacebookContainer';
+import Statistic from "./component/Statistic";
+//import axios from './core/core';
+import Navbar from './component/Navbar';
+import EventContainer from './component/EventContainer';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import FacebookContainer from './component/FacebookContainer';
+
+import EventCard from './component/EventCard';
+
 
 class App extends Component {
 
-  async getSomeData(obj) {
-    return await axios.post('./posts', obj)
-  }
-
   render() {
-    this.getSomeData( {
-      test: 'test'
-    })
-      .then(response => console.log(response.data))
-      // .then(result => console.log(result))
-      .catch(console.log)
+
     return (
-      <div className="font-sans">
+        
+      <div className="font-sans border-black flex flex-col content-center w-screen bg-grey-light" style={{ height: '2000px'}}>
+        <Navbar />
+        <Statistic />
+        <EventContainer />
         <FacebookContainer />
+        {/* <EventCard/> */}
       </div>
     );
   }

@@ -25,8 +25,12 @@ jobs:
             ./cc-test-reporter before-build
             yarn test --coverage
             ./cc-test-reporter after-build --exit-code $?
-      - store_artifacts:
-          path: target/surefire-reports
-          destination: tr1
-      - store_test_results:
-          path: target/surefire-reports
+      - store_artifacts: # special step to save test results as as artifact
+          # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
+          path: test-results.xml
+          prefix: tests
+      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
+          path: coverage
+          prefix: coverage
+      - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+          path: test-results.xml

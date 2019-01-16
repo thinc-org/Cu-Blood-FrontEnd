@@ -21,8 +21,8 @@ class AnnounceCont extends Component {
     
     content = (title, date) => {
         return (
-            <div className="border-cb-grey border-b flex items-start py-6">
-                <img src={Yell} alt="Megaphone" className="w-8 mr-10"/>
+            <div className="border-cb-grey border-b flex items-center py-4">
+                <img src={Yell} alt="Megaphone" className="w-8 mr-6"/>
                 <div>
                     <p className="text-xl font-semibold mb-1" style={{color: "#333333"}}>{title}</p>
                     <p className="text-cb-pink font-medium font-cu-body">{date}</p>

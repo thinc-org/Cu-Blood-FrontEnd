@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import FacebookContainer from './component/FacebookContainer';
 
-import EventCard from './component/EventCard';
+//import EventCard from './component/EventCard';
 
 
 class App extends Component {

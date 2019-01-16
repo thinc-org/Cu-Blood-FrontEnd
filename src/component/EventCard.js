@@ -30,7 +30,7 @@ export default ({id}) => {
                 </div>
                 <div className="flex justify-end items-start">
                     <span className="text-right font-cu-heading mr-3 font-semibold">อ่านต่อ</span>
-                    <img alt="forawrd arrow" className="w-6" src={Arrow}/>
+                    <img alt="arrow forward" className="w-6" src={Arrow}/>
                 </div>
             </div>
         </div>

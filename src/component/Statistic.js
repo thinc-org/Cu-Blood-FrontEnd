@@ -45,7 +45,7 @@ class Statistic extends Component {
 
         return (
             <div className="flex flex-col items-center font-cu-heading bg-white">
-                <Header borderColor="border-cb-red" text="Stat data" heading="STAT" headingColor="text-cb-pink"/>
+                <Header borderColor="border-cb-red" english="STATISTIC" thai="ข้อมูลมางสถิติ" englishColor="text-cb-pink"/>
                 <div className="flex flex-wrap w-3/5 mb-10">
                     <div className={`${contentStyle} sm:border-r sm:pt-5`}>
                         {content[0]}

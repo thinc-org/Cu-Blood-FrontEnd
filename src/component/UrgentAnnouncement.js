@@ -1,18 +1,21 @@
 import React, { Component } from "react";
 
-class AnnounceHead extends Component {
+class UrgentAnnouncement extends Component {
   render() {
     return (
-      <div className="border-black border-b flex w-full pb-8">
-        <div className="border-black border-r w-1/2 pr-8 flex justify-end items-end">
+      <div className="w-full flex justify-center bg-white">
+        <div className="border-black border-b flex w-3/5 pb-8 mt-10">
+          <div className="border-black border-r w-1/2 pr-8 flex justify-end items-end">
             {this.contentDate(`18-21`, `มกราคม`)}
             {this.contentDesc(`วันบริจาคเลือด`, `อีก 3 วัน`)}
-        </div>
-        <div className="w-1/2 pl-8 flex items-end">
+          </div>
+          <div className="w-1/2 pl-8 flex items-end">
             {this.contentDate(17, `มกราคม`)}
             {this.contentDesc(`ปิดการลงทะเบียน`, `อีก 2 วัน`)}
-        </div>
+          </div>
+        </div>        
       </div>
+
     );
   }
 
@@ -35,4 +38,4 @@ class AnnounceHead extends Component {
   }
 }
 
-export default AnnounceHead;
+export default UrgentAnnouncement;

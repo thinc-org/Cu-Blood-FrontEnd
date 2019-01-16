@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import AnnounceHead from './AnnounceHead';
-import AnnounceCont from './AnnounceCont';
+import AnnounceContent from './AnnounceContent';
 import axios from "../core/core";
+import Header from "./PageHeader";
 
 class Announcement extends Component {
     constructor(props) {
@@ -47,13 +47,9 @@ class Announcement extends Component {
 
         return(
             <div className="bg-white flex justify-center">
-                <div className="font-cu-heading w-3/5 flex flex-col items-center my-10">
-                    <AnnounceHead />
-                    <div className="text-center mt-10 border-cb-red border-b-8">
-                        <h2 className="text-base tracking-wide text-cb-pink mb-1">Announcement</h2>
-                        <h2 className="text-3xl mb-3">ข่าวประกาศ</h2>
-                    </div>
-                    <AnnounceCont title={title} date={date}/>
+                <div className="font-cu-heading w-3/5 flex flex-col items-center mb-10">
+                    <Header borderColor="border-cb-red" english="ANNOUNCEMENT" thai="ข่าวประกาศ" englishColor="text-cb-pink"/>
+                    <AnnounceContent title={title} date={date}/>
                 </div>
             </div>
         );

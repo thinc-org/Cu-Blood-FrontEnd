@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick-theme.css";
 import FacebookContainer from './component/FacebookContainer';
 import Footer from './component/Footer';
 import Announcement from './component/Announcement';
+import UrgentAnnouncement from './component/UrgentAnnouncement';
 
 //import EventCard from './component/EventCard';
 
@@ -22,6 +23,7 @@ class App extends Component {
       <div className="font-sans border-black flex flex-col content-center w-screen bg-grey-light" >
         <div><Navbar /></div>
         <HomeHead />
+        <UrgentAnnouncement />
         <Announcement />
         <EventContainer />
         <Statistic />

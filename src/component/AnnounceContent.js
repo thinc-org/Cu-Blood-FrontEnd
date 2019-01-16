@@ -5,7 +5,7 @@ import Arrow from '../asset/homePage/forward-arrow2.png';
 class AnnounceCont extends Component {
     render() {
         return(
-            <div className="mt-8">
+            <div>
                 {this.content(`จุฬาฯ ลงนามบันทึกความเข้าใจกับ North-Eastern Hill University (NEHU)`, `จันทร์, 14 มกราคม 2562`)}
                 {this.content(this.props.title[0], this.props.date[0])}
                 {this.content(this.props.title[1], this.props.date[1])}

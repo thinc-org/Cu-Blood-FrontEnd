@@ -8,6 +8,8 @@ import EventContainer from './component/EventContainer';
 import HomeHead from './component/HomeHead';
 import FacebookContainer from './component/FacebookContainer';
 import Footer from './component/Footer';
+import Announcement from './component/Announcement';
+import UrgentAnnouncement from './component/UrgentAnnouncement';
 
 it('renders without crashing', () => {
     shallow(<App />);
@@ -29,4 +31,10 @@ it('renders without crashing', () => {
 });
 it('renders without crashing', () => {
     shallow(<Footer/>);
+});
+it('renders without crashing', () => {
+    shallow(<Announcement/>);
+});
+it('renders without crashing', () => {
+    shallow(<UrgentAnnouncement/>);
 });

@@ -48,10 +48,10 @@ class Announcement extends Component {
             });
 
         return(
-            <div className="bg-white flex justify-center">
-                <div className="font-cu-heading w-3/5 flex flex-col items-center mb-10">
-                    <Header borderColor="border-cb-red" english="ANNOUNCEMENT" thai="ข่าวประกาศ" englishColor="text-cb-pink"/>
-                    <AnnouncementContent title={title} date={date}/>
+            <div className="bg-white flex flex-col items-center mb-10">
+                <Header borderColor="border-cb-red" english="ANNOUNCEMENT" thai="ข่าวประกาศ" englishColor="text-cb-pink"/>
+                <div className="font-cu-heading w-3/5">
+                    <div className=""><AnnouncementContent title={title} date={date}/></div>
                 </div>
             </div>
         );

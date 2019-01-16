@@ -25,7 +25,7 @@ class App extends Component {
         <HomeHead />
         <UrgentAnnouncement />
         <Announcement />
-        <div className="bg-grey-light"><EventContainer /></div>
+        <EventContainer />
         <Statistic />
         <FacebookContainer />
         {/* <EventCard/> */}

@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - "stable"
+cache:
+  directories:
+    - node_modules
+script:
+  - yarn test
+  - yarn build
+deploy:
+  provider: surge
+  skip_cleanup: true
+  domain: new5558.surge.sh
+  project: ./build/
+  on:
+    branch: master

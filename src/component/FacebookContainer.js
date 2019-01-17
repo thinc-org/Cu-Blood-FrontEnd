@@ -12,10 +12,10 @@ class FacebookZone extends React.Component {
 
 
 
-    render () {
+    render() {
 
         return (
-            <div id="root" className=" flex flex-col items-center text-white " style={{backgroundColor: '#8e9dc0'}}>
+            <div id="root" className=" flex flex-col items-center text-white " style={{ backgroundColor: '#8e9dc0' }}>
                 {/* <div className=" ">
                     OUR ACTIVITY
                 </div>
@@ -33,16 +33,11 @@ class FacebookZone extends React.Component {
                     <FacebookCard />
                     <FacebookCard />
                 </div>
-                
-
-
                 <div className="my-12">
                     <FacebookButton />
                 </div>
-
-
             </div>
-                
+
 
         )
     }

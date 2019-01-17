@@ -18,14 +18,14 @@ class App extends Component {
 
     return (
       <div className="font-sans border-black flex flex-col content-center w-screen" >
-        {/* <Navbar />
+        <Navbar />
         <HomeHead />
-        <UrgentAnnouncement /> */}
+        <UrgentAnnouncement />
         <Announcement />
        {/*} <EventContainer /> */}
-        {/* <Statistic />
+        <Statistic />
         <FacebookContainer />
-        <Footer /> */}
+        <Footer />
       </div>
     );
   }

@@ -41,7 +41,7 @@ class EventContainer extends Component {
 
     render() {
         return (
-            <div className="bg-cb-grey-lighter w-full">
+            <div className="bg-cb-grey-lighter w-screen">
                 <Header english="CALENDAR" thai="ปฏิทินกิจกรรม" borderColor="border-cb-red" englishColor="text-cb-red"/>
                 <Slider {...this.settings}>
                     <EventCard id="1" />

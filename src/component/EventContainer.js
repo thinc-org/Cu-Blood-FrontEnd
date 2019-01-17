@@ -17,7 +17,6 @@ class EventContainer extends Component {
             autoplay: true,
             autoplaySpeed: 7000,
             variableWidth: true,
-            focusOnSelect: true
             // responsive: [
             //     {
             //         breakpoint: 1400,

@@ -8,32 +8,12 @@ export default ({id}) => {
         width: 'auto',
     }
 
-    // props = 0 rounded card + specific width
-    // props = 1 rounded card on left side only
-    const roundedCorner = (props) => {
-        if(props===0) {
-            const myStyle = {
-                borderRadius: '1rem',
-                width: '30rem'
-            }
-            return (
-                myStyle
-            )
-        }   
-        else if (props===1) {
-            const myStyle = {
-                borderTopLeftRadius: '1rem',
-                borderBottomLeftRadius: '1rem'
-            }
-            return (
-                myStyle
-            )
-        }
-    }
+    
+
 
     return (
-        <div className="flex flex-row shadow-lg bg-white m-4 " style={roundedCorner(0)}>
-            <div className="bg-cb-pink-light text-cb-pink p-6 font-cu-heading flex flex-col " style={roundedCorner(1)} >
+        <div className="flex flex-row shadow-lg bg-white m-4 " style={{borderRadius: '1rem', width: '30rem'}}>
+            <div className="bg-cb-pink-light text-cb-pink p-6 font-cu-heading flex flex-col " style={{borderTopLeftRadius: '1rem', borderBottomLeftRadius: '1rem'}} >
                 <span className="text-3xl font-bold  whitespace-no-wrap">06-08</span>
                 <span className="text-sm">มกราคม</span>
             </div>

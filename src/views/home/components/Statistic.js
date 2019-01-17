@@ -35,9 +35,9 @@ class Statistic extends Component {
         } 
         
         //Execute the content of each block
-        let content = this.state.data.map(element => {
+        let content = this.state.data.map((element, index) => {
         let a = [];
-        a.push(<StatisticContent number={element.id} content={element.title}/>);
+        a.push(<StatisticContent key={index} number={element.id} content={element.title}/>);
         return a;
         });
 

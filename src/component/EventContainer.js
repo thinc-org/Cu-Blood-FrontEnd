@@ -7,37 +7,41 @@ class EventContainer extends Component {
     constructor() {
         super();
         this.settings = {
-            className: 'center',
+            className: 'h-auto w-screen',
             dots: true,
             infinite: true,
-            speed: 500,
-            slidesToShow: 3,
+            speed: 1000,
             slidesToScroll: 1,
             centerMode: true,
-            responsive: [
-                {
-                    breakpoint: 1400,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1,
-                        infinite: true,
-                        dots: true
-                    }
-                },
-                {
-                    breakpoint: 768,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
-                    }
-                },
-            ]
+            adaptiveHeight: true,
+            autoplay: true,
+            autoplaySpeed: 7000,
+            variableWidth: true,
+            focusOnSelect: true
+            // responsive: [
+            //     {
+            //         breakpoint: 1400,
+            //         settings: {
+            //             slidesToShow: 2,
+            //             slidesToScroll: 1,
+            //             infinite: true,
+            //             dots: true
+            //         }
+            //     },
+            //     {
+            //         breakpoint: 768,
+            //         settings: {
+            //             slidesToShow: 1,
+            //             slidesToScroll: 1,
+            //         }
+            //     },
+            // ]
         };
     }
 
     render() {
         return (
-            <div className="bg-cb-grey-lighter w-full">
+            <div className="bg-cb-grey-lighter w-screen">
                 <Header english="CALENDAR" thai="ปฏิทินกิจกรรม" borderColor="border-cb-red" englishColor="text-cb-red"/>
                 <Slider {...this.settings}>
                     <EventCard id="1" />

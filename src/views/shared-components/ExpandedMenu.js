@@ -6,7 +6,7 @@ export default ({visibility, onCloseListener}) => {
     return visibility ? (
         <div className="w-4/5 bg-white shadow-md h-screen fixed pin-r pin-t z-50 flex flex-col md:hidden font-cu-heading font-medium tracking-wide leading-none">
             <div className="flex flex-row justify-between items-center py-6 ml-10 mr-6 border-b">
-                <a onClick={onCloseListener} className="close"/>
+                <div onClick={onCloseListener} className="close"></div>
                 <div className="rounded-lg flex flex-row items-center ml-4 p-1 px-2 bg-cb-pink-light mb-2">
                     <img className="h-5" src={earth} alt="change language" />
                     <span className="ml-2 font-sans text-cb-red">THAI</span>

@@ -22,7 +22,7 @@ class App extends Component {
   onMenuCloseListener = () => {
     this.setState({
       onExpanded: false,
-    })
+    });
     console.log("closed");
   }
 

@@ -2,7 +2,7 @@ import React from 'react';
 import logo from 'assets/logo/logo1.svg'
 import earth from 'assets/logo/ios-globe.svg'
 
-export default () => {
+export default ({onExpandListener}) => {
     return (
         <div className="font-cu-heading text-sm font-medium tracking-wide leading-none sticky pin-t pin-l w-full shadow z-40">
             <div className="flex justify-between items-center md:justify-center py-5 md:py-3 bg-white">
@@ -27,12 +27,12 @@ export default () => {
                         </div>
                     </div>
                 </div>
-                <div className="flex md:hidden flex-col mr-6">
+                <div className="flex md:hidden flex-col mr-6" onClick={onExpandListener}>
                     <div className="border-b-2 border-black w-8"></div>
-                    <div className="border-b-2 border-black w-8 mt-2"></div>
-                    <div className="border-b-2 border-black w-8 mt-2"></div>
+                    <div className="border-b-2 border-black w-8 pt-1"></div>
+                    <div className="border-b-2 border-black w-8 pt-1"></div>
                 </div>
             </div>
         </div>
-    );
+        );
 };

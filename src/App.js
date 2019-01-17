@@ -10,7 +10,7 @@ class App extends Component {
     return (
       <div>
         <Navbar />
-        <NavbarMobile/>
+        {/* <NavbarMobile/> */}
         <Home />
       </div>
     );

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import axios from "../../../core/core";
+import axios from "core/core";
 import StatisticContent from "./StatisticContent";
-import Header from "../../shared-components/PageHeader";
+import Header from "views/shared-components/PageHeader";
 
 class Statistic extends Component {
     constructor(props) {

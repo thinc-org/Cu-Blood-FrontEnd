@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Statistic from "./components/Statistic";
-import EventContainer from './components/EventContainer';
+// import EventContainer from './components/EventContainer';
 import HomeHead from './components/HomeHead';
 import FacebookContainer from '../shared-components/FacebookContainer';
 import Footer from '../shared-components/Footer';
@@ -17,7 +17,7 @@ class App extends Component {
         <HomeHead />
         <UrgentAnnouncement />
         <Announcement />
-        <EventContainer />
+        {/* <EventContainer /> */}
         <Statistic />
         <FacebookContainer />
         <Footer />

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Home from './views/home/Home'
 import Navbar from './views/shared-components/Navbar';
+import NavbarMobile from './views/shared-components/NavbarMobile';
 
 class App extends Component {
 
@@ -8,8 +9,9 @@ class App extends Component {
 
     return (
       <div>
-        <Navbar/>
-        <Home/>
+        <Navbar />
+        <NavbarMobile/>
+        <Home />
       </div>
     );
   }

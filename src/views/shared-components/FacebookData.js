@@ -20,7 +20,7 @@ class FacebookData extends React.Component {
                 posts: res.data
             })
         })
-        .catch(err => console.log(err))
+        .catch(console.log)
     }
 
     render() {
@@ -44,10 +44,10 @@ class FacebookData extends React.Component {
 
         return(
             <div>
-                <p className="font-bold pb-3">
+                <p className="font-bold font-cu-heading leading-normal mb-2">
                     {title[randomNumber]}
                 </p>
-                <p>
+                <p className="font-cu-body leading-none">
                     {body[randomNumber]}
                 </p>
             

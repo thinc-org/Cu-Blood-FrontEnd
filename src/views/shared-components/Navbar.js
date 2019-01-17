@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../asset/logo/logo1-small.png'
+import logo from '../../assets/logo/logo1-small.png'
 
 export default () => {
     return (
@@ -17,7 +17,7 @@ export default () => {
                         </ul>
                     </div>
                     <ul className="list-reset py-6">
-                        <li className="text-red">เช้าสู่ระบบ</li>
+                        <li className="text-red">เข้าสู่ระบบ</li>
                     </ul>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import Yell from '../asset/homePage/megaphone.png';
-import Arrow from '../asset/homePage/forward-arrow2.png';
+import Yell from '../../../assets/homePage/megaphone.png';
+import Arrow from '../../../assets/homePage/forward-arrow2.png';
 
 class AnnouncementContent extends Component {
     render() {

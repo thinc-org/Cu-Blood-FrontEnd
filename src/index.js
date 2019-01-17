@@ -4,7 +4,7 @@ import './core/tailwind.css';
 import './core/core.js';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import './index.css'
+import './assets/css/index.css'
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

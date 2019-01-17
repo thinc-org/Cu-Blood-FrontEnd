@@ -1,5 +1,5 @@
 import React from 'react';
-import clock from '../asset/logo/clock.png';
+import clock from '../asset/logo/clock.svg';
 import FacebookData from './FacebookData'
 
 
@@ -21,7 +21,7 @@ class FacebookCard extends React.Component {
                     <div className="bg-white flex bg-center " style={{ height: '150px', borderTopLeftRadius: '1rem', borderTopRightRadius: '1rem', backgroundImage: 'url(' + backgroundPhotoURL + ')'}}>
                     </div>
                     <div className="flex flex-row px-3 bg-white mt-2">
-                        <img src={clock} alt=""/>
+                        <img className="w-6 pt-1"src={clock} alt="clock"/>
                         <p className="flex items-center pl-2 font-bold" style={{ color: '#8e9dc0'}}>
                             Today
                         </p>

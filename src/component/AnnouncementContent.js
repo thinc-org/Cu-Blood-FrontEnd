@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import Yell from '../asset/homePage/megaphone.png';
-import Arrow from '../asset/homePage/forward-arrow2.png';
+import Yell from '../asset/homePage/megaphone.svg';
+import Arrow from '../asset/homePage/forward-arrow2.svg';
 
 class AnnouncementContent extends Component {
     render() {
@@ -15,7 +15,7 @@ class AnnouncementContent extends Component {
                 {this.content(title[4], date[4])}
                 <div className="flex w-full items-center justify-end mt-8">
                     <div className="font-medium mr-2" style={{colo: "#333333"}}>ดูข่าวประกาศทั้งหมด</div>
-                    <img src={Arrow} alt="arrow" className="w-6" />
+                    <img src={Arrow} alt="arrow" className="w-6 pb-2" />
                 </div>
             </div>
         );

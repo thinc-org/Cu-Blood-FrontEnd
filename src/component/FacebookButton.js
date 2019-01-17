@@ -1,5 +1,5 @@
 import React from 'react'
-import flogo from '../asset/logo/flogo.png'
+import flogo from '../asset/logo/flogo.svg'
 
 class FacebookButton extends React.Component {
     // constructor(props) {

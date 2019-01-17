@@ -26,8 +26,8 @@ class AnnouncementContent extends Component {
             <div className="border-cb-grey border-b flex items-center py-4">
                 <img src={Yell} alt="Megaphone" className="w-8 mr-6"/>
                 <div>
-                    <div className="text-xl font-normal mb-1" style={{color: "#333333"}}>{title}</div>
-                    <div className="text-cb-pink font-normal font-cu-body">{date}</div>
+                    <div className="text-xl font-medium mb-1" style={{color: "#333333"}}>{title}</div>
+                    <div className="text-cb-pink font-normal font-cu-body italic">{date}</div>
                 </div> 
             </div>
         );

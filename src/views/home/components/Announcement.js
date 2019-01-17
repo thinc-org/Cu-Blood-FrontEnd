@@ -47,6 +47,7 @@ class Announcement extends Component {
             return a;
             });
 
+
         return(
             <div className="bg-white flex flex-col items-center mb-10">
                 <Header borderColor="border-cb-red" english="ANNOUNCEMENT" thai="ข่าวประกาศ" englishColor="text-cb-pink"/>

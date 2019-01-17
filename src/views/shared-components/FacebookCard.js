@@ -15,9 +15,9 @@ class FacebookCard extends React.Component {
                 <div className="bg-white shadow-lg" style={{borderRadius: '1rem', width: "19rem"}}>
                     <div className="bg-white flex bg-center" style={{ height: '150px', borderTopLeftRadius: '1rem', borderTopRightRadius: '1rem', backgroundImage: 'url(' + backgroundPhotoURL + ')'}}>
                     </div>
-                    <div className="flex flex-row items-start px-6 bg-white my-6">
-                        <img className="w-6 pt-1" src={clock} alt="clock"/>
-                        <p className="pl-2 font-bold text-lg" style={{ color: '#8e9dc0'}}>
+                    <div className="flex flex-row items-center px-6 bg-white my-6">
+                        <img className="w-10" src={clock} alt="clock"/>
+                        <p className="pl-2 font-semibold text-lg" style={{ color: '#8e9dc0'}}>
                             Today
                         </p>
                     </div>

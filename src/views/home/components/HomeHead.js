@@ -21,7 +21,7 @@ class HomeHead extends Component {
               ร่วมกันบริจาคโลหิตให้แก่สภากาชาดไทย
             </div>
             <div className="flex justify-center md:justify-start">
-              <button className="text-lg bg-cb-red rounded-lg text-white px-10 h-12 mb-6 leading-none">
+              <button className="text-lg bg-cb-red rounded-lg text-white px-12 h-12 mb-6 leading-none">
                 ลงทะบียน
               </button>              
             </div>

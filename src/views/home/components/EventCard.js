@@ -1,5 +1,5 @@
 import React from 'react';
-import Arrow from '../../../assets/homePage/forward-arrow2.svg';
+import Arrow from 'assets/homePage/forward-arrow2.svg';
 
 export default ({id}) => {
 

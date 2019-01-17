@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import AnnouncementContent from './AnnouncementContent';
-import axios from "../../../core/core";
-import Header from "../../shared-components/PageHeader";
+import axios from "core/core";
+import Header from "views/shared-components/PageHeader";
 
 class Announcement extends Component {
     constructor(props) {

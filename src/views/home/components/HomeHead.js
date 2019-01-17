@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import Arrow from "../../../assets/homePage/forward-arrow.png";
-import Cross from "../../../assets/homePage/cross.png";
-import Logo from "../../../assets/logo/logo1.png";
-import Blood from "../../../assets/homePage/blood-logo.png";
+import Arrow from "../../../assets/homePage/forward-arrow.svg";
+import Cross from "../../../assets/homePage/cross.svg";
+import Logo from "../../../assets/logo/logo1.svg";
+import Blood from "../../../assets/homePage/blood-logo.svg";
 
 class HomeHead extends Component {
   render() {
@@ -20,12 +20,12 @@ class HomeHead extends Component {
               <span className="font-black">จุฬาลงกรณ์มหาวิทยาลัย</span>
               ร่วมกันบริจาคโลหิตให้แก่สภากาชาดไทย
             </p>
-            <button className="text-lg bg-cb-red rounded-lg text-white px-12 py-4 -2 mb-6">
+            <button className="text-lg bg-cb-red rounded-lg text-white px-12 pt-2 h-12 mb-6">
               ลงทะบียน
             </button>
             <div className="flex items-center justify-center md:justify-start">
               <p className="text-lg text-cb-red font-normal mr-2">เกี่ยวกับโครงการ</p>
-              <img src={Arrow} alt="arrow" className="w-6" />
+              <img src={Arrow} alt="arrow" className="w-6 pb-2" />
             </div>
           </div>
           <div className="w-full md:w-1/2 flex md:flex-row justify-center md:justify-start items-center md:pl-10">

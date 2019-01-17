@@ -1,5 +1,5 @@
 import React from 'react';
-import Arrow from '../../../assets/homePage/forward-arrow2.png';
+import Arrow from '../../../assets/homePage/forward-arrow2.svg';
 
 export default ({id}) => {
 
@@ -34,7 +34,7 @@ export default ({id}) => {
                 </div>
                 <div className="flex justify-end items-start">
                     <span className="text-right font-cu-heading mr-3 font-semibold">อ่านต่อ</span>
-                    <img alt="arrow forward" className="w-6" src={Arrow}/>
+                    <img alt="arrow forward" className="w-6 pb-2" src={Arrow}/>
                 </div>
             </div>
         </div>

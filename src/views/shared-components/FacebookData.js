@@ -44,10 +44,10 @@ class FacebookData extends React.Component {
 
         return(
             <div>
-                <p className="font-bold font-cu-heading">
+                <p className="font-bold font-cu-heading leading-normal mb-2">
                     {title[randomNumber]}
                 </p>
-                <p className="font-cu-body">
+                <p className="font-cu-body leading-none">
                     {body[randomNumber]}
                 </p>
             

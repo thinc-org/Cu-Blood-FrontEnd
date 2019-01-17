@@ -41,11 +41,11 @@ class Statistic extends Component {
         return a;
         });
 
-        let contentStyle = "border-cb-grey border-solid border-b w-full sm:w-1/2 text-center pb-8 pr-10 pl-10";
+        let contentStyle = "border-cb-grey border-solid border-b w-screen sm:w-1/2 text-center pb-8 pr-10 pl-10";
 
         return (
             <div className="flex flex-col items-center font-cu-heading bg-white">
-                <Header borderColor="border-cb-red" english="STATISTIC" thai="ข้อมูลมางสถิติ" englishColor="text-cb-pink"/>
+                <Header borderColor="border-cb-red" english="STATISTIC" thai="ข้อมูลทางสถิติ" englishColor="text-cb-pink"/>
                 <div className="flex flex-wrap w-3/5 mb-10">
                     <div className={`${contentStyle} sm:border-r sm:pt-5`}>
                         {content[0]}

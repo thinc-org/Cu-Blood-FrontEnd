@@ -17,7 +17,6 @@ class App extends Component {
   render() {
 
     return (
-        
       <div className="font-sans border-black flex flex-col content-center w-screen" >
         <Navbar />
         <HomeHead />

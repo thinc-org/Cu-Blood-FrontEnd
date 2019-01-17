@@ -1,6 +1,5 @@
 import React from 'react';
 import Arrow from '../asset/homePage/forward-arrow2.png';
-import Truncate from 'react-truncate';
 
 export default ({id}) => {
     return (

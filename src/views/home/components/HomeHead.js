@@ -20,9 +20,11 @@ class HomeHead extends Component {
               <span className="font-black">จุฬาลงกรณ์มหาวิทยาลัย</span>
               ร่วมกันบริจาคโลหิตให้แก่สภากาชาดไทย
             </div>
-            <button className="text-lg bg-cb-red rounded-lg text-white px-12 pt-2 h-12 mb-6 leading-none">
-              ลงทะบียน
-            </button>
+            <div className="flex justify-center md:justify-start">
+              <button className="text-lg bg-cb-red rounded-lg text-white px-10 h-12 mb-6 leading-none">
+                ลงทะบียน
+              </button>              
+            </div>
             <div className="flex items-center justify-center md:justify-start">
               <p className="text-lg text-cb-red font-normal mr-2">
                 เกี่ยวกับโครงการ

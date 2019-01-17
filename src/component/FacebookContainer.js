@@ -33,14 +33,9 @@ class FacebookZone extends React.Component {
                     <FacebookCard />
                     <FacebookCard />
                 </div>
-
-
-
                 <div className="my-12">
                     <FacebookButton />
                 </div>
-
-
             </div>
 
 

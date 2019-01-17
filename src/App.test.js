@@ -2,14 +2,15 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import App from './App'
-import Statistic from "./component/Statistic";
-import Navbar from './component/Navbar';
-import EventContainer from './component/EventContainer';
-import HomeHead from './component/HomeHead';
-import FacebookContainer from './component/FacebookContainer';
-import Footer from './component/Footer';
-import Announcement from './component/Announcement';
-import UrgentAnnouncement from './component/UrgentAnnouncement';
+import Statistic from "./views/home/components/Statistic";
+import Navbar from './views/shared-components/Navbar';
+import EventContainer from './views/home/components/EventContainer';
+import HomeHead from './views/home/components/HomeHead';
+import FacebookContainer from './views/shared-components/FacebookContainer';
+import Footer from './views/shared-components/Footer';
+import Announcement from './views/home/components/Announcement';
+import UrgentAnnouncement from './views/home/components/UrgentAnnouncement';
+import Home from './views/home/Home'
 
 it('renders without crashing', () => {
     shallow(<App />);
@@ -37,4 +38,7 @@ it('renders without crashing', () => {
 });
 it('renders without crashing', () => {
     shallow(<UrgentAnnouncement/>);
+});
+it('renders without crashing', () => {
+    shallow(<Home/>);
 });

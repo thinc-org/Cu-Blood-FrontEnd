@@ -22,7 +22,7 @@ class App extends Component {
         <HomeHead />
         <UrgentAnnouncement />
         <Announcement />
-       // <EventContainer />
+       {/*} <EventContainer /> */}
         <Statistic />
         <FacebookContainer />
         <Footer />

@@ -22,10 +22,8 @@ class App extends Component {
         <HomeHead />
         <UrgentAnnouncement />
         <Announcement />
-        <EventContainer />
         <Statistic />
         <FacebookContainer />
-        {/* <EventCard/> */}
         <Footer />
       </div>
     );

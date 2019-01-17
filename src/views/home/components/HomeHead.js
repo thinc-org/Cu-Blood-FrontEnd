@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import Arrow from "../asset/homePage/forward-arrow.png";
-import Cross from "../asset/homePage/cross.png";
-import Logo from "../asset/logo/logo1.png";
-import Blood from "../asset/homePage/blood-logo.png";
+import Arrow from "../../../assets/homePage/forward-arrow.png";
+import Cross from "../../../assets/homePage/cross.png";
+import Logo from "../../../assets/logo/logo1.png";
+import Blood from "../../../assets/homePage/blood-logo.png";
 
 class HomeHead extends Component {
   render() {

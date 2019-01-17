@@ -1,14 +1,9 @@
 import React from 'react';
-import clock from '../asset/logo/clock.png';
+import clock from '../../assets/logo/clock.png';
 import FacebookData from './FacebookData'
 
 
 class FacebookCard extends React.Component {
-    // constructor(props) {
-    //     super(props)
-    // }
-
-    
 
     render() {
         let backgroundPhotoURL = "https://picsum.photos/400/400/?random";

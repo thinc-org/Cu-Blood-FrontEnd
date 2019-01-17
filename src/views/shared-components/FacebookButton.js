@@ -1,10 +1,7 @@
 import React from 'react'
-import flogo from '../asset/logo/flogo.png'
+import flogo from '../../assets/logo/flogo.png'
 
 class FacebookButton extends React.Component {
-    // constructor(props) {
-    //     super(props)
-    // }
 
     render() {
         return(

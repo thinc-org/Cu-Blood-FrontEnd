@@ -4,7 +4,7 @@ class UrgentAnnouncement extends Component {
   render() {
     return (
       <div className="w-full flex justify-center bg-white">
-        <div className="flex flex-col sm:flex-row w-full pb-6 sm:pb-8 mt-10 font-cu-heading justify-center">
+        <div className="flex flex-col sm:flex-row w-full mt-10 font-cu-heading justify-center">
           <div className="border-cb-grey-border border-b sm:border-r pb-4 px-4 sm:pb-0 md:pr-8 mb-6 sm:mb-0 flex justify-start sm:justify-end">
             {this.contentDate(`18-21`, `มกราคม`)}
             {this.contentDesc(`วันบริจาคเลือด`, `อีก 3 วัน`)}

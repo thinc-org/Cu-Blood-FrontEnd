@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-class StatCont extends Component {
+class StatisticContent extends Component {
     render() {
         return (
             <div>
@@ -11,4 +11,4 @@ class StatCont extends Component {
     }
 }
 
-export default StatCont;
+export default StatisticContent;

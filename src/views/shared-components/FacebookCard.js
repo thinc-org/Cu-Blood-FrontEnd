@@ -1,5 +1,5 @@
 import React from 'react';
-import clock from '../../assets/logo/clock.svg';
+import clock from 'assets/logo/clock.svg';
 import FacebookData from './FacebookData'
 
 

@@ -11,21 +11,21 @@ class FacebookCard extends React.Component {
         
         return(
             
-            <div className="text-black lg:w-1/3 bg-transparent flex lg:justify-center  content-start overflow-show mb-12">
+            <div className="text-black lg:w-1/3 bg-transparent flex lg:justify-center  content-start overflow-show mb-10">
                 <div className="bg-white shadow-lg" style={{borderRadius: '1rem', width: "19rem"}}>
-                    <div className="bg-white flex bg-center " style={{ height: '150px', borderTopLeftRadius: '1rem', borderTopRightRadius: '1rem', backgroundImage: 'url(' + backgroundPhotoURL + ')'}}>
+                    <div className="bg-white flex bg-center" style={{ height: '150px', borderTopLeftRadius: '1rem', borderTopRightRadius: '1rem', backgroundImage: 'url(' + backgroundPhotoURL + ')'}}>
                     </div>
-                    <div className="flex flex-row px-3 bg-white mt-2">
+                    <div className="flex flex-row items-start px-6 bg-white my-6">
                         <img className="w-6 pt-1" src={clock} alt="clock"/>
-                        <p className="flex items-center pl-2 font-bold" style={{ color: '#8e9dc0'}}>
+                        <p className="pl-2 font-bold text-lg" style={{ color: '#8e9dc0'}}>
                             Today
                         </p>
                     </div>
-                    <div className="px-8 pb-3 bg-white text-sm">
+                    <div className="px-8 pb-3 bg-white text-sm mb-6">
                             <FacebookData />
                     </div>
-                    <div className="bg-grey-lightest px-10 py-4 flex justify-center" style={{borderBottomLeftRadius: '1rem', borderBottomRightRadius: '1rem'}}>
-                        <button className="" style={{color: '#8e9dc0'}}>View on Facebook</button>
+                    <div className="bg-cb-grey-lighter flex justify-center" style={{borderBottomLeftRadius: '1rem', borderBottomRightRadius: '1rem'}}>
+                        <button className="px-4 py-4" style={{color: '#8e9dc0'}}>View on Facebook</button>
                     </div>
                 </div>
 

@@ -8,7 +8,7 @@ export default () => {
                 <div className="flex justify-between w-3/4" style={{maxWidth:'1080px'}}>
                     <div className="flex items-center">
                         <img src={logo} alt="logo" className="h-16 w-16" />
-                        <div className="border-l-2 mx-4 h-12 hidden md:block"></div>
+                        <div className="border-l mx-4 h-8 hidden md:block"></div>
                         <ul className="list-reset py-6 text-grey-darkest hidden md:flex">
                             <li className="mx-3">เกี่ยวกับเรา</li>
                             <li className="mx-3">ข้อควรรู้</li>

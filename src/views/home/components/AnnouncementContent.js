@@ -13,8 +13,8 @@ class AnnouncementContent extends Component {
                 {this.content(title[2], date[2])}
                 {this.content(title[3], date[3])}
                 {this.content(title[4], date[4])}
-                <div className="flex w-full items-start justify-end mt-8">
-                    <p className="font-semibold mr-2" style={{colo: "#333333"}}>ดูข่าวประกาศทั้งหมด</p>
+                <div className="flex w-full items-center justify-end mt-8">
+                    <p className="font-normal mr-2" style={{colo: "#333333"}}>ดูข่าวประกาศทั้งหมด</p>
                     <img src={Arrow} alt="arrow" className="w-6" />
                 </div>
             </div>
@@ -26,7 +26,7 @@ class AnnouncementContent extends Component {
             <div className="border-cb-grey border-b flex items-center py-4">
                 <img src={Yell} alt="Megaphone" className="w-8 mr-6"/>
                 <div>
-                    <p className="text-xl font-semibold mb-1" style={{color: "#333333"}}>{title}</p>
+                    <p className="text-xl font-normal mb-1" style={{color: "#333333"}}>{title}</p>
                     <p className="text-cb-pink font-medium font-cu-body">{date}</p>
                 </div> 
             </div>

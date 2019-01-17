@@ -7,9 +7,13 @@ export default ({id}) => {
         height: '275px',
         width: 'auto',
     }
+
+    
+
+
     return (
-        <div className="flex flex-col sm:flex-row shadow rounded bg-white m-4">
-            <div className="bg-cb-pink-light text-cb-pink p-6 font-cu-heading flex flex-col rounded-l" >
+        <div className="flex flex-row shadow-lg bg-white m-4 " style={{borderRadius: '1rem', width: '30rem'}}>
+            <div className="bg-cb-pink-light text-cb-pink p-6 font-cu-heading flex flex-col " style={{borderTopLeftRadius: '1rem', borderBottomLeftRadius: '1rem'}} >
                 <span className="text-3xl font-bold  whitespace-no-wrap">06-08</span>
                 <span className="text-sm">มกราคม</span>
             </div>

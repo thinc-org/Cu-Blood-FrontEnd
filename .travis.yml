@@ -4,9 +4,10 @@ node_js:
 cache:
   directories:
     - node_modules
+    - .next
 script:
-  - yarn test
-  - yarn build
+  # - yarn test
+  - yarn next:build
 deploy:
   provider: surge
   skip_cleanup: true

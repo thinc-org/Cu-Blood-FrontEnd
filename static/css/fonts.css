@@ -1,0 +1,48 @@
+@font-face {
+    font-family: 'ChulaCharasNew';
+    src: url('/static/fonts/ChulaCharasNew-BoldItalic.woff2') format('woff2'),
+        url('/static/fonts/ChulaCharasNew-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'ChulaCharasNew';
+    src: url('/static/fonts/ChulaCharasNew-Bold.woff2') format('woff2'),
+        url('/static/fonts/ChulaCharasNew-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ChulaCharasNew';
+    src: url('/static/fonts/ChulaCharasNew-Italic.woff2') format('woff2'),
+        url('/static/fonts/ChulaCharasNew-Italic.woff') format('woff');
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'ChulaCharasNew';
+    src: url('/static/fonts/ChulaCharasNew.woff2') format('woff2'),
+        url('/static/fonts/ChulaCharasNew.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CHULALONGKORN';
+    src: url('/static/fonts/CHULALONGKORN-Bold.woff2') format('woff2'),
+        url('/static/fonts/CHULALONGKORN-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CHULALONGKORN';
+    src: url('/static/fonts/CHULALONGKORN-Regular.woff2') format('woff2'),
+        url('/static/fonts/CHULALONGKORN-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+

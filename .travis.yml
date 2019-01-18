@@ -6,7 +6,7 @@ cache:
     - node_modules
     - .next
 script:
-  # - yarn test
+  - yarn test
   - yarn next:build
 deploy:
   provider: surge

@@ -1,4 +1,8 @@
 import React from 'react';
+<<<<<<< HEAD:components/home/local-components/EventCard.js
+=======
+import Arrow from 'assets/homePage/forward-arrow2.svg';
+>>>>>>> parent of 7f32f57... Fix CI error:src/views/home/components/EventCard.js
 
 export default ({id}) => {
 

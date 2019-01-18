@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Slider from 'react-slick';
 import EventCard from './EventCard'
-import Header from 'views/shared-components/PageHeader';
+import Header from '../../shared-components/PageHeader';
 
 class EventContainer extends Component {
     constructor() {

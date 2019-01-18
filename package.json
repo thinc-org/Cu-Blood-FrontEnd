@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@zeit/next-css": "^1.0.1",
     "axios": "^0.18.0",
+    "next": "^7.0.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-scripts": "2.1.3",
@@ -12,12 +14,15 @@
     "slick-carousel": "^1.8.1"
   },
   "scripts": {
-    "start:tw": "postcss ./src/core/tw.css -o ./src/core/tailwind.css -w",
+    "next:dev": "next",
+    "next:build": "next build",
+    "next:start": "next start",
+    "start:tw": "postcss ./components/core/tw.css -o ./components/core/tailwind.css -w",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "go": "concurrently --kill-others \"npm run start:tw\" \"npm run start\""
+    "go": "concurrently --kill-others \"yarn start:tw\" \"yarn next:dev\""
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -29,10 +34,13 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "babel-plugin-root-import": "^6.1.0",
     "concurrently": "^4.1.0",
+    "cssnano": "^4.1.8",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
     "postcss-cli": "^6.1.1",
+    "postcss-easy-import": "^3.0.0",
     "tailwindcss": "^0.7.3"
   }
 }

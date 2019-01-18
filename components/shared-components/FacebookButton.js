@@ -1,8 +1,4 @@
 import React from 'react'
-<<<<<<< HEAD:components/shared-components/FacebookButton.js
-=======
-import flogo from '../../assets/logo/flogo.svg'
->>>>>>> parent of e29d83b... Merge branch 'master' into boom:src/views/shared-components/FacebookButton.js
 
 class FacebookButton extends React.Component {
 

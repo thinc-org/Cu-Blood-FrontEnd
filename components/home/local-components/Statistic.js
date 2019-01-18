@@ -1,13 +1,7 @@
 import React, {Component} from 'react';
-<<<<<<< HEAD:components/home/local-components/Statistic.js
 import axios from '@/core/core'
 import StatisticContent from "./StatisticContent";
 import Header from "@/shared-components/PageHeader";
-=======
-import axios from "../../../core/core";
-import StatisticContent from "./StatisticContent";
-import Header from "../../shared-components/PageHeader";
->>>>>>> parent of e29d83b... Merge branch 'master' into boom:src/views/home/components/Statistic.js
 
 class Statistic extends Component {
     constructor(props) {

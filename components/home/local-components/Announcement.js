@@ -1,12 +1,7 @@
 import React, {Component} from 'react';
 import AnnouncementContent from './AnnouncementContent';
-<<<<<<< HEAD:components/home/local-components/Announcement.js
 import axios from "@/core/core";
 import Header from "@/shared-components/PageHeader";
-=======
-import axios from "../../../core/core";
-import Header from "../../shared-components/PageHeader";
->>>>>>> parent of e29d83b... Merge branch 'master' into boom:src/views/home/components/Announcement.js
 
 class Announcement extends Component {
     constructor(props) {

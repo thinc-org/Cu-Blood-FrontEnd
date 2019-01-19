@@ -15,4 +15,4 @@ deploy:
   domain: new5558.surge.sh
   project: ./out/
   on:
-    branch: CICD
+    branch: master

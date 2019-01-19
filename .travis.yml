@@ -13,3 +13,5 @@ deploy:
   skip_cleanup: true
   domain: new5558.surge.sh
   project: ./build/
+  on:
+    branch: master

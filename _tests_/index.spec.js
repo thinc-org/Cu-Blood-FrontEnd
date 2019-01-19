@@ -10,7 +10,11 @@ import FacebookContainer from '@/shared-components/FacebookContainer';
 import Footer from '@/shared-components/Footer';
 import Announcement from '@/home/local-components/Announcement';
 import UrgentAnnouncement from '@/home/local-components/UrgentAnnouncement';
-import Home from '@/home/Home'
+
+import Home from '../pages/index'
+import About from '../pages/about';
+
+// test components
 
 it('renders without crashing', () => {
     shallow(<IndexPage />);
@@ -39,6 +43,12 @@ it('renders without crashing', () => {
 it('renders without crashing', () => {
     shallow(<UrgentAnnouncement/>);
 });
+
+// test pages
+
 it('renders without crashing', () => {
     shallow(<Home/>);
+});
+it('renders without crashing', () => {
+    shallow(<About/>);
 });

@@ -2,7 +2,6 @@ import React from 'react';
 import AboutHeader from '@/about/local-components/AboutHeader';
 import PageHeader from '@/shared-components/PageHeader';
 import AboutCard from '@/about/local-components/AboutCard';
-import Main from '$/main'
 
 class About extends React.Component {
     render() {

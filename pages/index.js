@@ -10,7 +10,7 @@ import axios from '@/core/core'
 import '../static/css/index.css';
 
 class App extends Component {
-
+  
   constructor(props) {
     super(props)
     this.state = {
@@ -71,6 +71,18 @@ class App extends Component {
       </div>
     );
   }
+
+  async getStatData() {
+    return await axios.get('./posts')
+    .then(response => response.data.length)
+    .then(dataNumber => axios.get(`./posts?_start=${dataNumber-4}&_limit=4`));
+  }  
+
+  async getAnnouncementData() {
+    return await axios.get('./posts')
+    .then(response => response.data.length)
+    .then(dataNumber => axios.get(`./posts?_start=${dataNumber-5}&_limit=5`));
+  }   
 }
 
 export default App;

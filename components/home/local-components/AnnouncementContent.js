@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {map} from 'lodash'
+import map from 'lodash/map'
 
 class AnnouncementContent extends Component {
     render() {

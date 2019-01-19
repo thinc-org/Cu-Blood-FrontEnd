@@ -1,28 +1,21 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import axios from '@/core/core'
 import StatisticContent from "./StatisticContent";
 import Header from "@/shared-components/PageHeader";
+import map from 'lodash/map';
 
-class Statistic extends Component { 
+class Statistic extends Component {
+    
     render() {
-    //Set data of statistic into variable
-    let statNumber = this.props.statData.map(element => {
-        let a = [];
-        a.push(element.id);
-        return a;
-      });
-  
-      let statContent = this.props.statData.map(element => {
-        let a =[];
-        a.push(element.title);
-        return a;
-      })
-  
+        const data = this.props.statData
+        const statNumber = map(data, 'id')
+        const statContent = map(data, 'title')
+
         let contentStyle = "border-cb-grey-border border-b sm:border-b-0 w-full sm:w-1/2 text-center pb-6 sm:flex justify-center";
 
         return (
             <div className="flex flex-col items-center font-cu-heading bg-white">
-                <Header borderColor="border-cb-red" english="STATISTIC" thai="ข้อมูลทางสถิติ" englishColor="text-cb-pink"/>
+                <Header borderColor="border-cb-red" english="STATISTIC" thai="ข้อมูลทางสถิติ" englishColor="text-cb-pink" />
                 <div className="flex flex-col items-center mb-10 px-4">
                     <div className="border-cb-grey-border sm:border-b flex flex-col sm:flex-row w-full justify-center items-center">
                         <div className={`${contentStyle} sm:border-r sm:pr-6`}>

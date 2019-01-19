@@ -4,7 +4,20 @@ import StatisticContent from "./StatisticContent";
 import Header from "@/shared-components/PageHeader";
 
 class Statistic extends Component { 
-   render() {
+    render() {
+    //Set data of statistic into variable
+    let statNumber = this.props.statData.map(element => {
+        let a = [];
+        a.push(element.id);
+        return a;
+      });
+  
+      let statContent = this.props.statData.map(element => {
+        let a =[];
+        a.push(element.title);
+        return a;
+      })
+  
         let contentStyle = "border-cb-grey-border border-b sm:border-b-0 w-full sm:w-1/2 text-center pb-6 sm:flex justify-center";
 
         return (
@@ -13,18 +26,18 @@ class Statistic extends Component {
                 <div className="flex flex-col items-center mb-10 px-4">
                     <div className="border-cb-grey-border sm:border-b flex flex-col sm:flex-row w-full justify-center items-center">
                         <div className={`${contentStyle} sm:border-r sm:pr-6`}>
-                            <StatisticContent number={this.props.number[0]} content={this.props.content[0]} />
+                            <StatisticContent number={statNumber[0]} content={statContent[0]} />
                         </div>
                         <div className={`${contentStyle} pt-6 sm:pt-0 sm:pl-6`}>
-                            <StatisticContent number={this.props.number[1]} content={this.props.content[1]} />
+                            <StatisticContent number={statNumber[1]} content={statContent[1]} />
                         </div>
                     </div>
                     <div className="flex flex-col sm:flex-row w-full items-center">
                         <div className={`${contentStyle} pt-6 sm:border-b-0 sm:border-r sm:pr-6`}>
-                            <StatisticContent number={this.props.number[2]} content={this.props.content[2]} />
+                            <StatisticContent number={statNumber[2]} content={statContent[2]} />
                         </div>
                         <div className={`text-center w-full sm:w-1/2 sm:border-b-0 pt-6 sm:pl-6 sm:flex sm:justify-center`}>
-                            <StatisticContent number={this.props.number[3]} content={this.props.content[3]} />
+                            <StatisticContent number={statNumber[3]} content={statContent[3]} />
                         </div>
                     </div>
                 </div>

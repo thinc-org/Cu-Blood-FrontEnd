@@ -37,33 +37,7 @@ class App extends Component {
     this.setState({isFetched: true})
   }
 
-  render() {
-    //Set data of announcement into variable
-    let announcementTitle = this.state.announcementData.map(element => {
-      let a = [];
-      a.push(element.title);
-      return a;
-    })
-
-    let announcementDate = this.state.announcementData.map(element => {
-      let a = [];
-      a.push(element.id);
-      return a;
-    })
-    
-    //Set data of statistic into variable
-    let statNumber = this.state.statData.map(element => {
-      let a = [];
-      a.push(element.id);
-      return a;
-    });
-
-    let statContent = this.state.statData.map(element => {
-      let a =[];
-      a.push(element.title);
-      return a;
-    })
-
+  render() {    
     //If data is not fetched
     if (!this.state.isFetched) {
       return (
@@ -76,9 +50,9 @@ class App extends Component {
       <div className="font-sans border-black flex flex-col content-center w-screen" >
         <HomeHead />
         <UrgentAnnouncement />
-        <Announcement title={announcementTitle} date={announcementDate}/>
+        <Announcement announcementData={this.state.announcementData}/>
         {/* <EventContainer /> */}
-        <Statistic number={statNumber} content={statContent}/>
+        <Statistic statData={this.state.statData}/>
         <FacebookContainer />
         <Footer />
       </div>

@@ -64,12 +64,14 @@ class App extends Component {
       return a;
     })
 
+    //If data is not fetched
     if (!this.state.isFetched) {
       return (
         <div></div>
       )
     }
 
+    //If data is fetched
     return (
       <div className="font-sans border-black flex flex-col content-center w-screen" >
         <HomeHead />

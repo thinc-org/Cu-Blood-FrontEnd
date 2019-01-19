@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default ({visibility, onCloseListener}) => {
-    console.log(visibility, 'onExpanded')
     return visibility ? (
         <div className="w-4/5 bg-white shadow-md h-screen fixed pin-r pin-t z-50 flex flex-col md:hidden font-cu-heading font-medium tracking-wide leading-none">
             <div className="flex flex-row justify-between items-center py-6 ml-10 mr-6 border-b">

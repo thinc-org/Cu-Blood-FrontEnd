@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
+import {map} from 'lodash'
 
 class AnnouncementContent extends Component {
     render() {
-        const {title,date} = this.props;
+        const {data} = this.props;
+        const title = map(data, 'title');
+        const date = map(data, 'id');
         
         return(
             <div>

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Link from 'next/link';
 
 class HomeHead extends Component {
   render() {
@@ -21,9 +22,9 @@ class HomeHead extends Component {
             </div>
           
           <div className="flex justify-center md:justify-start">
-            <button className="text-lg bg-cb-red rounded-lg text-white px-12 h-12 mb-6 leading-none">
+            <Link href="/register" replace><button className="text-lg bg-cb-red rounded-lg text-white px-12 h-12 mb-6 leading-none">
               ลงทะบียน
-            </button>              
+            </button></Link>              
           </div>
           <div className="flex items-center justify-center md:justify-start">
             <p className="text-lg text-cb-red font-normal mr-2">

@@ -1,9 +1,9 @@
 import React from 'react';
 
 class AboutHeader extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
 
     render() {
         return(

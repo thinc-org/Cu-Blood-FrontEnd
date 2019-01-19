@@ -7,7 +7,6 @@ import ExpandedMenu from '@/shared-components/ExpandedMenu';
 import '@/core/tailwind.css';
 import '@/core/core.js';
 import '../static/css/index.css'
-import AboutHeader from '../components/about/local-components/AboutHeader';
 
 class App extends Component {
 

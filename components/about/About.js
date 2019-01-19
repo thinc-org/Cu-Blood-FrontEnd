@@ -10,9 +10,9 @@ class About extends React.Component {
                 <AboutHeader />
                 <PageHeader english="STAFFS" englishColor="text-pink" thai="บุคลากร" borderColor="border-red"/>
                 <div className="flex flex-col md:flex-row justify-center flex-wrap">
-                    <AboutCard englishName="Boom" role="Front-end" picture="/static/logo/ios-globe.svg"/>
-                    <AboutCard englishName="New" role="Front-end" picture="/static/logo/ios-globe.svg"/>
-                    <AboutCard englishName="Poom" role="Front-end" picture="/static/logo/ios-globe.svg"/>
+                    <AboutCard englishName="Boom" myRole="Front-end" picture="/static/logo/ios-globe.svg"/>
+                    <AboutCard englishName="New" myRole="Front-end" picture="/static/logo/ios-globe.svg"/>
+                    <AboutCard englishName="Poom" myRole="Front-end" picture="/static/logo/ios-globe.svg"/>
                 </div>
             </div>
         );

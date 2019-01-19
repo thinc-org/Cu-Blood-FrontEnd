@@ -6,6 +6,7 @@ cache:
     - node_modules
 script:
   - yarn test
+  - yarn gencss
   - yarn next:build
   - yarn export
 deploy:

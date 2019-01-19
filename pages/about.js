@@ -7,8 +7,7 @@ import Main from '$/main'
 class About extends React.Component {
     render() {
         return (
-            <Main>
-                <div>
+            <div>
                     <AboutHeader />
                     <PageHeader english="STAFFS" englishColor="text-pink" thai="บุคลากร" borderColor="border-red" />
                     <div className="flex flex-col md:flex-row justify-center flex-wrap">
@@ -17,7 +16,6 @@ class About extends React.Component {
                         <AboutCard englishName="Poom" myRole="Front-end" picture="/static/logo/ios-globe.svg" />
                     </div>
                 </div>
-            </Main>
         );
     }
 }

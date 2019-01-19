@@ -8,8 +8,8 @@ class App extends Component {
   render() {
     return (
       <Main>
-        {/* <Home /> */}
-        <RegistrationPage1/>
+        <Home />
+        {/* <RegistrationPage1/> */}
       </Main>
     );
   }

@@ -6,7 +6,7 @@ import RegisterChoice from '@/registration/local-components/RegisterChoice';
 class RegistrationPage1 extends Component {
     render() {
         return(
-            <div className="bg-red">
+            <div>
                 <RegisterChoice />
                 <div className="flex flex-col items-center text-white py-10" style={{ backgroundColor: '#8e9dc0' }}><FacebookButton /></div>
                 <Footer />

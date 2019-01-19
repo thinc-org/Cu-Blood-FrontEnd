@@ -4,13 +4,15 @@ node_js:
 cache:
   directories:
     - node_modules
+    - .next
 script:
   - yarn test
-  - yarn build
+  - yarn next:build
+  - yarn export
 deploy:
   provider: surge
   skip_cleanup: true
   domain: new5558.surge.sh
-  project: ./build/
+  project: ./out/
   on:
     branch: master

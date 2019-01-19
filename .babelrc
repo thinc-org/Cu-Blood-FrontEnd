@@ -6,10 +6,10 @@
         ["babel-plugin-root-import", {
             "paths": [{
                 "rootPathPrefix": "@", // `~` is the default so you can remove this if you want
-                "rootPathSuffix": "components"
+                "rootPathSuffix": "./components"
             }, {
-                "rootPathPrefix": "@",
-                "rootPathSuffix": "./"
+                "rootPathPrefix": "$",
+                "rootPathSuffix": "./layouts"
             }]
         }]
     ]

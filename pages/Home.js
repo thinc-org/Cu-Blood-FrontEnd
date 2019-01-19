@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Statistic from "./local-components/Statistic";
-// import EventContainer from './components/EventContainer';
-import HomeHead from './local-components/HomeHead';
+import Statistic from "@/home/local-components/Statistic";
+// import EventContainer from '@/home/local-components/EventContainer';
+import HomeHead from '@/home/local-components/HomeHead';
 import FacebookContainer from '@/shared-components/FacebookContainer';
 import Footer from '@/shared-components/Footer';
-import Announcement from './local-components/Announcement';
-import UrgentAnnouncement from './local-components/UrgentAnnouncement';
+import Announcement from '@/home/local-components/Announcement';
+import UrgentAnnouncement from '@/home/local-components/UrgentAnnouncement';
 import axios from '@/core/core'
 
 

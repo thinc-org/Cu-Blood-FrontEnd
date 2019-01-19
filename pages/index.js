@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Main from '$/main'
-import Home from '@/home/Home'
+import Home from './Home.js'
 import '../static/css/index.css'
 
 class App extends Component {

@@ -8,10 +8,11 @@ cache:
 script:
   - yarn test
   - yarn next:build
+  - yarn export
 deploy:
   provider: surge
   skip_cleanup: true
   domain: new5558.surge.sh
-  project: ./build/
+  project: ./next/
   on:
     branch: CICD

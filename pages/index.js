@@ -37,7 +37,7 @@ class App extends Component {
       <div>
         <Navbar onExpandListener={this.onMenuExpandListener}/>
         <ExpandedMenu visibility={this.state.onExpanded} onCloseListener={this.onMenuCloseListener}/>
-        {/* <Home /> */}
+        <Home />
         <About />
       </div>
     );

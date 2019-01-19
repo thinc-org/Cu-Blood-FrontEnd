@@ -1,6 +1,10 @@
 import React from 'react';
 
 class AboutHeader extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return(
             <div id="AboutHeader" className="flex flex-col items-center font-cu-heading bg-pink-lightest ">

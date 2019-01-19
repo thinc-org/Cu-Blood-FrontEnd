@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link'
 
 export default ({onExpandListener}) => {
     return (
@@ -9,7 +10,7 @@ export default ({onExpandListener}) => {
                         <img src='/static/logo/logo1.svg' alt="logo" className="h-16 w-16" />
                         <div className="border-l mx-4 h-8 block"></div>
                         <ul className="list-reset py-6 text-grey-darkest hidden md:flex">
-                            <li className="mx-3">เกี่ยวกับเรา</li>
+                            <Link href="/about" replace><a><li className="mx-3">เกี่ยวกับเรา</li></a></Link>
                             <li className="mx-3">ข้อควรรู้</li>
                             <li className="mx-3">ข่าวประกาศ</li>
                             <li className="mx-3">ติดต่อเรา</li>

@@ -1,4 +1,5 @@
 import React from 'react'
+import Main from '$/main'
 import App, { Container } from 'next/app'
 
 export default class MyApp extends App {
@@ -17,7 +18,9 @@ export default class MyApp extends App {
 
     return (
       <Container>
-        <Component {...pageProps} />
+        <Main {...pageProps}>
+         <Component {...pageProps} />
+        </Main>
       </Container>
     )
   }

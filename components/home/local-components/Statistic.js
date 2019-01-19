@@ -7,9 +7,9 @@ import map from 'lodash/map';
 class Statistic extends Component {
     
     render() {
-        const data = this.props.statData
-        const statNumber = map(data, 'id')
-        const statContent = map(data, 'title')
+        const data = this.props.statData;
+        const statNumber = map(data, 'id');
+        const statContent = map(data, 'title');
 
         let contentStyle = "border-cb-grey-border border-b sm:border-b-0 w-full sm:w-1/2 text-center pb-6 sm:flex justify-center";
 

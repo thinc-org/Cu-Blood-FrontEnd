@@ -13,6 +13,6 @@ deploy:
   provider: surge
   skip_cleanup: true
   domain: new5558.surge.sh
-  project: ./next/
+  project: ./out/
   on:
     branch: CICD

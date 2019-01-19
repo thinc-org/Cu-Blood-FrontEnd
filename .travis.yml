@@ -3,7 +3,7 @@ node_js:
   - "stable"
 cache:
   directories:
-
+    - node_modules
     - .next
 script:
   - yarn test

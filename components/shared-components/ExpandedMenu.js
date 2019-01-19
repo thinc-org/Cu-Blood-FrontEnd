@@ -13,11 +13,11 @@ export default ({visibility, onCloseListener}) => {
             </div>
             <div className="my-3">
                 <ul className="list-reset text-grey-darkest flex flex-col ml-6">
-                <Link href="/about" atr="about" replace><a atr="about"><li className="my-3">เกี่ยวกับเรา</li></a></Link>
+                <Link href="/about" replace><a atr="about"><li className="my-3">เกี่ยวกับเรา</li></a></Link>
                     <li className="my-3">ข้อควรรู้</li>
                     <li className="my-3">ข่าวประกาศ</li>
                     <li className="my-3">ติดต่อเรา</li>
-                    <Link href="/register" atr="register" replace><a atr="register"><li className="my-3 text-cb-red">เข้าสู่ระบบ</li></a></Link>
+                    <Link href="/register" replace><a atr="register"><li className="my-3 text-cb-red">เข้าสู่ระบบ</li></a></Link>
                 </ul>
             </div>
         </div>

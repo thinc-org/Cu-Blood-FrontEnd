@@ -14,8 +14,7 @@ class App extends Component {
   render() {
 
     return (
-      <Main>
-        <div className="font-sans border-black flex flex-col content-center w-screen" >
+      <div className="font-sans border-black flex flex-col content-center w-screen" >
           <HomeHead />
           <UrgentAnnouncement />
           <Announcement />
@@ -24,7 +23,6 @@ class App extends Component {
           <FacebookContainer />
           <Footer />
         </div>
-      </Main>
     );
   }
 }

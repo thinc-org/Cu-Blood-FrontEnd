@@ -8,6 +8,7 @@ import Announcement from '@/home/local-components/Announcement';
 import UrgentAnnouncement from '@/home/local-components/UrgentAnnouncement';
 import axios from '@/core/core';
 import '../static/css/index.css';
+import I18 from '@/core/i18n';
 
 class App extends Component {
 
@@ -62,4 +63,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default I18.withNamespaces('common')(App)

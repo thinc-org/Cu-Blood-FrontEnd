@@ -2,42 +2,65 @@ import React from 'react';
 import FacebookCard from './FacebookCard';
 import FacebookButton from './FacebookButton'
 import PageHeader from './PageHeader';
+import axios from '@/core/core';
+import map from 'lodash/map';
 
 
 class FacebookZone extends React.Component {
-    // constructor(props) {
-    //     super(props);
 
-    // }
+    constructor(props) {
+        super(props);
+        this.state = {
+            posts: []
+        }
+    }
 
+    async getData() {
+        return await axios.get('https://jsonplaceholder.typicode.com/posts?_start=0&_limit=3')
+    }
 
+    componentDidMount() {
+        this.getData()
+        .then(res => {
+            this.setState({
+                posts: res.data
+            })
+        })
+        .catch(console.log)
+    }
 
     render() {
 
+        //Map promise to title array
+        const title = this.state.posts.map(element => {
+            const temp = [];
+            temp.push(element.title);
+            return temp;
+        })
+
+        //Map promise to body array
+        const body = this.state.posts.map(element => {
+            const temp = [];
+            temp.push(element.body);
+            return temp;
+        })
+
+        //Just a temp random number
+        var randomNumber = Math.floor(Math.random()*3);
+
+        // layout-wide
         return (
-            <div id="root" className=" flex flex-col items-center text-white " style={{ backgroundColor: '#8e9dc0' }}>
-                {/* <div className=" ">
-                    OUR ACTIVITY
-                </div>
-
-                <div className="font-bold font text-3xl">
-                    CU Blood on Facebook
-                </div>
-
-                <hr className="border-2 w-32 mt-6 mb-12" /> */}
-
+            <div id="root" className="flex flex-col items-center text-white" style={{ backgroundColor: '#8e9dc0' }}>
                 <PageHeader borderColor="border-white" thaiColor="white" thai="CU Blood on Facebook" englishColor="text-grey-light text-xs" english="OUR ACTIVITY" />
-
                 <div className="flex flex-col items-center lg:flex-row w-screen" >
-                    <FacebookCard />
-                    <FacebookCard />
-                    <FacebookCard />
+                    <FacebookCard title={title[0]} body={body[0]}/>
+                    <FacebookCard title={title[1]} body={body[1]}/>
+                    <FacebookCard title={title[2]} body={body[2]}/>
                 </div>
                 <div className="mb-10">
                     <FacebookButton />
                 </div>
             </div>
-
 
         )
     }

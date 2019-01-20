@@ -30,20 +30,9 @@ class FacebookZone extends React.Component {
     }
 
     render() {
-
-        //Map promise to title array
-        const title = this.state.posts.map(element => {
-            const temp = [];
-            temp.push(element.title);
-            return temp;
-        })
-
-        //Map promise to body array
-        const body = this.state.posts.map(element => {
-            const temp = [];
-            temp.push(element.body);
-            return temp;
-        })
+        const posts = this.state.posts;
+        const title = map(posts, 'title');
+        const body = map(posts, 'body');
 
         //Just a temp random number
         var randomNumber = Math.floor(Math.random()*3);

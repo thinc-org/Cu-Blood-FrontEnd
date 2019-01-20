@@ -9,7 +9,7 @@ class RegisterChoice extends Component {
         return (
             <div className="bg-cb-grey-lighter py-6">
                 <Header english={`REGISTER`} thai={`ลงทะเบียน`} englishColor={`text-cb-pink`} borderColor={`border-cb-red`} />
-                <div className="flex w-full px-4 justify-center items-center flex-col md:flex-row pb-10">
+                <div className="flex layout-wide justify-center items-center flex-col md:flex-row pb-10">
                     <div className={`mb-10 md:mb-0 md:mr-4 ${ChoiceContainerClass}`} style={ChoiceContainerStyle}>
                         <div className="mb-6">
                             <img className="mr-6" style={{width: "5rem"}} src="/static/logo/logo1.svg" alt="CUBlood logo"/>

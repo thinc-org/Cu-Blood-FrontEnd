@@ -6,9 +6,9 @@ class Announcement extends Component {
     render() {
 
         return(
-            <div className="bg-white w-full flex flex-col items-center">
+            <div className="bg-white layout-wide flex flex-col items-center">
                 <Header borderColor="border-cb-red" english="ANNOUNCEMENT" thai="ข่าวประกาศ" englishColor="text-cb-pink"/>
-                <div className="font-cu-heading w-full px-4 flex justify-center">
+                <div className="font-cu-heading w-full flex justify-center">
                     <div className=""><AnnouncementContent data={this.props.announcementData}/></div>
                 </div>
             </div>

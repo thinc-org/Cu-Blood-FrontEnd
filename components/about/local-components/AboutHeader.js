@@ -7,7 +7,7 @@ class AboutHeader extends React.Component {
 
     render() {
         return(
-            <div id="AboutHeader" className="flex flex-col items-center font-cu-heading bg-pink-lightest ">
+            <div id="AboutHeader" className="layout-wide flex flex-col items-center font-cu-heading bg-pink-lightest ">
                 <div className="w-2/3 text-5xl py-12 font-semibold ">
                     เกี่ยวกับเรา
                 </div>

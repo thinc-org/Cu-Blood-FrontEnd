@@ -4,9 +4,11 @@ import Link from 'next/link';
 export default ({onExpandListener}) => {
     return (
         <div className="font-cu-heading text-sm font-medium tracking-wide leading-none sticky pin-t pin-l w-full shadow z-40">
+
+            <div className="layout-wide">
             <div className="flex justify-between items-center md:justify-center py-2 md:py-3 bg-white">
-                <div className="flex justify-between w-3/4" style={{ maxWidth: '1080px' }}>
-                    <div className="flex items-center ml-4">
+                <div className="flex justify-between w-full">
+                    <div className="flex items-center">
                         <Link href="/" prefetch><a atr="home"><img src='/static/logo/logo1.svg' alt="logo" className="h-16 w-16" /></a></Link>
                         <div className="border-l mx-4 h-8 block"></div>
                         <ul className="list-reset py-6 text-grey-darkest hidden md:flex">
@@ -26,11 +28,12 @@ export default ({onExpandListener}) => {
                         </div>
                     </div>
                 </div>
-                <div className="flex md:hidden flex-col mr-6" onClick={onExpandListener}>
+                <div className="flex md:hidden flex-col" onClick={onExpandListener}>
                     <div className="border-b-2 border-black w-8"></div>
                     <div className="border-b-2 border-black w-8 pt-1"></div>
                     <div className="border-b-2 border-black w-8 pt-1"></div>
                 </div>
+            </div>
             </div>
         </div>
         );

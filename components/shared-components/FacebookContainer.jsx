@@ -2,7 +2,6 @@ import React from 'react';
 import FacebookCard from './FacebookCard';
 import FacebookButton from './FacebookButton'
 import PageHeader from './PageHeader';
-import axios from '@/core/core';
 import map from 'lodash/map';
 
 class FacebookZone extends React.Component {

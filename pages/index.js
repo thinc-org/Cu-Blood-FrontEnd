@@ -27,8 +27,9 @@ class App extends Component {
       .then(response => response.data)
       .catch(console.log);
 
-    const facebookPosts = await axios.get('https://jsonplaceholder.typicode.com/posts?_start=0&_limit=3')
+    const facebookPosts = await axios.get('https://api-dev.fives.cloud/api/v1//public/facebook')
       .then(response => response.data)
+      .then(result => result.data)
       .catch(console.log);
 
     return {
@@ -40,7 +41,7 @@ class App extends Component {
 
   render() {
     const {announcementData, statData, facebookPosts} = this.props;
-
+    console.log(facebookPosts, 'posts')
     //If data is not fetched
     if (!(announcementData && statData)) {
       return (

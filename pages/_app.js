@@ -2,8 +2,9 @@ import React from 'react'
 import Main from '$/main'
 import App, { Container } from 'next/app'
 import NProgress from "next-nprogress/component"
+import NextI18Next from '@/core/i18n'
 
-export default class MyApp extends App {
+class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
     let pageProps = {}
 
@@ -30,3 +31,5 @@ export default class MyApp extends App {
     )
   }
 }
+
+export default NextI18Next.appWithTranslation(MyApp);

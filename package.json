@@ -8,7 +8,9 @@
     "axios": "^0.18.0",
     "babel-core": "^7.0.0-beta",
     "babel-runtime": "^7.0.0-beta",
+    "express": "^4.16.4",
     "next": "^7.0.2",
+    "next-i18next": "^0.19.0",
     "next-nprogress": "^1.4.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
@@ -28,6 +30,7 @@
     "test:coverage": "jest --coverage",
     "eject": "react-scripts eject",
     "go": "concurrently --kill-others \"yarn start:tw\" \"yarn next:dev\"",
+    "full": "concurrently --kill-others \"yarn start:tw\" \"yarn next:start\"",
     "export": "yarn next:build | next export"
   },
   "eslintConfig": {

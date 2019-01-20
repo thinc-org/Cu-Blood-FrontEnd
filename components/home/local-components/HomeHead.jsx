@@ -9,7 +9,6 @@ class HomeHead extends Component {
 
     return (
       <div id="homeHeadBanner" className="flex bg-cb-grey-lighter font-cu-heading py-10 overflow-hidden lg:flex-row  flex-col-reverse ">
-                          {/*<div className="flex flex-col md:flex-row md:justify-center w-4/5 sm:w-3/5">*/}
         <div id="leftBoxHomeHeaderBanner" className="flex w-full lg:w-1/2 flex-col">
           <div className="w-3/4 flex flex-col items-center self-center lg:items-start lg:self-end text-center lg:text-left">
             <div className="text-6xl text-cb-red font-black mb-6 ">
@@ -22,20 +21,18 @@ class HomeHead extends Component {
             </div>
           
           <div className="flex justify-center md:justify-start">
-            <Link href="/register" replace><button className="text-lg bg-cb-red rounded-lg text-white px-12 h-12 mb-6 leading-none">
+            <Link href="/register" prefetch><button className="text-lg bg-cb-red rounded-lg text-white px-12 h-12 mb-6 leading-none">
               ลงทะบียน
             </button></Link>              
           </div>
           <div className="flex items-center justify-center md:justify-start">
-            <p className="text-lg text-cb-red font-normal mr-2">
+            <Link href="/about" prefetch><a><p className="text-lg text-cb-red font-normal mr-2">
               เกี่ยวกับโครงการ
-            </p>
+            </p></a></Link>
             <img src='/static/home/forward-arrow.svg' alt="arrow" className="w-6 pb-2" />
           </div>
           </div>
         </div>
-                            
-                          {/*<div className="w-full md:w-1/2 flex md:flex-row justify-center md:justify-start items-center md:pl-10">*/}
         <div id="rightBoxHomeHeaderBanner" className="w-full lg:w-1/2 flex overflow-hidden flex-col justify-center py-8 lg:py-0">
           <div className="flex flex-row lg:self-start self-center items-center ">
             <img src='/static/logo/logo1.svg' alt="CU Blood logo" className=" h-full px-6 pl-10" style={{width: '11rem'}} />

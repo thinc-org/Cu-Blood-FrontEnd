@@ -6,53 +6,36 @@ import FacebookContainer from '@/shared-components/FacebookContainer';
 import Footer from '@/shared-components/Footer';
 import Announcement from '@/home/local-components/Announcement';
 import UrgentAnnouncement from '@/home/local-components/UrgentAnnouncement';
-import axios from '@/core/core'
+// import axios from '@/core/core';
 import '../static/css/index.css';
+import axios from '@/core/core';
 
 class App extends Component {
-  
-  constructor(props) {
-    super(props)
-    this.state = {
-      announcementData: [],
-      statData: [],
-      isFetched: false,
-    }
-  }
 
-  componentDidMount() {
-    //Save announcementData to state
-    this.getAnnouncementData()
-      .then(response => this.setState({
-        announcementData: response.data
-      }))
-      .catch(console.log)
+  static async getInitialProps() {
+     //Save announcementData to state
+    const announcementData = await axios.get('https://jsonplaceholder.typicode.com/posts')
+      .then(response => response.data.length)
+      .then(dataNumber => axios.get(`https://jsonplaceholder.typicode.com/posts?_start=${dataNumber - 5}&_limit=5`))
+      .then(response => response.data)
+      .catch(console.log);
 
     //Save statData to state
-    this.getStatData()
-      .then(response => this.setState({
-        statData: response.data
-      }))
+    const statData = await axios.get('https://jsonplaceholder.typicode.com/posts')
+      .then(response => response.data.length)
+      .then(dataNumber => axios.get(`https://jsonplaceholder.typicode.com/posts?_start=${dataNumber - 4}&_limit=4`))
+      .then(response => response.data)
       .catch(console.log)
 
-    this.setState({ isFetched: true })
-  }
-
-  async getStatData() {
-    return await axios.get('./posts')
-      .then(response => response.data.length)
-      .then(dataNumber => axios.get(`./posts?_start=${dataNumber - 4}&_limit=4`));
-  }
-
-  async getAnnouncementData() {
-    return await axios.get('./posts')
-      .then(response => response.data.length)
-      .then(dataNumber => axios.get(`./posts?_start=${dataNumber - 5}&_limit=5`));
+    return {
+      announcementData,
+      statData
+    };
   }
 
   render() {
     //If data is not fetched
-    if (!this.state.isFetched) {
+    if (!(this.props.announcementData && this.props.statData)) {
       return (
         <div></div>
       )
@@ -63,26 +46,14 @@ class App extends Component {
       <div className="font-sans border-black flex flex-col content-center w-screen" >
         <HomeHead />
         <UrgentAnnouncement />
-        <Announcement announcementData={this.state.announcementData} />
+        <Announcement announcementData={this.props.announcementData} />
         {/* <EventContainer /> */}
-        <Statistic statData={this.state.statData} />
+        <Statistic statData={this.props.statData} />
         <FacebookContainer />
         <Footer />
       </div>
     );
   }
-
-  async getStatData() {
-    return await axios.get('./posts')
-    .then(response => response.data.length)
-    .then(dataNumber => axios.get(`./posts?_start=${dataNumber-4}&_limit=4`));
-  }  
-
-  async getAnnouncementData() {
-    return await axios.get('./posts')
-    .then(response => response.data.length)
-    .then(dataNumber => axios.get(`./posts?_start=${dataNumber-5}&_limit=5`));
-  }   
 }
 
 export default App;

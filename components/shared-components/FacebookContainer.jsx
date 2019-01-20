@@ -5,37 +5,12 @@ import PageHeader from './PageHeader';
 import axios from '@/core/core';
 import map from 'lodash/map';
 
-
 class FacebookZone extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            posts: []
-        }
-    }
-
-    async getData() {
-        return await axios.get('https://jsonplaceholder.typicode.com/posts?_start=0&_limit=3')
-    }
-
-    componentDidMount() {
-        this.getData()
-        .then(res => {
-            this.setState({
-                posts: res.data
-            })
-        })
-        .catch(console.log)
-    }
-
     render() {
-        const posts = this.state.posts;
+        const {posts} = this.props;
         const title = map(posts, 'title');
         const body = map(posts, 'body');
-
-        //Just a temp random number
-        var randomNumber = Math.floor(Math.random()*3);
 
         // layout-wide
         return (
@@ -50,7 +25,6 @@ class FacebookZone extends React.Component {
                     <FacebookButton />
                 </div>
             </div>
-
         )
     }
 }

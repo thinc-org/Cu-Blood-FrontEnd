@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from '@/shared-components/Navbar';
-import ExpandedMenu from '@/shared-components/ExpandedMenu'
+import ExpandedMenu from '@/shared-components/ExpandedMenu';
 import '@/core/tailwind.css';
 import '@/core/core.js';
 
@@ -8,30 +8,27 @@ export default class Main extends React.Component {
     constructor() {
         super();
         this.state = {
-            onExpanded: false,
+            isExpanding: false
         }
     }
 
     onMenuExpandListener = () => {
         this.setState({
-          onExpanded: true,
+          isExpanding: true
         })
-        console.log('expaned');
     }
     
-      onMenuCloseListener = () => {
+    onMenuCloseListener = () => {
         this.setState({
-          onExpanded: false,
-        });
-        console.log('closed');
+          isExpanding: false,
+        })
     }
 
     render () {
-        const isExpanded = this.state.onExpanded ? "fadeIn animated faster fixed z-50" : "fadeOut animated faster";
         return (
             <React.Fragment>
                 <Navbar onExpandListener={this.onMenuExpandListener}/>
-                <ExpandedMenu className={isExpanded} onCloseListener={this.onMenuCloseListener}/>
+                <ExpandedMenu className={'fixed z-50 expand-menu' + (this.state.isExpanding ? ' is-expanding' : '')} onCloseListener={this.onMenuCloseListener}/>
                 { this.props.children }
             </React.Fragment>
         )

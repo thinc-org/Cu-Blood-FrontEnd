@@ -20,7 +20,6 @@ class HomeHead extends Component {
                 <span className="font-black">จุฬาลงกรณ์มหาวิทยาลัย</span>
                 ร่วมกันบริจาคโลหิตให้แก่สภากาชาดไทย
               </div>
-            
             <div className="flex justify-center md:justify-start">
               <Link href="/register" prefetch><button className="text-lg bg-cb-red rounded-lg text-white px-12 h-12 mb-6 leading-none">
                 ลงทะบียน
@@ -42,7 +41,6 @@ class HomeHead extends Component {
             </div>
           </div>
         </div>
-
       </div>
     );
   }

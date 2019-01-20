@@ -8,7 +8,6 @@ import Announcement from '@/home/local-components/Announcement';
 import UrgentAnnouncement from '@/home/local-components/UrgentAnnouncement';
 import axios from '@/core/core';
 import '../static/css/index.css';
-import fetch from 'isomorphic-unfetch';
 
 class App extends Component {
 

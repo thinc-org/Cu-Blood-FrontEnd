@@ -7,12 +7,12 @@ class AboutHeader extends React.Component {
 
     render() {
         return(
-            <div id="AboutHeader" className="layout-wide flex flex-col items-center font-cu-heading bg-pink-lightest ">
-                <div className="w-2/3 text-5xl py-12 font-semibold ">
-                    เกี่ยวกับเรา
+            <div id="AboutHeader" className=" flex flex-col items-center font-cu-heading bg-pink-lightest ">
+                <div className="layout-wide text-5xl py-12 font-semibold" style={{maxWidth:"820px"}}>
+                    <div>เกี่ยวกับเรา</div>
                 </div>
-                <div className="w-2/3">
-                    <div className="w-3/4 text-xl pb-12">
+                <div className="layout-wide flex justify-center">
+                    <div className="text-xl pb-12" style={{maxWidth:"820px"}}>
                     CU Blood  เป็นโครงการเพื่อรณรงค์ให้นิสิตปัจจุบัน
                      นิสิตเก่า บุคลากรและคณาจารย์ จากจุฬาล
                      งกรณ์มหาวิทยาลัยร่วมกันไปรจากโลหิตกับสภากาชาดไทย 

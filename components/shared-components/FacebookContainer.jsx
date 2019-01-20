@@ -13,7 +13,7 @@ class FacebookZone extends React.Component {
 
         // layout-wide
         return (
-            <div id="root" className="layout-wide flex flex-col items-center text-white" style={{ backgroundColor: '#8e9dc0' }}>
+            <div id="root" className="flex flex-col items-center text-white" style={{ backgroundColor: '#8e9dc0' }}>
                 <PageHeader borderColor="border-white" thaiColor="white" thai="CU Blood on Facebook" englishColor="text-grey-light text-xs" english="OUR ACTIVITY" />
                 <div className="flex flex-col items-center lg:flex-row w-screen layout-wide" >
                     <FacebookCard title={title[0]} body={body[0]}/>

@@ -8,7 +8,7 @@ class RegistrationPage1 extends Component {
         return(
             <div>
                 <RegisterChoice />
-                <div className="layout-wide flex flex-col items-center text-white py-10" style={{ backgroundColor: '#8e9dc0' }}><FacebookButton /></div>
+                <div className="flex flex-col items-center text-white py-10" style={{ backgroundColor: '#8e9dc0' }}><FacebookButton /></div>
                 <Footer />
             </div>
         );

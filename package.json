@@ -9,6 +9,7 @@
     "babel-core": "^7.0.0-beta",
     "babel-runtime": "^7.0.0-beta",
     "next": "^7.0.2",
+    "next-nprogress": "^1.4.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-scripts": "2.1.3",

@@ -16,21 +16,20 @@ export default class Main extends React.Component {
         this.setState({
           onExpanded: true,
         })
-        console.log("expanded");
-      }
+    }
     
       onMenuCloseListener = () => {
         this.setState({
           onExpanded: false,
         });
-        console.log("closed");
-      }
+    }
 
     render () {
+        const isExpanded = this.state.onExpanded ? "block" : "hidden";
         return (
             <React.Fragment>
                 <Navbar onExpandListener={this.onMenuExpandListener}/>
-                <ExpandedMenu visibility={this.state.onExpanded} onCloseListener={this.onMenuCloseListener}/>
+                <ExpandedMenu className={isExpanded} onCloseListener={this.onMenuCloseListener}/>
                 { this.props.children }
             </React.Fragment>
         )

@@ -26,7 +26,7 @@ export default ({onExpandListener}) => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex md:hidden flex-col mr-6" onClick={onExpandListener}>
+                    <div className="flex md:hidden flex-col mr-6 py-5" onClick={onExpandListener}>
                         <div className="border-b-2 border-black w-8"></div>
                         <div className="border-b-2 border-black w-8 pt-1"></div>
                         <div className="border-b-2 border-black w-8 pt-1"></div>

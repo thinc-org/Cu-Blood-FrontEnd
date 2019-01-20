@@ -4,7 +4,7 @@ import Link from 'next/link';
 export default ({onExpandListener}) => {
     return (
         <div className="font-cu-heading text-sm font-medium tracking-wide leading-none sticky pin-t pin-l w-full shadow z-40">
-            <div className="flex justify-between items-center md:justify-center py-5 md:py-3 bg-white">
+            <div className="flex justify-between items-center md:justify-center py-2 md:py-3 bg-white">
                 <div className="flex justify-between w-3/4" style={{ maxWidth: '1080px' }}>
                     <div className="flex items-center ml-4">
                         <Link href="/" prefetch><a atr="home"><img src='/static/logo/logo1.svg' alt="logo" className="h-16 w-16" /></a></Link>

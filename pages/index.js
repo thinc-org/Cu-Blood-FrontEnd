@@ -33,7 +33,6 @@ class App extends Component {
   }
 
   render() {
-    // console.log(this.props.announcementData, 'props')
     //If data is not fetched
     if (!(this.props.announcementData && this.props.statData)) {
       return (

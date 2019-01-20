@@ -1,6 +1,7 @@
 .close {
     width: 32px;
     height: 32px;
+    padding-left: 15px;
 }
 
 .close:hover {
@@ -23,4 +24,40 @@
 .close:after {
     transform: rotate(-45deg);
 }
+
+@keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
   
+    to {
+      opacity: 0;
+    }
+}
+  
+.fadeOut {
+    animation-name: fadeOut;
+}
+
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+}
+  
+.fadeIn {
+    animation-name: fadeIn;
+}
+
+.animated {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+  }
+  
+.animated.faster {
+    animation-duration: 500ms;
+}

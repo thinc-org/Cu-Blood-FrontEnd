@@ -8,15 +8,13 @@ export default class Main extends React.Component {
     constructor() {
         super();
         this.state = {
-            isExpanding: false,
-            isHidden: true,
+            isExpanding: false
         }
     }
 
     onMenuExpandListener = () => {
         this.setState({
-          isExpanding: true,
-          isHidden: false,
+          isExpanding: true
         })
     }
     
@@ -24,26 +22,13 @@ export default class Main extends React.Component {
         this.setState({
           isExpanding: false,
         })
-        this.onHidden();
-    }
-
-    onHidden = () => {
-        setTimeout(() => {
-            this.setState({
-                isHidden: true,
-            })}
-        , 500)
     }
 
     render () {
-        const isExpanding = this.state.isExpanding ? "fadeIn animated faster fixed z-50 " : "fadeOut animated faster ";
-        const isHidden = this.state.isHidden ? "hidden" : "";
-        console.log(isExpanding, "isExpanding")
-        console.log(isHidden, "isHidden")
         return (
             <React.Fragment>
                 <Navbar onExpandListener={this.onMenuExpandListener}/>
-                <ExpandedMenu className={isExpanding + isHidden} onCloseListener={this.onMenuCloseListener}/>
+                <ExpandedMenu className={'fixed z-50 expand-menu' + (this.state.isExpanding ? ' is-expanding' : '')} onCloseListener={this.onMenuCloseListener}/>
                 { this.props.children }
             </React.Fragment>
         )

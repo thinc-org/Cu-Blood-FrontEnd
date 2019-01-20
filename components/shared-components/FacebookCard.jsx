@@ -7,7 +7,6 @@ class FacebookCard extends React.Component {
     render() {
         let backgroundPhotoURL = "https://picsum.photos/400/400/?random";
         
-        
         return(
             <div className="text-black lg:w-1/3 bg-transparent flex lg:justify-center lg:self-start self-center overflow-show mb-10">
                 <div className="bg-white shadow-lg" style={{borderRadius: '1rem', width: "19rem"}}>

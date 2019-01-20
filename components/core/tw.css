@@ -8,3 +8,17 @@ body {
     @apply leading-normal;
     @apply antialiased;
 }
+
+.layout-wide {
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    @apply px-3;
+}
+
+.layout-narrow {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    @apply px-3;
+}

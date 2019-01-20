@@ -4,9 +4,9 @@ import Link from 'next/link';
 export default ({onCloseListener, className}) => {
     return (
         <div className={className}>
-            <div style={{width:"280px"}} className="bg-white shadow-md h-screen fixed pin-r pin-t z-50 flex flex-col md:hidden font-cu-heading font-medium tracking-wide leading-none">
+        <div style={{width:"280px"}} className={"bg-white shadow-md h-screen fixed pin-r pin-t z-50 flex flex-col md:hidden font-cu-heading font-medium tracking-wide leading-none "}>
                 <div className="flex flex-row justify-between items-center py-6 ml-5 mr-6 border-b">
-                    <div onClick={onCloseListener} className="close "></div>
+                    <div onClick={onCloseListener} className="close"></div>
                     <div className="rounded-lg flex flex-row items-center ml-4 p-1 px-2 bg-cb-pink-light">
                         <img className="h-5" src='/static/logo/ios-globe.svg' alt="change language" />
                         <span className="ml-2 font-sans text-cb-red">THAI</span>
@@ -22,6 +22,6 @@ export default ({onCloseListener, className}) => {
                         </ul>
                 </div>
             </div>
-        </div>
+         </div>
     );
 };

@@ -8,7 +8,7 @@ class HomeHead extends Component {
     };
 
     return (
-      <div id="homeHeadBanner" className="flex bg-cb-grey-lighter font-cu-heading py-10 overflow-hidden lg:flex-row  flex-col-reverse ">
+      <div id="homeHeadBanner" className="flex bg-cb-grey-lighter font-cu-heading py-10 overflow-hidden lg:flex-row flex-col-reverse layout-wide">
         <div id="leftBoxHomeHeaderBanner" className="flex w-full lg:w-1/2 flex-col">
           <div className="w-3/4 flex flex-col items-center self-center lg:items-start lg:self-end text-center lg:text-left">
             <div className="text-6xl text-cb-red font-black mb-6 ">

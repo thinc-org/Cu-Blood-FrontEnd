@@ -41,15 +41,18 @@ class EventContainer extends Component {
 
     render() {
         return (
-            <div className="bg-cb-grey-lighter w-screen">
-                <Header english="CALENDAR" thai="ปฏิทินกิจกรรม" borderColor="border-cb-red" englishColor="text-cb-red"/>
-                <Slider {...this.settings}>
-                    <EventCard id="1" />
-                    <EventCard id="2" />
-                    <EventCard id="3" />
-                    <EventCard id="4" />
-                    <EventCard id="5" />
-                </Slider>   
+            <div className="bg-cb-grey-lighter">
+                <div className="layout-wide">
+                    <Header english="CALENDAR" thai="ปฏิทินกิจกรรม" borderColor="border-cb-red" englishColor="text-cb-red"/>
+                    <Slider {...this.settings}>
+                        <EventCard id="1" />
+                        <EventCard id="2" />
+                        <EventCard id="3" />
+                        <EventCard id="4" />
+                        <EventCard id="5" />
+                    </Slider>                      
+                </div>
+ 
             </div>
         );
     }

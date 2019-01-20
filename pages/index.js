@@ -24,17 +24,24 @@ class App extends Component {
       .then(response => response.data.length)
       .then(dataNumber => axios.get(`https://jsonplaceholder.typicode.com/posts?_start=${dataNumber - 4}&_limit=4`))
       .then(response => response.data)
-      .catch(console.log)
+      .catch(console.log);
+
+    const facebookPosts = await axios.get('https://jsonplaceholder.typicode.com/posts?_start=0&_limit=3')
+      .then(response => response.data)
+      .catch(console.log);
 
     return {
       announcementData,
-      statData
+      statData,
+      facebookPosts
     };
   }
 
   render() {
+    const {announcementData, statData, facebookPosts} = this.props;
+
     //If data is not fetched
-    if (!(this.props.announcementData && this.props.statData)) {
+    if (!(announcementData && statData)) {
       return (
         <div></div>
       )
@@ -45,10 +52,10 @@ class App extends Component {
       <div className="font-sans border-black flex flex-col content-center w-screen" >
         <HomeHead />
         <UrgentAnnouncement />
-        <Announcement announcementData={this.props.announcementData} />
+        <Announcement announcementData={announcementData} />
         {/* <EventContainer /> */}
-        <Statistic statData={this.props.statData} />
-        <FacebookContainer />
+        <Statistic statData={statData} />
+        <FacebookContainer posts={facebookPosts}/>
         <Footer />
       </div>
     );

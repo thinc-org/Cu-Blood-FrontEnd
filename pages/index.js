@@ -6,9 +6,8 @@ import FacebookContainer from '@/shared-components/FacebookContainer';
 import Footer from '@/shared-components/Footer';
 import Announcement from '@/home/local-components/Announcement';
 import UrgentAnnouncement from '@/home/local-components/UrgentAnnouncement';
-// import axios from '@/core/core';
-import '../static/css/index.css';
 import axios from '@/core/core';
+import '../static/css/index.css';
 
 class App extends Component {
 

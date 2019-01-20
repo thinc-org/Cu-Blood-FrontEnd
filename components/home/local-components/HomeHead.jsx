@@ -35,7 +35,7 @@ class HomeHead extends Component {
         </div>
         <div id="rightBoxHomeHeaderBanner" className="w-full lg:w-1/2 flex overflow-hidden flex-col justify-center py-8 lg:py-0">
           <div className="flex flex-row lg:self-start self-center items-center ">
-            <img src='/static/logo/logo1.svg' alt="CU Blood logo" className=" h-full px-6 pl-10" style={{width: '11rem'}} />
+            <img src='/static/logo/logo1.svg' alt="CU Blood logo" className=" h-full px-6" style={{width: '11rem'}} />
             <img src='/static/home/cross.svg' alt="Cross" className="w-6 h-full" />
             <img src='/static/home/blood-logo.svg' alt="Red Cross logo" className=" h-full px-6" style={{width: '15rem'}}/>
           </div>

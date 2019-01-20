@@ -12,7 +12,7 @@ class AboutHeader extends React.Component {
                     เกี่ยวกับเรา
                 </div>
                 <div className="w-2/3">
-                    <div className="w-3/4 text-xl pb-12">
+                    <div className="md:w-3/4 text-xl pb-12 w-full">
                     CU Blood  เป็นโครงการเพื่อรณรงค์ให้นิสิตปัจจุบัน
                      นิสิตเก่า บุคลากรและคณาจารย์ จากจุฬาล
                      งกรณ์มหาวิทยาลัยร่วมกันไปรจากโลหิตกับสภากาชาดไทย 

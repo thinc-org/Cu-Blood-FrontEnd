@@ -6,11 +6,11 @@ class Footer extends React.Component {
     // }
     render() {
         return(
-            <div className="bg-black text-grey-dark text-center text-xs py-4">
+            <div className="bg-black font-cu-body text-white text-base py-6">
                 <div className="layout-wide">
-                    COPYRIGHT 2019 CU BLOOD 
-                    <br />
-                    CHULALONGKORN UNIVERSITY. DEVELOPED BY THINC : TEAM BRAVO
+                    <p className="font-bold">Copyright &copy; 2019 CU Blood Project</p>
+                    <p className="opacity-50"><strong>Chulalongkorn University</strong> &mdash; Developed by Thinc 6<sup>th</sup> Generation</p>
+                    <p className="opacity-50">Team Bravo</p>
                 </div>
             </div>
         )

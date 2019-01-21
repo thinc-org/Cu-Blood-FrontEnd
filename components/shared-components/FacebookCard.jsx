@@ -8,10 +8,6 @@ let i18n = I18.i18n;
 
 
 class FacebookCard extends React.Component {
-    
-    // const body = map(posts, 'message');
-    // const pictureUrl = map(posts, 'full_picture');
-    // const url = map(posts, 'permalink_url')
 
     render() {
         const {post, hasMarginBottom = true } = this.props;

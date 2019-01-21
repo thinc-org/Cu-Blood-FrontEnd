@@ -12,8 +12,6 @@ export default class AboutCard extends React.Component {
                     <div>
                         {this.props.myRole}
                     </div>
-                    
-                    
                 </div>
             </div>
         )

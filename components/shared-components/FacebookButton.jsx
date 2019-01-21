@@ -9,7 +9,7 @@ class FacebookButton extends React.Component {
                     width: 30,
                     marginRight: 10
                 }} alt="Facebook Logo"/>
-                <div className="font-semibold text-lg py-1">CU Blood</div>
+                <div className="font-semibold text-lg pt-2 leading-none">CU Blood</div>
             </div>
         );
     }

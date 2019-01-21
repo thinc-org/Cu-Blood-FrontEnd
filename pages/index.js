@@ -14,8 +14,9 @@ class App extends Component {
 
   static async getInitialProps() {
     //Get announcement data
-    const announcementData = await axios.get('https://api-dev.fives.cloud/api/v1/public/announcements/all/')
+    const announcementData = await axios.get('https://api-dev.fives.cloud/api/v1/public/announcements/all/1')
     .then(response => response.data)
+    .then(result => result.data)
     .then(result => result.data)
     .catch(console.log);
 
@@ -31,8 +32,6 @@ class App extends Component {
       .then(result => result.data)
       .catch(console.log);
 
-
-
     return {
       announcementData,
       statData,
@@ -42,14 +41,7 @@ class App extends Component {
 
   render() {
     const { announcementData, statData, facebookPosts } = this.props;
-    //If data is not fetched
-    if (!(announcementData && statData)) {
-      return (
-        <div></div>
-      )
-    }
 
-    //If data is fetched
     return (
       <div className="font-sans border-black flex flex-col content-center w-full" >
         <HomeHead />

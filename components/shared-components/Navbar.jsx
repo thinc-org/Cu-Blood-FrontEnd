@@ -24,9 +24,9 @@ const Navbar = ({onExpandListener, t}) => {
                             <ul className="list-reset py-6">
                                 <Link href="/register" prefetch><a><li className="text-cb-red hidden md:block">เข้าสู่ระบบ</li></a></Link>
                             </ul>
-                            <button onClick={() => i18n.changeLanguage(i18n.language === 'en' ? 'th' : 'en')} className="rounded-lg hidden md:flex flex-row items-center ml-4 p-1 px-2 bg-cb-pink-light mb-2">
-                                <img className="h-6" src='/static/logo/ios-globe.svg' alt="change language" />
-                                <span className="ml-2 font-sans text-cb-red">{t('language').toUpperCase()}</span>
+                            <button onClick={() => i18n.changeLanguage(i18n.language === 'en' ? 'th' : 'en')} className="rounded-lg hidden md:flex flex-row items-center ml-4 p-2 px-3 bg-cb-pink-light mb-2">
+                                <img className="h-5 opacity-75" src='/static/logo/ios-globe.svg' alt="change language" />
+                                <span className="ml-2 font-sans text-xs tracking-wide font-semibold text-cb-red">{t('language').toUpperCase().substring(0, 2)}</span>
                             </button>
                         </div>
                     </div>

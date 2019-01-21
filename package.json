@@ -32,7 +32,8 @@
     "eject": "react-scripts eject",
     "go": "concurrently --kill-others \"yarn start:tw\" \"yarn next:dev\"",
     "full": "concurrently --kill-others \"yarn start:tw\" \"yarn next:start\"",
-    "export": "yarn next:build | next export"
+    "export": "yarn next:build | next export",
+    "start:prod": "node server.js"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -40,7 +40,7 @@ class FacebookCard extends React.Component {
                     </div>
                 </div>
                 <div className="bg-cb-grey-lighter flex justify-center" style={{ borderBottomLeftRadius: '1rem', borderBottomRightRadius: '1rem' }}>
-                    <a href={permalink_url} target=""><button className="px-4 py-4" style={{ color: '#8e9dc0' }}>View on Facebook</button></a>
+                    <a href={permalink_url} target="_blank"><button className="px-4 py-4" style={{ color: '#8e9dc0' }}>View on Facebook</button></a>
                 </div>
             </div>
         );

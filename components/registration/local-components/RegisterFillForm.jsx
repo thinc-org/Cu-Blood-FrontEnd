@@ -20,22 +20,26 @@ class RegisterFillForm extends Component {
                             <div className="w-full flex flex-col sm:flex-row mb-6 md:ml-10" style={maxWidth}>
                                 <div className="sm:mr-10 w-full sm:w-48 mb-6 sm:mb-0">
                                     <div className="font-cu-body font-medium">ชื่อ</div>
-                                    <input className={`${inputClassName} w-full h-8`} type="text"/>                                
+                                    <input className={`${inputClassName} w-full h-8`} type="text" required/>                                
                                 </div>
                                 <div className="w-full sm:w-48">
                                     <div className="font-cu-body font-medium">นามสกุล</div>
-                                    <input className={`${inputClassName} w-full h-8`} type="text"/>  
+                                    <input className={`${inputClassName} w-full h-8`} type="text" required/>  
                                 </div>
                             </div>
                             {/* Bottom of Personal Information */}
                             <div className="w-full flex sm:flex-row mb-16 sm:mb-10 md:ml-10" style={maxWidth}>
                                 <div className="mr-6 sm:mr-10 w-1/2 sm:w-48 sm:mb-0">
                                     <div className="font-cu-body font-medium">วัน/เดือน/ปี เกิด</div>
-                                    <input className={`${inputClassName} w-full h-8`} type="text"/>                                
+                                    <input className={`${inputClassName} w-full h-8`} placeholder="dd/mm/yyyy" type="text"/>                                
                                 </div>
                                 <div className="w-1/2 sm:w-24"> 
                                     <div className="font-cu-body font-medium">เพศ</div>
-                                    <input className={`${inputClassName} w-full h-8`} type="text"/>  
+                                    <select className={`${inputClassName} w-full h-8`}>
+                                        <option value="ชาย">ชาย</option>
+                                        <option value="หญิง">หญิง</option>
+                                        <option value="อื่น">อื่นๆ</option>
+                                    </select>  
                                 </div>
                             </div>
                         </div>
@@ -49,7 +53,12 @@ class RegisterFillForm extends Component {
                             <div className="w-full flex flex-col sm:flex-row mb-6 md:ml-10" style={maxWidth}>
                                 <div className="sm:mr-10 mb-6 sm:mb-0 w-1/2 sm:w-2/5">
                                     <div className="font-cu-body font-medium">หมู่เลือด</div>
-                                    <input className={`${inputClassName} w-full h-8`} type="text"/>                                
+                                    <select className={`${inputClassName} w-full h-8`}>
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="AB">AB</option>\
+                                        <option value="O">O</option>
+                                    </select>                                
                                 </div>
                                 <div className="w-full">
                                     <div className="font-cu-body font-medium">โรคประจำตัว</div>
@@ -78,18 +87,18 @@ class RegisterFillForm extends Component {
                                 </div>
                                 <div className="w-full sm:w-48">
                                     <div className="font-cu-body font-medium">อีเมล</div>
-                                    <input className={`${inputClassName} w-full h-8`} type="email"/>  
+                                    <input className={`${inputClassName} w-full h-8`} type="email" required/>  
                                 </div>
                             </div>
                             {/* Bottom of User Information */}
                             <div className="w-full flex flex-col sm:flex-row md:ml-10" style={maxWidth}>
                                 <div className="sm:mr-10 w-full sm:w-48 mb-6 sm:mb-0">
                                     <div className="font-cu-body font-medium">รหัสผ่านใหม่</div>
-                                    <input className={`${inputClassName} w-full h-8`} type="password"/>                                
+                                    <input className={`${inputClassName} w-full h-8`} type="password" required/>                                
                                 </div>
                                 <div className="w-full sm:w-48">
                                     <div className="font-cu-body font-medium">ยืนยันรหัสผ่าน</div>
-                                    <input className={`${inputClassName} w-full h-8`} type="password"/>  
+                                    <input className={`${inputClassName} w-full h-8`} type="password" required/>  
                                 </div>
                             </div>
                         </div>
@@ -101,7 +110,7 @@ class RegisterFillForm extends Component {
                             I have <span className="text-cb-pink font-semibold">read the guide</span> and agreed to <span className="text-cb-pink font-semibold">Terms and Conditions</span>.    
                             </div>
                         </div>
-                        <input className="px-10 py-3 text-white bg-cb-red rounded-lg mt-12" type="submit" value="ลงทะเบียน"/>
+                        <input className={`px-10 py-3 text-white bg-cb-red rounded-lg mt-12`} type="submit" value="ลงทะเบียน" id="confirm"/>
                     </div>                    
                 </div>
             </form>

@@ -17,12 +17,18 @@ body {
     width: 100%;
     max-width: 1080px;
     margin: 0 auto;
-    @apply px-3;
+    @apply px-6;
 }
 
 .layout-narrow {
     width: 100%;
     max-width: 720px;
     margin: 0 auto;
-    @apply px-3;
+    @apply px-6;
+}
+
+@screen lg {
+    .layout-wide, .layout-narrow {
+        @apply px-0;
+    }
 }

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Link from 'next/link';
-// import homeBg from '../../../static/home/homehead.jpg'
 
 class HomeHead extends Component {
   render() {
@@ -20,7 +19,7 @@ class HomeHead extends Component {
           <Link href="/register" prefetch>
             <button className="text-2xl bg-cb-red rounded-lg text-white px-20 py-4 mb-8 leading-none">ลงทะเบียน</button>
           </Link>
-          <Link href="/about" prefetch><a>
+          <Link href="/about" prefetch><a className="no-underline">
             <div className="flex items-center justify-center md:justify-start">
               <p className="text-2xl text-white font-normal mr-2">
                 เกี่ยวกับโครงการ

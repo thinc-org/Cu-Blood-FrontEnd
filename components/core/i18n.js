@@ -1,7 +1,9 @@
-import NextI18Next from 'next-i18next'
+// import NextI18Next from 'next-i18next'
+
+const NextI18Next = require('next-i18next')
 
 const options = {
     defaultLanguage	: 'th',
 }
 
-export default new NextI18Next(options);
+module.exports = new NextI18Next(options);

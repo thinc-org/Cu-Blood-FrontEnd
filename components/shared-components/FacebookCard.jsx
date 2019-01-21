@@ -20,7 +20,7 @@ class FacebookCard extends React.Component {
         i18n.language === 'th' ? moment.locale('th') : moment.locale('en')
 
         return (
-            <div className={"bg-white flex flex-col justify-between shadow-lg text-black md:mb-0 " + (hasMarginBottom ? "mb-10" : "mb-0")} style={{ borderRadius: '1rem', width: "19rem" }}>
+            <div className={"bg-white flex flex-col justify-between shadow-lg text-black lg:mb-0 " + (hasMarginBottom ? "mb-10" : "mb-0")} style={{ borderRadius: '1rem', width: "19rem" }}>
                 <div>
                     <div className="bg-white flex bg-center bg-cover" style={{ height: '150px', borderTopLeftRadius: '1rem', borderTopRightRadius: '1rem', backgroundImage: 'url(' + full_picture + ')' }}></div>
                     <div className="flex flex-row items-center px-6 bg-white my-3">

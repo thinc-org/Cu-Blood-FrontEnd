@@ -21,7 +21,7 @@ class MyApp extends App {
     return (
       <Container>
         <NProgress
-          color="#CF2334"
+          color="#ff0000"
           spinner={false}
         />
         <Main {...pageProps}>

@@ -29,6 +29,6 @@ body {
 
 @screen lg {
     .layout-wide, .layout-narrow {
-        @apply px-0;
+        @apply px-3;
     }
 }

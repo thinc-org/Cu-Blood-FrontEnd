@@ -32,6 +32,8 @@ class App extends Component {
       .then(result => result.data)
       .catch(console.log);
 
+
+
     return {
       announcementData,
       statData,
@@ -41,7 +43,6 @@ class App extends Component {
 
   render() {
     const { announcementData, statData, facebookPosts } = this.props;
-    console.log(facebookPosts, 'posts')
     //If data is not fetched
     if (!(announcementData && statData)) {
       return (

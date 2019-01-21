@@ -14,12 +14,13 @@ class FacebookCard extends React.Component {
     // const url = map(posts, 'permalink_url')
 
     render() {
-        const {created_time , permalink_url, full_picture, message} = this.props.post;
-        
+        const {post, hasMarginBottom = true } = this.props;
+        const {created_time , permalink_url, full_picture, message} = post;
+
         i18n.language === 'th' ? moment.locale('th') : moment.locale('en')
 
         return (
-            <div className="bg-white flex flex-col justify-between shadow-lg text-black mb-10 md:mb-0 " style={{ borderRadius: '1rem', width: "19rem" }}>
+            <div className={"bg-white flex flex-col justify-between shadow-lg text-black md:mb-0 " + (hasMarginBottom ? "mb-10" : "mb-0")} style={{ borderRadius: '1rem', width: "19rem" }}>
                 <div>
                     <div className="bg-white flex bg-center bg-cover" style={{ height: '150px', borderTopLeftRadius: '1rem', borderTopRightRadius: '1rem', backgroundImage: 'url(' + full_picture + ')' }}></div>
                     <div className="flex flex-row items-center px-6 bg-white my-3">
@@ -39,7 +40,7 @@ class FacebookCard extends React.Component {
                     </div>
                 </div>
                 <div className="bg-cb-grey-lighter flex justify-center" style={{ borderBottomLeftRadius: '1rem', borderBottomRightRadius: '1rem' }}>
-                    <a href={permalink_url}><button className="px-4 py-4" style={{ color: '#8e9dc0' }}>View on Facebook</button></a>
+                    <a href={permalink_url} target=""><button className="px-4 py-4" style={{ color: '#8e9dc0' }}>View on Facebook</button></a>
                 </div>
             </div>
         );

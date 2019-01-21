@@ -39,5 +39,5 @@
     /* @apply hidden; */
     visibility: hidden;
     /* PLAY WITH THIS: https://easings.net/ */
-    transition: all .3s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    transition: all .3s cubic-bezier(.57,.21,.69, 1);
 }

@@ -3,8 +3,8 @@ import AnnouncementContent from './AnnouncementContent';
 import Header from "@/shared-components/PageHeader";
 
 class Announcement extends Component {
+    
     render() {
-
         return(
             <div className="bg-white">
                 <div className="layout-wide flex flex-col items-center">

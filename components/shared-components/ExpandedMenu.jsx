@@ -11,9 +11,9 @@ const ExpandedMenu = ({onCloseListener, className, t}) => {
         <div style={{width:"280px"}} className={"bg-white shadow-md h-screen fixed pin-r pin-t z-50 flex flex-col md:hidden font-cu-heading font-medium tracking-wide leading-none "}>
                 <div className="flex flex-row justify-between items-center py-6 ml-5 mr-6 border-b">
                     <div onClick={onCloseListener} className="close"></div>
-                    <button onClick={() => i18n.changeLanguage(i18n.language === 'en' ? 'th' : 'en')} className="rounded-lg flex flex-row items-center ml-4 p-1 px-2 bg-cb-pink-light">
-                        <img className="h-5" src='/static/logo/ios-globe.svg' alt="change language" />
-                        <span className="ml-2 font-sans text-cb-red">{t('language').toUpperCase()}</span>
+                    <button onClick={() => i18n.changeLanguage(i18n.language === 'en' ? 'th' : 'en')} className="rounded-lg flex flex-row items-center ml-4 p-2 px-3 bg-cb-pink-light">
+                    <img className="h-5 opacity-75" src='/static/logo/ios-globe.svg' alt="change language" />
+                                <span className="ml-2 font-sans text-xs tracking-wide font-semibold text-cb-red">{t('language').toUpperCase().substring(0, 2)}</span>
                     </button>
                 </div>
                 <div className="my-3">

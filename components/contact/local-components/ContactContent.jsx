@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 class ContactContent extends Component {
     render() {
         return(
-            <div className="layout-wide py-10 flex flex-col sm:flex-row font-cu-heading text-xl items-center" style={{maxWidth: "40rem"}}>
+            <div className="layout-wide py-10 flex flex-col sm:flex-row font-cu-heading text-lg items-center" style={{maxWidth: "40rem"}}>
                 <div className="w-full sm:w-1/2 flex items-center pb-6 sm:pb-0 sm:pr-6">
                     <div className="mr-4"><img className="w-5" src="/static/icons/map.svg" alt="Map logo"/></div>
                     <div>View on <span className="font-semibold">Google Maps</span></div>

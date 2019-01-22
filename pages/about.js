@@ -11,7 +11,6 @@ export default class About extends React.Component {
             <div>
                 <AboutHeader />
                 <PageHeader english="STAFFS" englishColor="text-pink" thai="บุคลากร" borderColor="border-red" />
-
                 <div className="layout-wide flex flex-wrap flex-row justify-center pb-10">
                     <AboutCard englishName="Boom" myRole="Front-end" picture="/static/logo/ios-globe.svg" />
                     <AboutCard englishName="New" myRole="Front-end" picture="/static/logo/ios-globe.svg" />

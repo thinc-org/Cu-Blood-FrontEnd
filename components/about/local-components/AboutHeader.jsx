@@ -3,6 +3,10 @@ import React from 'react';
 class AboutHeader extends React.Component {
 
     render() {
+
+        
+
+
         return(
             <div className="font-cu-heading bg-pink-lightest"> 
             <div className="bg-white" />
@@ -16,7 +20,10 @@ class AboutHeader extends React.Component {
                         งกรณ์มหาวิทยาลัยร่วมกันไปรจากโลหิตกับสภากาชาดไทย 
                     </div>
                 </div>
+             
             </div>
+            
+            
         );
     }
 }

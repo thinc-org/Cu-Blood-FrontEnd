@@ -17,7 +17,6 @@ class Contact extends Component {
     
     render() {
         const {facebookPosts} = this.props
-        console.log(facebookPosts) 
         return (
             <div>
                 <ContactHeader />

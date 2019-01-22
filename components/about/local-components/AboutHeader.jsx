@@ -3,10 +3,10 @@ import React from 'react';
 class AboutHeader extends React.Component {
 
     render() {
-        return(
-            <div className="font-cu-heading bg-cb-pink-light"> 
-                <div className=" layout-wide py-16 text-center md:text-left" >
-                    <div className="text-6xl font-black mb-6">
+        return (
+            <div className="font-cu-heading bg-cb-pink-light">
+                <div className="layout-wide py-20 text-center md:text-left" >
+                    <div className="text-6xl font-bold mb-6 text-black">
                         เกี่ยวกับเรา
                     </div>
                     <div className="text-3xl text-grey-darkest" >

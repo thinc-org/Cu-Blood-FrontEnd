@@ -14,7 +14,7 @@ class Statistic extends Component {
         let contentStyle = "border-cb-grey-border border-b sm:border-b-0 w-full sm:w-1/2 text-center pb-6 sm:flex justify-center";
 
         return (
-            <div className="bg-white">
+            <div className="bg-cb-grey-lighter">
                 <div className="layout-wide flex flex-col items-center font-cu-heading">
                     <Header borderColor="border-cb-red" english="STATISTIC" thai="ข้อมูลทางสถิติ" englishColor="text-cb-pink" />
                     <div className="flex flex-col items-center mb-10">

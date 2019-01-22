@@ -7,7 +7,7 @@ class Announcement extends Component {
     render() {
         return (
             <div className="bg-white display flex">
-                <div className="bg-cover bg-center hidden md:block w-4/5" style={{ backgroundImage: 'url(../../../static/home/announcementBg.jpg)' }}></div>
+                <div className="bg-cover bg-center hidden md:block w-4/5" style={{ backgroundImage: 'url(../../../static/home/announcementBg.JPG)' }}></div>
                 <div className="font-cu-heading layout-wide flex flex-col md:px-10 mx-auto">
                     <div className="hidden md:block">
                         <SpecialHeader borderColor="border-cb-red" english="ANNOUNCEMENT" thai="ข่าวประกาศ" englishColor="text-cb-pink" />

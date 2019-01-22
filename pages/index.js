@@ -13,14 +13,14 @@ import I18 from '@/core/i18n';
 class App extends Component {
 
   static async getInitialProps() {
-    //Save announcementData to state
-    const announcementData = await axios.get('https://jsonplaceholder.typicode.com/posts')
-      .then(response => response.data.length)
-      .then(dataNumber => axios.get(`https://jsonplaceholder.typicode.com/posts?_start=${dataNumber - 5}&_limit=5`))
-      .then(response => response.data)
-      .catch(console.log);
+    //Get announcement data
+    const announcementData = await axios.get('https://api-dev.fives.cloud/api/v1/public/announcements/all/1')
+    .then(response => response.data)
+    .then(result => result.data)
+    .then(result => result.data)
+    .catch(console.log);
 
-    //Save statData to state
+    //Get stat data
     const statData = await axios.get('https://jsonplaceholder.typicode.com/posts')
       .then(response => response.data.length)
       .then(dataNumber => axios.get(`https://jsonplaceholder.typicode.com/posts?_start=${dataNumber - 4}&_limit=4`))
@@ -32,8 +32,6 @@ class App extends Component {
       .then(result => result.data)
       .catch(console.log);
 
-
-
     return {
       announcementData,
       statData,
@@ -43,14 +41,7 @@ class App extends Component {
 
   render() {
     const { announcementData, statData, facebookPosts } = this.props;
-    //If data is not fetched
-    if (!(announcementData && statData)) {
-      return (
-        <div></div>
-      )
-    }
 
-    //If data is fetched
     return (
       <div className="font-sans border-black flex flex-col content-center w-full" >
         <HomeHead />

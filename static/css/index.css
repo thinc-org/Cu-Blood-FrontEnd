@@ -41,3 +41,20 @@
     /* PLAY WITH THIS: https://easings.net/ */
     transition: all .3s cubic-bezier(.57,.21,.69, 1);
 }
+
+.special-wrap {
+    width:4.2rem;
+}
+
+.special-color {
+    border-color: rgba(255,255,255,0.3);
+}
+
+@media (min-width: 576px) {
+    .special-wrap {
+        width:auto;
+    }
+    .special-color {
+        border-color: rgba(255,255,255,0.1);;
+    }
+}

@@ -7,11 +7,6 @@ class FacebookZone extends React.Component {
 
     render() {
         const { posts } = this.props;
-        // const body = map(posts, 'message');
-        // const pictureUrl = map(posts, 'full_picture');
-        // const url = map(posts, 'permalink_url')
-
-        // layout-wide
         return (
             <div className="" style={{ backgroundColor: '#8e9dc0' }} >
                 <div className="flex flex-col items-center text-white layout-wide pb-10">

@@ -19,11 +19,9 @@ class About extends React.Component {
                         <AboutCard englishName="Five" myRole="Master" picture="/static/logo/logo1.svg" />
                         <AboutCard englishName="Pond" myRole="Dev-ops" picture="/static/logo/logo2.svg" />
                         <AboutCard englishName="Jean" myRole="Back-end" picture="/static/logo/logo2.svg" />
-
                     </div>
                 </div>
-                
-                <FacebookButton />
+                <div className="flex flex-col items-center text-white py-10" style={{ backgroundColor: '#8e9dc0' }}><FacebookButton /></div>
                 <Footer />
             </div>
         );

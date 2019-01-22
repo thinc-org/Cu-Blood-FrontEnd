@@ -5,7 +5,7 @@ import AboutCard from '@/about/local-components/AboutCard';
 import Footer from '@/shared-components/Footer';
 import FacebookButton from '@/shared-components/FacebookButton';
 
-class About extends React.Component {
+export default class About extends React.Component {
     render() {
         return (
             <div>
@@ -21,11 +21,11 @@ class About extends React.Component {
                         <AboutCard englishName="Jean" myRole="Back-end" picture="/static/logo/logo2.svg" />
                     </div>
                 </div>
-                <div className="flex flex-col items-center text-white py-10" style={{ backgroundColor: '#8e9dc0' }}><FacebookButton /></div>
+                <div className="flex flex-col items-center text-white py-10" style={{ backgroundColor: '#8e9dc0' }}>
+                    <FacebookButton />
+                </div>
                 <Footer />
             </div>
         );
     }
 }
-
-export default About;

@@ -17,7 +17,7 @@ const Navbar = ({onExpandListener, t}) => {
                                 <Link href="/about" prefetch><a className="no-underline text-grey-darkest"><li className="mx-3">เกี่ยวกับเรา</li></a></Link>
                                 <li className="mx-3">ข้อควรรู้</li>
                                 <li className="mx-3">ข่าวประกาศ</li>
-                                <li className="mx-3">ติดต่อเรา</li>
+                                <Link href="/contact" prefetch><a className="no-underline text-grey-darkest"><li className="mx-3">ติดต่อเรา</li></a></Link>
                             </ul>
                         </div>
                         <div className="flex items-center">

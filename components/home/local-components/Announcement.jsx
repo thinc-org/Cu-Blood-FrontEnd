@@ -15,7 +15,7 @@ class Announcement extends Component {
                     <div className="block md:hidden">
                         <Header borderColor="border-cb-red" english="ANNOUNCEMENT" thai="ข่าวประกาศ" englishColor="text-cb-pink" />
                     </div>
-                    <div className=""><AnnouncementContent data={this.props.announcementData} /></div>
+                    <div className="layout-wide"><AnnouncementContent data={this.props.announcementData} /></div>
                 </div>
             </div>
         );

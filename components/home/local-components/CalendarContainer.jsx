@@ -1,17 +1,23 @@
 import React from 'react';
-import PageHeader from '@/shared-components/PageHeader'
+import PageHeader from '@/shared-components/PageHeader';
+import map from 'lodash/map';
+
 
 export default class CalendarContainer extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    // }
+    
     render() {
+        const data = this.props.calendarEvents;
+        const eventTitle = map(data, 'title');
         return (
             <div className="bg-cb-pink-light">
                 <PageHeader borderColor="border-cb-red" english="Calendar" thai="ปฏิทินกิจกรรม" englishColor="text-cb-pink" />
-                <MinorEvent title='โครงการ I wish I knew before I graduated'/>
+                <MinorEvent title={eventTitle[0]} />
                 <LineBreak />
-                <MinorEvent title='Hello World'/>
+                <MinorEvent title={eventTitle[1]} />
+                <LineBreak />
+                <MinorEvent title={eventTitle[2]} />
+                <LineBreak />
+                <MinorEvent title={eventTitle[3]} />
             </div>
         );
     }
@@ -38,7 +44,7 @@ const MinorEvent = (props) => {
 }
 
 const LineBreak = () => {
-    return(
-        <hr className="border-solid border-grey layout-wide" style={{borderBottomWidth: '0.05rem'}}/>
+    return (
+        <hr className="border-solid border-grey layout-wide" style={{ borderBottomWidth: '0.05rem' }} />
     )
 }

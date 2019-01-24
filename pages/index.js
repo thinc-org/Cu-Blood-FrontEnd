@@ -33,15 +33,20 @@ class App extends Component {
       .then(result => result.data)
       .catch(console.log);
 
+    const calendarEvents = await axios.get('https://jsonplaceholder.typicode.com/posts')
+      .then(response => response.data)
+      .catch(console.log);
+
     return {
       announcementData,
       statData,
-      facebookPosts
+      facebookPosts,
+      calendarEvents
     };
   }
 
   render() {
-    const { announcementData, statData, facebookPosts } = this.props;
+    const { announcementData, statData, facebookPosts, calendarEvents } = this.props;
 
     return (
       <div className="font-sans border-black flex flex-col content-center w-full" >
@@ -49,7 +54,7 @@ class App extends Component {
         <UrgentAnnouncement />
         <Announcement announcementData={announcementData} />
         {/* <EventContainer /> */}
-        <CalendarContainer />
+        <CalendarContainer calendarEvents={calendarEvents}/>
         <Statistic statData={statData} />
         <FacebookContainer posts={facebookPosts} />
         <Footer />

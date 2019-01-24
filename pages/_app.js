@@ -46,7 +46,6 @@ class MyApp extends App {
       else {
         var response = await axios.post('https://api-dev.fives.cloud/api/v1/private/profile/info', {
           accessToken: cookies(ctx).accessToken
-          // accessToken: 1
         })
           .then(resp => {
               return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken } };

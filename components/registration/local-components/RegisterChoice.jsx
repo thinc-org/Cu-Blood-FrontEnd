@@ -2,6 +2,28 @@ import React, {Component} from 'react';
 import Header from '@/shared-components/PageHeader';
 
 class RegisterChoice extends Component {
+
+    testLoginSuccess = () => {
+        let now = new Date();
+        let time = now.getTime() + 3600 * 1000 * 2;
+        now.setTime(time);
+        document.cookie = 'accessToken=' + 1 + '; expires=' + now.toUTCString() + '; path=/';
+        // log in by set cookie accessToken to 1 and test api will resolve this teoken in _app.js/ && expire in 2 hours
+        // in production mode - real accessToken will be received from login api and pass to this method
+    } 
+
+    testLogout = () => {
+        document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        // log out by remove cookie accessToken
+    }
+
+    testInvalidateToken = () => {
+        document.cookie = 'accessToken=' + 2;
+        // invalidate accessToken (set accessToken to '2' and test api will reject as a promise in _app.js)
+        // just a test method only 
+        // please delete on production
+    }
+
     render() {
         const ChoiceContainerClass = `w-full bg-white flex flex-col justify-center items-center rounded-lg`;
         const ChoiceContainerStyle = {maxWidth:"350px", height:"300px"};
@@ -29,6 +51,11 @@ class RegisterChoice extends Component {
                             <div className="font-cu-heading text-lg">Alumni</div>
                         </div>
                     </div> 
+                </div>
+                <div className="flex justify-between mx-20">
+                    <button className="bg-cb-red" onClick={this.testLoginSuccess}> login </button>
+                    <button className="bg-cb-red" onClick={this.testLogout}> logout </button>
+                    <button className="bg-cb-red" onClick={this.testInvalidateToken}> Invalidate Token </button>
                 </div>
             </div>
         );

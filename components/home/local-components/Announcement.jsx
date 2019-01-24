@@ -7,15 +7,15 @@ class Announcement extends Component {
     render() {
         return (
             <div className="bg-white display flex">
-                <div className="bg-cover bg-center hidden md:block w-2/5" style={{ backgroundImage: 'url(../../../static/home/announcementBackground.jpg)' }}></div>
-                <div className="font-cu-heading flex flex-col md:px-10 mr-auto">
+                <div className="bg-cover bg-center hidden md:block w-screen max-w-xs xl:max-w-md" style={{ backgroundImage: 'url(../../../static/home/announcementBackground.jpg)' }}></div>
+                <div className="font-cu-heading flex flex-col md:px-10">
                     <div className="hidden md:block">
                         <SpecialHeader borderColor="border-cb-red" english="ANNOUNCEMENT" thai="ข่าวประกาศ" englishColor="text-cb-pink" />
                     </div>
                     <div className="block md:hidden">
                         <Header borderColor="border-cb-red" english="ANNOUNCEMENT" thai="ข่าวประกาศ" englishColor="text-cb-pink" />
                     </div>
-                    <div className="layout-wide"><AnnouncementContent data={this.props.announcementData} /></div>
+                    <div className="mx-10 md:mx-0"><AnnouncementContent data={this.props.announcementData} /></div>
                 </div>
             </div>
         );

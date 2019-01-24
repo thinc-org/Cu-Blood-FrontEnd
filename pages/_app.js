@@ -6,6 +6,8 @@ import NextI18Next from '@/core/i18n'
 import redirectTo from '@/core/redirectTo.js'
 import cookies from 'next-cookies'
 import axios from '@/core/core'
+// for redirect purpose
+// import Router from 'next/router'
 
 class MyApp extends App {
   constructor(props) {
@@ -13,10 +15,26 @@ class MyApp extends App {
     this.state = {};
   }
 
-  static async getInitialProps({ Component, router, ctx }) {
-
+  static async getInitialProps({ Component, router, ctx, res}) {
     let pageProps = {}
     const c = cookies(ctx);
+    const redirect = (url) => {
+      if (ctx.res) {
+        ctx.res.writeHead(302, {
+          Location: url
+        })
+        ctx.res.end()
+      } else if(res) {
+        res.writeHead(302, {
+          Location: url
+        })
+        res.end();
+      }
+       else {
+        router.push(url)
+      }
+      return {}
+    }
 
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx)
@@ -24,7 +42,7 @@ class MyApp extends App {
     console.log(ctx.pathname.substring(0,3) ,ctx.pathname.substring(0,3) === '/u/', 'pathname')
     // if is in user page
     if (ctx.pathname.substring(0,3) === '/u/') {
-      if (typeof c.accessToken === 'undefined' && false) redirectTo('/register', { res: ctx.res, status: 301 })
+      if (typeof c.accessToken === 'undefined') redirect('/register')
       else {
         var response = await axios.post('https://api-dev.fives.cloud/api/v1/private/profile/info', {
           accessToken: cookies(ctx).accessToken
@@ -34,8 +52,8 @@ class MyApp extends App {
               return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken } };
           })
           .catch((err) => {
-            // document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-            // redirectTo('/register', { res: ctx.res, status: 301 });
+            document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            redirect('/register');
           })
       }
     }

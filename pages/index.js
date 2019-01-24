@@ -31,7 +31,7 @@ class App extends Component {
       .then(response => response.data)
       .then(result => result.data)
       .catch(console.log);
-    console.log(announcementData, 'data')
+    // console.log(announcementData, 'data')
     return {
       announcementData,
       statData,

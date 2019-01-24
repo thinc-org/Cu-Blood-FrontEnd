@@ -16,7 +16,7 @@ const Navbar = ({onExpandListener, t}) => {
                             <ul className="list-reset py-6 text-grey-darkest hidden md:flex">
                                 <Link href="/about" prefetch><a className="no-underline text-grey-darkest"><li className="mx-3">เกี่ยวกับเรา</li></a></Link>
                                 <li className="mx-3">ข้อควรรู้</li>
-                                <li className="mx-3">ข่าวประกาศ</li>
+                                <Link href="/u/abt" prefetch><li className="mx-3">ข่าวประกาศ</li></Link>
                                 <Link href="/contact" prefetch><a className="no-underline text-grey-darkest"><li className="mx-3">ติดต่อเรา</li></a></Link>
                             </ul>
                         </div>

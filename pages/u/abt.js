@@ -11,15 +11,7 @@ class About extends React.Component {
         return (
             <div>
                 <AboutHeader />
-                <PageHeader english="STAFFS" englishColor="text-pink" thai="บุคลากร" borderColor="border-red" />
-                <div className="layout-wide flex flex-wrap flex-row justify-center pb-10">
-                    <AboutCard englishName="Boom" myRole="Front-end" picture="/static/logo/ios-globe.svg" />
-                    <AboutCard englishName="New" myRole="Front-end" picture="/static/logo/ios-globe.svg" />
-                    <AboutCard englishName="Poom" myRole="Front-end" picture="/static/logo/ios-globe.svg" />
-                    <AboutCard englishName="Five" myRole="Consultant" picture="/static/logo/ios-globe.svg" />
-                    <AboutCard englishName="Pond" myRole="Dev-ops" picture="/static/logo/ios-globe.svg" />
-                    <AboutCard englishName="Jean" myRole="Back-end" picture="/static/logo/ios-globe.svg" />
-                </div>
+                <PageHeader english="Dashboard" englishColor="text-pink" thai="just a test page" borderColor="border-red" />
                 <FacebookButton />
                 <Footer />
             </div>

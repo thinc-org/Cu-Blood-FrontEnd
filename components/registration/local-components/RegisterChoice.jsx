@@ -8,8 +8,8 @@ class RegisterChoice extends Component {
         let time = now.getTime() + 3600 * 1000 * 2;
         now.setTime(time);
         document.cookie = 'accessToken=' + 1 + '; expires=' + now.toUTCString() + '; path=/';
-        // log in by set cookie accessToken to 1 and test api will resolve this teoken in _app.js/ && expire in 2 hours
-        // in production mode - real accessToken will be received from login api and pass to this method
+        // log in by set cookie accessToken to 1 and test api will resolve this token in _app.js/ && expire in 2 hours
+        // in production mode - this method will run only if login api is resolved a promise then pass the token to this method
     } 
 
     testLogout = () => {

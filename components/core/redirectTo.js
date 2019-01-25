@@ -12,5 +12,3 @@ export default function redirectTo(destination, { res, status } = {}) {
     }
   }
 }
-
-// just a template that maybe used in the future

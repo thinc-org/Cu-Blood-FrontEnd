@@ -51,6 +51,7 @@
     "cssnano": "^4.1.8",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
+    "next-purgecss": "^3.0.0",
     "postcss-cli": "^6.1.1",
     "postcss-easy-import": "^3.0.0",
     "tailwindcss": "^0.7.3"

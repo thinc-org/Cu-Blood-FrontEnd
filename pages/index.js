@@ -18,18 +18,14 @@ class App extends Component {
     const statDataPromise = axios.get(`https://jsonplaceholder.typicode.com/posts?_start=96&_limit=4`)
     const FacebookPostsPromise = axios.get('https://api-dev.fives.cloud/api/v1/public/facebook')
 
-    const data = await Promise.all([announcementdataPromise, statDataPromise, FacebookPostsPromise].map(p => p.catch(e => {
-      e.data = undefined
-      return e
-    })))
-      .then(allResponse => [allResponse[0].data,  allResponse[1].data, allResponse[2].data])
+    const data = await Promise.all([announcementdataPromise, statDataPromise, FacebookPostsPromise].map(p => p.catch(e => undefined)))
       .catch(console.log);
 
     const [announcementData, statData, facebookPosts] = data;
     return {
-      announcementData: announcementData ? announcementData.data.data : undefined,
-      statData: statData ? statData : [],
-      facebookPosts: facebookPosts ? facebookPosts.data : undefined
+      announcementData: announcementData ? announcementData.data.data.data : undefined,
+      statData: statData ? statData.data : [],
+      facebookPosts: facebookPosts ? facebookPosts.data.data : undefined
     };
   }
 

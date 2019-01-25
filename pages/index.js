@@ -14,17 +14,17 @@ class App extends Component {
 
   static async getInitialProps() {
 
-    const announcementdataPromise = axios.get('https://api-dev.fives.cloud/api/v1/public/announcements/all/1')
-    const statDataPromise = axios.get(`https://jsonplaceholder.typicode.com/posts?_start=96&_limit=4`)
+    const announcementdataPromise = axios.get('https://a*pi-dev.fives.cloud/api/v1/public/announcements/all/1')
+    const statDataPromise = axios.get(`https://jsonplace*holder.typicode.com/posts?_start=96&_limit=4`)
     const FacebookPostsPromise = axios.get('https://api-dev.fives.cloud/api/v1/public/facebook')
 
-    const data = await Promise.all([announcementdataPromise, statDataPromise, FacebookPostsPromise].map(p => p.catch(e => undefined)))
+    const data = await Promise.all([announcementdataPromise, statDataPromise, FacebookPostsPromise].map(p => p.catch(e => null)))
       .catch(console.log);
 
     const [announcementData, statData, facebookPosts] = data;
     return {
       announcementData: announcementData ? announcementData.data.data.data : undefined,
-      statData: statData ? statData.data : [],
+      statData: statData ? statData.data : undefined,
       facebookPosts: facebookPosts ? facebookPosts.data.data : undefined
     };
   }

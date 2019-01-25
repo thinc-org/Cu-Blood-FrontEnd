@@ -8,7 +8,6 @@ script:
   - yarn test
   - yarn gencss
   - yarn next:build
-  - yarn export
 deploy:
   provider: surge
   skip_cleanup: true

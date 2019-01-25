@@ -29,14 +29,13 @@ class App extends Component {
       .catch(console.log);
 
     const facebookPosts = await axios.get('https://api-dev.fives.cloud/api/v1/public/facebook')
-      .then(response => response.data)
-      .then(result => result.data)
+      .then(response => response.data.data)
       .catch(console.log);
 
-    const calendarEvents = await axios.get('https://jsonplaceholder.typicode.com/posts')
-      .then(response => response.data)
+    const calendarEvents = await axios.get('https://api-dev.fives.cloud/api/v1/public/announcements/all/1')
+      .then(response => response.data.data.data)
       .catch(console.log);
-
+    
     return {
       announcementData,
       statData,

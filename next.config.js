@@ -9,6 +9,7 @@ const withPurgeCss = require('next-purgecss')
 module.exports = withCSS(withPurgeCss(
     {
     purgeCss: {
+        whitelist: () => ['expand-menu', 'is-expanding'],
         extractors: [
             {
                 extractor: TailwindExtractor,

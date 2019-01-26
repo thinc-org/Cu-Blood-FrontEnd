@@ -13,7 +13,6 @@ class AnnouncementContent extends Component {
 
         return (
             <div>
-                {/* {this.contentForm(`จุฬาฯ ลงนามบันทึกความเข้าใจกับ North-Eastern Hill University (NEHU)`, `จันทร์, 14 มกราคม 2562`, `pb-6`)} */}
                 {content}
                 <div className="flex w-full items-center justify-end my-6">
                     <div className="font-medium mr-2" style={{ colo: "#333333" }}>ดูข่าวประกาศทั้งหมด</div>

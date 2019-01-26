@@ -1,7 +1,7 @@
 import React from 'react';
 import FacebookCard from './FacebookCard';
 import FacebookButton from './FacebookButton'
-import PageHeader from './PageHeader';
+import PageHeader from './TopicCenter';
 
 class FacebookZone extends React.Component {
 

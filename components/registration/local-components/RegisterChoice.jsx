@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Header from '@/shared-components/PageHeader';
+import Header from '@/shared-components/TopicCenter';
 
 class RegisterChoice extends Component {
 

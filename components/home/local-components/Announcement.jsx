@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AnnouncementContent from './AnnouncementContent';
 import Header from "@/shared-components/TopicCenter";
-import Topic from "@/shared-components/Topic";
+import Topic from "@/shared-components/TopicLeft";
 
 class Announcement extends Component {
 

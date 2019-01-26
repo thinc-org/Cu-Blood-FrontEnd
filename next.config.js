@@ -5,21 +5,6 @@ class TailwindExtractor {
 }
 
 const withCSS = require('@zeit/next-css')
-<<<<<<< HEAD
-const withPurgeCss = require('next-purgecss')
-module.exports = withCSS(withPurgeCss(
-    {
-    purgeCss: {
-        extractors: [
-            {
-                extractor: TailwindExtractor,
-                extensions: ['js', 'jsx', 'ts', 'tsx', 'svg', 'html'],
-            }
-        ]
-    }
-}
-))
-=======
 module.exports = withCSS({
     // async exportPathMap() {
     //   return {
@@ -31,4 +16,3 @@ module.exports = withCSS({
     //   }
     // },
 })
->>>>>>> b581b3f92cfe20c185818b5269c9d1044692f672

@@ -1,6 +1,6 @@
 import React from 'react';
 import AboutHeader from '@/about/local-components/AboutHeader';
-import PageHeader from '@/shared-components/PageHeader';
+import PageHeader from '@/shared-components/TopicCenter';
 import AboutCard from '@/about/local-components/AboutCard';
 import Footer from '@/shared-components/Footer';
 import FacebookButton from '@/shared-components/FacebookButton';

@@ -3,19 +3,45 @@ import Main from '$/main'
 import App, { Container } from 'next/app'
 import NProgress from "next-nprogress/component"
 import NextI18Next from '@/core/i18n'
+import redirectTo from '@/core/redirectTo.js'
+import cookies from 'next-cookies'
+import axios from '@/core/core'
 
 class MyApp extends App {
-  static async getInitialProps({ Component, router, ctx }) {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  static async getInitialProps({ Component, router, ctx, res}) {
     let pageProps = {}
+    const c = cookies(ctx);
 
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx)
     }
+    // if is in user page
+    if (ctx.pathname.substring(0,3) === '/u/') {
+      if (typeof c.accessToken === 'undefined') redirectTo('/register', ctx)
+      else {
+        var response = await axios.post('https://api-dev.fives.cloud/api/v1/private/profile/info', {
+          accessToken: cookies(ctx).accessToken
+        })
+          .then(resp => {
+              return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken } };
+          })
+          .catch((err) => {
+            document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            redirectTo('/register', ctx);
+          })
+      }
+    }
 
-    return { pageProps }
+    if (response !== null) { return { response }; }
+    else return { pageProps };
   }
 
-  render () {
+  render() {
     const { Component, pageProps } = this.props
 
     return (
@@ -25,7 +51,7 @@ class MyApp extends App {
           spinner={false}
         />
         <Main {...pageProps}>
-         <Component {...pageProps} />
+          <Component {...pageProps} />
         </Main>
       </Container>
     )

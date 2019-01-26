@@ -20,8 +20,12 @@ class App extends Component {
 
     const data = await Promise.all([announcementdataPromise, statDataPromise, FacebookPostsPromise].map(p => p.catch(e => null)))
       .catch(console.log);
+<<<<<<< HEAD
 
     const [announcementData, statData, facebookPosts] = data;
+=======
+    // console.log(announcementData, 'data')
+>>>>>>> b581b3f92cfe20c185818b5269c9d1044692f672
     return {
       announcementData: announcementData ? announcementData.data.data.data : undefined,
       statData: statData ? statData.data : undefined,

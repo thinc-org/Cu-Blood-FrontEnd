@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from '@/core/core'
 import StatisticContent from "./StatisticContent";
-import Header from "@/shared-components/PageHeader";
+import Header from "@/shared-components/TopicCenter";
 import map from 'lodash/map';
 
 class Statistic extends Component {

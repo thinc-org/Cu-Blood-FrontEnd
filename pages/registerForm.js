@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Footer from '@/shared-components/Footer';
 import FacebookButton from '@/shared-components/FacebookButton';
-import Header from '@/shared-components/PageHeader';
+import Header from '@/shared-components/TopicCenter';
 import Form from '@/registration/local-components/RegisterFillForm';
 import I18 from '@/core/i18n';
 

@@ -14,33 +14,24 @@ import CalendarContainer from '@/home/local-components/CalendarContainer';
 class App extends Component {
 
   static async getInitialProps() {
-    //Get announcement data
-    const announcementData = await axios.get('https://api-dev.fives.cloud/api/v1/public/announcements/all/1')
-    .then(response => response.data)
-    .then(result => result.data)
-    .then(result => result.data)
-    .catch(console.log);
 
-    //Get stat data
-    const statData = await axios.get('https://jsonplaceholder.typicode.com/posts')
-      .then(response => response.data.length)
-      .then(dataNumber => axios.get(`https://jsonplaceholder.typicode.com/posts?_start=${dataNumber - 4}&_limit=4`))
-      .then(response => response.data)
+    const announcementdataPromise = axios.get('https://api-dev.fives.cloud/v0/announcements/all/1')
+    const statDataPromise = axios.get(`https://jsonplaceholder.typicode.com/posts?_start=96&_limit=4`)
+    const FacebookPostsPromise = axios.get('https://api-dev.fives.cloud/v0/commons/facebook/posts')
+    const calendarEventsPromise = axios.get('https://api-dev.fives.cloud/api/v1/public/announcements/all/1')
+
+    const data = await Promise.all([announcementdataPromise, statDataPromise, FacebookPostsPromise, calendarEventsPromise]
+      .map(p => p
+        .then(response => response.data)
+        .catch(e => null)))
       .catch(console.log);
 
-    const facebookPosts = await axios.get('https://api-dev.fives.cloud/api/v1/public/facebook')
-      .then(response => response.data.data)
-      .catch(console.log);
-
-    const calendarEvents = await axios.get('https://api-dev.fives.cloud/api/v1/public/announcements/all/1')
-      .then(response => response.data.data.data)
-      .catch(console.log);
-    
+    const [announcementData, statData, facebookPosts] = data;
     return {
-      announcementData,
-      statData,
-      facebookPosts,
-      calendarEvents
+      announcementData: announcementData ? announcementData.result.data : undefined,
+      statData: statData ? statData : undefined,
+      facebookPosts: facebookPosts ? facebookPosts.result : undefined,
+      calendarEventsPromise: calendarEventsPromise ? calendarEventsPromise.data : undefined,
     };
   }
 

@@ -7,7 +7,7 @@ import MedicalInfo from '@/profile/MedicalInfo';
 import EnrollmentHistory from '@/profile/EnrollmentHistory';
 import FacebookButton from '@/shared-components/FacebookButton';
 import Footer from '@/shared-components/Footer';
-import '../static/css/profile.css';
+import '../../static/css/profile.css';
 
 
 class Profile extends Component {

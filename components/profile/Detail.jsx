@@ -9,9 +9,9 @@ export default ({bigText, smallText, isBold, align}) => {
     }
 
     return(
-        <div className="flex flex-col font-cu-heading mb-4 md:mb-0 text-center md:text-left">
-            <div className={"text-xl mb-1 " + (isBold ? 'font-bold' : '')} style={{color: "#333333"}}>{bigText}</div>
-            <div className={"text-lg text-cb-pink " + al}>{smallText}</div>
+        <div className="flex flex-col">
+            <div className={"text-xl mb-1 font-cu-heading " + (isBold ? 'font-bold' : '')} style={{color: "#333333"}}>{bigText}</div>
+            <div className={"text-lg text-cb-pink font-cu-body " + al}>{smallText}</div>
         </div>
     );
 }

@@ -22,7 +22,7 @@ const Navbar = ({onExpandListener, t}) => {
                         </div>
                         <div className="flex items-center">
                             <ul className="list-reset py-6">
-                                <Link href="/register" prefetch><a className="no-underline"><li className="text-cb-red hidden md:block">เข้าสู่ระบบ</li></a></Link>
+                                <Link href="/chulaLogin" prefetch><a className="no-underline"><li className="text-cb-red hidden md:block">เข้าสู่ระบบ</li></a></Link>
                             </ul>
                             <button style={{ width: '72px' }} onClick={() => i18n.changeLanguage(i18n.language === 'en' ? 'th' : 'en')} className="rounded-lg hidden md:flex flex-row items-center ml-4 p-2 px-3 bg-cb-pink-light mb-2">
                                 <img className="h-5 opacity-75" src='/static/logo/ios-globe.svg' alt="change language" />

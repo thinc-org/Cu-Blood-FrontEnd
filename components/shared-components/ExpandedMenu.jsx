@@ -23,8 +23,8 @@ const ExpandedMenu = ({onCloseListener, className, t}) => {
                         <Link href="/about" prefetch><span onClick={onCloseListener}><a><li className="my-3">เกี่ยวกับเรา</li></a></span></Link>
                         <li className="my-3">ข้อควรรู้</li>
                         <li className="my-3">ข่าวประกาศ</li>
-                        <li className="my-3">ติดต่อเรา</li>
-                        <Link href="/register" prefetch><span onClick={onCloseListener}><a><li className="my-3 text-cb-red">เข้าสู่ระบบ</li></a></span></Link>
+                        <Link href="/u/abt" prefetch><li className="my-3">ข่าวประกาศ</li></Link>
+                        <Link href="/chulaLogin" prefetch><span onClick={onCloseListener}><a><li className="my-3 text-cb-red">เข้าสู่ระบบ</li></a></span></Link>
                     </ul>
                 </div>
             </div>

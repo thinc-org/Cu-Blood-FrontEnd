@@ -44,13 +44,13 @@ class MyApp extends App {
     if (ctx.pathname.substring(0,3) === '/u/') {
         var response = await axios.get('https://api-dev.fives.cloud/v0/profile/me')
           .then(resp => {
-              console.log(resp)
+              // console.log(resp)
               return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken } };
           })
           .catch((err) => {
-            console.log(err)
-            return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken } };
-            // redirectTo('/chulaLogin', ctx);
+            // console.log(err)
+            // return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken } };
+            redirectTo('/chulaLogin', ctx);
           })
     }
 

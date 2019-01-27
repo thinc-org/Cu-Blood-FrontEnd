@@ -26,12 +26,12 @@ class App extends Component {
         .catch(e => null)))
       .catch(console.log);
 
-    const [announcementData, statData, facebookPosts] = data;
+    const [announcementData, statData, facebookPosts, calendarEvents] = data;
     return {
       announcementData: announcementData ? announcementData.result.data : undefined,
       statData: statData ? statData : undefined,
       facebookPosts: facebookPosts ? facebookPosts.result : undefined,
-      calendarEventsPromise: calendarEventsPromise ? calendarEventsPromise.data : undefined,
+      calendarEvents: calendarEvents ? calendarEvents.result.data : undefined,
     };
   }
 

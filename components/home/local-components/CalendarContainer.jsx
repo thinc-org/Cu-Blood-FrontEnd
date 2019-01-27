@@ -1,5 +1,5 @@
 import React from 'react';
-import PageHeader from '@/shared-components/PageHeader';
+import TopicCenter from '@/shared-components/TopicCenter';
 import map from 'lodash/map';
 
 export default class CalendarContainer extends React.Component {
@@ -9,7 +9,7 @@ export default class CalendarContainer extends React.Component {
         const eventTitle = map(calendarEvents, 'title');
         return (
             <div className="bg-cb-pink-light">
-                <PageHeader borderColor="border-cb-red" english="Calendar" thai="ปฏิทินกิจกรรม" englishColor="text-cb-pink" />
+                <TopicCenter borderColor="border-cb-red" english="Calendar" thai="ปฏิทินกิจกรรม" englishColor="text-cb-pink" thaiColor="text-black"/>
                 <MajorEvent />
                 <MinorEvent title={eventTitle[1]} />
                 <MinorEvent title={eventTitle[2]} />

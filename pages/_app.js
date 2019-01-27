@@ -17,24 +17,41 @@ class MyApp extends App {
     let pageProps = {}
     const c = cookies(ctx);
 
+    // if (Component.getInitialProps) {
+    //   pageProps = await Component.getInitialProps(ctx)
+    // }
+    // // if is in user page
+    // if (ctx.pathname.substring(0,3) === '/u/') {
+    //   if (typeof c.accessToken === 'undefined') redirectTo('/chulaLogin', ctx)
+    //   else {
+    //     var response = await axios.post('https://api-dev.fives.cloud/v0/users/verify', {
+    //       accessToken: cookies(ctx).accessToken
+    //     })
+    //       .then(resp => {
+    //           return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken } };
+    //       })
+    //       .catch((err) => {
+    //         document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    //         redirectTo('/chulaLogin', ctx);
+    //       })
+    //   }
+    // }
+
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx)
     }
     // if is in user page
     if (ctx.pathname.substring(0,3) === '/u/') {
-      if (typeof c.accessToken === 'undefined') redirectTo('/register', ctx)
-      else {
-        var response = await axios.post('https://api-dev.fives.cloud/api/v1/private/profile/info', {
-          accessToken: cookies(ctx).accessToken
-        })
+        var response = await axios.get('https://api-dev.fives.cloud/v0/profile/me')
           .then(resp => {
+              // console.log(resp)
               return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken } };
           })
           .catch((err) => {
-            document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-            redirectTo('/register', ctx);
+            // console.log(err)
+            // return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken } };
+            redirectTo('/chulaLogin', ctx);
           })
-      }
     }
 
     if (response !== null) { return { response }; }

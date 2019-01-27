@@ -25,7 +25,7 @@ class RegisterChoice extends Component {
     }
 
     render() {
-        const ChoiceContainerClass = `w-full bg-white flex flex-col justify-center items-center rounded-lg`;
+        const ChoiceContainerClass = `w-full bg-white flex flex-col justify-center items-center rounded-lg shadow`;
         const ChoiceContainerStyle = {maxWidth:"350px", height:"300px"};
 
         return (

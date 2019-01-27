@@ -8,4 +8,12 @@
     .special-text-align-left {
         text-align: left;
     }
+
+    .special-mb-10 {
+        margin-bottom: 2.5rem;
+    }
+
+    .special-mb-0 {
+        margin-bottom: 0rem;
+    }
 }

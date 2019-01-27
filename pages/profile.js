@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import I18 from '@/core/i18n';
 import ProfileHeader from '@/profile/ProfileHeader';
 import Enrollment from '@/profile/Enrollment';
-import PersonalInformation from '@/profile/PersonalInfo';
+import PersonalInfo from '@/profile/PersonalInfo';
+import MedicalInfo from '@/profile/MedicalInfo';
+import EnrollmentHistory from '@/profile/EnrollmentHistory';
+import FacebookButton from '@/shared-components/FacebookButton';
+import Footer from '@/shared-components/Footer';
 import '../static/css/profile.css';
+
 
 class Profile extends Component {
     render() {
@@ -11,8 +16,11 @@ class Profile extends Component {
             <div>
                 <ProfileHeader name="พชรภัทร ชัยเจริญ" email="abcdef@gmail.com" tel="081-234-5678"/>  
                 <Enrollment /> 
-                <PersonalInformation />
-
+                <PersonalInfo />
+                <MedicalInfo />
+                <EnrollmentHistory />
+                <FacebookButton />
+                <Footer />
             </div>
         );
     }

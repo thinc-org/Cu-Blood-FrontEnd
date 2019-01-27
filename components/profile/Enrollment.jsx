@@ -18,7 +18,7 @@ class Enrollment extends Component {
                             {this.content(`สภากาชาดไทย`, `Thai Red Cross Society`, `https://www.google.com/maps/search/?api=1&query=13.7367861%2C100.5321102&query_place_id=ChIJS2-cD9We4jAReELREIa4HPI`)}
                         </div>
                         <div className="w-full flex flex-col sm:flex-row items-center sm:justify-between mt-8">
-                            <div className="mb-4 sm:mb-0 text-center sm:text-left"><Detail bigText="10 มกราคม - 20 มีนาคม" smallText="วันลงทะเบียน" isBold={true} /></div>
+                            <div className="mb-8 sm:mb-0 text-center sm:text-left"><Detail bigText="10 มกราคม - 20 มีนาคม" smallText="วันลงทะเบียน" isBold={true} /></div>
                             <div className="text-center sm:text-right"><Detail bigText="21 มีนาคม - 30 มีนาคม" smallText="วันบริจาคโลหิต" isBold={true} /></div>
                         </div>
                     </Card>

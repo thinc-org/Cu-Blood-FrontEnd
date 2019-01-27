@@ -7,7 +7,7 @@ class PersonalInfo extends Component {
         return(
             <div className="layout-wide">
                 <Header english="PERSONAL INFORMATION" thai="ข้อมูลส่วนตัว" englishColor="text-cb-pink" borderColor="border-cb-red" />
-                <div className="w-full flex flex-row flex-wrap">
+                <div className="w-full flex flex-row flex-wrap mb-2 special-mb-0">
                     {this.content("พชรภัทร ชัยเจริญ", "ชื่อ - นามสกุล", true)}
                     {this.content("abcdef@gmail.com", "ที่อยู่อีเมล")}
                     {this.content("081-234-5678", "เบอร์โทรศัพท์")}
@@ -22,7 +22,7 @@ class PersonalInfo extends Component {
 
     content = (bigText, smallText, isBold, align) => {
         return(
-            <div className="w-full special-half-width md:w-1/3 text-center special-text-align-left mb-10"><Detail bigText={bigText} smallText={smallText} isBold={isBold} align={align} /></div>
+            <div className="w-full special-half-width md:w-1/3 text-center special-text-align-left mb-8 special-mb-10"><Detail bigText={bigText} smallText={smallText} isBold={isBold} align={align} /></div>
         );
     }
 }

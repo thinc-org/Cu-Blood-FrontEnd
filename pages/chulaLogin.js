@@ -26,7 +26,8 @@ class ChulaLogin extends Component {
         }
         axios.post('https://api-dev.fives.cloud/v0/profile/login', data)
             .then(() => redirectTo('/u/abt'))
-            .catch(() => window.location.href = '/chulaLogin');
+            // .catch(() => window.location.href = '/chulaLogin');
+            .catch(console.log)
     }
 
     render() {

@@ -50,3 +50,5 @@ class App extends Component {
 }
 
 export default I18.withNamespaces('common')(App)
+
+

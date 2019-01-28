@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import axios from '@/core/core';
 
 const UserInfoContext = React.createContext();
 
@@ -19,14 +20,13 @@ class UserInfoProvider extends Component {
     }
 
     logout = () => {
-        this.setState({
-            userInfo: {},
-            isLogin: false,
-        })
+        axios.post('https://api-dev.fives.cloud/v0/profile/logout', null)
+            .then(() => this.setState({ userInfo: {}, isLogin: false }))
+            .catch(console.log)
     }
 
     render() {
-        return(
+        return (
             <UserInfoContext.Provider value={{
                 addUserInfo: this.addUserInfo,
                 userInfo: this.state.userInfo,
@@ -42,4 +42,4 @@ class UserInfoProvider extends Component {
 const UserInfoConsumer = UserInfoContext.Consumer;
 
 export default UserInfoProvider;
-export {UserInfoConsumer};
+export { UserInfoConsumer };

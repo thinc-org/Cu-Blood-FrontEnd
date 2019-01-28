@@ -7,6 +7,10 @@ import { UserInfoConsumer } from '../core/UserInfoProvider';
 let i18n = I18.i18n;
 
 const ExpandedMenu = ({ onCloseListener, className, t }) => {
+    const mobileLogout = (context) => () => {
+        onCloseListener()
+        context.logout()
+    }
     return (
         <div className={className}>
             <div style={{ width: "280px" }} className={"bg-white shadow-md h-screen fixed pin-r pin-t z-50 flex flex-col md:hidden font-cu-heading font-medium tracking-wide leading-none "}>
@@ -27,11 +31,10 @@ const ExpandedMenu = ({ onCloseListener, className, t }) => {
                                     <div className="pl-6 bg-cb-grey-light py-3">
                                         <div className="my-4 font-bold">{context.userInfo.firstName + " " + context.userInfo.lastName}</div>
                                         <ul className="list-reset text-grey-darkest flex flex-col">
-                                        <Link href="/u/profile" prefetch><li className="my-3">ไปที่หน้าโปรไฟล์</li></Link>
-                                            <li className="my-3 text-cb-red" onClick={() => {
-                                                onCloseListener()
-                                                context.logout()
-                                                }}>ออกจากระบบ</li>
+                                        <Link href="/u/profile" prefetch><span onClick={onCloseListener}><a><li className="my-3">ไปที่หน้าโปรไฟล์</li></a></span></Link>
+                                        <a className="no-underline" href="" onClick={mobileLogout(context)}>
+                                            <li className="my-3 text-cb-red" >ออกจากระบบ</li> 
+                                        </a>
                                         </ul>
                                     </div>
                                 )

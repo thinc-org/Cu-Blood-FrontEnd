@@ -52,7 +52,7 @@ const MinorEvent = (props) => {
 
 const MajorEvent = (props) => {
     return (
-        <div className="layout-wide">
+        <div className="layout-wide py-8">
             <div className="bg-white layout-narrow rounded-lg font-cu-heading text-3xl py-8 shadow-md " style={{ maxWidth: '800px', paddingLeft: '0', paddingRight: '0', }}>
                 <div className="flex flex-row">
                     <div className="flex flex-col text-pink-dark px-8 flex-start">

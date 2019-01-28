@@ -14,8 +14,8 @@ class Enrollment extends Component {
                     <Card>
                         <div className="w-full mb-8 text-3xl font-cu-heading">{eventTitle}</div>
                         <div className="w-full border-cb-grey-border border-t border-b py-8 flex flex-col">
-                            {this.content(`อาคารมหิตลาธิเบศร จุฬาลงกรณ์มหาวิทยาลัย`, `Mahittalathibet Building, Chulalongkorn University`, `https://www.google.com/maps/search/?api=1&query=13.7367861%2C100.5321102&query_place_id=ChIJS2-cD9We4jAReELREIa4HPI`, `mb-8`)}
-                            {this.content(`สภากาชาดไทย`, `Thai Red Cross Society`, `https://www.google.com/maps/search/?api=1&query=13.7367861%2C100.5321102&query_place_id=ChIJS2-cD9We4jAReELREIa4HPI`)}
+                            {this.content(`อาคารมหิตลาธิเบศร จุฬาลงกรณ์มหาวิทยาลัย`, `Mahittalathibet Building, Chulalongkorn University`, `https://maps.google.com/maps?hl=en&q=Mahitaladhibesra+Building&ll=13.7337533,100.5293964,17z&t=m&z=19`, `mb-8`)}
+                            {this.content(`สภากาชาดไทย`, `Thai Red Cross Society`, `https://maps.google.com/maps?hl=en&q=National+Blood+Center,+Thai+Red+Cross+Society&ll=13.7364773,100.5312038,17z&t=m&z=19`)}
                         </div>
                         <div className="w-full flex flex-col sm:flex-row items-center sm:justify-between mt-8">
                             <div className="mb-8 sm:mb-0 text-center sm:text-left"><Detail bigText="10 มกราคม - 20 มีนาคม" smallText="วันลงทะเบียน" isBold={true} /></div>

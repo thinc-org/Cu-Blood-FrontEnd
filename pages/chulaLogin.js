@@ -9,13 +9,6 @@ import I18 from '@/core/i18n';
 
 class ChulaLogin extends Component {
 
-    setCookie(token) {
-        let now = new Date();
-        let time = now.getTime() + 3600 * 1000 * 2;
-        now.setTime(time);
-        document.cookie = 'accessToken=' + token + '; expires=' + now.toUTCString() + '; path=/';
-    }
-
     onSubmit = (e) => {
         e.preventDefault();
         const form = e.target;

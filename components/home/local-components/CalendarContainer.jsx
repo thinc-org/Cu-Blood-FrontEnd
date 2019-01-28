@@ -7,10 +7,13 @@ export default class CalendarContainer extends React.Component {
     render() {
         const { calendarEvents = [] } = this.props;
         const eventTitle = map(calendarEvents, 'title');
+        const majorWeather = map(calendarEvents, 'weather');
+        const majorLocation = map(calendarEvents, 'location');
+        const majorTime = map(calendarEvents, 'time')
         return (
             <div className="bg-cb-pink-light">
                 <TopicCenter borderColor="border-cb-red" english="Calendar" thai="ปฏิทินกิจกรรม" englishColor="text-cb-pink" thaiColor="text-black"/>
-                <MajorEvent />
+                <MajorEvent title={eventTitle[0]} weather={majorWeather[0]} location={majorLocation[0]} time={majorTime[0]}/>
                 <MinorEvent title={eventTitle[1]} />
                 <MinorEvent title={eventTitle[2]} />
                 <MinorEvent title={eventTitle[3]} />
@@ -51,6 +54,7 @@ const MinorEvent = (props) => {
 
 
 const MajorEvent = (props) => {
+    const { title, weather, location, time } = props;
     return (
         <div className="layout-wide py-8">
             <div className="bg-white layout-narrow rounded-lg font-cu-heading text-3xl py-8 shadow-md " style={{ maxWidth: '800px', paddingLeft: '0', paddingRight: '0', }}>
@@ -65,7 +69,7 @@ const MajorEvent = (props) => {
                     </div>
                     <div className="flex flex-col pr-8 text-wrap">
 
-                        ประกาศเปิดตัวเว็บไซต์ CU Blood โดย Thinc. Development
+                        {title}
     
                     <div className="flex flex-row text-base pt-8">
                             <div className="w-1/2 text-pink-dark flex flex-row items-center ">

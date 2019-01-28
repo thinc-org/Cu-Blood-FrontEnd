@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Main from '$/main'
 import App, { Container } from 'next/app'
 import NProgress from "next-nprogress/component"
@@ -6,6 +6,7 @@ import NextI18Next from '@/core/i18n'
 import redirectTo from '@/core/redirectTo.js'
 import cookies from 'next-cookies'
 import axios from '@/core/core'
+import UserInfoProvider, { UserInfoConsumer } from '../components/core/UserInfoProvider';
 
 class MyApp extends App {
   constructor(props) {
@@ -13,7 +14,7 @@ class MyApp extends App {
     this.state = {};
   }
 
-  static async getInitialProps({ Component, router, ctx}) {
+  static async getInitialProps({ Component, ctx }) {
     let pageProps = {}
     const c = cookies(ctx);
 
@@ -26,14 +27,15 @@ class MyApp extends App {
       pageProps = await Component.getInitialProps(ctx)
     }
     // if is in user page
-    if (ctx.pathname.substring(0,3) === '/u/') {
-        var response = await axios.get('https://api-dev.fives.cloud/v0/profile/me', {headers})
-          .then(resp => {
-              return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken } };
-          })
-          .catch((err) => {
-            redirectTo('/chulaLogin', ctx);
-          })
+    if (ctx.pathname.substring(0, 3) === '/u/') {
+      var response = await axios.get('https://api-dev.fives.cloud/v0/profile/me', { headers })
+        .then(resp => {
+          console.log(resp)
+          return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, userInfo: resp.data.result } };
+        })
+        .catch((err) => {
+          redirectTo('/chulaLogin', ctx);
+        })
     }
 
     if (response !== null) { return { response }; }
@@ -41,19 +43,35 @@ class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps } = this.props
-
+    const { Component, pageProps, response } = this.props
     return (
       <Container>
         <NProgress
           color="#ff0000"
           spinner={false}
         />
-        <Main {...pageProps}>
-          <Component {...pageProps} />
-        </Main>
+        <UserInfoProvider>
+          <UserInfoConsumer>
+            {context => response && <AddUserInfo context={context} userInfo={response.userInfo}/>}
+          </UserInfoConsumer>
+          <Main {...pageProps}>
+            <Component {...pageProps} />
+          </Main>
+        </UserInfoProvider>
       </Container>
     )
+  }
+}
+
+class AddUserInfo extends Component {
+
+  componentDidMount() {
+    const { userInfo, context } = this.props;
+    context.addUserInfo(userInfo);
+  }
+
+  render() {
+    return null
   }
 }
 

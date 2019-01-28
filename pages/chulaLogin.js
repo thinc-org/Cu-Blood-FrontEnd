@@ -17,9 +17,13 @@ class ChulaLogin extends Component {
           if (element.tagName === 'BUTTON') { continue; }
           data[element.name] = element.value;
         }
+        if(data.username==="" && data.password==="") return;
         axios.post('https://api-dev.fives.cloud/v0/profile/login', data)
             .then(() => redirectTo('/u/profile'))
-            .catch(() => window.location.href = '/chulaLogin');
+            .catch((e) =>  {
+                // e.response && console.log(e.response.data.message)
+                window.location.href = '/chulaLogin'
+            })
     }
 
     render() {

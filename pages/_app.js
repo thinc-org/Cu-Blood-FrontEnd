@@ -26,7 +26,7 @@ class MyApp extends App {
       pageProps = await Component.getInitialProps(ctx)
     }
     // if is in user page
-    if (ctx.pathname.substring(0, 3) === '/u/') {
+    if (ctx.pathname.substring(0, 3) === '/u/' || ctx.res) {
       var response = await axios.get('https://api-dev.fives.cloud/v0/profile/me', { headers })
         .then(resp => {
           return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, userInfo: resp.data.result, status: resp.status } };

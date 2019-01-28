@@ -30,7 +30,6 @@ class MyApp extends App {
     if (ctx.pathname.substring(0, 3) === '/u/') {
       var response = await axios.get('https://api-dev.fives.cloud/v0/profile/me', { headers })
         .then(resp => {
-          console.log(resp)
           return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, userInfo: resp.data.result } };
         })
         .catch((err) => {

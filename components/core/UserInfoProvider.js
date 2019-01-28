@@ -7,13 +7,21 @@ class UserInfoProvider extends Component {
         super(props);
         this.state = {
             userInfo: {},
+            isLogin: false,
         }
     }
 
     addUserInfo = (user) => {
-        console.log(user, 'user')
         this.setState({
-            userInfo: user
+            userInfo: user,
+            isLogin: true,
+        })
+    }
+
+    logout = () => {
+        this.setState({
+            userInfo: {},
+            isLogin: false,
         })
     }
 
@@ -21,7 +29,9 @@ class UserInfoProvider extends Component {
         return(
             <UserInfoContext.Provider value={{
                 addUserInfo: this.addUserInfo,
-                userInfo: this.state.userInfo
+                userInfo: this.state.userInfo,
+                isLogin: this.state.isLogin,
+                logout: this.logout,
             }}>
                 {this.props.children}
             </UserInfoContext.Provider>

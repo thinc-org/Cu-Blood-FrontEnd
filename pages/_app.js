@@ -25,7 +25,7 @@ class MyApp extends App {
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx)
     }
-    console.log(ctx.res, 'ctx.res')
+
     // if is in user page
     if (ctx.pathname.substring(0, 3) === '/u/') {
       var response = await axios.get('https://api-dev.fives.cloud/v0/profile/me', { headers })
@@ -45,7 +45,7 @@ class MyApp extends App {
           return null;
         })
     }
-    console.log(response, 'response')
+
     if (response !== null) { return { response }; }
     else return { pageProps };
   }

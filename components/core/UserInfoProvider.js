@@ -22,10 +22,10 @@ class UserInfoProvider extends Component {
     logout = (noRedirect) => {
         axios.post('https://api-dev.fives.cloud/v0/profile/logout')
             .then((resp) => {
-                console.log(resp, 'logout response')
+                // console.log(resp, 'logout response')
                 this.setState({ userInfo: {}, isLogin: false })
             })
-            .catch(console.log)
+            // .catch(console.log)
             // .finally(() => {noRedirect === true ? null : window.location.href = '/'})
         // })
     }

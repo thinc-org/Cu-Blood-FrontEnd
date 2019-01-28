@@ -18,7 +18,7 @@ class App extends Component {
     const announcementdataPromise = axios.get('https://api-dev.fives.cloud/v0/announcements/all/1')
     const statDataPromise = axios.get(`https://jsonplaceholder.typicode.com/posts?_start=96&_limit=4`)
     const FacebookPostsPromise = axios.get('https://api-dev.fives.cloud/v0/commons/facebook/posts')
-    const calendarEventsPromise = axios.get('https://api-dev.fives.cloud/v0/announcements/all/1')
+    const calendarEventsPromise = axios.get('https://api-dev.fives.cloud/v0/events/all/1')
 
     const data = await Promise.all([announcementdataPromise, statDataPromise, FacebookPostsPromise, calendarEventsPromise]
       .map(p => p

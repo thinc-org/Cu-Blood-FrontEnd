@@ -35,16 +35,17 @@ class MyApp extends App {
         .catch((err) => {
           return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, status: err.response.status } };
         })
-    } else if (ctx.res) {
+    } 
+    else if (ctx.res) {
       var response = await axios.get('https://api-dev.fives.cloud/v0/profile/me', { headers })
         .then(resp => {
           return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, userInfo: resp.data.result, status: resp.status } };
         })
         .catch((err) => {
-          return { pageProps };
+          return null;
         })
     }
-
+    console.log(response, 'response')
     if (response !== null) { return { response }; }
     else return { pageProps };
   }

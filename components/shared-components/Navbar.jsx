@@ -24,10 +24,14 @@ const Navbar = ({ onExpandListener, t }) => {
                     <div className="flex items-center">
                         <ul className="list-reset py-6 flex">
                             <UserInfoConsumer>
-                                {/* {(context) => <li className="text-cb-red hidden md:block">{context.userInfo.name}</li>} */}
                                 {(context) => {
-                                    return (
-                                            <LoginOrLogout isLogin={context.isLogin} logout={context.lo} username={context.userInfo.username} />
+                                    return true ? 
+                                    (
+                                        <LoginOrLogout isLogin={context.isLogin} logout={context.logout} username={context.userInfo.username} />
+                                    )
+                                    :
+                                    (
+                                        <LoginOrLogout />
                                     )
                                 }}
                             </UserInfoConsumer>
@@ -54,7 +58,7 @@ const LoginOrLogout = ({ isLogin, logout, username }) => {
         (
             <React.Fragment>
                 <Link href="/u/profile" prefetch><a className="no-underline"><li className="text-cb-red hidden md:block mr-5">{username}</li></a></Link>
-                <a onClick={logout} className="no-underline"><li className="text-cb-red hidden md:block">ออกจากระบบ</li></a>
+                <a className="no-underline" href="" onClick={logout}><li className="text-cb-red hidden md:block">ออกจากระบบ</li></a>
             </React.Fragment>
         )
         :

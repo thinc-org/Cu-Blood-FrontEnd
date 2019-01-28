@@ -30,10 +30,11 @@ class MyApp extends App {
     if (ctx.pathname.substring(0, 3) === '/u/') {
       var response = await axios.get('https://api-dev.fives.cloud/v0/profile/me', { headers })
         .then(resp => {
-          return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, userInfo: resp.data.result } };
+          return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, userInfo: resp.data.result, status: resp.status } };
         })
         .catch((err) => {
-          redirectTo('/chulaLogin', ctx);
+          // redirectTo('/chulaLogin', ctx);
+          return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, status: err.response.status } };
         })
     }
 
@@ -43,30 +44,58 @@ class MyApp extends App {
 
   render() {
     const { Component, pageProps, response } = this.props
-    return (
-      <Container>
-        <NProgress
-          color="#ff0000"
-          spinner={false}
-        />
-        <UserInfoProvider>
+    if (response && response.status == 401) {
+      return (
+        <Container>
+          <UserInfoProvider>
           <UserInfoConsumer>
-            {context => response && <AddUserInfo context={context} userInfo={response.userInfo}/>}
+            {context => response && <ForceLogout context={context} />}
           </UserInfoConsumer>
-          <Main {...pageProps}>
-            <Component {...pageProps} />
-          </Main>
-        </UserInfoProvider>
-      </Container>
-    )
+          </UserInfoProvider>
+        </Container>
+      )
+    } else {
+      return (
+        <Container>
+          <NProgress
+            color="#ff0000"
+            spinner={false}
+          />
+          <UserInfoProvider>
+            <UserInfoConsumer>
+              {context => response && <AddUserInfo context={context} userInfo={response.userInfo} />}
+            </UserInfoConsumer>
+            <Main {...pageProps}>
+              <Component {...pageProps} />
+            </Main>
+          </UserInfoProvider>
+        </Container>
+      )
+    }
   }
 }
 
+
+// hack from stackoverflow 
 class AddUserInfo extends Component {
 
   componentDidMount() {
     const { userInfo, context } = this.props;
     context.addUserInfo(userInfo);
+  }
+
+  render() {
+    return null
+  }
+}
+
+// hack from stackoverflow
+class ForceLogout extends Component {
+
+  componentDidMount() {
+    const { context } = this.props;
+    context.logout(true);
+    redirectTo('/chulaLogin');
   }
 
   render() {

@@ -13,7 +13,7 @@ class MyApp extends App {
     this.state = {};
   }
 
-  static async getInitialProps({ Component, router, ctx, res}) {
+  static async getInitialProps({ Component, router, ctx}) {
     let pageProps = {}
     const c = cookies(ctx);
 
@@ -36,13 +36,17 @@ class MyApp extends App {
     //       })
     //   }
     // }
+    ctx.req && console.log(ctx.req.headers.cookie, 'req')
+    const headers = ctx.req ? {
+      cookie: ctx.req.headers.cookie,
+    } : undefined;
 
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx)
     }
     // if is in user page
     if (ctx.pathname.substring(0,3) === '/u/') {
-        var response = await axios.get('https://api-dev.fives.cloud/v0/profile/me')
+        var response = await axios.get('https://api-dev.fives.cloud/v0/profile/me', {headers})
           .then(resp => {
               // console.log(resp)
               return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken } };

@@ -36,7 +36,7 @@ class MyApp extends App {
           return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, status: err.response.status } };
         })
     } else if (ctx.res) {
-      var response2 = await axios.get('https://api-dev.fives.cloud/v0/profile/me', { headers })
+      var response = await axios.get('https://api-dev.fives.cloud/v0/profile/me', { headers })
         .then(resp => {
           return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, userInfo: resp.data.result, status: resp.status } };
         })

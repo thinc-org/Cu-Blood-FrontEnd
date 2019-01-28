@@ -114,8 +114,8 @@ const LineBreak = ({ hasLineBreak = true }) => {
 const CalendarDate = (props) => {
     const { startMonth, endMonth, startDay, endDay } = props;
 
-    const monthChecker = startMonth == endMonth;
-    const dayChecker = startDay == endDay;
+    const monthChecker = startMonth === endMonth;
+    const dayChecker = startDay === endDay;
 
     return monthChecker ?
         (

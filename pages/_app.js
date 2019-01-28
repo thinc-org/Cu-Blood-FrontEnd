@@ -18,7 +18,6 @@ class MyApp extends App {
     let pageProps = {}
     const c = cookies(ctx);
 
-    ctx.req && console.log(ctx.req.headers.cookie, 'req')
     const headers = ctx.req ? {
       cookie: ctx.req.headers.cookie,
     } : undefined;
@@ -33,7 +32,6 @@ class MyApp extends App {
           return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, userInfo: resp.data.result, status: resp.status } };
         })
         .catch((err) => {
-          // redirectTo('/chulaLogin', ctx);
           return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, status: err.response.status } };
         })
     }

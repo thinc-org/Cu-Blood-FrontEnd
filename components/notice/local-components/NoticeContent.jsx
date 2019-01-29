@@ -4,7 +4,7 @@ import TopicCenter from '@/shared-components/TopicCenter';
 export default class NoticeContent extends React.Component {
     render() {
         return (
-            <div>
+            <div className="layout-wide">
                 <TopicCenter english="CHARACTERISTIC AND CRITERIA" englishColor="text-pink" thai="คุณสมบัติผู้บริจาคโลหิต" borderColor="border-red" />
                 <BulletPoint />
                 <TopicCenter english="PROCEDURES" englishColor="text-pink" thai="ขั้นตอนการบริจาคโลหิตกับโครงการ" borderColor="border-red" />
@@ -12,7 +12,6 @@ export default class NoticeContent extends React.Component {
                 <TopicCenter english="PRE-POST DONATION PREPARATION" englishColor="text-pink" thai="การเตรียมตัวก่อน-หลังบริจาคโลหิต" borderColor="border-red" />
                 <BulletPoint />
                 <NoticeContact />
-
             </div>
         );
     }
@@ -21,14 +20,14 @@ export default class NoticeContent extends React.Component {
 
 const BulletPoint = () => {
     return (
-        <div className="bg-white flex flex-col font-cu-heading text-xl layout-wide p-4">
+        <div className="bg-white flex flex-col font-cu-heading text-xl p-4">
             <div className="flex flex-row items-center justify-center">
-                <div className="bg-pink-lightest text-pink-dark text-2xl p-4 w-16 h-16 rounded-full flex items-center justify-center mr-6">
+                <span className="bg-pink-lightest text-pink-dark text-2xl p-4 w-12 sm:w-16 h-12 sm:h-16 rounded-full flex items-center justify-center mr-6">
                     1
-                </div>
-                <div>
+                </span>
+                <span>
                     อายุระหว่าง 17 ปีถึง 70 ปีบริบูรณ์ผู้ที่มีอายุ 17 ปีไม่ถึง 18 ปีต้องมีหนังสือยินยอมจากผู้ปกครอง
-                </div>
+                </span>
             </div>
             <hr className="border-solid border-grey w-full py-8 " style={{ borderBottomWidth: '0.05rem' }} />
         </div>

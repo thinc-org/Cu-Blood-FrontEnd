@@ -9,7 +9,7 @@ import UrgentAnnouncement from '@/home/local-components/UrgentAnnouncement';
 import axios from '@/core/core';
 import '../static/css/index.css';
 import I18 from '@/core/i18n';
-import CalendarContainer from '@/home/local-components/CalendarContainer';
+// import CalendarContainer from '@/home/local-components/CalendarContainer';
 
 class App extends Component {
 
@@ -43,7 +43,7 @@ class App extends Component {
         <HomeHead />
         <UrgentAnnouncement />
         <Announcement announcementData={announcementData} />
-        <CalendarContainer calendarEvents={calendarEvents}/>
+        {/* <CalendarContainer calendarEvents={calendarEvents}/>  will temport disable this until boom fix layout problem on mobile */}
         <Statistic statData={statData} />
         <FacebookContainer posts={facebookPosts} />
         <Footer />

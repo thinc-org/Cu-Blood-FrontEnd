@@ -19,14 +19,16 @@ class HomeHead extends Component {
             <Link href="/register" prefetch>
               <button className="text-2xl bg-cb-red rounded-lg text-white px-20 py-4 mb-8 leading-none">ลงทะเบียน</button>
             </Link>
-            <Link href="/about" prefetch>
-              <button className="flex items-center justify-center md:justify-start w-auto">
-                <p className="text-2xl text-white font-normal mr-2">
-                  เกี่ยวกับโครงการ
-                </p>
-                <img src='/static/home/forward-arrow.svg' alt="arrow" className="w-6" />
-              </button>
-            </Link>
+            <div className="w-auto flex justify-center md:justify-start">
+              <Link href="/about" prefetch>
+                <div className="flex items-center justify-center cursor-pointer">
+                  <p className="text-2xl text-white font-normal mr-2">
+                    เกี่ยวกับโครงการ
+                  </p>
+                  <img src='/static/home/forward-arrow.svg' alt="arrow" className="w-6 pb-2" />
+                </div>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

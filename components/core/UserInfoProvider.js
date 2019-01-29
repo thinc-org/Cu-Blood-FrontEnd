@@ -19,15 +19,9 @@ class UserInfoProvider extends Component {
         })
     }
 
-    logout = (noRedirect) => {
+    logout = () => {
         axios.post('https://api-dev.fives.cloud/v0/profile/logout')
-            .then((resp) => {
-                console.log(resp, 'logout response')
-                // this.setState({ userInfo: {}, isLogin: false })
-            })
-            .catch(err => console.log(err, 'error'))
-            .finally(() => {noRedirect === true ? null : window.location.href = ''})
-        // })
+            .finally(() => window.location.href = '')
     }
 
     deleteUserContext = () => {

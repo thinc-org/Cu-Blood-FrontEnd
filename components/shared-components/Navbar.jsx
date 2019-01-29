@@ -58,7 +58,7 @@ const LoginOrLogout = ({ isLogin, logout, username }) => {
         (
             <React.Fragment>
                 <Link href="/u/profile" prefetch><a className="no-underline"><li className="text-cb-red hidden md:block mr-5">{username}</li></a></Link>
-                <a className="no-underline" onClick={logout}><li className="text-cb-red hidden md:block">ออกจากระบบ</li></a>
+                <a className="no-underline cursor-pointer" onClick={logout}><li className="text-cb-red hidden md:block">ออกจากระบบ</li></a>
             </React.Fragment>
         )
         :

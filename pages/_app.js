@@ -102,7 +102,7 @@ class ForceLogout extends Component {
 
   componentDidMount() {
     const { context } = this.props;
-    context.logout(true);
+    context.deleteUserContext();
     redirectTo('/chulaLogin');
   }
 

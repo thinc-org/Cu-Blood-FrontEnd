@@ -10,7 +10,7 @@ export default class AnnouncementHeader extends React.Component {
                         ข่าวประกาศ
                     </div>
                     <div className="text-3xl text-grey-darkest" >
-                        คณาจารย์จุฬาฯ ได้รับรางวัลนักวิจัยดีเด่นแห่งชาติ 3 สาขา
+                        คณาจารย์จุฬาฯ ได้รับรางวัลนักวิจัยดีเด่นแห่งชาติ 3 สาขา <br/>
                         รางวัลผลงานวิจัย วิทยานิพนธ์และผลงานประดิษฐ์คิดค้น ปี 2562
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Statistic from "@/home/local-components/Statistic";
-// import EventContainer from './components/EventContainer';
+
 import HomeHead from '@/home/local-components/HomeHead';
 import FacebookContainer from '@/shared-components/FacebookContainer';
 import Footer from '@/shared-components/Footer';
@@ -43,7 +43,6 @@ class App extends Component {
         <HomeHead />
         <UrgentAnnouncement />
         <Announcement announcementData={announcementData} />
-        {/* <EventContainer /> */}
         <CalendarContainer calendarEvents={calendarEvents}/>
         <Statistic statData={statData} />
         <FacebookContainer posts={facebookPosts} />

@@ -10,5 +10,5 @@ export default function redirectTo(destination, { res, status } = {}) {
     } else {
       window.location = destination
     }
-  }
+  } 
 }

@@ -7,15 +7,21 @@ import MedicalInfo from '@/profile/MedicalInfo';
 import EnrollmentHistory from '@/profile/EnrollmentHistory';
 import FacebookButton from '@/shared-components/FacebookButton';
 import Footer from '@/shared-components/Footer';
-import '../static/css/profile.css';
-
+import '../../static/css/profile.css';
+import { UserInfoConsumer } from '../../components/core/UserInfoProvider';
 
 class Profile extends Component {
     render() {
-        return(
+        return (
             <div>
-                <ProfileHeader name="พชรภัทร ชัยเจริญ" email="abcdef@gmail.com" tel="081-234-5678"/>  
-                <Enrollment /> 
+                <UserInfoConsumer>
+                    {({ userInfo }) => {
+                        return (
+                            <ProfileHeader name={userInfo.firstName + " " + userInfo.lastName} email="abcdef@gmail.com" tel={userInfo.phoneNumber} />
+                        )
+                    }}
+                </UserInfoConsumer>
+                <Enrollment />
                 <PersonalInfo />
                 <MedicalInfo />
                 <EnrollmentHistory />

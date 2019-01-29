@@ -1,6 +1,4 @@
 import React from 'react';
-// import FacebookData from './FacebookData'
-// import Truncate from 'react-truncate';
 import TextTruncate from 'react-text-truncate';
 import moment from 'moment';
 import I18 from '@/core/i18n';

@@ -1,7 +1,9 @@
 const NextI18Next = require('next-i18next')
 
 const options = {
-    lng: 'th'
+    otherLanguages: ['th'],
+    // lng: 'en'
+    fallbackLng: 'th'
 }
 
 module.exports = new NextI18Next(options);

@@ -9,6 +9,9 @@ class Notice extends React.Component {
         return (
             <div>
                 <NoticeHeader />
+
+                <FacebookButton />
+                <Footer />
             </div>
         );
     }

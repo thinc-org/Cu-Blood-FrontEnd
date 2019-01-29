@@ -1,11 +1,8 @@
 import React from 'react';
-// import FacebookData from './FacebookData'
-// import Truncate from 'react-truncate';
 import TextTruncate from 'react-text-truncate';
 import moment from 'moment';
 import I18 from '@/core/i18n';
 let i18n = I18.i18n;
-
 
 class FacebookCard extends React.Component {
 

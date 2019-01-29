@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Main from '$/main'
 import App, { Container } from 'next/app'
 import NProgress from "next-nprogress/component"
@@ -6,6 +6,7 @@ import NextI18Next from '@/core/i18n'
 import redirectTo from '@/core/redirectTo.js'
 import cookies from 'next-cookies'
 import axios from '@/core/core'
+import UserInfoProvider, { UserInfoConsumer } from '../components/core/UserInfoProvider';
 
 class MyApp extends App {
   constructor(props) {
@@ -13,28 +14,37 @@ class MyApp extends App {
     this.state = {};
   }
 
-  static async getInitialProps({ Component, router, ctx, res}) {
+  static async getInitialProps({ Component, ctx }) {
     let pageProps = {}
     const c = cookies(ctx);
+
+    const headers = ctx.req ? {
+      cookie: ctx.req.headers.cookie,
+    } : undefined;
 
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx)
     }
+
     // if is in user page
-    if (ctx.pathname.substring(0,3) === '/u/') {
-      if (typeof c.accessToken === 'undefined') redirectTo('/register', ctx)
-      else {
-        var response = await axios.post('https://api-dev.fives.cloud/api/v1/private/profile/info', {
-          accessToken: cookies(ctx).accessToken
+    let response;
+    if (ctx.pathname.substring(0, 3) === '/u/') {
+      response = await axios.get('https://api-dev.fives.cloud/v0/profile/me', { headers })
+        .then(resp => {
+          return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, userInfo: resp.data.result, status: resp.status } };
         })
-          .then(resp => {
-              return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken } };
-          })
-          .catch((err) => {
-            document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-            redirectTo('/register', ctx);
-          })
-      }
+        .catch((err) => {
+          return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, status: err.response.status } };
+        })
+    } 
+    else if (ctx.res) { // to fix bug : refresh in non /u/... and cannot access username in navbar
+      response = await axios.get('https://api-dev.fives.cloud/v0/profile/me', { headers })
+        .then(resp => {
+          return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, userInfo: resp.data.result, status: resp.status } };
+        })
+        .catch((err) => {
+          return null;
+        })
     }
 
     if (response !== null) { return { response }; }
@@ -42,19 +52,63 @@ class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps } = this.props
+    const { Component, pageProps, response } = this.props
+    if (response && response.status === 401) {
+      return (
+        <Container>
+          <UserInfoProvider>
+            <UserInfoConsumer>
+              {context => response && <ForceLogout context={context} />}
+            </UserInfoConsumer>
+          </UserInfoProvider>
+        </Container>
+      )
+    } else {
+      return (
+        <Container>
+          <NProgress
+            color="#ff0000"
+            spinner={false}
+          />
+          <UserInfoProvider>
+            <UserInfoConsumer>
+              {context => response && <AddUserInfo context={context} userInfo={response.userInfo} />}
+            </UserInfoConsumer>
+            <Main {...pageProps}>
+              <Component {...pageProps} />
+            </Main>
+          </UserInfoProvider>
+        </Container>
+      )
+    }
+  }
+}
 
-    return (
-      <Container>
-        <NProgress
-          color="#ff0000"
-          spinner={false}
-        />
-        <Main {...pageProps}>
-          <Component {...pageProps} />
-        </Main>
-      </Container>
-    )
+
+// hack from stackoverflow 
+class AddUserInfo extends Component {
+
+  componentDidMount() {
+    const { userInfo, context } = this.props;
+    context.addUserInfo(userInfo);
+  }
+
+  render() {
+    return null
+  }
+}
+
+// hack from stackoverflow
+class ForceLogout extends Component {
+
+  componentDidMount() {
+    const { context } = this.props;
+    context.deleteUserContext();
+    redirectTo('/chulaLogin');
+  }
+
+  render() {
+    return null
   }
 }
 

@@ -1,0 +1,9 @@
+@media (min-height: 800px) {
+    .special-height {
+        height: 100vh;
+    }
+
+    .special-padding-buttom {
+        padding-bottom: 2.5rem;
+    }
+}

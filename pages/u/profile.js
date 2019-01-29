@@ -10,7 +10,6 @@ import Footer from '@/shared-components/Footer';
 import '../../static/css/profile.css';
 import { UserInfoConsumer } from '@/core/UserInfoProvider';
 import axios from '@/core/core';
-import CommonsInfoProvider, { CommonsInfoConsumer } from '@/core/CommonsInfoProvider';
 
 
 class Profile extends Component {
@@ -38,12 +37,7 @@ class Profile extends Component {
                         )
                     }}
                 </UserInfoConsumer>
-                <CommonsInfoProvider>
-                    <CommonsInfoConsumer>
-                        {context => <AddCommonsInfo commonsInfo={commonsData} context={context}/>}
-                    </CommonsInfoConsumer>
-                    <Enrollment />
-                </CommonsInfoProvider>
+                <Enrollment commonsInfo={commonsData} />      
                 <PersonalInfo />
                 <MedicalInfo />
                 <EnrollmentHistory />
@@ -53,17 +47,5 @@ class Profile extends Component {
         );
     }
 }
-
-class AddCommonsInfo extends Component {
-
-    componentDidMount() {
-      const { commonsInfo, context } = this.props;
-      context.addCommonsInfo(commonsInfo);
-    }
-  
-    render() {
-      return null
-    }
-  }
 
 export default I18.withNamespaces('private')(Profile);

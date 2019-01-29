@@ -10,7 +10,7 @@ class Notice extends React.Component {
         return (
             <div className="bg-grey-lightest">
                 <AnnouncementHeader />
-                <div className="flex flex-row flex-wrap pb-10 justify-center layout-wide">
+                <div className="flex flex-row flex-wrap pb-10 justify-center">
                      <AnnouncementCard />
                      <AnnouncementCard />
                      <AnnouncementCard />

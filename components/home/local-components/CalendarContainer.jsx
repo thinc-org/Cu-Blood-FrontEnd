@@ -14,7 +14,6 @@ export default class CalendarContainer extends React.Component {
         const endDate = map(calendarEvents, 'endDate');
 
         return (
-                <MinorEvent title={eventTitle[4]} startDate={startDate[4]} endDate={endDate[4]} hasLineBreak={false} />
             <div className="bg-cb-pink-light ">
                 <div className="layout-wide">
                     <TopicCenter borderColor="border-cb-red" english="Calendar" thai="ปฏิทินกิจกรรม" englishColor="text-cb-pink" thaiColor="text-black" />

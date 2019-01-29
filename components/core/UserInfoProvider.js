@@ -26,7 +26,7 @@ class UserInfoProvider extends Component {
                 this.setState({ userInfo: {}, isLogin: false })
             })
             .catch(err => console.log(err, 'error'))
-            // .finally(() => {noRedirect === true ? null : window.location.href = '/'})
+            .finally(() => {noRedirect === true ? null : window.location.href = ''})
         // })
     }
 

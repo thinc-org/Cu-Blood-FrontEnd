@@ -32,7 +32,7 @@ const ExpandedMenu = ({ onCloseListener, className, t }) => {
                                         <div className="my-4 font-bold">{context.userInfo.firstName + " " + context.userInfo.lastName}</div>
                                         <ul className="list-reset text-grey-darkest flex flex-col">
                                         <Link href="/u/profile" prefetch><span onClick={onCloseListener}><a><li className="my-3">ไปที่หน้าโปรไฟล์</li></a></span></Link>
-                                        <a className="no-underline" href="" onClick={mobileLogout(context)}>
+                                        <a className="no-underline" onClick={mobileLogout(context)}>
                                             <li className="my-3 text-cb-red" >ออกจากระบบ</li> 
                                         </a>
                                         </ul>

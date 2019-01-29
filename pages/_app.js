@@ -27,8 +27,9 @@ class MyApp extends App {
     }
 
     // if is in user page
+    let response;
     if (ctx.pathname.substring(0, 3) === '/u/') {
-      var response = await axios.get('https://api-dev.fives.cloud/v0/profile/me', { headers })
+      response = await axios.get('https://api-dev.fives.cloud/v0/profile/me', { headers })
         .then(resp => {
           return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, userInfo: resp.data.result, status: resp.status } };
         })
@@ -37,7 +38,7 @@ class MyApp extends App {
         })
     } 
     else if (ctx.res) { // to fix bug : refresh in non /u/... and cannot access username in navbar
-      var response = await axios.get('https://api-dev.fives.cloud/v0/profile/me', { headers })
+      response = await axios.get('https://api-dev.fives.cloud/v0/profile/me', { headers })
         .then(resp => {
           return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, userInfo: resp.data.result, status: resp.status } };
         })
@@ -52,7 +53,7 @@ class MyApp extends App {
 
   render() {
     const { Component, pageProps, response } = this.props
-    if (response && response.status == 401) {
+    if (response && response.status === 401) {
       return (
         <Container>
           <UserInfoProvider>

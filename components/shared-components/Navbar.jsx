@@ -1,8 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
+import '../../static/css/nav.css';
 
 // import i18n for changing langauge
-import I18 from '@/core/i18n'
+import I18 from '@/core/i18n';
 import { UserInfoConsumer } from '../core/UserInfoProvider';
 let i18n = I18.i18n;
 
@@ -24,16 +25,7 @@ const Navbar = ({ onExpandListener, t }) => {
                     <div className="flex items-center">
                         <ul className="list-reset py-6 flex">
                             <UserInfoConsumer>
-                                {(context) => {
-                                    return true ? 
-                                    (
-                                        <LoginOrLogout isLogin={context.isLogin} logout={context.logout} username={context.userInfo.username} />
-                                    )
-                                    :
-                                    (
-                                        <LoginOrLogout />
-                                    )
-                                }}
+                                {(context) => <LoginOrLogout isLogin={context.isLogin} logout={context.logout} username={context.userInfo.username} />}
                             </UserInfoConsumer>
                         </ul>
                         <button style={{ width: '72px' }} onClick={() => i18n.changeLanguage(i18n.language === 'en' ? 'th' : 'en')} className="rounded-lg hidden md:flex flex-row items-center ml-4 p-2 px-3 bg-cb-pink-light mb-2">
@@ -53,11 +45,10 @@ const Navbar = ({ onExpandListener, t }) => {
 };
 
 const LoginOrLogout = ({ isLogin, logout, username }) => {
-    console.log()
     return isLogin ?
         (
             <React.Fragment>
-                <Link href="/u/profile" prefetch><a className="no-underline"><li className="text-cb-red hidden md:block mr-5">{username}</li></a></Link>
+                <Link href="/u/profile" prefetch><a className="no-underline"><li className="text-cb-red hidden md:block mr-5 special-truncate">{username}</li></a></Link>
                 <a className="no-underline cursor-pointer" onClick={logout}><li className="text-cb-red hidden md:block">ออกจากระบบ</li></a>
             </React.Fragment>
         )

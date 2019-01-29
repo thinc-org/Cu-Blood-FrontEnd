@@ -1,0 +1,8 @@
+@media(max-width: 850px) {
+    .special-truncate {
+        max-width: 100px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}

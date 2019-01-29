@@ -68,14 +68,9 @@ const MajorEvent = (props) => {
         <div className="layout-wide py-8">
             <div className="bg-white layout-narrow rounded-lg font-cu-heading text-3xl py-8 shadow-md " style={{ maxWidth: '800px', paddingLeft: '0', paddingRight: '0', }}>
                 <div className="flex flex-row">
-
-                    
-                        <div className="flex flex-col text-pink-dark px-8 flex-start">
-                           <CalendarDate startMonth={startMonth} endMonth={endMonth} startDay={startDay} endDay={endDay}/>
-                        </div>
-                        
-
-
+                    <div className="flex flex-col text-pink-dark px-8 flex-start">
+                        <CalendarDate startMonth={startMonth} endMonth={endMonth} startDay={startDay} endDay={endDay}/>
+                    </div>
                     <div className="flex flex-col pr-8 text-wrap w-full">
 
                         {title}

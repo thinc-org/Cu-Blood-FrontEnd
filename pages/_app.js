@@ -36,8 +36,15 @@ class MyApp extends App {
         .catch((err) => {
           return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, status: err.response.status } };
         })
-    } 
-    else if (ctx.res) { // to fix bug : refresh in non /u/... and cannot access username in navbar
+    } else if (ctx.pathname === '/chulaLogin') {
+      response = await axios.get('https://api-dev.fives.cloud/v0/profile/me', { headers })
+      .then(resp => {
+        redirectTo('/');
+      })
+      .catch((err) => {
+        return null;
+      })
+    } else if (ctx.res) { // to fix bug : refresh in non /u/... and cannot access username in navbar
       response = await axios.get('https://api-dev.fives.cloud/v0/profile/me', { headers })
         .then(resp => {
           return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, userInfo: resp.data.result, status: resp.status } };

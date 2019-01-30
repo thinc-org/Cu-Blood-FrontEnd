@@ -27,13 +27,14 @@ class Profile extends Component {
         const data = this.props;
         const commonsData = data.result[0] !== undefined? data.result[0] : null;
         
+        
         console.log(commonsData);
         return (
             <div>
                 <UserInfoConsumer>
                     {({userInfo}) => {
                         return (
-                            <ProfileHeader name={userInfo.firstName + " " + userInfo.lastName} email="abcdef@gmail.com" tel={userInfo.phoneNumber} />
+                            <ProfileHeader name={userInfo.firstName + " " + userInfo.lastName} email={userInfo.username} tel={userInfo.phoneNumber} />
                         )
                     }}
                 </UserInfoConsumer>

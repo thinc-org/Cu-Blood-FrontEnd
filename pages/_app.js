@@ -26,30 +26,32 @@ class MyApp extends App {
       pageProps = await Component.getInitialProps(ctx)
     }
 
-    // if is in user page
+    // although the result / performance is 100% coherent to the userflow journey, I know this code itself is very boilerplate.
+    // Will fix that if we have enough time.
     let response;
+    // if is in user page
     if (ctx.pathname.substring(0, 3) === '/u/') {
       response = await axios.get('https://api-dev.fives.cloud/v0/profile/me', { headers })
-        .then(resp => {
+        .then(resp => { // add userinfo to context
           return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, userInfo: resp.data.result, status: resp.status } };
         })
-        .catch((err) => {
+        .catch((err) => { // force logout then redirect to same page
           return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, status: err.response.status } };
         })
-    } else if (ctx.pathname === '/chulaLogin') {
+    } else if (ctx.pathname === '/chulaLogin') { //
       response = await axios.get('https://api-dev.fives.cloud/v0/profile/me', { headers })
-      .then(resp => {
+      .then(resp => { // redirect if already login
         redirectTo('/', ctx);
       })
-      .catch((err) => {
+      .catch((err) => { // allow user to access login page if not log in
         return null;
       })
-    } else if (ctx.res) { // to fix bug : refresh in non /u/... and cannot access username in navbar
+    } else if (ctx.res) { 
       response = await axios.get('https://api-dev.fives.cloud/v0/profile/me', { headers })
-        .then(resp => {
+        .then(resp => { // add userInfo to context when already log in
           return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, userInfo: resp.data.result, status: resp.status } };
         })
-        .catch((err) => {
+        .catch((err) => { // 
           return null;
         })
     }

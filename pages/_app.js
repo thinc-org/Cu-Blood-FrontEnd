@@ -39,7 +39,7 @@ class MyApp extends App {
     } else if (ctx.pathname === '/chulaLogin') {
       response = await axios.get('https://api-dev.fives.cloud/v0/profile/me', { headers })
       .then(resp => {
-        redirectTo('/');
+        redirectTo('/', ctx);
       })
       .catch((err) => {
         return null;

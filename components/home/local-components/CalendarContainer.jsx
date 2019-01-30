@@ -111,14 +111,14 @@ const LineBreak = ({ hasLineBreak = true }) => {
 const CalendarDate = (props) => {
     const { startMonth, endMonth, startDay, endDay } = props;
 
-    const monthChecker = startMonth === endMonth;
-    const dayChecker = startDay === endDay;
+    const isSameMonth = startMonth === endMonth;
+    const isSameDay = startDay === endDay;
 
-    return monthChecker ?
+    return isSameMonth ?
         (
             <div>
                 <div className="font-bold">
-                    {(dayChecker) ? (startDay) : <div>{startDay}-{endDay}</div>}
+                    {(isSameDay) ? (startDay) : <div>{startDay}-{endDay}</div>}
 
                 </div>
                 <div className="font-medium">

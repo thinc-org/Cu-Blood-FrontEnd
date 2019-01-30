@@ -25,7 +25,9 @@ class HomeHead extends Component {
                   <p className="text-2xl text-white font-normal mr-2">
                     เกี่ยวกับโครงการ
                   </p>
-                  <img src='/static/home/forward-arrow.svg' alt="arrow" className="w-6 pb-2" />
+                  <div>
+                    <img src='/static/home/forward-arrow.svg' alt="arrow" className="w-6" />
+                  </div>
                 </div>
               </Link>
             </div>

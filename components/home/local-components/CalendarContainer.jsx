@@ -38,11 +38,11 @@ const MinorEvent = (props) => {
     if (title && startDate && endDate) {
         return (
             <div className="layout-narrow">
-                <div className="flex flex-row  font-cu-heading justify-start items-center py-5">
-                    <div className="flex flex-col text-pink-dark items-start w-24" >
+                <div className="flex flex-col sm:flex-row font-cu-heading justify-start py-5">
+                    <div className="flex flex-col text-pink-dark items-center" >
                         <CalendarDate startMonth={startMonth} endMonth={endMonth} startDay={startDay} endDay={endDay} />
                     </div>
-                    <div>
+                    <div className="flex flex-col text-wrap text-center sm:text-left items-center">
                         {title}
                     </div>
                 </div>
@@ -68,14 +68,12 @@ const MajorEvent = (props) => {
     if (title && startDate && endDate) {
 
         return (
-            <div className="bg-white layout-narrow rounded-lg font-cu-heading text-3xl py-8 shadow-md flex flex-row" style={{ maxWidth: '800px', paddingLeft: '0', paddingRight: '0', marginBottom: '2rem', marginTop: '2rem' }}>
-                <div className="flex flex-col text-pink-dark px-8 flex-start">
+            <div className="bg-white layout-narrow rounded-lg font-cu-heading text-3xl py-8 shadow-md flex flex-col sm:flex-row" style={{ maxWidth: '800px', paddingLeft: '0', paddingRight: '0', marginBottom: '2rem', marginTop: '2rem' }}>
                     <CalendarDate startMonth={startMonth} endMonth={endMonth} startDay={startDay} endDay={endDay} />
-                </div>
-                <div className="flex flex-col pr-8 text-wrap w-full">
+                <div className="flex flex-col px-8 sm:px-0 sm:pr-8 text-wrap w-full ">
                     {title}
-                    <div className="flex flex-row text-base pt-8">
-                        <div className="w-1/2 text-pink-dark flex flex-row items-center ">
+                    <div className="flex flex-col sm:flex-row text-base pt-4">
+                        <div className="w-1/2 text-pink-dark flex flex-row items-center pb-4 sm:pb-0">
                             <img className="w-14 h-14 mr-4" src='/static/logo/location.png' alt="clock"></img>
                             {location}
                         </div>
@@ -116,8 +114,8 @@ const CalendarDate = (props) => {
 
     return isSameMonth ?
         (
-            <div>
-                <div className="font-bold">
+            <div className="flex flex-row sm:flex-col text-pink-dark px-8 flex-start mb-2 sm:mb-0">
+                <div className="font-bold mr-4 sm:mr-0">
                     {(isSameDay) ? (startDay) : <div>{startDay}-{endDay}</div>}
 
                 </div>
@@ -128,8 +126,8 @@ const CalendarDate = (props) => {
         )
         :
         (
-            <div>
-                <div className="font-bold">
+            <div className="flex flex-row sm:flex-col text-pink-dark px-8 flex-start mb-2 sm:mb-0">
+                <div className="font-bold mr-4 sm:mr-0">
                     {startDay}-{endDay}
                 </div>
                 <div className="font-medium">

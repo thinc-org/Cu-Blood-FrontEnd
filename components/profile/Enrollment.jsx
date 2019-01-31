@@ -67,14 +67,16 @@ class Enrollment extends Component {
     toggleRedCrossModal = () => {
         const sessionInfo = this.props.sessionInfo;
         const sessionId = sessionInfo[0].id == undefined ? null : sessionInfo[0].id
-        this.setState({RedCrossModal: !this.state.RedCrossModal, sessionId: sessionId});
+        const regisDate = this.props.sessionInfo[0].timeSlot == undefined ? moment(this.props.commonsInfo.startDate).format('YYYY-MM-DD') : this.props.sessionInfo[0].timeSlot
+        this.setState({RedCrossModal: !this.state.RedCrossModal, sessionId: sessionId, regisDate: regisDate});
     }
 
     //Function to setState of turing CU modal on and off
     toggleCUModal = () => {
         const sessionInfo = this.props.sessionInfo;
         const sessionId = sessionInfo[0].id == undefined ? null : sessionInfo[0].id;
-        this.setState({CUModal: !this.state.CUModal, sessionId: sessionId});
+        const regisDate = this.props.sessionInfo[0].timeSlot == undefined ? moment(this.props.commonsInfo.startDate).format('YYYY-MM-DD') : this.props.sessionInfo[0].timeSlot
+        this.setState({CUModal: !this.state.CUModal, sessionId: sessionId, regisDate: regisDate});
     }
 
     //Function to post information needed for enroll to API when click accepts

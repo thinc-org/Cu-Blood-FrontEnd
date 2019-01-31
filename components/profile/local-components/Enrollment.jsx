@@ -64,9 +64,9 @@ class Enrollment extends Component {
 
         const regisStartDate = moment(commonsInfo.registrationStartDate).format('MM/DD/YYYY');
         const eventEndDate = moment(commonsInfo.endDate).format('MM/DD/YYYY');
-        const eventStartDate = moment(commonsInfo.startDate).format('MM/DD/YYYY');
+        const regisEndDate = moment(commonsInfo.registrationEndDate).format('MM/DD/YYYY');
         const userDate = moment().tz('Asia/Bangkok').format('MM/DD/YYYY');
-        if (Date.parse(userDate) <= Date.parse(regisStartDate) || Date.parse(userDate) >= Date.parse(eventEndDate)) {
+        if (Date.parse(userDate) < Date.parse(regisStartDate) || Date.parse(userDate) > Date.parse(eventEndDate)) {
             return (
                 <div className="bg-cb-grey-lighter pb-10">
                     <div className="layout-wide">
@@ -79,7 +79,7 @@ class Enrollment extends Component {
             );
         }
         //Create fix date button if the user already registered for the current event
-        const fixDateButton = (this.state.currentSessionInfo !== null) && (Date.parse(userDate) <= Date.parse(eventStartDate)) ? <button className="ml-2" onClick={() => this.toggleModal(null, 'fixDateModal')}><img className="w-6" src="/static/icons/fix.svg" alt="Fix logo" /></button> : null;
+        const fixDateButton = (this.state.currentSessionInfo !== null) && (Date.parse(userDate) <= Date.parse(regisEndDate)) ? <button className="ml-2" onClick={() => this.toggleModal(null, 'fixDateModal')}><img className="w-6" src="/static/icons/fix.svg" alt="Fix logo" /></button> : null;
         //Create the location content where there is the location name + link to map + button to open modal
         const locationContent = commonsInfo.locations.map(element => this.content(element.nameTH, element.nameEN, element.googleMapsURL, element));
         //Mapping to create the register modal
@@ -139,9 +139,10 @@ class Enrollment extends Component {
         const isLocationPick = (this.state.currentSessionInfo !== null) && (this.state.currentSessionInfo.locationId === element.id)
         
         //Check if user is during an event time
-        const eventStartDate = this.state.commonsInfo !== null ? moment(this.state.commonsInfo.startDate).format('MM/DD/YYYY') : null;
+        const regisEndDate = this.state.commonsInfo !== null ? moment(this.state.commonsInfo.registrationEndDate).format('MM/DD/YYYY') : null;
         const userDate = moment().tz('Asia/Bangkok').format('MM/DD/YYYY');
-        const inEventDate = eventStartDate !== null ? (Date.parse(userDate) >= Date.parse(eventStartDate)) : false;
+        console.log(Date.parse(userDate), Date.parse(regisEndDate));
+        const inEventDate = regisEndDate !== null ? (Date.parse(userDate) > Date.parse(regisEndDate)) : false;
 
         //Choose what kind of button will show = register / change location / show QR
         const button = this.chooseButton(alreadyRegistered, isLocationPick, element, inEventDate);

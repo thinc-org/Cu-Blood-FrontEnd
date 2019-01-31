@@ -4,6 +4,7 @@ import Detail from './Detail';
 import Card from '@/shared-components/Card';
 import moment from 'moment';
 import I18 from '@/core/i18n';
+import axios from '@/core/core';
 let i18n = I18.i18n
 
 class Enrollment extends Component {
@@ -12,13 +13,17 @@ class Enrollment extends Component {
 
         this.state = {
             RedCrossModal: false,
-            CUModal: false
+            CUModal: false,
+            regisDate: "",
+            sessionId: null
         };
     }
     
     render() {
         i18n.language === 'th' ? moment.locale('th') : moment.locale('en')
         const commonsInfo = this.props.commonsInfo;
+        const sessionInfo = this.props.sessionInfo;
+        console.log(sessionInfo);
         return (
             <div className="bg-cb-grey-lighter pb-10">
                 <div className="layout-wide">
@@ -35,8 +40,8 @@ class Enrollment extends Component {
                         </div>
                     </Card>
                     {/* Modal that will show when click register */}
-                    {this.windowModal(this.state.CUModal, `อาคารมหิตลาธิเบศร จุฬาลงกรณ์มหาวิทยาลัย`, `Mahittalathibet Building, Chulalongkorn University`, this.toggleCUModal, this.toggleCUModal)}
-                    {this.windowModal(this.state.RedCrossModal, `สภากาชาดไทย`, `Thai Red Cross Society`, this.toggleRedCrossModal, this.toggleRedCrossModal)}             
+                    {this.windowModal(this.state.CUModal, `อาคารมหิตลาธิเบศร จุฬาลงกรณ์มหาวิทยาลัย`, `Mahittalathibet Building, Chulalongkorn University`, this.toggleCUModal, this.postEnroll, "CU", commonsInfo.id)}
+                    {this.windowModal(this.state.RedCrossModal, `สภากาชาดไทย`, `Thai Red Cross Society`, this.toggleRedCrossModal, this.postEnroll, "Red Cross", commonsInfo.id)}             
                 </div>
             </div>
         );
@@ -62,7 +67,28 @@ class Enrollment extends Component {
         this.setState({CUModal: !this.state.CUModal});
     }
 
-    windowModal = (show, thaiName, engName, cancelFunc, acceptFunc) => {
+    postEnroll = async (location, projectId) => {
+        const commonsInfo = this.props.commonsInfo;
+        const closeFunc = location == "CU" ? this.toggleCUModal : this.toggleRedCrossModal;
+        const registrationPoint = location == "CU" ? 1 : 0
+        axios.post('https://api-dev.fives.cloud/v0/profile/me/enroll', {
+            projectId: projectId,
+            registrationPoint: registrationPoint,
+            timeSlot: this.state.regisDate
+        })
+        .then((response) => {
+            console.log(response);
+            this.setState({sessionId: response});
+        })
+        .then(closeFunc())
+        .catch(console.log)
+    }
+
+    handleChange = (event) => {
+        this.setState({regisDate: event.target.value})
+    }
+
+    windowModal = (show, thaiName, engName, cancelFunc, acceptFunc, location, projectId) => {
         if(!show) {
             return null;
           }
@@ -76,12 +102,12 @@ class Enrollment extends Component {
                         <Detail bigText={`${thaiName}`} smallText={`${engName}`} />
                         <div className="mt-4 flex justify-center items-center">
                             <div className="mr-4">วันที่:</div>
-                            <input className="w-24" type="text" placeholder="DD/MM/YYYY"/>
+                            <input className="w-24" type="text" placeholder="DD/MM/YYYY" value={this.state.regisDate} onChange={this.handleChange}/>
                         </div>
                     </div>
                     <div className="pt-6 flex justify-between px-4 sm:px-10">
                         <button onClick={cancelFunc}>ยกเลิก</button>
-                        <button className="text-cb-pink" onClick={acceptFunc}>ยืนยัน</button>   
+                        <button className="text-cb-pink" onClick={() => acceptFunc(location, projectId)}>ยืนยัน</button>   
                     </div>               
                 </div>
             </div>

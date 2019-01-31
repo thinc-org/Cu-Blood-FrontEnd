@@ -15,30 +15,38 @@ import axios from '@/core/core';
 class Profile extends Component {
     static async getInitialProps() {
 
-        const commonsData = axios.get('https://api-dev.fives.cloud/v0/commons')
-        .then(response => response.data)
-        .catch(e => null)
+        const commonsDataPromise = axios.get('https://api-dev.fives.cloud/v0/commons');
+        const sessionDataPromise = axios.get('https://api-dev.fives.cloud/v0/profile/me/sessions');
+
+        const data = await Promise.all([commonsDataPromise, sessionDataPromise]
+        .map(p => p
+            .then(response => response.data)
+            .catch(e => null)))
         .catch(console.log);
-    
-        return (commonsData ? commonsData : undefined);
+        
+        const [commonsData, sessionData] = data;
+        return {
+          commonsData: commonsData ? commonsData : undefined,
+          sessionData: sessionData ? sessionData : undefined,
+        };
     }
     
     render() {
-        const data = this.props;
-        const commonsData = data.result[0] !== undefined? data.result[0] : null;
+        const { commonsData, sessionData } = this.props;
+        const commonsInfo = commonsData.result[0] !== undefined? commonsData.result[0] : null;
         
-        
-        console.log(commonsData);
+        console.log(commonsInfo);
         return (
             <div>
                 <UserInfoConsumer>
                     {({userInfo}) => {
+                        console.log(userInfo)
                         return (
                             <ProfileHeader name={userInfo.firstName + " " + userInfo.lastName} email={userInfo.username} tel={userInfo.phoneNumber} />
                         )
                     }}
                 </UserInfoConsumer>
-                <Enrollment commonsInfo={commonsData} />      
+                <Enrollment commonsInfo={commonsInfo} sessionInfo={sessionData}/>      
                 <PersonalInfo />
                 <MedicalInfo />
                 <EnrollmentHistory />

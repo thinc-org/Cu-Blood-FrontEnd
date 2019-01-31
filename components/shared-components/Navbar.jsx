@@ -1,5 +1,6 @@
 import React from 'react';
-import Link from 'next/link';
+// import Link from 'next/link';
+import { Link } from '@/core/i18n'
 import '../../static/css/nav.css';
 
 // import i18n for changing langauge

@@ -14,8 +14,8 @@ class Enrollment extends Component {
         this.state = {
             RedCrossModal: false,
             CUModal: false,
-            regisDate: this.props.sessionInfo[0].timeSlot == undefined ? moment(this.props.commonsInfo.startDate).format('YYYY-MM-DD') : this.props.sessionInfo[0].timeSlot,
-            sessionId: null
+            regisDate: this.props.sessionInfo[0].timeSlot != undefined ? this.props.sessionInfo[0].timeSlot : null,
+            sessionId: this.props.sessionInfo[0].id != undefined ? this.props.sessionInfo[0].id : null
         };
     }
     
@@ -32,7 +32,10 @@ class Enrollment extends Component {
                 <div className="layout-wide">
                     <Header english="ENROLLMENT" thai="ลงทะเบียนเข้าร่วม" englishColor="text-cb-pink" borderColor="border-cb-red" />
                     <Card>
-                        <div className="w-full mb-8 text-3xl font-cu-heading">{commonsInfo.name}</div>
+                        <div className="w-full mb-8 font-cu-heading flex flex-col sm:flex-row text-center sm:text-left justify-between items-center">
+                            <div className="text-3xl">{commonsInfo.name}</div>
+                            <div className="text-base mt-4 sm:mt-0">วันที่เลือกปริจาคโลหิต: <span className="text-cb-pink">{this.state.regisDate != null ? moment(this.state.regisDate).format('D MMMM') : '-'}</span></div>
+                        </div>
                         <div className="w-full border-cb-grey-border border-t border-b py-8 flex flex-col">
                             {this.content(`อาคารมหิตลาธิเบศร จุฬาลงกรณ์มหาวิทยาลัย`, `Mahittalathibet Building, Chulalongkorn University`, `https://maps.google.com/maps?hl=en&q=Mahitaladhibesra+Building&ll=13.7337533,100.5293964,17z&t=m&z=19`, `mb-8`, `CU`)}
                             {this.content(`สภากาชาดไทย`, `Thai Red Cross Society`, `https://maps.google.com/maps?hl=en&q=National+Blood+Center,+Thai+Red+Cross+Society&ll=13.7364773,100.5312038,17z&t=m&z=19`, ``, `Red Cross`)}
@@ -50,11 +53,11 @@ class Enrollment extends Component {
         );
     }
 
-    //Function that creates the location appearance
+    //Function that creates the location and register button
     content = (thaiName, engName, urlLocation, divClass = ``, location) => {
         return (
             <div className={`flex flex-col md:flex-row items-center justify-between ${divClass}`}>
-                <div className="text-center md:text-left mb-4"><Detail bigText={thaiName} smallText={engName} /></div>
+                <div className="text-center md:text-left mb-4 md:mb-0"><Detail bigText={thaiName} smallText={engName} /></div>
                 <div className="flex font-cu-body items-center">
                     <a href={`${urlLocation}`} target="_blank" rel="noopener noreferrer" className="text-base mr-8 text-center" style={{ color: "#58595b" }}>ดูแผนที่</a>
                     <button onClick={location == "CU" ? this.toggleCUModal : this.toggleRedCrossModal} className="text-lg bg-cb-pink-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#de5c8e" }}>ลงทะเบียน</button>
@@ -66,8 +69,8 @@ class Enrollment extends Component {
     //Function to setState of turning Red Cross modal on and off
     toggleRedCrossModal = () => {
         const sessionInfo = this.props.sessionInfo;
-        const sessionId = sessionInfo[0].id == undefined ? null : sessionInfo[0].id
-        const regisDate = this.props.sessionInfo[0].timeSlot == undefined ? moment(this.props.commonsInfo.startDate).format('YYYY-MM-DD') : this.props.sessionInfo[0].timeSlot
+        const sessionId = sessionInfo[0].id == undefined ? null : sessionInfo[0].id;
+        const regisDate = this.props.sessionInfo[0].timeSlot != undefined ? this.props.sessionInfo[0].timeSlot : null; 
         this.setState({RedCrossModal: !this.state.RedCrossModal, sessionId: sessionId, regisDate: regisDate});
     }
 
@@ -75,12 +78,12 @@ class Enrollment extends Component {
     toggleCUModal = () => {
         const sessionInfo = this.props.sessionInfo;
         const sessionId = sessionInfo[0].id == undefined ? null : sessionInfo[0].id;
-        const regisDate = this.props.sessionInfo[0].timeSlot == undefined ? moment(this.props.commonsInfo.startDate).format('YYYY-MM-DD') : this.props.sessionInfo[0].timeSlot
+        const regisDate = this.props.sessionInfo[0].timeSlot != undefined ? this.props.sessionInfo[0].timeSlot : null; 
         this.setState({CUModal: !this.state.CUModal, sessionId: sessionId, regisDate: regisDate});
     }
 
     //Function to post information needed for enroll to API when click accepts
-    postEnroll = async (location, projectId) => {
+    postEnroll = (location, projectId) => {
         const closeFunc = location == "CU" ? this.toggleCUModal : this.toggleRedCrossModal;
         const registrationPoint = location == "CU" ? 1 : 0
         axios.post('https://api-dev.fives.cloud/v0/profile/me/enroll', {
@@ -125,11 +128,11 @@ class Enrollment extends Component {
         <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{backgroundColor: 'rgba(0,0,0,0.3)', top: 50}}>
             <div className="layout-wide flex justify-center">
                 <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg">
-                    <div className="mb-6 px-4 sm:px-10 font-semibold">ยืนยันการเปลี่ยนสถานที่บริจาคโลหิต</div>
+                    <div className="mb-6 px-4 sm:px-10 font-semibold">ยืนยันการลงทะเบียนสถานที่บริจาคโลหิต</div>
                     <div className="bg-cb-grey-lighter py-6 w-full px-4 sm:px-10 flex flex-col justify-center">
                         <Detail bigText={`${thaiName}`} smallText={`${engName}`} />
                         <div className="mt-4 flex justify-center items-center">
-                            <label>วันที่: 
+                            <label>เลือกวันที่บริจาค: 
                                 <select className="w-32" value={this.state.regisDate} onChange={this.handleChange}>
                                     {datesOption}
                                 </select>

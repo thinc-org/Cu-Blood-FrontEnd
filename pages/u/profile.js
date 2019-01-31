@@ -34,7 +34,8 @@ class Profile extends Component {
     render() {
         const { commonsData, sessionData } = this.props;
         const commonsInfo = commonsData.result[0] !== undefined? commonsData.result[0] : null;
-        
+        const sessionInfo = sessionData.result !== undefined? sessionData.result : null;
+
         console.log(commonsInfo);
         return (
             <div>
@@ -46,7 +47,7 @@ class Profile extends Component {
                         )
                     }}
                 </UserInfoConsumer>
-                <Enrollment commonsInfo={commonsInfo} sessionInfo={sessionData}/>      
+                <Enrollment commonsInfo={commonsInfo} sessionInfo={sessionInfo}/>      
                 <PersonalInfo />
                 <MedicalInfo />
                 <EnrollmentHistory />

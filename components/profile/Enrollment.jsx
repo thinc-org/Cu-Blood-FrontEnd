@@ -14,7 +14,7 @@ class Enrollment extends Component {
         this.state = {
             RedCrossModal: false,
             CUModal: false,
-            regisDate: "",
+            regisDate: this.props.sessionInfo[0].timeSlot == undefined ? moment(this.props.commonsInfo.startDate).format('YYYY-MM-DD') : this.props.sessionInfo[0].timeSlot,
             sessionId: null
         };
     }
@@ -22,8 +22,11 @@ class Enrollment extends Component {
     render() {
         i18n.language === 'th' ? moment.locale('th') : moment.locale('en')
         const commonsInfo = this.props.commonsInfo;
-        const sessionInfo = this.props.sessionInfo.result;
+        const sessionInfo = this.props.sessionInfo;
+        const datesDuringDonation = this.betweenDonationDate(commonsInfo.startDate, commonsInfo.endDate);
         console.log(sessionInfo);
+        console.log(this.state.regisDate);
+
         return (
             <div className="bg-cb-grey-lighter pb-10">
                 <div className="layout-wide">
@@ -40,13 +43,14 @@ class Enrollment extends Component {
                         </div>
                     </Card>
                     {/* Modal that will show when click register */}
-                    {this.windowModal(this.state.CUModal, `อาคารมหิตลาธิเบศร จุฬาลงกรณ์มหาวิทยาลัย`, `Mahittalathibet Building, Chulalongkorn University`, this.toggleCUModal, this.postEnroll, "CU", commonsInfo.id)}
-                    {this.windowModal(this.state.RedCrossModal, `สภากาชาดไทย`, `Thai Red Cross Society`, this.toggleRedCrossModal, this.postEnroll, "Red Cross", commonsInfo.id)}             
+                    {this.firstEnrollModal(this.state.CUModal, `อาคารมหิตลาธิเบศร จุฬาลงกรณ์มหาวิทยาลัย`, `Mahittalathibet Building, Chulalongkorn University`, this.toggleCUModal, this.postEnroll, "CU", commonsInfo.id, datesDuringDonation)}
+                    {this.firstEnrollModal(this.state.RedCrossModal, `สภากาชาดไทย`, `Thai Red Cross Society`, this.toggleRedCrossModal, this.postEnroll, "Red Cross", commonsInfo.id, datesDuringDonation)}             
                 </div>
             </div>
         );
     }
 
+    //Function that creates the location appearance
     content = (thaiName, engName, urlLocation, divClass = ``, location) => {
         return (
             <div className={`flex flex-col md:flex-row items-center justify-between ${divClass}`}>
@@ -59,18 +63,21 @@ class Enrollment extends Component {
         );
     }
 
+    //Function to setState of turning Red Cross modal on and off
     toggleRedCrossModal = () => {
-        const sessionInfo = this.props.sessionInfo.result;
+        const sessionInfo = this.props.sessionInfo;
         const sessionId = sessionInfo[0].id == undefined ? null : sessionInfo[0].id
         this.setState({RedCrossModal: !this.state.RedCrossModal, sessionId: sessionId});
     }
 
+    //Function to setState of turing CU modal on and off
     toggleCUModal = () => {
-        const sessionInfo = this.props.sessionInfo.result;
+        const sessionInfo = this.props.sessionInfo;
         const sessionId = sessionInfo[0].id == undefined ? null : sessionInfo[0].id;
         this.setState({CUModal: !this.state.CUModal, sessionId: sessionId});
     }
 
+    //Function to post information needed for enroll to API when click accepts
     postEnroll = async (location, projectId) => {
         const closeFunc = location == "CU" ? this.toggleCUModal : this.toggleRedCrossModal;
         const registrationPoint = location == "CU" ? 1 : 0
@@ -84,15 +91,34 @@ class Enrollment extends Component {
         .catch(console.log)
     }
 
+    //Function to setState to regisDate for when date option is pick
     handleChange = (event) => {
         this.setState({regisDate: event.target.value})
     }
 
-    windowModal = (show, thaiName, engName, cancelFunc, acceptFunc, location, projectId) => {
+    //Create an array of dates between the start and end of donation
+    betweenDonationDate = (startDate, endDate) => {
+        let start = moment(startDate);
+        const end = moment(endDate);
+        let dates = [];
+
+        while(start <= end) {
+            dates.push(start.format('YYYY-MM-DD'));
+            start = start.clone().add(1, 'days');
+        }
+
+        return dates;
+    }
+
+    // Function takes care of popup for first enrollment
+    firstEnrollModal = (show, thaiName, engName, cancelFunc, acceptFunc, location, projectId, datesOption) => {
         if(!show) {
             return null;
           }
-      
+        
+        // Turn the array of dates into options to select
+        datesOption = datesOption.map(date => <option value={date}>{date}</option>)
+        
         return (
         <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{backgroundColor: 'rgba(0,0,0,0.3)', top: 50}}>
             <div className="layout-wide flex justify-center">
@@ -101,8 +127,11 @@ class Enrollment extends Component {
                     <div className="bg-cb-grey-lighter py-6 w-full px-4 sm:px-10 flex flex-col justify-center">
                         <Detail bigText={`${thaiName}`} smallText={`${engName}`} />
                         <div className="mt-4 flex justify-center items-center">
-                            <div className="mr-4">วันที่:</div>
-                            <input className="w-24" type="text" placeholder="DD/MM/YYYY" value={this.state.regisDate} onChange={this.handleChange}/>
+                            <label>วันที่: 
+                                <select className="w-32" value={this.state.regisDate} onChange={this.handleChange}>
+                                    {datesOption}
+                                </select>
+                            </label>
                         </div>
                     </div>
                     <div className="pt-6 flex justify-between px-4 sm:px-10">

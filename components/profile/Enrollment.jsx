@@ -22,7 +22,7 @@ class Enrollment extends Component {
     render() {
         i18n.language === 'th' ? moment.locale('th') : moment.locale('en')
         const commonsInfo = this.props.commonsInfo;
-        const sessionInfo = this.props.sessionInfo;
+        const sessionInfo = this.props.sessionInfo.result;
         console.log(sessionInfo);
         return (
             <div className="bg-cb-grey-lighter pb-10">
@@ -60,15 +60,18 @@ class Enrollment extends Component {
     }
 
     toggleRedCrossModal = () => {
-        this.setState({RedCrossModal: !this.state.RedCrossModal});
+        const sessionInfo = this.props.sessionInfo.result;
+        const sessionId = sessionInfo[0].id == undefined ? null : sessionInfo[0].id
+        this.setState({RedCrossModal: !this.state.RedCrossModal, sessionId: sessionId});
     }
 
     toggleCUModal = () => {
-        this.setState({CUModal: !this.state.CUModal});
+        const sessionInfo = this.props.sessionInfo.result;
+        const sessionId = sessionInfo[0].id == undefined ? null : sessionInfo[0].id;
+        this.setState({CUModal: !this.state.CUModal, sessionId: sessionId});
     }
 
     postEnroll = async (location, projectId) => {
-        const commonsInfo = this.props.commonsInfo;
         const closeFunc = location == "CU" ? this.toggleCUModal : this.toggleRedCrossModal;
         const registrationPoint = location == "CU" ? 1 : 0
         axios.post('https://api-dev.fives.cloud/v0/profile/me/enroll', {
@@ -76,10 +79,7 @@ class Enrollment extends Component {
             registrationPoint: registrationPoint,
             timeSlot: this.state.regisDate
         })
-        .then((response) => {
-            console.log(response);
-            this.setState({sessionId: response});
-        })
+        .then(console.log)
         .then(closeFunc())
         .catch(console.log)
     }

@@ -1,15 +1,17 @@
 import React from 'react';
 import TopicCenter from '@/shared-components/TopicCenter';
+import I18 from '@/core/i18n';
 
-export default class NoticeContent extends React.Component {
+class NoticeContent extends React.Component {
     render() {
+      const {data = [], t} = this.props;
         return (
             <div className="layout-wide">
-                <TopicCenter english="CHARACTERISTIC AND CRITERIA" englishColor="text-pink" thai="คุณสมบัติผู้บริจาคโลหิต" borderColor="border-red" />
+                <TopicCenter english={t('topic1Small')} englishColor="text-pink" thai={t('topic1Big')} borderColor="border-red" />
                 <BulletPoint />
-                <TopicCenter english="PROCEDURES" englishColor="text-pink" thai="ขั้นตอนการบริจาคโลหิตกับโครงการ" borderColor="border-red" />
+                <TopicCenter english={t('topic2Small')} englishColor="text-pink" thai={t('topic2Big')} borderColor="border-red" />
                 <BulletPoint />
-                <TopicCenter english="PRE-POST DONATION PREPARATION" englishColor="text-pink" thai="การเตรียมตัวก่อน-หลังบริจาคโลหิต" borderColor="border-red" />
+                <TopicCenter english={t('topic3Small')} englishColor="text-pink" thai={t('topic3Big')} borderColor="border-red" />
                 <BulletPoint />
                 <NoticeContact />
             </div>
@@ -42,3 +44,4 @@ const NoticeContact = () => {
         </div>
     )
 }
+export default I18.withNamespaces('notice')(NoticeContent);

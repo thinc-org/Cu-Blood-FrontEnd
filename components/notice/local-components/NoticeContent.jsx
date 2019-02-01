@@ -11,11 +11,11 @@ class NoticeContent extends React.Component {
                 <BulletPoint bullet={1} context={context11} />
                 <BulletPoint bullet={2} context={context12} />
                 <Context13 bullet={3} context={context13} />
-                <TopicCenter english={t('topic2Small'} englishColor="text-pink" thai={t('topic2Big')} borderColor="border-red" />
+                <TopicCenter english={t('topic2Small')} englishColor="text-pink" thai={t('topic2Big')} borderColor="border-red" />
                 <BulletPoint bullet={1} context={context21} />
                 <BulletPoint bullet={2} context={context22} />
                 <BulletPoint bullet={3} context={context23} />
-                <TopicCenter english={t('topic3Small'} englishColor="text-pink" thai={t('topic3Big')} borderColor="border-red" />
+                <TopicCenter english={t('topic3Small')} englishColor="text-pink" thai={t('topic3Big')} borderColor="border-red" />
                 <BulletHeader header={"การเตรียมตัวก่อนบริจาคโลหิต"} />
                 <BulletPoint bullet={1} context={context31} />
                 <BulletPoint bullet={2} context={context32} />

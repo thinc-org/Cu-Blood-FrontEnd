@@ -17,10 +17,10 @@ const Navbar = ({ onExpandListener, t }) => {
                         <Link href="/" prefetch><a><img src='/static/logo/logo1.svg' alt="logo" className="h-16 w-16" /></a></Link>
                         <div className="border-l mx-4 h-8 block"></div>
                         <ul className="list-reset py-6 text-grey-darkest hidden md:flex">
-                            <Link href="/about" prefetch><a className="no-underline text-grey-darkest"><li className="mx-3">เกี่ยวกับเรา</li></a></Link>
-                            <li className="mx-3">ข้อควรรู้</li>
-                            <Link href="/u/registerForm" prefetch><li className="mx-3">ข่าวประกาศ</li></Link>
-                            <Link href="/contact" prefetch><a className="no-underline text-grey-darkest"><li className="mx-3">ติดต่อเรา</li></a></Link>
+                                <Link href="/about" prefetch><a className="no-underline text-grey-darkest"><li className="mx-3">เกี่ยวกับเรา</li></a></Link>
+                                <Link href="/notice" prefetch><a className="no-underline text-grey-darkest"><li className="mx-3">ข้อควรรู้</li></a></Link>
+                                <Link href="/announcement" prefetch><a className="no-underline text-grey-darkest"><li className="mx-3">ข่าวประกาศ</li></a></Link>
+                                <Link href="/contact" prefetch><a className="no-underline text-grey-darkest"><li className="mx-3">ติดต่อเรา</li></a></Link>
                         </ul>
                     </div>
                     <div className="flex items-center">

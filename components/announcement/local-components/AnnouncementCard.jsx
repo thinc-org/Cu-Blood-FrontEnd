@@ -2,6 +2,7 @@ import React from 'react'
 
 export default class AnnouncementCard extends React.Component {
     render() {
+
         return (
             <div className={"bg-white flex flex-col justify-between shadow-md text-black rounded-lg lg:mb-0 m-5 mt-10"} style={{ width: "19rem" }}>
                 <div className="bg-white flex bg-center bg-cover" style={{ height: '150px', borderTopLeftRadius: '1rem', borderTopRightRadius: '1rem' }}></div>

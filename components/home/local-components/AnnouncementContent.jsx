@@ -15,7 +15,7 @@ class AnnouncementContent extends Component {
             <div>
                 {content}
                 <div className="flex w-full items-center justify-end my-6">
-                    <div className="font-medium mr-2" style={{ colo: "#333333" }}>{t('announcementHeader')}</div>
+                    <div className="font-medium mr-2" style={{ colo: "#333333" }}>{t('lookAnnouncment')}</div>
                     <img src='/static/home/forward-arrow2.svg' alt="arrow" className="w-6 pb-2" />
                 </div>
             </div>

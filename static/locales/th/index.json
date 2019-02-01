@@ -4,7 +4,9 @@
     "homeHeaderText2" : " ร่วมกันบริจาคโลหิตให้แก่สภากาชาดไทย",
     "registerButton" : "ลงทะเบียน",
     "aboutCuButton" : "เกี่ยวกับโครงการ",
-    "announcementHeader": "ดูข่่าวประกาศทั้งหมด",
+    "lookAnnouncment": "ดูข่่าวประกาศทั้งหมด",
+    "announcementHeaderSmall" : "announcement",
+    "announcementHeaderBig" : "ข่าวประกาศ",
     "statisticHeaderSmall": "STATISTIC",
     "statisticHeaderBig": "ข้อมูลทางสถิติ"
 }

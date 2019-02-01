@@ -15,21 +15,21 @@ class NoticeContent extends React.Component {
         return (
             <div className="layout-wide">
                 <TopicCenter english={t('topic1Small')} englishColor="text-pink" thai={t('topic1Big')} borderColor="border-red" />
-                <BulletPoint bullet={1} context={context11t} />
-                <BulletPoint bullet={2} context={context12t} />
-                <Context13 bullet={3} context={context13t} t={t}/>
+                <BulletPoint bullet={1} context={context11} />
+                <BulletPoint bullet={2} context={context12} />
+                <Context13 bullet={3} context={context13} t={t}/>
                 <TopicCenter english={t('topic2Small')} englishColor="text-pink" thai={t('topic2Big')} borderColor="border-red" />
-                <BulletPoint bullet={1} context={context21t} />
-                <BulletPoint bullet={2} context={context22t} />
-                <BulletPoint bullet={3} context={context23t} />
+                <BulletPoint bullet={1} context={context21} />
+                <BulletPoint bullet={2} context={context22} />
+                <BulletPoint bullet={3} context={context23} />
                 <TopicCenter english={t('topic3Small')} englishColor="text-pink" thai={t('topic3Big')} borderColor="border-red" />
                 <BulletHeader header={"การเตรียมตัวก่อนบริจาคโลหิต"} />
-                <BulletPoint bullet={1} context={context31t} />
-                <BulletPoint bullet={2} context={context32t} />
+                <BulletPoint bullet={1} context={context31} />
+                <BulletPoint bullet={2} context={context32} />
                 <BulletHeader header={"การเตรียมตัวขณะบริจาคโลหิต"} />
-                <BulletPoint bullet={1} context={context33t} />
+                <BulletPoint bullet={1} context={context33} />
                 <BulletHeader header={"การเตรียมตัวหลังบริจาคโลหิต"} />
-                <BulletPoint bullet={1} context={context34t} />
+                <BulletPoint bullet={1} context={context34} />
                 <NoticeContact />
             </div>
         );

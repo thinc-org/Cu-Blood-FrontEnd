@@ -19,4 +19,4 @@ class Notice extends React.Component {
 }
 
 
-export default Notice;
+export default I18.withNamespaces('common')(Notice)

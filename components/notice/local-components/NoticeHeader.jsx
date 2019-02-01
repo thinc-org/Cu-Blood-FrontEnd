@@ -1,4 +1,5 @@
 import React from 'react'
+import I18 from '@/core/i18n'
 
 export default class NoticeHeader extends React.Component {
     render() {

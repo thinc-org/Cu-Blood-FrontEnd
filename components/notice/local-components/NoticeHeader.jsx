@@ -3,7 +3,7 @@ import I18 from '@/core/i18n'
 
 class NoticeHeader extends React.Component {
     render() {
-      const { data = [],t } = this.props;
+      const { t } = this.props;
         return (
             <div className="font-cu-heading bg-cb-pink-light">
                 <div className="layout-wide py-20 flex flex-col items-center md:items-start">

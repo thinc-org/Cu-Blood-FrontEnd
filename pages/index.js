@@ -8,8 +8,7 @@ import Announcement from '@/home/local-components/Announcement';
 import UrgentAnnouncement from '@/home/local-components/UrgentAnnouncement';
 import axios from '@/core/core';
 import '../static/css/index.css';
-// import I18 from '@/core/i18n';
-// import CalendarContainer from '@/home/local-components/CalendarContainer';
+import CalendarContainer from '@/home/local-components/CalendarContainer';
 
 class App extends Component {
 
@@ -36,15 +35,15 @@ class App extends Component {
   }
 
   render() {
-    const { announcementData, statData, facebookPosts} = this.props;
-    // const { announcementData, statData, facebookPosts, calendarEvents } = this.props;
+    // const { announcementData, statData, facebookPosts} = this.props;
+    const { announcementData, statData, facebookPosts, calendarEvents } = this.props;
 
     return (
       <div className="font-sans border-black flex flex-col content-center w-full" >
         <HomeHead />
         <UrgentAnnouncement />
         <Announcement announcementData={announcementData} />
-        {/* <CalendarContainer calendarEvents={calendarEvents}/>  will temport disable this until boom fix layout problem on mobile */}
+        <CalendarContainer calendarEvents={calendarEvents}/>
         <Statistic statData={statData} />
         <FacebookContainer posts={facebookPosts} />
         <Footer />

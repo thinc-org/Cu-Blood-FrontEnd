@@ -3,7 +3,7 @@ import I18 from '@/core/i18n';
 
 class ContactHeader extends Component {
     render() {
-      const { data = [],t } = this.props;
+      const { t } = this.props;
         return (
             <div className="bg-cb-pink-light">
                 <div className="layout-wide flex flex-col py-16 font-cu-heading text-center md:text-left">

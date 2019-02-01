@@ -7,7 +7,7 @@ import I18 from '@/core/i18n';
 class Announcement extends Component {
 
     render() {
-      const {data = [], t} = this.props;
+      const { t } = this.props;
         return (
             <div className="bg-white display flex">
                 <div className="bg-cover bg-center hidden md:block w-screen max-w-xs xl:max-w-md" style={{ backgroundImage: 'url(../../../static/home/announcementBackground.jpg)' }}></div>

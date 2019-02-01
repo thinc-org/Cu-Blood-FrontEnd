@@ -40,4 +40,4 @@ class AnnouncementContent extends Component {
     }
 }
 
-export default I18.withNamespaces('common')(AnnouncementContent);
+export default I18.withNamespaces('index')(AnnouncementContent);

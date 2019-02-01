@@ -14,7 +14,7 @@ class RegisterFillForm extends Component {
                 <div>
                     {/* Contact Information */}
                     <div className="flex flex-col md:flex-row">
-                        <div className={titleClassName}>ข้อมูลส่วนตัว</div>
+                        <div className={titleClassName}>ข้อมูลติดต่อ</div>
                         <hr className={borderOnSmall} />
                         <div className={inputContainer}>
                             {/* Top of Contact Information */}
@@ -93,26 +93,57 @@ class RegisterFillForm extends Component {
                                 <div className="w-1/2 sm:w-24">
                                     <div className="font-cu-body font-medium">ไซส์เสื้อ</div>
                                     <select className={`${inputClassName} w-full h-8`} style={p0}>
-                                        <option value="ชาย">S</option>
-                                        <option value="หญิง">M</option>
-                                        <option value="หญิง">L</option>
+                                        <option value="ชาย">M (38")</option>
+                                        <option value="หญิง">L (40")</option>
+                                        <option value="หญิง">XL (42")</option>
+                                        <option value="หญิง">XXL (44")</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="w-full flex flex-col sm:flex-row mb-6 md:ml-10" style={maxWidth}>
+                                <div className="w-1/2 sm:w-24 md:mr-10 mb-6 sm:mb-0">
+                                    <div className="font-cu-body font-medium">น้ำหนัก</div>
+                                    <input className={`${inputClassName} w-full h-8`} type="number" />
+                                </div>
+                                <div className="w-1/2 sm:w-24 md:mr-10 mb-6 sm:mb-0">
+                                    <div className="font-cu-body font-medium">สถานภาพ</div>
+                                    <select className={`${inputClassName} w-full h-8`} style={p0}>
+                                        <option value="ชาย">นิสิตจุฬา</option>
+                                        <option value="หญิง">นิสิตเก่า</option>
+                                        <option value="หญิง">บุคลากร</option>
+                                        <option value="หญิง">อาจารย์</option>
+                                    </select>
+                                </div>
+                                <div className="w-1/2 sm:w-24">
+                                    <div className="font-cu-body font-medium">สัญชาติ</div>
+                                    <select className={`${inputClassName} w-full h-8`} style={p0}>
+                                        <option value="ชาย">ไทย</option>
+                                        <option value="หญิง">ต่างชาติ</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="w-full flex flex-col sm:flex-row mb-6 md:ml-10" style={maxWidth}>
+                                <div className="sm:mr-10 w-full sm:w-48 mb-6 sm:mb-0">
+                                    <div className="font-cu-body font-medium">รหัสนิสิต</div>
+                                    <input className={`${inputClassName} w-full h-8`} type="text" required />
+                                </div>
+                                <div className="w-1/4 sm:w-24">
+                                    <div className="font-cu-body font-medium">ชั้นปี</div>
+                                    <select className={`${inputClassName} w-full h-8`} style={p0}>
+                                        <option value="ชาย">1</option>
+                                        <option value="หญิง">2</option>
+                                        <option value="หญิง">3</option>
+                                        <option value="หญิง">4</option>
+                                        <option value="ชาย">5</option>
+                                        <option value="หญิง">6</option>
+                                        <option value="หญิง">ปริญญาโท (Master's degree)</option>
+                                        <option value="หญิง">ปริญญาเอก (Doctoral degree)</option>
+                                        <option value="หญิง">อื่นๆ (Other)</option>
                                     </select>
                                 </div>
                             </div>
                             <div className="w-full flex flex-col sm:flex-row mb-16 sm:mb-10 md:ml-10" style={maxWidth}>
-                                <div className="w-1/2 sm:w-24 md:mr-10">
-                                    <div className="font-cu-body font-medium">น้ำหนัก</div>
-                                    <input className={`${inputClassName} w-full h-8`} type="number" />
-                                </div>
-                                <div className="w-1/2 sm:w-24">
-                                        <div className="font-cu-body font-medium">สถานภาพ</div>
-                                        <select className={`${inputClassName} w-full h-8`} style={p0}>
-                                            <option value="ชาย">นิสิตจุฬา</option>
-                                            <option value="หญิง">นิสิตเก่า</option>
-                                            <option value="หญิง">บุคลากร</option>
-                                            <option value="หญิง">อาจารย์</option>
-                                        </select>
-                                    </div>
+                                
                             </div>
                         </div>
                     </div>

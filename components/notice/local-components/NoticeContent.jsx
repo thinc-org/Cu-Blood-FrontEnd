@@ -5,12 +5,15 @@ import I18 from '@/core/i18n';
 class NoticeContent extends React.Component {
     render() {
         const { t } = this.props;
+        const context11 = "อายุระหว่าง 17 ปีถึง 70 ปีบริบูรณ์ผู้ที่มีอายุ 17 ปีไม่ถึง 18 ปีต้องมีหนังสือยินยอมจากผู้ปกครอง";
+        const context12 = "ผู้บริจาคโลหิตเป็นครั้งแรก ถ้าอายุเกิน 55 ปี – 60 ปีและให้อยู่ในดุลพินิจของแพทย์และ พยาบาล";
+        const context13 = `ผู้บริจาคโลหิตอายุมากกว่า 60 ปี – 70 ปีแบ่งเกณฑ์การคัดเลือกตามอายุ 2 ช่วง ดังนี้`;
         return (
             <div className="layout-wide">
                 <TopicCenter english={t('topic1Small')} englishColor="text-pink" thai={t('topic1Big')} borderColor="border-red" />
                 <BulletPoint bullet={1} context={context11} />
                 <BulletPoint bullet={2} context={context12} />
-                <Context13 bullet={3} context={context13} />
+                <Context13 bullet={3} context={context13} t={t}/>
                 <TopicCenter english={t('topic2Small')} englishColor="text-pink" thai={t('topic2Big')} borderColor="border-red" />
                 <BulletPoint bullet={1} context={context21} />
                 <BulletPoint bullet={2} context={context22} />

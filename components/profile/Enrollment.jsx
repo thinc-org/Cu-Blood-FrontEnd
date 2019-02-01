@@ -12,21 +12,29 @@ class Enrollment extends Component {
         super(props);
 
         this.state = {
-            RedCrossModal: false,
-            CUModal: false,
-            regisDate: this.props.sessionInfo[0].timeSlot != undefined ? this.props.sessionInfo[0].timeSlot : null,
-            sessionId: this.props.sessionInfo[0].id != undefined ? this.props.sessionInfo[0].id : null
+            regisDate: moment(this.props.commonsInfo.startDate).format('YYYY-MM-DD'),
+            currentSessionId: null
         };
     }
     
+    componentWillMount() {
+        this.props.commonsInfo.registrationPoints.map(element => this.setState({[element.nameEN.replace(/\s+/g, "")] : false}));
+    }
+
     render() {
         i18n.language === 'th' ? moment.locale('th') : moment.locale('en')
         const commonsInfo = this.props.commonsInfo;
-        const sessionInfo = this.props.sessionInfo;
         const datesDuringDonation = this.betweenDonationDate(commonsInfo.startDate, commonsInfo.endDate);
-        console.log(sessionInfo);
-        console.log(this.state.regisDate);
+        const locationContent = commonsInfo.registrationPoints.map(element => this.content(element.nameTH, element.nameEN, element.googleMapsURL, element.nameEN.replace(/\s+/g, "")));
+        const EnrollModal = commonsInfo.registrationPoints.map(element => {
+            const locationName = element.nameEN.replace(/\s+/g, "");
+            return(
+                this.firstEnrollModal(this.state[locationName], element.nameTH, element.nameEN, locationName, element.id, commonsInfo.id, datesDuringDonation)
+                );
+        });
 
+        console.log(this.props.sessionInfo);
+        
         return (
             <div className="bg-cb-grey-lighter pb-10">
                 <div className="layout-wide">
@@ -36,9 +44,8 @@ class Enrollment extends Component {
                             <div className="text-3xl">{commonsInfo.name}</div>
                             <div className="text-base mt-4 sm:mt-0">วันที่เลือกปริจาคโลหิต: <span className="text-cb-pink">{this.state.regisDate != null ? moment(this.state.regisDate).format('D MMMM') : '-'}</span></div>
                         </div>
-                        <div className="w-full border-cb-grey-border border-t border-b py-8 flex flex-col">
-                            {this.content(`อาคารมหิตลาธิเบศร จุฬาลงกรณ์มหาวิทยาลัย`, `Mahittalathibet Building, Chulalongkorn University`, `https://maps.google.com/maps?hl=en&q=Mahitaladhibesra+Building&ll=13.7337533,100.5293964,17z&t=m&z=19`, `mb-8`, `CU`)}
-                            {this.content(`สภากาชาดไทย`, `Thai Red Cross Society`, `https://maps.google.com/maps?hl=en&q=National+Blood+Center,+Thai+Red+Cross+Society&ll=13.7364773,100.5312038,17z&t=m&z=19`, ``, `Red Cross`)}
+                        <div className="w-full border-cb-grey-border border-t border-b pt-8 flex flex-col">
+                            {locationContent}
                         </div>
                         <div className="w-full flex flex-col sm:flex-row items-center sm:justify-between mt-8">
                             <div className="mb-8 sm:mb-0 text-center sm:text-left"><Detail bigText={`${moment(commonsInfo.registrationStartDate).add('years', (i18n.language === 'th' ? 543 : 0)).format('D MMMM')} - ${moment(commonsInfo.registrationEndDate).add('years', (i18n.language === 'th' ? 543 : 0)).format('D MMMM')}`} smallText="วันลงทะเบียน" isBold={true} /></div>
@@ -46,53 +53,42 @@ class Enrollment extends Component {
                         </div>
                     </Card>
                     {/* Modal that will show when click register */}
-                    {this.firstEnrollModal(this.state.CUModal, `อาคารมหิตลาธิเบศร จุฬาลงกรณ์มหาวิทยาลัย`, `Mahittalathibet Building, Chulalongkorn University`, this.toggleCUModal, this.postEnroll, "CU", commonsInfo.id, datesDuringDonation)}
-                    {this.firstEnrollModal(this.state.RedCrossModal, `สภากาชาดไทย`, `Thai Red Cross Society`, this.toggleRedCrossModal, this.postEnroll, "Red Cross", commonsInfo.id, datesDuringDonation)}             
+                    {EnrollModal}           
                 </div>
             </div>
         );
     }
 
     //Function that creates the location and register button
-    content = (thaiName, engName, urlLocation, divClass = ``, location) => {
+    content = (thaiName, engName, urlLocation, locationToggle) => {
         return (
-            <div className={`flex flex-col md:flex-row items-center justify-between ${divClass}`}>
+            <div className="flex flex-col md:flex-row items-center justify-between mb-8">
                 <div className="text-center md:text-left mb-4 md:mb-0"><Detail bigText={thaiName} smallText={engName} /></div>
                 <div className="flex font-cu-body items-center">
                     <a href={`${urlLocation}`} target="_blank" rel="noopener noreferrer" className="text-base mr-8 text-center" style={{ color: "#58595b" }}>ดูแผนที่</a>
-                    <button onClick={location == "CU" ? this.toggleCUModal : this.toggleRedCrossModal} className="text-lg bg-cb-pink-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#de5c8e" }}>ลงทะเบียน</button>
+                    <button onClick={() => this.toggleModal(locationToggle)} className="text-lg bg-cb-pink-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#de5c8e" }}>ลงทะเบียน</button>
                 </div>
             </div>
         );
     }
 
-    //Function to setState of turning Red Cross modal on and off
-    toggleRedCrossModal = () => {
-        const sessionInfo = this.props.sessionInfo;
-        const sessionId = sessionInfo[0].id == undefined ? null : sessionInfo[0].id;
-        const regisDate = this.props.sessionInfo[0].timeSlot != undefined ? this.props.sessionInfo[0].timeSlot : null; 
-        this.setState({RedCrossModal: !this.state.RedCrossModal, sessionId: sessionId, regisDate: regisDate});
-    }
-
-    //Function to setState of turing CU modal on and off
-    toggleCUModal = () => {
-        const sessionInfo = this.props.sessionInfo;
-        const sessionId = sessionInfo[0].id == undefined ? null : sessionInfo[0].id;
-        const regisDate = this.props.sessionInfo[0].timeSlot != undefined ? this.props.sessionInfo[0].timeSlot : null; 
-        this.setState({CUModal: !this.state.CUModal, sessionId: sessionId, regisDate: regisDate});
+    //Function to toggle the modal to be on/off
+    toggleModal = (locationName) => {
+        const currentSessionInfo = this.props.sessionInfo !== null ? this.props.sessionInfo[this.props.sessionInfo.length - 1] : null;
+        const datePick = currentSessionInfo !== null ? currentSessionInfo.timeSlot : moment(this.props.commonsInfo.startDate).format('YYYY-MM-DD');
+        const idReceived = currentSessionInfo !== null ? currentSessionInfo.id : null;
+        this.setState({[locationName] : !this.state[locationName], regisDate : datePick, currrentSessionId : idReceived})
     }
 
     //Function to post information needed for enroll to API when click accepts
-    postEnroll = (location, projectId) => {
-        const closeFunc = location == "CU" ? this.toggleCUModal : this.toggleRedCrossModal;
-        const registrationPoint = location == "CU" ? 1 : 0
+    postEnroll = (locationModal, locationId, projectId) => {
         axios.post('https://api-dev.fives.cloud/v0/profile/me/enroll', {
             projectId: projectId,
-            registrationPoint: registrationPoint,
+            registrationPoint: locationId,
             timeSlot: this.state.regisDate
         })
         .then(console.log)
-        .then(closeFunc())
+        .then(this.toggleModal(locationModal))
         .catch(console.log)
     }
 
@@ -116,13 +112,13 @@ class Enrollment extends Component {
     }
 
     // Function takes care of popup for first enrollment
-    firstEnrollModal = (show, thaiName, engName, cancelFunc, acceptFunc, location, projectId, datesOption) => {
+    firstEnrollModal = (show, thaiName, engName, locationModal, locationId, projectId, dates) => {
         if(!show) {
             return null;
           }
         
         // Turn the array of dates into options to select
-        datesOption = datesOption.map(date => <option value={date}>{date}</option>)
+        const datesOption = dates.map(date => <option value={date}>{date}</option>)
         
         return (
         <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{backgroundColor: 'rgba(0,0,0,0.3)', top: 50}}>
@@ -140,8 +136,8 @@ class Enrollment extends Component {
                         </div>
                     </div>
                     <div className="pt-6 flex justify-between px-4 sm:px-10">
-                        <button onClick={cancelFunc}>ยกเลิก</button>
-                        <button className="text-cb-pink" onClick={() => acceptFunc(location, projectId)}>ยืนยัน</button>   
+                        <button onClick={() => this.toggleModal(locationModal)}>ยกเลิก</button>
+                        <button className="text-cb-pink" onClick={() => this.postEnroll(locationModal, locationId, projectId)}>ยืนยัน</button>   
                     </div>               
                 </div>
             </div>

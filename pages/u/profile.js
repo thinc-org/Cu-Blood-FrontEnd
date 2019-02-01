@@ -27,21 +27,19 @@ class Profile extends Component {
         const [commonsData, sessionData] = data;
         return {
           commonsData: commonsData ? commonsData : undefined,
-          sessionData: sessionData ? sessionData : undefined,
+          sessionData: sessionData !== null ? sessionData : undefined,
         };
     }
     
     render() {
         const { commonsData, sessionData } = this.props;
-        const commonsInfo = commonsData.result[0] !== undefined? commonsData.result[0] : null;
-        const sessionInfo = sessionData.result !== undefined? sessionData.result : null;
+        const commonsInfo = commonsData !== undefined? commonsData.result : null;
+        const sessionInfo = sessionData !== undefined? sessionData.result : null;
 
-        console.log(commonsInfo);
         return (
             <div>
                 <UserInfoConsumer>
                     {({userInfo}) => {
-                        console.log(userInfo)
                         return (
                             <ProfileHeader name={userInfo.firstName + " " + userInfo.lastName} email={userInfo.username} tel={userInfo.phoneNumber} />
                         )

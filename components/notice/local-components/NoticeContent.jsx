@@ -5,27 +5,31 @@ import I18 from '@/core/i18n';
 class NoticeContent extends React.Component {
     render() {
         const { t } = this.props;
-        const context11 = "อายุระหว่าง 17 ปีถึง 70 ปีบริบูรณ์ผู้ที่มีอายุ 17 ปีไม่ถึง 18 ปีต้องมีหนังสือยินยอมจากผู้ปกครอง";
-        const context12 = "ผู้บริจาคโลหิตเป็นครั้งแรก ถ้าอายุเกิน 55 ปี – 60 ปีและให้อยู่ในดุลพินิจของแพทย์และ พยาบาล";
-        const context13 = `ผู้บริจาคโลหิตอายุมากกว่า 60 ปี – 70 ปีแบ่งเกณฑ์การคัดเลือกตามอายุ 2 ช่วง ดังนี้`;
+        const context11 = t('context11t');
+        const context12 = t('context12t');
+        const context13 = t('context13t');
+
+        const context21 = t('context21t');
+        const context22 = t('context22t');
+        const context23 = t('context23t');
         return (
             <div className="layout-wide">
                 <TopicCenter english={t('topic1Small')} englishColor="text-pink" thai={t('topic1Big')} borderColor="border-red" />
-                <BulletPoint bullet={1} context={context11} />
-                <BulletPoint bullet={2} context={context12} />
-                <Context13 bullet={3} context={context13} t={t}/>
+                <BulletPoint bullet={1} context={context11t} />
+                <BulletPoint bullet={2} context={context12t} />
+                <Context13 bullet={3} context={context13t} t={t}/>
                 <TopicCenter english={t('topic2Small')} englishColor="text-pink" thai={t('topic2Big')} borderColor="border-red" />
-                <BulletPoint bullet={1} context={context21} />
-                <BulletPoint bullet={2} context={context22} />
-                <BulletPoint bullet={3} context={context23} />
+                <BulletPoint bullet={1} context={context21t} />
+                <BulletPoint bullet={2} context={context22t} />
+                <BulletPoint bullet={3} context={context23t} />
                 <TopicCenter english={t('topic3Small')} englishColor="text-pink" thai={t('topic3Big')} borderColor="border-red" />
                 <BulletHeader header={"การเตรียมตัวก่อนบริจาคโลหิต"} />
-                <BulletPoint bullet={1} context={context31} />
-                <BulletPoint bullet={2} context={context32} />
+                <BulletPoint bullet={1} context={context31t} />
+                <BulletPoint bullet={2} context={context32t} />
                 <BulletHeader header={"การเตรียมตัวขณะบริจาคโลหิต"} />
-                <BulletPoint bullet={1} context={context33} />
+                <BulletPoint bullet={1} context={context33t} />
                 <BulletHeader header={"การเตรียมตัวหลังบริจาคโลหิต"} />
-                <BulletPoint bullet={1} context={context34} />
+                <BulletPoint bullet={1} context={context34t} />
                 <NoticeContact />
             </div>
         );
@@ -73,7 +77,7 @@ const context11 = "อายุระหว่าง 17 ปีถึง 70 ป�
 const context12 = "ผู้บริจาคโลหิตเป็นครั้งแรก ถ้าอายุเกิน 55 ปี – 60 ปีและให้อยู่ในดุลพินิจของแพทย์และ พยาบาล";
 const context13 = `ผู้บริจาคโลหิตอายุมากกว่า 60 ปี – 70 ปีแบ่งเกณฑ์การคัดเลือกตามอายุ 2 ช่วง ดังนี้`;
 const Context13 = (props) => {
-    const { bullet, context } = props
+    const { bullet, context,t } = props
     return (
         <div className="bg-white font-cu-heading text-xl py-4 layout-narrow flex flex-col md:flex-row items-start justify-start">
             <div className="bg-pink-lightest w-16 h-16 text-pink-dark text-2xl p-4 rounded-full flex flex-col items-center justify-center mr-6 mb-4 md:mb-0" style={{minWidth: '64px'}}>
@@ -98,9 +102,7 @@ const Context13 = (props) => {
 }
 
 
-const context21 = 'อายุระหว่าง 17 ปีถึง 70 ปีบริบูรณ์ผู้ที่มีอายุ 17 ปีไม่ถึง 18 ปีต้องมีหนังสือยินยอมจากผู้ปกครอง';
-const context22 = 'ผู้บริจาคโลหิตเป็นครั้งแรก ถ้าอายุเกิน 55 ปี – 60 ปีและให้อยู่ในดุลพินิจของแพทย์และ พยาบาล';
-const context23 = "ผู้บริจาคโลหิตอายุมากกว่า 60 ปี – 70 ปีแบ่งเกณฑ์การคัดเลือกตามอายุ 2 ช่วง ดังนี้";
+
 
 
 const context31 = 'นอนหลับพักผ่อนให้เพียงพอ ตามเวลานอนปกติของตนเอง ในคืนก่อนวันที่จะมาบริจาคโลหิต';

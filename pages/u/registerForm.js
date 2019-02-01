@@ -11,7 +11,8 @@ class RegisterForm extends Component {
             <div>
                 <div className="bg-cb-grey-lighter"><Header english={`REGISTER`} thai={`ลงทะเบียน`} englishColor={`text-cb-pink`} borderColor={`border-cb-red`}/></div>
                 <div className="bg-white"><Form /></div>
-                <div className="flex flex-col items-center text-white py-10" style={{ backgroundColor: '#8e9dc0' }}><FacebookButton /></div>
+                {/* <div className="flex flex-col items-center text-white py-10" style={{ backgroundColor: '#8e9dc0' }}><FacebookButton /></div> */}
+                <FacebookButton />
                 <Footer />
             </div>
         );

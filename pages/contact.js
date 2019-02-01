@@ -4,7 +4,7 @@ import axios from '@/core/core';
 import Footer from '@/shared-components/Footer';
 import ContactHeader from '@/contact/local-components/ContactHeader';
 import ContactContent from '@/contact/local-components/ContactContent';
-import I18 from '@/core/i18n';
+// import I18 from '@/core/i18n';
 
 class Contact extends Component {
     static async getInitialProps() {
@@ -29,4 +29,4 @@ class Contact extends Component {
     }
 }
 
-export default I18.withNamespaces('common')(Contact)
+export default Contact

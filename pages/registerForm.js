@@ -3,7 +3,7 @@ import Footer from '@/shared-components/Footer';
 import FacebookButton from '@/shared-components/FacebookButton';
 import Header from '@/shared-components/TopicCenter';
 import Form from '@/registration/local-components/RegisterFillForm';
-import I18 from '@/core/i18n';
+// import I18 from '@/core/i18n';
 
 class RegisterForm extends Component {
     render() {
@@ -18,4 +18,4 @@ class RegisterForm extends Component {
     }
 }
 
-export default I18.withNamespaces('common')(RegisterForm);
+export default RegisterForm;

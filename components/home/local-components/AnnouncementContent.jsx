@@ -6,7 +6,7 @@ let i18n = I18.i18n;
 class AnnouncementContent extends Component {
     render() {
         i18n.language === 'th' ? moment.locale('th') : moment.locale('en')
-        const { data = [] } = this.props;
+        const { data = [], t } = this.props;
         const content = data.slice(0, 5).map(
             (dataContent, index) => this.contentForm(dataContent.title, dataContent.updatedAt, `py-6`, index, i18n.language)
         )
@@ -15,7 +15,7 @@ class AnnouncementContent extends Component {
             <div>
                 {content}
                 <div className="flex w-full items-center justify-end my-6">
-                    <div className="font-medium mr-2" style={{ colo: "#333333" }}>ดูข่าวประกาศทั้งหมด</div>
+                    <div className="font-medium mr-2" style={{ colo: "#333333" }}>{t('announcementHeader')}</div>
                     <img src='/static/home/forward-arrow2.svg' alt="arrow" className="w-6 pb-2" />
                 </div>
             </div>
@@ -40,4 +40,4 @@ class AnnouncementContent extends Component {
     }
 }
 
-export default AnnouncementContent;
+export default I18.withNamespaces('common')(AnnouncementContent);

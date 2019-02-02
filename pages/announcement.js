@@ -31,24 +31,30 @@ class Notice extends React.Component {
         const announcementTitle = map(announcementData, 'title');
         const announcementDate = map(announcementData, 'updatedAt')
 
+        const lengthOfArray = announcementData.length;
+
         const announcementDateMoment = (props) => {
             let data = moment(announcementDate[props]).format('DD MMMM YYYY');
             return(
                 data
             );
         }
+
+        const AnnouncementCardLoop = () => {
+            let data = [];
+            for(let i = 0; i < lengthOfArray; i++) {
+                data.push(<AnnouncementCard text={announcementTitle[i]} date={announcementDateMoment(i)} />);
+            }
+
+            return data;
+        }
+
+
         return (
             <div className="bg-grey-lightest">
                 <AnnouncementHeader />
                 <div className="flex flex-row flex-wrap pb-10 justify-center">
-                     <AnnouncementCard text={announcementTitle[1]} date={announcementDateMoment(0)}/> {/* This is the correct one, other cards waiting for pagination */}
-                     <AnnouncementCard text={announcementTitle[1]}/>
-                     <AnnouncementCard text={announcementTitle[2]}/>
-                     <AnnouncementCard text={announcementTitle[3]}/>
-                     <AnnouncementCard text={announcementTitle[4]}/>
-                     <AnnouncementCard text={announcementTitle[5]}/>
-                     <AnnouncementCard text={announcementTitle[6]}/>
-                     <AnnouncementCard text={announcementTitle[7]}/>
+                     <AnnouncementCardLoop />
                 </div>
                 <FacebookButton />
                 <Footer />
@@ -56,6 +62,8 @@ class Notice extends React.Component {
         );
     }
 }
+
+
 
 
 export default I18.withNamespaces('common')(Notice)

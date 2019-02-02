@@ -13,6 +13,19 @@ class EnrollmentHistory extends Component {
         const sessionInfo = this.props.sessionInfo;
         const content = (commonsInfo !== null) && (sessionInfo !== null) ? this.chooseContent(sessionInfo, commonsInfo) : null
         
+        if (commonsInfo === null) {
+            return(
+            <div className="bg-cb-grey-lighter pb-10">
+                <div className="layout-wide">
+                    <Header english="ENROLLMENT" thai="ลงทะเบียนเข้าร่วม" englishColor="text-cb-pink" borderColor="border-cb-red" />
+                    <Card>
+                        <Detail bigText="ขณะนี้ข้อมูลมีปัญหา โปรดลองใหม่อีกครั้ง" smallText="Error in retrieving information, please try again later"/>
+                    </Card>
+                </div>
+            </div>
+            );
+        }
+
         return(
             <div className="bg-cb-grey-lighter">
                 <div className="layout-wide pb-2">

@@ -83,7 +83,6 @@ class Enrollment extends Component {
         })
         //Create modal that can change date
         const changeDateModal = this.changeDateModal(this.state.modalOpener['changeDateModal'], 'changeDateModal', datesDuringDonation);
-        console.log("regisDate ", this.state.regisDate)
 
         return (
             <div className="bg-cb-grey-lighter pb-10">
@@ -92,7 +91,7 @@ class Enrollment extends Component {
                     <Card>
                         <div className="w-full mb-8 font-cu-heading flex flex-col md:flex-row text-center md:text-left justify-between items-center">
                             <div className="text-3xl">{commonsInfo.name}</div>
-                            <div className="text-base flex mt-4 sm:mt-0 items-center">
+                            <div className="text-sm sm:text-base flex mt-4 sm:mt-0 items-center">
                                 <div className="mr-2">วันที่เลือกปริจาคโลหิต:</div> 
                                 <div className="text-cb-pink">{this.state.regisDate !== null ? moment(this.state.regisDate).format('D MMMM') : '-'}</div>
                                 {fixDateButton}
@@ -216,7 +215,7 @@ class Enrollment extends Component {
         return (
         <div key={locationModal} className="fixed pin-l w-full h-full flex items-center justify-center" style={{backgroundColor: 'rgba(0,0,0,0.3)', top: 50}}>
             <div className="layout-wide flex justify-center">
-                <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg">
+                <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{minWidth: '250px'}}>
                     <div className="mb-6 px-4 sm:px-10 font-semibold">ยืนยันการลงทะเบียนสถานที่บริจาคโลหิต</div>
                     <div className="bg-cb-grey-lighter py-6 w-full px-4 sm:px-10 flex flex-col justify-center">
                         <Detail bigText={`${thaiName}`} smallText={`${engName}`} />
@@ -248,7 +247,7 @@ class Enrollment extends Component {
         return (
         <div key={locationModal} className="fixed pin-l w-full h-full flex items-center justify-center" style={{backgroundColor: 'rgba(0,0,0,0.3)', top: 50}}>
             <div className="layout-wide flex justify-center">
-                <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg">
+                <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{minWidth: '250px'}}>
                     <div className="mb-6 px-4 sm:px-10 font-semibold">ยืนยันการลงทะเบียนสถานที่บริจาคโลหิต</div>
                     <div className="bg-cb-grey-lighter py-6 w-full px-4 sm:px-10 flex flex-col justify-center items-center">
                         <Detail bigText={`${thaiName}`} smallText={`${engName}`} />
@@ -272,7 +271,7 @@ class Enrollment extends Component {
         return (
         <div key={locationModal} className="fixed pin-l w-full h-full flex items-center justify-center" style={{backgroundColor: 'rgba(0,0,0,0.3)', top: 50}}>
             <div className="layout-wide flex justify-center">
-                <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg">
+                <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{minWidth: '250px'}}>
                     <div className="mb-6 px-4 sm:px-10 font-semibold">QR Code</div>
                     <div className="bg-cb-grey-lighter py-6 w-full px-4 sm:px-10 flex flex-col justify-center items-center">
                         <QRCode value={this.state.currentSessionInfo.id} renderAs="svg" size="125" />
@@ -299,7 +298,7 @@ class Enrollment extends Component {
         return (
         <div key={locationModal} className="fixed pin-l w-full h-full flex items-center justify-center" style={{backgroundColor: 'rgba(0,0,0,0.3)', top: 50}}>
             <div className="layout-wide flex justify-center">
-                <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg">
+                <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{minWidth: '250px'}}>
                     <div className="mb-6 px-4 sm:px-10 font-semibold">กรุณาเลือกวันที่ใหม่</div>
                     <div className="bg-cb-grey-lighter py-6 w-full px-4 sm:px-10 flex flex-col justify-center items-center">
                         <select className="w-32" value={this.state.regisDate} onChange={this.handleChange}>

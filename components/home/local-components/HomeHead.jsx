@@ -4,7 +4,7 @@ import I18 from '@/core/i18n';
 
 class HomeHead extends Component {
   render() {
-    const {data = [], t} = this.props;
+    const {t} = this.props;
     return (
       <div className="bg-cover bg-center" style={{ backgroundImage: 'url(../../../static/home/homehead.jpg)' }}>
         <div style={{ background: 'rgba(0, 0, 0, 0.5)' }}>

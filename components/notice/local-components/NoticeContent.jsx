@@ -144,7 +144,7 @@ const NoticeContact = () => {
 
 
 const Context13 = (props) => {
-    const { bullet, context,t } = props
+    const { bullet, context } = props
     return (
         <div className="bg-white font-cu-heading text-xl py-4 layout-narrow flex flex-col md:flex-row items-start justify-start">
             <div className="bg-pink-lightest w-16 h-16 text-pink-dark text-2xl p-4 rounded-full flex flex-col items-center justify-center mr-6 mb-4 md:mb-0" style={{minWidth: '64px'}}>

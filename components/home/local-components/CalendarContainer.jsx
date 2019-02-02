@@ -2,10 +2,13 @@ import React from 'react';
 import TopicCenter from '@/shared-components/TopicCenter';
 import map from 'lodash/map';
 import moment from 'moment';
+import I18 from '@/core/i18n';
 
-export default class CalendarContainer extends React.Component {
+
+ class CalendarContainer extends React.Component {
 
     render() {
+        const {t} = this.props;
         const { calendarEvents = [] } = this.props;
         const eventTitle = map(calendarEvents, 'title');
         const majorLocation = map(calendarEvents, 'location');
@@ -16,7 +19,7 @@ export default class CalendarContainer extends React.Component {
         return (
             <div className="bg-cb-pink-light ">
                 <div className="layout-wide">
-                    <TopicCenter borderColor="border-cb-red" english="Calendar" thai="ปฏิทินกิจกรรม" englishColor="text-cb-pink" thaiColor="text-black" />
+                    <TopicCenter borderColor="border-cb-red" english={t("calendarHeaderSmall")} thai={t("calendarHeaderBig")} englishColor="text-cb-pink" thaiColor="text-black" />
                     <MajorEvent title={eventTitle[0]} location={majorLocation[0]} time={majorTime[0]} startDate={startDate[0]} endDate={endDate[0]} />
                     <MinorEvent title={eventTitle[1]} startDate={startDate[1]} endDate={endDate[1]} />
                     <MinorEvent title={eventTitle[2]} startDate={startDate[2]} endDate={endDate[2]} />
@@ -136,3 +139,4 @@ const CalendarDate = (props) => {
             </div>
         )
 }
+export default I18.withNamespaces('index')(CalendarContainer);

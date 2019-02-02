@@ -8,5 +8,7 @@
     "announcementHeaderSmall" : "announcement",
     "announcementHeaderBig" : "ข่าวประกาศ",
     "statisticHeaderSmall": "STATISTIC",
-    "statisticHeaderBig": "ข้อมูลทางสถิติ"
+    "statisticHeaderBig": "ข้อมูลทางสถิติ",
+    "calendarHeaderSmall": "Calendar",
+    "calendarHeaderBig" : "ปฏิทินกิจกรรม"
 }

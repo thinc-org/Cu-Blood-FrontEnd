@@ -5,7 +5,7 @@ import Card from '@/shared-components/Card';
 import moment from 'moment';
 import I18 from '@/core/i18n';
 import axios from '@/core/core';
-import redirectTo from '@/core/redirectTo.js';
+import QRCode from 'qrcode.react';
 // import { CompositeDisposable } from 'rx';
 let i18n = I18.i18n
 
@@ -14,33 +14,67 @@ class Enrollment extends Component {
         super(props);
 
         this.state = {
-            regisDate: (this.props.sessionInfo !== null) && (this.props.sessionInfo[this.props.sessionInfo.length - 1].project.id == this.props.commonsInfo.id) ? this.props.sessionInfo[this.props.sessionInfo.length - 1].timeSlot : moment(this.props.commonsInfo.startDate).format('YYYY-MM-DD'),
-            currentSessionId: (this.props.sessionInfo !== null) && (this.props.sessionInfo[this.props.sessionInfo.length - 1].project.id == this.props.commonsInfo.id) ? this.props.sessionInfo[this.props.sessionInfo.length - 1].id : null
+            regisDate: (this.props.sessionInfo !== null) && (this.props.sessionInfo[this.props.sessionInfo.length - 1].project.id == this.props.commonsInfo.id) ? this.props.sessionInfo[this.props.sessionInfo.length - 1].timeSlot : null,
+            currentSessionInfo: (this.props.sessionInfo !== null) && (this.props.sessionInfo[this.props.sessionInfo.length - 1].project.id == this.props.commonsInfo.id) ? this.props.sessionInfo[this.props.sessionInfo.length - 1] : null,
+            commonsInfo : this.props.commonsInfo,
+            modalOpener : {}
         };
     }
     
     componentWillMount() {
-        this.props.commonsInfo.registrationPoints.map(element => this.setState({[element.nameEN.replace(/\s+/g, "")] : false, [element.nameEN.replace(/\s+/g, "") + "PutEnroll"] : false, [element.nameEN.replace(/\s+/g, "") + "QRCode"] : false}));
+        if (this.state.commonsInfo !== null) {
+            this.state.commonsInfo.registrationPoints.map(element => this.setState(
+            prevState => ({
+                modalOpener: {
+                    ...prevState.modalOpener,
+                    [element.nameEN.replace(/\s+/g, "")] : false,
+                    [element.nameEN.replace(/\s+/g, "") + "PutEnroll"] : false,
+                    [element.nameEN.replace(/\s+/g, "") + "QRCode"] : false
+                }
+            })
+            ));
+        }
     }
 
     render() {
         i18n.language === 'th' ? moment.locale('th') : moment.locale('en')
-        const commonsInfo = this.props.commonsInfo;
-        const datesDuringDonation = this.betweenDonationDate(commonsInfo.startDate, commonsInfo.endDate);
+        const commonsInfo = this.state.commonsInfo;
+        
+        if (commonsInfo === null) {
+            return (
+                <div className="bg-cb-grey-lighter pb-10">
+                    <div className="layout-wide">
+                        <Header english="ENROLLMENT" thai="ลงทะเบียนเข้าร่วม" englishColor="text-cb-pink" borderColor="border-cb-red" />
+                        <Card>
+                            <div className="font-cu-heading text-center">ขณะนี้ข้อมูลมีปัญหา โปรดลองใหม่อีกครั้ง</div>
+                        </Card>
+                    </div>
+                </div>
+            );
+        }
+        
+        
+        const datesDuringDonation = commonsInfo !== null ? this.betweenDonationDate(commonsInfo.startDate, commonsInfo.endDate) : null;
         const locationContent = commonsInfo.registrationPoints.map(element => this.content(element.nameTH, element.nameEN, element.googleMapsURL, element.nameEN.replace(/\s+/g, ""), element.id));
         const registerEnrollModal = commonsInfo.registrationPoints.map(element => {
             const locationName = element.nameEN.replace(/\s+/g, "");
             return(
-                this.firstEnrollModal(this.state[locationName], element.nameTH, element.nameEN, locationName, element.id, commonsInfo.id, datesDuringDonation)
+                this.firstEnrollModal(this.state.modalOpener[locationName], element.nameTH, element.nameEN, locationName, element.id, commonsInfo.id, datesDuringDonation)
                 );
         });
         const changeLocationModal = commonsInfo.registrationPoints.map(element => {
             const locationNamePutEnroll = element.nameEN.replace(/\s+/g, "") + "PutEnroll";
             return(
-                this.putEnrollModal(this.state[locationNamePutEnroll], element.nameTH, element.nameEN, locationNamePutEnroll, element.id)
+                this.putEnrollModal(this.state.modalOpener[locationNamePutEnroll], element.nameTH, element.nameEN, locationNamePutEnroll, element.id)
                 );
         });
-        console.log(this.state.currentSessionId)
+        const QRCodeModal = commonsInfo.registrationPoints.map(element => {
+            const locationNameQRCode = element.nameEN.replace(/\s+/g, "") + "QRCode";
+            return(
+                this.QRCodeModal(this.state.modalOpener[locationNameQRCode], locationNameQRCode, element.nameTH)
+            );
+        })
+        console.log(this.state.currentSessionInfo);
 
         return (
             <div className="bg-cb-grey-lighter pb-10">
@@ -49,7 +83,7 @@ class Enrollment extends Component {
                     <Card>
                         <div className="w-full mb-8 font-cu-heading flex flex-col sm:flex-row text-center sm:text-left justify-between items-center">
                             <div className="text-3xl">{commonsInfo.name}</div>
-                            <div className="text-base mt-4 sm:mt-0">วันที่เลือกปริจาคโลหิต: <span className="text-cb-pink">{this.state.regisDate != null ? moment(this.state.regisDate).format('D MMMM') : '-'}</span></div>
+                            <div className="text-base mt-4 sm:mt-0">วันที่เลือกปริจาคโลหิต: <span className="text-cb-pink">{this.state.regisDate !== null ? moment(this.state.regisDate).format('D MMMM') : '-'}</span></div>
                         </div>
                         <div className="w-full border-cb-grey-border border-t border-b pt-8 flex flex-col">
                             {locationContent}
@@ -62,6 +96,7 @@ class Enrollment extends Component {
                     {/* Modal that will show when click */}
                     {registerEnrollModal}           
                     {changeLocationModal}
+                    {QRCodeModal}
                 </div>
             </div>
         );
@@ -69,15 +104,13 @@ class Enrollment extends Component {
 
     //Function that creates the location and register button
     content = (thaiName, engName, urlLocation, locationToggle, locationId) => {
-        const currentSessionInfo = this.props.sessionInfo !== null ? this.props.sessionInfo[this.props.sessionInfo.length - 1] : null;
-        const sessionInfoProjectId = currentSessionInfo !== null ? currentSessionInfo.project.id : null;
-        const alreadyRegistered = (sessionInfoProjectId == this.props.commonsInfo.id);
-        // const isLocationPick = (locationId == currentSessionInfo.locationId);
+        const alreadyRegistered = this.state.currentSessionInfo !== null;
+        const isLocationPick = (this.state.currentSessionInfo !== null) && (this.state.currentSessionInfo.locationId == locationId)
 
-        const button = this.chooseButton(alreadyRegistered, false, locationToggle);
+        const button = this.chooseButton(alreadyRegistered, isLocationPick, locationToggle);
 
         return (
-            <div className="flex flex-col md:flex-row items-center justify-between mb-8">
+            <div key={engName} className="flex flex-col md:flex-row items-center justify-between mb-8">
                 <div className="text-center md:text-left mb-4 md:mb-0"><Detail bigText={thaiName} smallText={engName} /></div>
                 <div className="flex font-cu-body items-center">
                     <a href={`${urlLocation}`} target="_blank" rel="noopener noreferrer" className="text-base mr-8 text-center" style={{ color: "#58595b" }}>ดูแผนที่</a>
@@ -87,42 +120,54 @@ class Enrollment extends Component {
         );
     }
 
-    //Function to toggle firstEnrollModal on/off
-    togglePostEnrollModal = (locationName) => {
-        const currentSessionInfo = this.props.sessionInfo !== null ? this.props.sessionInfo[this.props.sessionInfo.length - 1] : null;
-        const datePick = currentSessionInfo !== null ? currentSessionInfo.timeSlot : moment(this.props.commonsInfo.startDate).format('YYYY-MM-DD');
-        const idReceived = currentSessionInfo !== null ? currentSessionInfo.id : null;
-        this.setState({[locationName] : !this.state[locationName], regisDate : datePick, currentSessionId : idReceived})
-    }
-
-    //Function to toggle putEnrollModal on/off
-    togglePutEnrollModal = (locationName) => {
-        this.setState({[locationName] : !this.state[locationName]});
+    //Function to toggle modal on/off
+    toggleModal = (locationName) => {
+        const registeredDate = this.state.currentSessionInfo !== null ? this.state.currentSessionInfo.timeSlot : null
+        const stateOfModal = this.state.modalOpener[locationName];
+        this.setState(
+            prevState => ({
+                modalOpener: {
+                    ...prevState.modalOpener,
+                    [locationName] : !stateOfModal
+                },
+                regisDate : registeredDate
+            })
+        );
     }
 
     //Function to post information needed for enroll to API when click accepts
     postEnroll = (locationModal, locationId, projectId) => {
         axios.post('https://api-dev.fives.cloud/v0/profile/me/enroll', {
             projectId: projectId,
-            registrationPoint: locationId,
+            locationId: locationId,
             timeSlot: this.state.regisDate
         })
         .then(console.log)
-        .then(redirectTo('/u/profile'))
-        .then(this.togglePostEnrollModal(locationModal))
+        .then(() => this.getSessionInfo())
+        .then(() => this.toggleModal(locationModal))
         .catch(console.log)
     }
 
     //Function to put information needed for enroll to API when click accepts
-    putEnroll = (locationModal, registrationPoint) => {
+    putEnroll = (locationModal, locationId) => {
         axios.put('https://api-dev.fives.cloud/v0/profile/me/enroll', {
-            sessionId: this.state.currentSessionId,
-            registrationPoint: registrationPoint
+            sessionId: this.state.currentSessionInfo.id,
+            locationId: locationId,
+            timeSlot: this.state.currentSessionInfo.timeSlot
         })
         .then(console.log)
-        .then(redirectTo('/u/profile'))
-        .then(this.togglePutEnrollModal(locationModal))
+        .then(() => this.getSessionInfo())
+        .then(() => this.toggleModal(locationModal))
         .catch(console.log)
+    }
+
+    //Get session information from API and set it to the states
+    getSessionInfo = () => {
+        axios.get('https://api-dev.fives.cloud/v0/profile/me/sessions')
+        .then(response => response.data)
+        .then(data => data.result)
+        .catch(e => null)
+        .then(result => this.setState({currentSessionInfo: result[result.length - 1]}, () => console.log("setState of session info ", result)))
     }
 
     //Function to setState to regisDate for when date option is pick
@@ -148,13 +193,13 @@ class Enrollment extends Component {
     chooseButton = (registeredCondition, locationCondition, locationModal, locationId) => {
         if (registeredCondition) {
             if (locationCondition) {
-                return(<button onClick={() => this.toggleQRCodeModal(locationModal)} className="text-lg bg-cb-pink-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#de5c8e" }}>QR Code</button>);
+                return(<button onClick={() => this.toggleModal(locationModal + "QRCode")} className="text-lg bg-cb-pink-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#de5c8e" }}>QR Code</button>);
             }
-            return (<button onClick={() => this.togglePutEnrollModal(locationModal + "PutEnroll")} className="text-lg bg-cb-grey-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#696969" }}>เปลี่ยนสถานที่</button>);
+            return (<button onClick={() => this.toggleModal(locationModal + "PutEnroll")} className="text-lg bg-cb-grey-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#696969" }}>เปลี่ยนสถานที่</button>);
         }
 
         return(
-            <button onClick={() => this.togglePostEnrollModal(locationModal)} className="text-lg bg-cb-pink-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#de5c8e" }}>ลงทะเบียน</button>
+            <button onClick={() => this.toggleModal(locationModal)} className="text-lg bg-cb-pink-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#de5c8e" }}>ลงทะเบียน</button>
         );
     }
 
@@ -165,10 +210,10 @@ class Enrollment extends Component {
           }
         
         // Turn the array of dates into options to select
-        const datesOption = dates.map(date => <option value={date}>{date}</option>)
+        const datesOption = dates !== null ? dates.map(date => <option key={date} value={date}>{date}</option>) : null;
         
         return (
-        <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{backgroundColor: 'rgba(0,0,0,0.3)', top: 50}}>
+        <div key={locationModal} className="fixed pin-l w-full h-full flex items-center justify-center" style={{backgroundColor: 'rgba(0,0,0,0.3)', top: 50}}>
             <div className="layout-wide flex justify-center">
                 <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg">
                     <div className="mb-6 px-4 sm:px-10 font-semibold">ยืนยันการลงทะเบียนสถานที่บริจาคโลหิต</div>
@@ -177,13 +222,14 @@ class Enrollment extends Component {
                         <div className="mt-4 flex justify-center items-center">
                             <label>เลือกวันที่บริจาค: 
                                 <select className="w-32" value={this.state.regisDate} onChange={this.handleChange}>
+                                    <option value={null}>YYYY-MM-DD</option>
                                     {datesOption}
                                 </select>
                             </label>
                         </div>
                     </div>
                     <div className="pt-6 flex justify-between px-4 sm:px-10">
-                        <button onClick={() => this.togglePostEnrollModal(locationModal)}>ยกเลิก</button>
+                        <button onClick={() => this.toggleModal(locationModal)}>ยกเลิก</button>
                         <button className="text-cb-pink" onClick={() => this.postEnroll(locationModal, locationId, projectId)}>ยืนยัน</button>   
                     </div>               
                 </div>
@@ -199,16 +245,40 @@ class Enrollment extends Component {
           }
         
         return (
-        <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{backgroundColor: 'rgba(0,0,0,0.3)', top: 50}}>
+        <div key={locationModal} className="fixed pin-l w-full h-full flex items-center justify-center" style={{backgroundColor: 'rgba(0,0,0,0.3)', top: 50}}>
             <div className="layout-wide flex justify-center">
                 <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg">
                     <div className="mb-6 px-4 sm:px-10 font-semibold">ยืนยันการลงทะเบียนสถานที่บริจาคโลหิต</div>
-                    <div className="bg-cb-grey-lighter py-6 w-full px-4 sm:px-10 flex flex-col justify-center">
+                    <div className="bg-cb-grey-lighter py-6 w-full px-4 sm:px-10 flex flex-col justify-center items-center">
                         <Detail bigText={`${thaiName}`} smallText={`${engName}`} />
                     </div>
                     <div className="pt-6 flex justify-between px-4 sm:px-10">
-                        <button onClick={() => this.togglePutEnrollModal(locationModal)}>ยกเลิก</button>
+                        <button onClick={() => this.toggleModal(locationModal)}>ยกเลิก</button>
                         <button className="text-cb-pink" onClick={() => this.putEnroll(locationModal, locationId)}>ยืนยัน</button>   
+                    </div>               
+                </div>
+            </div>
+        </div>
+        );
+    }
+
+    QRCodeModal = (show, locationModal, locationNameTH) => {
+        if(!show) {
+            return null;
+          }
+        
+        return (
+        <div key={locationModal} className="fixed pin-l w-full h-full flex items-center justify-center" style={{backgroundColor: 'rgba(0,0,0,0.3)', top: 50}}>
+            <div className="layout-wide flex justify-center">
+                <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg">
+                    <div className="mb-6 px-4 sm:px-10 font-semibold">QR Code</div>
+                    <div className="bg-cb-grey-lighter py-6 w-full px-4 sm:px-10 flex flex-col justify-center items-center">
+                        <QRCode value={this.state.currentSessionInfo.id} renderAs="svg" size="125" />
+                        <div className="mt-4 mb-1">{this.state.commonsInfo.name}</div>
+                        <div className="text-cb-pink text-base">{locationNameTH}</div>
+                    </div>
+                    <div className="pt-6 flex justify-center px-4 sm:px-10">
+                        <button onClick={() => this.toggleModal(locationModal)}>ปิดหน้าต่าง</button> 
                     </div>               
                 </div>
             </div>

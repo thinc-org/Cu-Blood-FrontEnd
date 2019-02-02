@@ -17,7 +17,7 @@ class Enrollment extends Component {
             regisDate: (this.props.sessionInfo !== null) && (this.props.sessionInfo[this.props.sessionInfo.length - 1].project.id == this.props.commonsInfo.id) ? this.props.sessionInfo[this.props.sessionInfo.length - 1].timeSlot : null,
             currentSessionInfo: (this.props.sessionInfo !== null) && (this.props.sessionInfo[this.props.sessionInfo.length - 1].project.id == this.props.commonsInfo.id) ? this.props.sessionInfo[this.props.sessionInfo.length - 1] : null,
             commonsInfo : this.props.commonsInfo,
-            modalOpener : {}
+            modalOpener : {changeDateModal : false}
         };
     }
     
@@ -55,6 +55,7 @@ class Enrollment extends Component {
         
         
         const datesDuringDonation = commonsInfo !== null ? this.betweenDonationDate(commonsInfo.startDate, commonsInfo.endDate) : null;
+        const fixDateButton = this.state.currentSessionInfo !== null ? <button className="ml-2" onClick={() => this.toggleModal('changeDateModal')}><img className="w-6" src="/static/icons/fix.svg" alt="Fix logo" /></button> : null; 
         const locationContent = commonsInfo.registrationPoints.map(element => this.content(element.nameTH, element.nameEN, element.googleMapsURL, element.nameEN.replace(/\s+/g, ""), element.id));
         const registerEnrollModal = commonsInfo.registrationPoints.map(element => {
             const locationName = element.nameEN.replace(/\s+/g, "");
@@ -74,6 +75,7 @@ class Enrollment extends Component {
                 this.QRCodeModal(this.state.modalOpener[locationNameQRCode], locationNameQRCode, element.nameTH)
             );
         })
+        const changeDateModal = this.changeDateModal(this.state.modalOpener['changeDateModal'], 'changeDateModal', datesDuringDonation);
         console.log(this.state.currentSessionInfo);
 
         return (
@@ -81,9 +83,13 @@ class Enrollment extends Component {
                 <div className="layout-wide">
                     <Header english="ENROLLMENT" thai="ลงทะเบียนเข้าร่วม" englishColor="text-cb-pink" borderColor="border-cb-red" />
                     <Card>
-                        <div className="w-full mb-8 font-cu-heading flex flex-col sm:flex-row text-center sm:text-left justify-between items-center">
+                        <div className="w-full mb-8 font-cu-heading flex flex-col md:flex-row text-center md:text-left justify-between items-center">
                             <div className="text-3xl">{commonsInfo.name}</div>
-                            <div className="text-base mt-4 sm:mt-0">วันที่เลือกปริจาคโลหิต: <span className="text-cb-pink">{this.state.regisDate !== null ? moment(this.state.regisDate).format('D MMMM') : '-'}</span></div>
+                            <div className="text-base flex mt-4 sm:mt-0 items-center">
+                                <div className="mr-2">วันที่เลือกปริจาคโลหิต:</div> 
+                                <div className="text-cb-pink">{this.state.regisDate !== null ? moment(this.state.regisDate).format('D MMMM') : '-'}</div>
+                                {fixDateButton}
+                            </div>
                         </div>
                         <div className="w-full border-cb-grey-border border-t border-b pt-8 flex flex-col">
                             {locationContent}
@@ -97,6 +103,7 @@ class Enrollment extends Component {
                     {registerEnrollModal}           
                     {changeLocationModal}
                     {QRCodeModal}
+                    {changeDateModal}
                 </div>
             </div>
         );
@@ -153,7 +160,7 @@ class Enrollment extends Component {
         axios.put('https://api-dev.fives.cloud/v0/profile/me/enroll', {
             sessionId: this.state.currentSessionInfo.id,
             locationId: locationId,
-            timeSlot: this.state.currentSessionInfo.timeSlot
+            timeSlot: this.state.regisDate
         })
         .then(console.log)
         .then(() => this.getSessionInfo())
@@ -167,7 +174,7 @@ class Enrollment extends Component {
         .then(response => response.data)
         .then(data => data.result)
         .catch(e => null)
-        .then(result => this.setState({currentSessionInfo: result[result.length - 1]}, () => console.log("setState of session info ", result)))
+        .then(result => this.setState({currentSessionInfo: result[result.length - 1], regisDate : result[result.length - 1].timeSlot}, () => console.log("setState of session info ", result)))
     }
 
     //Function to setState to regisDate for when date option is pick
@@ -262,6 +269,7 @@ class Enrollment extends Component {
         );
     }
 
+    //Function that take cares of modal for showing QRCode
     QRCodeModal = (show, locationModal, locationNameTH) => {
         if(!show) {
             return null;
@@ -279,6 +287,34 @@ class Enrollment extends Component {
                     </div>
                     <div className="pt-6 flex justify-center px-4 sm:px-10">
                         <button onClick={() => this.toggleModal(locationModal)}>ปิดหน้าต่าง</button> 
+                    </div>               
+                </div>
+            </div>
+        </div>
+        );
+    }
+
+    //Function that takes care of modal when user wants to change date
+    changeDateModal = (show, locationModal, dates) => {
+        if(!show) {
+            return null;
+          }
+        
+        const datesOption = dates !== null ? dates.map(date => <option key={date} value={date}>{date}</option>) : null;
+
+        return (
+        <div key={locationModal} className="fixed pin-l w-full h-full flex items-center justify-center" style={{backgroundColor: 'rgba(0,0,0,0.3)', top: 50}}>
+            <div className="layout-wide flex justify-center">
+                <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg">
+                    <div className="mb-6 px-4 sm:px-10 font-semibold">กรุณาเลือกวันที่ใหม่</div>
+                    <div className="bg-cb-grey-lighter py-6 w-full px-4 sm:px-10 flex flex-col justify-center items-center">
+                        <select className="w-32" value={this.state.regisDate} onChange={this.handleChange}>
+                            {datesOption}
+                        </select>
+                    </div>
+                    <div className="pt-6 flex justify-between px-4 sm:px-10">
+                        <button onClick={() => this.toggleModal(locationModal)}>ยกเลิก</button>
+                        <button className="text-cb-pink" onClick={() => this.putEnroll(locationModal, this.state.currentSessionInfo.locationId)}>ยืนยัน</button>
                     </div>               
                 </div>
             </div>

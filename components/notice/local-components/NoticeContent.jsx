@@ -12,6 +12,24 @@ class NoticeContent extends React.Component {
         const context21 = t('context21t');
         const context22 = t('context22t');
         const context23 = t('context23t');
+        const context24 = t('context24t');
+        const context25 = t('context25t');
+        const context26 = t('context26t');
+        const context27 = t('context27t');
+        const context28 = t('context28t');
+        const context29 = t('context29t');
+        const context210 = t('context210t');
+        const context211 = t('context211t');
+        const context212 = t('context212t');
+        const context213 = t('context213t');
+        //Section 3: Pre-Post Donation PROCEDURES
+
+        const context31 = t('context31t');
+        const context31 = t('context31t');
+        const context31 = t('context31t');
+        const context31 = t('context31t');
+
+
         return (
             <div className="layout-wide">
                 <TopicCenter english={t('topic1Small')} englishColor="text-pink" thai={t('topic1Big')} borderColor="border-red" />
@@ -22,6 +40,16 @@ class NoticeContent extends React.Component {
                 <BulletPoint bullet={1} context={context21} />
                 <BulletPoint bullet={2} context={context22} />
                 <BulletPoint bullet={3} context={context23} />
+                <BulletPoint bullet={4} context={context24} />
+                <BulletPoint bullet={5} context={context25} />
+                <BulletPoint bullet={6} context={context26} />
+                <BulletPoint bullet={7} context={context27} />
+                <BulletPoint bullet={8} context={context28} />
+                <BulletPoint bullet={9} context={context29} />
+                <BulletPoint bullet={10} context={context210} />
+                <BulletPoint bullet={11} context={context211} />
+                <BulletPoint bullet={12} context={context212} />
+                <BulletPoint bullet={13} context={context213} />
                 <TopicCenter english={t('topic3Small')} englishColor="text-pink" thai={t('topic3Big')} borderColor="border-red" />
                 <BulletHeader header={"การเตรียมตัวก่อนบริจาคโลหิต"} />
                 <BulletPoint bullet={1} context={context31} />
@@ -73,9 +101,7 @@ const NoticeContact = () => {
 
 // Context## first # is sections; Second # is list number. For example, context11 is list 1 in section 1
 
-const context11 = "อายุระหว่าง 17 ปีถึง 70 ปีบริบูรณ์ผู้ที่มีอายุ 17 ปีไม่ถึง 18 ปีต้องมีหนังสือยินยอมจากผู้ปกครอง";
-const context12 = "ผู้บริจาคโลหิตเป็นครั้งแรก ถ้าอายุเกิน 55 ปี – 60 ปีและให้อยู่ในดุลพินิจของแพทย์และ พยาบาล";
-const context13 = `ผู้บริจาคโลหิตอายุมากกว่า 60 ปี – 70 ปีแบ่งเกณฑ์การคัดเลือกตามอายุ 2 ช่วง ดังนี้`;
+
 const Context13 = (props) => {
     const { bullet, context,t } = props
     return (
@@ -105,9 +131,5 @@ const Context13 = (props) => {
 
 
 
-const context31 = 'นอนหลับพักผ่อนให้เพียงพอ ตามเวลานอนปกติของตนเอง ในคืนก่อนวันที่จะมาบริจาคโลหิต';
-const context32 = 'สุขภาพสมบูรณ์ทุกประการ ไม่เป็นไข้หวัด หรืออยู่ระหว่างรับประทานยาปฏิชีวนะใด ๆ เช่น ยาแก้อักเสบ แต่หยุดยาแล้วอย่างน้อย 7 วัน';
-const context33 = 'สวมใส่เสื้อผ้าที่แขนเสื้อไม่คับเกินไป สามารถดึงขึ้นเหนือข้อศอกได้อย่างน้อย 3 นิ้ว';
-const context34 = 'สวมใส่เสื้อผ้าที่แขนเสื้อไม่คับเกินไป สามารถดึงขึ้นเหนือข้อศอกได้อย่างน้อย 3 นิ้ว';
 
 export default I18.withNamespaces('notice')(NoticeContent);

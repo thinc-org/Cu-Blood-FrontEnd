@@ -9,7 +9,17 @@
   "context11t" : "Must be between 17 to 70 years old, donors younger than 17 must have a letter of consent from their parent or legal guardian.",
   "context12t" : "First time donors betweem  55 to 60 years, up to judgement of doctor and nurse.",
   "context13t" : "Blood donors between 60 to 70 years have criteria split into two categories as follows:",
-  "context21t" : "Must be between 17 to 70 years old, donors younger than 17 must have a letter of consent from their parent or legal guardian.",
-  "context22t": "First time donors betweem  55 to 60 years, up to judgement of doctor and nurse.",
-  "context23t": "Blood donors between 60 to 70 years have criteria split into two categories as follows:"
+  "context21t" : "Register in advance one week prior to the blood donation date.",
+  "context22t": "Donors who have registered in advance can check-in at the registration area located in the Mahittalathibet building, Chulalongkorn University, or on the 1st floor of the National Blood Center, Thai Red Cross. ",
+  "context23t": " For donors who haven't, walk-in registration is also available at the registration area, Mahittalathibet Building, Chulalongkorn University.",
+  "context24t" : "Donor gets \"Blood Donation Form\" and fills it in.",
+  "context25t" : "Donors at the Mahittalathibet Building can use the free provided transportation to the Nation Blood Center, Thai Red Cross.",
+  "context26t" : "Donor arrives at the National Blood Center and have their blood pressure measured.",
+  "context27t" : "Attach the blood pressure result on the \"Blood Donation Form\" and gives it to the registration counter.",
+  "context28t" : "Receive queue for measuring blood intensity level.",
+  "context29t" : "Donor have blood intensity level measured and answer some health questions for a preliminary assessment.",
+  "context210t" : "Go up to the 2nd floor, take the queue, and await blood donation.",
+  "context211t" : "Donate blood in the donating rooms.",
+  "context212t" : "After donating, relax and eat the provided snacks and refreshments in order normalize the body's water level. Once normalized, return to the 1st floor of the National Blood Center.",
+  "context213t" : "Donor check-out, verifies their donation, and receive souvenirs from CU Blood."
 }

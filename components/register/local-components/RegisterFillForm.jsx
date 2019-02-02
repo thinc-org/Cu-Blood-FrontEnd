@@ -10,7 +10,7 @@ class RegisterFillForm extends Component {
         const p0 = { padding: "0px" };
 
         return (
-            <form className="layout-wide flex flex-col items-center justify-center py-10">
+            <form className="layout-wide flex flex-col items-center justify-center pb-10 sm:py-10">
                 <div>
                     {/* Contact Information */}
                     <div className="flex flex-col md:flex-row">
@@ -18,23 +18,23 @@ class RegisterFillForm extends Component {
                         <hr className={borderOnSmall} />
                         <div className={inputContainer}>
                             {/* Top of Contact Information */}
-                            <div className="w-full flex flex-col sm:flex-row mb-6 md:ml-10" style={maxWidth}>
-                                <div className="sm:mr-10 w-full sm:w-48 mb-6 sm:mb-0">
+                            <div className="w-full flex flex-row justify-between flex-wrap sm:flex-row mb-6 sm:mb-10 md:ml-10" style={maxWidth}>
+                                <div className="w-full sm:w-48 mb-6 sm:mb-0">
                                     <div className="font-cu-body font-medium">อีเมลล์</div>
                                     <input className={`${inputClassName} w-full h-8`} type="email" required />
                                 </div>
-                                <div className="w-full sm:w-48">
+                                <div className="w-full sm:w-48 mb-6">
                                     <div className="font-cu-body font-medium">เบอร์โทรศัพท์</div>
                                     <input className={`${inputClassName} w-full h-8`} type="text" required />
                                 </div>
-                            </div>
-                            {/* Bottom of Contact Information */}
-                            <div className="w-full flex sm:flex-row mb-16 sm:mb-10 md:ml-10" style={maxWidth}>
+                                {/* </div> */}
+                                {/* Bottom of Contact Information */}
+                                {/* <div className="w-full flex sm:flex-row mb-16 sm:mb-10 md:ml-10" style={maxWidth}> */}
                                 {/* <div className="mr-6 sm:mr-10 w-1/2 sm:w-48 sm:mb-0">
                                     <div className="font-cu-body font-medium">วัน/เดือน/ปี เกิด</div>
                                     <input className={`${inputClassName} w-full h-8`} placeholder="dd/mm/yyyy" type="text"/>                                
                                 </div> */}
-                                <div className="w-full">
+                                <div className="w-full ">
                                     <div className="font-cu-body font-medium">ที่อยู่</div>
                                     <textarea className={`${inputClassName} w-full h-16`} />
                                     {/* <input className={`${inputClassName} w-full h-8`} type="text" required /> */}
@@ -48,7 +48,7 @@ class RegisterFillForm extends Component {
                         <hr className={borderOnSmall} />
                         <div className={inputContainer}>
                             {/* Top of Basic Information */}
-                            <div className="w-full flex flex-col sm:flex-row mb-6 md:ml-10" style={maxWidth}>
+                            <div className="w-full flex flex-row justify-between flex-wrap sm:flex-row mb-6 md:ml-10" style={maxWidth}>
                                 {/* <div className="sm:mr-10 mb-6 sm:mb-0 w-1/2 sm:w-2/5">
                                     <div className="font-cu-body font-medium">หมู่เลือด</div>
                                     <select className={`${inputClassName} w-full h-8`}>
@@ -58,39 +58,43 @@ class RegisterFillForm extends Component {
                                         <option value="O">O</option>
                                     </select>
                                 </div> */}
-                                <div className="sm:mr-10 w-full sm:w-48 mb-6 sm:mb-0">
+                                <div className="w-full sm:w-48 mb-6 sm:mb-0">
                                     <div className="font-cu-body font-medium">ชื่อ</div>
                                     <input className={`${inputClassName} w-full h-8`} type="text" required />
                                 </div>
-                                <div className="w-full sm:w-48">
+                                <div className="w-full sm:w-48 mb-6">
                                     <div className="font-cu-body font-medium">นามสกุล</div>
                                     <input className={`${inputClassName} w-full h-8`} type="text" required />
                                 </div>
-                            </div>
-                            {/* Bottom of Basic Information */}
-                            <div className="w-full flex flex-col sm:flex-row mb-6 md:ml-10" style={maxWidth}>
-                                <div className="sm:mr-10 w-full sm:w-48 mb-6 sm:mb-0">
+                                {/* </div> */}
+                                {/* Bottom of Basic Information */}
+                                {/* <div className="w-full flex flex-col sm:flex-row mb-6 md:ml-10" style={maxWidth}> */}
+                                <div className="w-full sm:w-48 mb-6">
                                     <div className="font-cu-body font-medium">ชื่อเล่น</div>
                                     <input className={`${inputClassName} w-full h-8`} type="text" required />
                                 </div>
-                                <div className="w-1/2 sm:w-24">
+
+                                {/* <div className="w-full">
+                                    <div className="font-cu-body font-medium">ประวัติการแพ้ยา</div>
+                                    <textarea className={`${inputClassName} w-full h-32`} />
+                                </div> */}
+                                {/* </div> */}
+                                {/* <div className="w-full flex flex-col sm:flex-row mb-6 md:ml-10" style={maxWidth}> */}
+                                <div className="sm:mr-0 w-full sm:w-48 mb-6 sm:mb-0">
+                                    <div className="font-cu-body font-medium">วัน/เดือน/ปี เกิด</div>
+                                    <input className={`${inputClassName} w-full h-8`} type="date" />
+                                </div>
+                                <div className="w-1/3">
+                                <div className="w-3/4 sm:w-24 mb-6">
                                     <div className="font-cu-body font-medium">เพศ</div>
                                     <select className={`${inputClassName} w-full h-8`} style={p0}>
                                         <option value="ชาย">ชาย</option>
                                         <option value="หญิง">หญิง</option>
                                     </select>
                                 </div>
-                                {/* <div className="w-full">
-                                    <div className="font-cu-body font-medium">ประวัติการแพ้ยา</div>
-                                    <textarea className={`${inputClassName} w-full h-32`} />
-                                </div> */}
-                            </div>
-                            <div className="w-full flex flex-col sm:flex-row mb-6 md:ml-10" style={maxWidth}>
-                                <div className="mr-6 sm:mr-10 w-1/2 sm:w-48 mb-6 sm:mb-0">
-                                    <div className="font-cu-body font-medium">วัน/เดือน/ปี เกิด</div>
-                                    <input className={`${inputClassName} w-full h-8`} type="date" />
                                 </div>
-                                <div className="w-1/2 sm:w-24">
+                                <div className="w-1/3">
+                                <div className="w-3/4 sm:w-24 mb-6">
                                     <div className="font-cu-body font-medium">ไซส์เสื้อ</div>
                                     <select className={`${inputClassName} w-full h-8`} style={p0}>
                                         <option value="ชาย">M (38")</option>
@@ -99,13 +103,17 @@ class RegisterFillForm extends Component {
                                         <option value="หญิง">XXL (44")</option>
                                     </select>
                                 </div>
-                            </div>
-                            <div className="w-full flex flex-col sm:flex-row mb-6 md:ml-10" style={maxWidth}>
-                                <div className="w-1/2 sm:w-24 md:mr-10 mb-6 sm:mb-0">
+                                </div>
+                                {/* </div> */}
+                                {/* <div className="w-full flex flex-col sm:flex-row mb-6 md:ml-10" style={maxWidth}> */}
+                                <div className="w-1/3">
+                                <div className="w-3/4 sm:w-24 mb-6">
                                     <div className="font-cu-body font-medium">น้ำหนัก</div>
                                     <input className={`${inputClassName} w-full h-8`} type="number" />
                                 </div>
-                                <div className="w-1/2 sm:w-24 md:mr-10 mb-6 sm:mb-0">
+                                </div>
+                                <div className="w-1/3">
+                                <div className="w-3/4 sm:w-24 mb-6 sm:mb-0">
                                     <div className="font-cu-body font-medium">สถานภาพ</div>
                                     <select className={`${inputClassName} w-full h-8`} style={p0}>
                                         <option value="ชาย">นิสิตจุฬา</option>
@@ -114,20 +122,18 @@ class RegisterFillForm extends Component {
                                         <option value="หญิง">อาจารย์</option>
                                     </select>
                                 </div>
-                                <div className="w-1/2 sm:w-24">
+                                </div>
+                                <div className="w-1/3">
+                                <div className="w-3/4 sm:w-24 mb-6">
                                     <div className="font-cu-body font-medium">สัญชาติ</div>
                                     <select className={`${inputClassName} w-full h-8`} style={p0}>
                                         <option value="ชาย">ไทย</option>
                                         <option value="หญิง">ต่างชาติ</option>
                                     </select>
                                 </div>
-                            </div>
-                            <div className="w-full flex flex-col sm:flex-row mb-6 md:ml-10" style={maxWidth}>
-                                <div className="sm:mr-10 w-full sm:w-48 mb-6 sm:mb-0">
-                                    <div className="font-cu-body font-medium">รหัสนิสิต</div>
-                                    <input className={`${inputClassName} w-full h-8`} type="text" required />
                                 </div>
-                                <div className="w-1/4 sm:w-24">
+                                <div className="w-1/3">
+                                <div className="w-3/4 sm:w-24 mb-6">
                                     <div className="font-cu-body font-medium">ชั้นปี</div>
                                     <select className={`${inputClassName} w-full h-8`} style={p0}>
                                         <option value="ชาย">1</option>
@@ -141,10 +147,17 @@ class RegisterFillForm extends Component {
                                         <option value="หญิง">อื่นๆ (Other)</option>
                                     </select>
                                 </div>
+                                </div>
+                                {/* </div> */}
+                                {/* <div className="w-full flex flex-col sm:flex-row mb-6 md:ml-10" style={maxWidth}> */}
+                                <div className="w-full sm:w-48 mb-6 sm:mb-0">
+                                    <div className="font-cu-body font-medium">รหัสนิสิต</div>
+                                    <input className={`${inputClassName} w-full h-8`} type="text" required />
+                                </div>
                             </div>
-                            <div className="w-full flex flex-col sm:flex-row mb-16 sm:mb-10 md:ml-10" style={maxWidth}>
-                                
-                            </div>
+                            {/* <div className="w-full flex flex-col sm:flex-row mb-16 sm:mb-10 md:ml-10" style={maxWidth}> */}
+
+                            {/* </div> */}
                         </div>
                     </div>
                     {/* User Information */}
@@ -153,23 +166,23 @@ class RegisterFillForm extends Component {
                         <hr className={borderOnSmall} />
                         <div className={inputContainer}>
                             {/* Top of User Information */}
-                            <div className="w-full flex flex-col sm:flex-row mb-6 md:ml-10" style={maxWidth}>
-                                <div className="sm:mr-10 w-full sm:w-48 mb-6 sm:mb-0">
+                            <div className="w-full flex flex-row flex-wrap justify-between sm:flex-row md:ml-10" style={maxWidth}>
+                                <div className="w-full sm:w-48 mb-6">
                                     <div className="font-cu-body font-medium">ที่อยู่</div>
                                     <input className={`${inputClassName} w-full h-8`} type="text" />
                                 </div>
-                                <div className="w-full sm:w-48">
+                                <div className="w-full sm:w-48 mb-6">
                                     <div className="font-cu-body font-medium">อีเมล</div>
                                     <input className={`${inputClassName} w-full h-8`} type="email" required />
                                 </div>
-                            </div>
-                            {/* Bottom of User Information */}
-                            <div className="w-full flex flex-col sm:flex-row md:ml-10" style={maxWidth}>
-                                <div className="sm:mr-10 w-full sm:w-48 mb-6 sm:mb-0">
+                                {/* </div> */}
+                                {/* Bottom of User Information */}
+                                {/* <div className="w-full flex flex-col sm:flex-row md:ml-10" style={maxWidth}> */}
+                                <div className="w-full sm:w-48 mb-6">
                                     <div className="font-cu-body font-medium">รหัสผ่านใหม่</div>
                                     <input className={`${inputClassName} w-full h-8`} type="password" required />
                                 </div>
-                                <div className="w-full sm:w-48">
+                                <div className="w-full sm:w-48 mb-6">
                                     <div className="font-cu-body font-medium">ยืนยันรหัสผ่าน</div>
                                     <input className={`${inputClassName} w-full h-8`} type="password" required />
                                 </div>

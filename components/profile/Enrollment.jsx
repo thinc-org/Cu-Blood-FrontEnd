@@ -164,6 +164,9 @@ class Enrollment extends Component {
 
     //Function to put information needed for enroll to API when click accepts
     putEnroll = (locationModal, locationId) => {
+        console.log("sessionId", this.state.currentSessionInfo.id);
+        console.log("locationId", locationId);
+        console.log("timeSlot", this.state.regisDate);
         axios.put('https://api-dev.fives.cloud/v0/profile/me/enroll', {
             sessionId: this.state.currentSessionInfo.id,
             locationId: locationId,

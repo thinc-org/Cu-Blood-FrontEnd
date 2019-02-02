@@ -11,7 +11,10 @@ class PersonalInfo extends Component {
         i18n.language === 'th' ? moment.locale('th') : moment.locale('en')   
         return(
             <div className="layout-wide">
-                <Header english="PERSONAL INFORMATION" thai="ข้อมูลส่วนตัว" englishColor="text-cb-pink" borderColor="border-cb-red" />
+                <div className="flex items-center justify-between">
+                    <Header english="PERSONAL INFORMATION" thai="ข้อมูลส่วนตัว" englishColor="text-cb-pink" borderColor="border-cb-red" />  
+                    <button><img className="w-6" src="/static/icons/fix.svg" alt="Fix logo" /> </button>
+                </div>
                 <UserInfoConsumer>
                     {({userInfo}) => {
                         console.log(userInfo)

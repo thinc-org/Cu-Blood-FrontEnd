@@ -8,7 +8,7 @@ class NoticeContent extends React.Component {
         const context11 = t('context11t');
         const context12 = t('context12t');
         const context13 = t('context13t');
-
+        //Section2: Donation Procedures
         const context21 = t('context21t');
         const context22 = t('context22t');
         const context23 = t('context23t');
@@ -22,12 +22,35 @@ class NoticeContent extends React.Component {
         const context211 = t('context211t');
         const context212 = t('context212t');
         const context213 = t('context213t');
-        //Section 3: Pre-Post Donation PROCEDURES
+        const preHeader = t('preHeadert');
+        const context31 = t('context31t');
+        const context32 = t('context32t');
+        const context33 = t('context33t');
+        const context34 = t('context34t');
+        const context35 = t('context35t');
+        const context36 = t('context36t');
 
-        const context31 = t('context31t');
-        const context31 = t('context31t');
-        const context31 = t('context31t');
-        const context31 = t('context31t');
+        const durHeader = t('durHeadert');
+        const contextDur1 = t('contextdur1t');
+        const contextDur2 = t('contextdur2t');
+        const contextDur3 = t('contextdur3t');
+        const contextDur4 = t('contextdur4t');
+        const contextDur5 = t('contextdur5t');
+
+        const postHeader = t('postHeadert');
+        const contextPost1 = t('contextPost1t');
+        const contextPost2 = t('contextPost2t');
+        const contextPost3 = t('contextPost3t');
+        const contextPost4 = t('contextPost4t');
+        const contextPost5 = t('contextPost5t');
+        const contextPost6 = t('contextPost6t');
+        const contextPost7 = t('contextPost7t');
+        const contextPost8 = t('contextPost8t');
+        const contextPost9 = t('contextPost9t');
+        const contextPost10 = t('contextPost10t');
+        const contextPost11 = t('contextPost11t');
+
+
 
 
         return (
@@ -51,13 +74,31 @@ class NoticeContent extends React.Component {
                 <BulletPoint bullet={12} context={context212} />
                 <BulletPoint bullet={13} context={context213} />
                 <TopicCenter english={t('topic3Small')} englishColor="text-pink" thai={t('topic3Big')} borderColor="border-red" />
-                <BulletHeader header={"การเตรียมตัวก่อนบริจาคโลหิต"} />
+                <BulletHeader header={preHeader} />
                 <BulletPoint bullet={1} context={context31} />
                 <BulletPoint bullet={2} context={context32} />
-                <BulletHeader header={"การเตรียมตัวขณะบริจาคโลหิต"} />
-                <BulletPoint bullet={1} context={context33} />
-                <BulletHeader header={"การเตรียมตัวหลังบริจาคโลหิต"} />
-                <BulletPoint bullet={1} context={context34} />
+                <BulletPoint bullet={3} context={context33} />
+                <BulletPoint bullet={4} context={context34} />
+                <BulletPoint bullet={5} context={context35} />
+                <BulletPoint bullet={6} context={context36} />
+                <BulletHeader header={durHeader} />
+                <BulletPoint bullet={1} context={contextDur1} />
+                <BulletPoint bullet={2} context={contextDur2} />
+                <BulletPoint bullet={3} context={contextDur3} />
+                <BulletPoint bullet={4} context={contextDur4} />
+                <BulletPoint bullet={5} context={contextDur5} />
+                <BulletHeader header={postHeader} />
+                <BulletPoint bullet={1} context={contextPost1} />
+                <BulletPoint bullet={2} context={contextPost2} />
+                <BulletPoint bullet={3} context={contextPost3} />
+                <BulletPoint bullet={4} context={contextPost4} />
+                <BulletPoint bullet={5} context={contextPost5} />
+                <BulletPoint bullet={6} context={contextPost6} />
+                <BulletPoint bullet={7} context={contextPost7} />
+                <BulletPoint bullet={8} context={contextPost8} />
+                <BulletPoint bullet={9} context={contextPost9} />
+                <BulletPoint bullet={10} context={contextPost10} />
+                <BulletPoint bullet={11} context={contextPost11} />
                 <NoticeContact />
             </div>
         );

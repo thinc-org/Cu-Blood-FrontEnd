@@ -14,6 +14,9 @@ class PersonalInfo extends Component {
                 <Header english="PERSONAL INFORMATION" thai="ข้อมูลส่วนตัว" englishColor="text-cb-pink" borderColor="border-cb-red" />
                 <UserInfoConsumer>
                     {({userInfo}) => {
+                        if ((userInfo === undefined) || (userInfo === null)) {
+                            return (<div className="w-full flex mb-10"><Detail bigText="ข้อมูลมีปัญหา โปรดลองใหม่อีกครั้ง" smallText="Error in retrieving information, please try again later"/></div>);
+                        }
                         return(
                             <div className="w-full flex flex-row flex-wrap mb-2 special-mb-0">
                                 {this.content(`${userInfo.firstName} ${userInfo.lastName}`, "ชื่อ - นามสกุล", true)}
@@ -26,7 +29,6 @@ class PersonalInfo extends Component {
                         )
                     }}
                 </UserInfoConsumer>
-
                 <hr className="w-full max-w-xs border border-cb-grey-border"/>
             </div>
         );

@@ -193,13 +193,13 @@ class Enrollment extends Component {
     chooseButton = (registeredCondition, locationCondition, locationModal, locationId) => {
         if (registeredCondition) {
             if (locationCondition) {
-                return(<button onClick={() => this.toggleModal(locationModal + "QRCode")} className="text-lg bg-cb-pink-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#de5c8e" }}>QR Code</button>);
+                return(<button onClick={() => this.toggleModal(locationModal + "QRCode")} className="text-base bg-cb-pink-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#de5c8e" }}>QR Code</button>);
             }
-            return (<button onClick={() => this.toggleModal(locationModal + "PutEnroll")} className="text-lg bg-cb-grey-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#696969" }}>เปลี่ยนสถานที่</button>);
+            return (<button onClick={() => this.toggleModal(locationModal + "PutEnroll")} className="text-base bg-cb-grey-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#696969" }}>เปลี่ยนสถานที่</button>);
         }
 
         return(
-            <button onClick={() => this.toggleModal(locationModal)} className="text-lg bg-cb-pink-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#de5c8e" }}>ลงทะเบียน</button>
+            <button onClick={() => this.toggleModal(locationModal)} className="text-base bg-cb-pink-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#de5c8e" }}>ลงทะเบียน</button>
         );
     }
 

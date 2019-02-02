@@ -83,7 +83,7 @@ class Enrollment extends Component {
         })
         //Create modal that can change date
         const changeDateModal = this.changeDateModal(this.state.modalOpener['changeDateModal'], 'changeDateModal', datesDuringDonation);
-        console.log(this.props.sessionInfo)
+        console.log("regisDate ", this.state.regisDate)
 
         return (
             <div className="bg-cb-grey-lighter pb-10">
@@ -211,7 +211,7 @@ class Enrollment extends Component {
           }
         
         // Turn the array of dates into options to select
-        const datesOption = dates !== null ? dates.map(date => <option key={date} value={date}>{moment(date).format('D MMMM')}</option>) : null;
+        const datesOption = dates !== null ? dates.map(date => <option key={date} value={moment(date).format('YYYY-MM-DD')}>{moment(date).format('D MMMM')}</option>) : null;
         
         return (
         <div key={locationModal} className="fixed pin-l w-full h-full flex items-center justify-center" style={{backgroundColor: 'rgba(0,0,0,0.3)', top: 50}}>
@@ -294,7 +294,7 @@ class Enrollment extends Component {
             return null;
           }
         
-        const datesOption = dates !== null ? dates.map(date => <option key={date} value={date}>{moment(date).format('D MMMM')}</option>) : null;
+        const datesOption = dates !== null ? dates.map(date => <option key={date} value={moment(date).format('YYYY-MM-DD')}>{moment(date).format('D MMMM')}</option>) : null;
 
         return (
         <div key={locationModal} className="fixed pin-l w-full h-full flex items-center justify-center" style={{backgroundColor: 'rgba(0,0,0,0.3)', top: 50}}>

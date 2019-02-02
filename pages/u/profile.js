@@ -19,10 +19,10 @@ class Profile extends Component {
 
         const data = await Promise.all([commonsDataPromise, sessionDataPromise]
         .map(p => p
-            .then(response => {response.data})
+            .then(response => response.data)
             .catch(e => null)))
         .catch(console.log);
-        
+
         const [commonsData, sessionData] = data;
         return {
           commonsData: commonsData ? commonsData : undefined,

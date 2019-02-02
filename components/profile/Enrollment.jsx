@@ -46,7 +46,7 @@ class Enrollment extends Component {
                     <div className="layout-wide">
                         <Header english="ENROLLMENT" thai="ลงทะเบียนเข้าร่วม" englishColor="text-cb-pink" borderColor="border-cb-red" />
                         <Card>
-                            <div className="font-cu-heading text-center">ขณะนี้ข้อมูลมีปัญหา โปรดลองใหม่อีกครั้ง</div>
+                            <Detail bigText="ขณะนี้ข้อมูลมีปัญหา โปรดลองใหม่อีกครั้ง" smallText="Error in retrieving information, please try again later"/>
                         </Card>
                     </div>
                 </div>

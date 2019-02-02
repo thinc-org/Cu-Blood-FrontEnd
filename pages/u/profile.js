@@ -3,7 +3,6 @@ import I18 from '@/core/i18n';
 import ProfileHeader from '@/profile/ProfileHeader';
 import Enrollment from '@/profile/Enrollment';
 import PersonalInfo from '@/profile/PersonalInfo';
-import MedicalInfo from '@/profile/MedicalInfo';
 import EnrollmentHistory from '@/profile/EnrollmentHistory';
 import FacebookButton from '@/shared-components/FacebookButton';
 import Footer from '@/shared-components/Footer';
@@ -41,13 +40,12 @@ class Profile extends Component {
                 <UserInfoConsumer>
                     {({userInfo}) => {
                         return (
-                            <ProfileHeader name={userInfo.firstName + " " + userInfo.lastName} email={userInfo.username} tel={userInfo.phoneNumber} />
+                            <ProfileHeader />
                         )
                     }}
                 </UserInfoConsumer>
                 <Enrollment commonsInfo={commonsInfo} sessionInfo={sessionInfo}/>      
                 <PersonalInfo />
-                <MedicalInfo />
                 <EnrollmentHistory commonsInfo={commonsInfo} sessionInfo={sessionInfo}/>
                 <FacebookButton />
                 <Footer />

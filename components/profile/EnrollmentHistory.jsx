@@ -37,7 +37,6 @@ class EnrollmentHistory extends Component {
                 sessionExceptCurrent.map(element => this.contentFunc(element.project.name, moment(element.timeSlot).add('years', (i18n.language === 'th' ? 543 : 0)).format('D MMMM YYYY')))
                 );
         }
-        console.log("else")
         return(sessionInfo.map(element => this.contentFunc(element.project.name, moment(element.timeSlot).add('years', (i18n.language === 'th' ? 543 : 0)).format('D MMMM YYYY'))));
     }
 }

@@ -15,7 +15,7 @@ class PersonalInfo extends Component {
                 <UserInfoConsumer>
                     {({userInfo}) => {
                         if ((userInfo === undefined) || (userInfo === null)) {
-                            return (<div className="w-full flex mb-10"><Detail bigText="ข้อมูลมีปัญหา โปรดลองใหม่อีกครั้ง" smallText="Error in retrieving information, please try again later"/></div>);
+                            return (<div className="w-full flex mb-10"><Detail bigText="ขณะนี้ข้อมูลมีปัญหา โปรดลองใหม่อีกครั้ง" smallText="Error in retrieving information, please try again later"/></div>);
                         }
                         return(
                             <div className="w-full flex flex-row flex-wrap mb-2 special-mb-0">
@@ -30,6 +30,17 @@ class PersonalInfo extends Component {
                     }}
                 </UserInfoConsumer>
                 <hr className="w-full max-w-xs border border-cb-grey-border"/>
+                <Header english="MEDICAL CONDITIONS" thai="โรคประจำตัว / ประวัติการแพ้ยา" englishColor="text-cb-pink" borderColor="border-cb-red" />
+                <UserInfoConsumer>
+                    {({userInfo}) => {
+                        if ((userInfo === null) || (userInfo === undefined)) {
+                            return (<div className="w-full flex mb-10"><Detail bigText="ขณะนี้ข้อมูลมีปัญหา โปรดลองใหม่อีกครั้ง" smallText="Error in retrieving information, please try again later"/></div>);
+                        }
+                        return (
+                            <div className="font-cb-body text-xl mb-10">{userInfo.medicalCondition}</div>    
+                        )
+                    }}                  
+                </UserInfoConsumer>
             </div>
         );
     }

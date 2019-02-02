@@ -14,17 +14,21 @@ class PersonalInfo extends Component {
                 <Header english="PERSONAL INFORMATION" thai="ข้อมูลส่วนตัว" englishColor="text-cb-pink" borderColor="border-cb-red" />
                 <UserInfoConsumer>
                     {({userInfo}) => {
+                        console.log(userInfo)
                         if ((userInfo === undefined) || (userInfo === null)) {
                             return (<div className="w-full flex mb-10"><Detail bigText="ขณะนี้ข้อมูลมีปัญหา โปรดลองใหม่อีกครั้ง" smallText="Error in retrieving information, please try again later"/></div>);
                         }
                         return(
                             <div className="w-full flex flex-row flex-wrap mb-2 special-mb-0">
                                 {this.content(`${userInfo.firstName} ${userInfo.lastName}`, "ชื่อ - นามสกุล", true)}
+                                {this.content(this.gender(userInfo.gender), "เพศ")}
+                                {this.content(`${moment(userInfo.birthday).add('years', (i18n.language === 'th' ? 543 : 0)).format('D MMMM YYYY')}`, "วัน / เดือน / ปี เกิด")}
                                 {this.content(`${userInfo.username}`, "ที่อยู่อีเมล")}
                                 {this.content(`${userInfo.phoneNumber}`, "เบอร์โทรศัพท์")}
-                                {this.content(`${moment(userInfo.birthday).add('years', (i18n.language === 'th' ? 543 : 0)).format('D MMMM YYYY')}`, "วัน / เดือน / ปี เกิด")}
                                 {this.content(`${userInfo.citizenId}`, "เลขประจำตัวประชาชน")}
                                 {this.content(`${this.bloodType(userInfo.bloodType)}`, "หมู่เลือด")}
+                                {this.content(`${userInfo.weight} kg`, "น้ำหนัก")}
+                                {this.content(this.shirtSize(userInfo.shirtSize), "ไซส์เสื้อ")}
                             </div>                             
                         )
                     }}
@@ -76,6 +80,41 @@ class PersonalInfo extends Component {
 
             case 7:
             return "AB Rh+";
+        }
+    }
+
+    gender = (reference) => {
+        switch(reference) {
+            case 0:
+            return "Male";
+
+            case 1:
+            return "Female";
+        }
+    }
+
+    shirtSize = (reference) => {
+        switch(reference) {
+            case 0:
+            return "XS";
+
+            case 1:
+            return "S";
+
+            case 2:
+            return "M";
+
+            case 3:
+            return "L";
+
+            case 4:
+            return "XL";
+
+            case 5:
+            return "XXL";
+
+            case 6:
+            return "XXXL";
         }
     }
 }

@@ -1,202 +1,135 @@
 import React, { Component } from 'react';
+import Form, { Selector, Input, FormGroup } from '@/shared-components/Form';
 
 class RegisterFillForm extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            formValid: false,
+            phoneNumber: "",
+            phoneNumberValid: false,
+            formErrors: {phoneNumber: ""},
+        };
+    }
+
+    handleChange = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        this.setState({[name]: value}, 
+            () => this.validate(name, value))
+    } 
+
+    validate = (name, value) => {
+        let isValid = this.state[name]
+        let formErrors = Object.assign({}, this.state.formErrors);
+        switch(name) {
+            case "phoneNumber":
+                isValid = (/^0[0-9]{9}$/i).test(value) ? true : false;
+                formErrors.phoneNumber = isValid ? "" : "เลขโทรศัพท์ไม่ถูกต้อง";
+                break;
+        }
+        // console.log(formErrors)
+        this.setState({[name + "Valid"]: isValid, "formErrors": formErrors}, () => this.validateForm())
+    }
+
+    validateForm = () => {
+        let isValid = true;
+        for(const key in this.state) {
+            if(key.toString().includes('Valid') && key.toString() !== 'formValid' && this.state[key] === false) {
+                isValid = false;
+                break;
+            }
+        }
+        this.setState({formValid : isValid}, () => console.log(this.state))
+    }
+
     render() {
         const inputClassName = `bg-cb-grey-light rounded-lg mt-2 p-2`;
-        const maxWidth = { maxWidth: "26.5rem" };
-        const titleClassName = "text-center w-full md:w-64 border-cb-grey-border md:border-r font-cu-heading text-2xl";
-        const borderOnSmall = "border-cb-grey-border w-full border md:hidden my-2";
-        const inputContainer = "w-full flex flex-col items-center md:items-start";
-        const p0 = { padding: "0px" };
-
         return (
             <form className="layout-wide flex flex-col items-center justify-center pb-10 sm:py-10">
                 <div>
-                    {/* Contact Information */}
-                    <div className="flex flex-col md:flex-row">
-                        <div className={titleClassName}>ข้อมูลติดต่อ</div>
-                        <hr className={borderOnSmall} />
-                        <div className={inputContainer}>
-                            {/* Top of Contact Information */}
-                            <div className="w-full flex flex-row justify-between flex-wrap sm:flex-row mb-6 sm:mb-10 md:ml-10" style={maxWidth}>
-                                <div className="w-full sm:w-48 mb-6 sm:mb-0">
-                                    <div className="font-cu-body font-medium">อีเมลล์</div>
-                                    <input className={`${inputClassName} w-full h-8`} type="email" required />
-                                </div>
-                                <div className="w-full sm:w-48 mb-6">
-                                    <div className="font-cu-body font-medium">เบอร์โทรศัพท์</div>
-                                    <input className={`${inputClassName} w-full h-8`} type="text" required />
-                                </div>
-                                {/* </div> */}
-                                {/* Bottom of Contact Information */}
-                                {/* <div className="w-full flex sm:flex-row mb-16 sm:mb-10 md:ml-10" style={maxWidth}> */}
-                                {/* <div className="mr-6 sm:mr-10 w-1/2 sm:w-48 sm:mb-0">
-                                    <div className="font-cu-body font-medium">วัน/เดือน/ปี เกิด</div>
-                                    <input className={`${inputClassName} w-full h-8`} placeholder="dd/mm/yyyy" type="text"/>                                
-                                </div> */}
-                                <div className="w-full ">
-                                    <div className="font-cu-body font-medium">ที่อยู่</div>
-                                    <textarea className={`${inputClassName} w-full h-16`} />
-                                    {/* <input className={`${inputClassName} w-full h-8`} type="text" required /> */}
-                                </div>
-                            </div>
+                    <FormGroup text="ข้อมูลติดต่อ">
+                        <Form text="อีเมลล์" width="full" smWidth="48">
+                            <Input type="email" />
+                        </Form>
+                        <Form text="เบอร์โทรศัพท์" width="full" smWidth="48">
+                            <Input value={this.state.phone} onChange={this.handleChange} type="text" name="phoneNumber" error={this.state.formErrors.phoneNumber} />
+                        </Form>
+                        <Form text="ที่อยู่" width="full">
+                            <textarea required className={`${inputClassName} w-full h-16`} />
+                        </Form>
+                    </FormGroup>
+                    <FormGroup text="ข้อมูลทั่วไป">
+                        <Form text="ชื่อ" width="full" smWidth="48">
+                            <Input type="text" />
+                        </Form>
+                        <Form text="นามสกุล" width="full" smWidth="48">
+                            <Input type="text" />
+                        </Form>
+                        <Form text="ชื่อเล่น" width="full" smWidth="48">
+                            <Input type="text" />
+                        </Form>
+                        <Form text="วัน/เดือน/ปี เกิด" width="full" smWidth="48">
+                            <Input type="date" />
+                        </Form>
+                        <Form text="เพศ" width="24">
+                            <Selector choices={['ชาย', 'หญิง']} />
+                        </Form>
+                        <Form text="ไซส์เสื้อ" width="24">
+                            <Selector choices={['M (38")', 'L (40")', 'XL (42")', 'XXL (44")']} />
+                        </Form>
+                        <Form text="น้ำหนัก" width="24">
+                            <Input type="number" />
+                        </Form>
+                        <Form text="สถานภาพ" width="24">
+                            <Selector choices={['นิสิตจุฬา', 'นิสิตเก่า', 'บุคลากร', 'อาจารย์']} />
+                        </Form>
+                        <Form text="สัญชาติ" width="24">
+                            <Selector choices={['ไทย', 'ต่างชาติ']} />
+                        </Form>
+                        <Form text="ชั้นปี" width="24">
+                            <Selector choices={['1', '2', '3', '4', '5', '6', "ปริญญาโท", 'ปริญญาเอก', 'อื่นๆ']} />
+                        </Form>
+                        <Form text="รหัสนิสิต" width="full" smWidth="48">
+                            <Input type="text" />
+                        </Form>
+                        <Form text="คณะ" width="full" smWidth="48">
+                            <Selector choices={
+                                ['คณะวิศวกรรมศาสตร์', 'คณะพาณิชยศาสตร์และการบัญชี', 'คณะวิทยาศาสตร์', 'คณะครุศาสตร์',
+                                    'คณะสหเวชศาสตร์ ', 'คณะอักษรศาสตร์', "คณะเภสัชศาสตร์", 'คณะเศรษฐศาสตร์', 'คณะทันตแพทยศาสตร์',
+                                    'คณะรัฐศาสตร์', 'คณะนิเทศศาสตร์', 'คณะจิตวิทยา', 'คณะนิติศาสตร์', 'คณะพยาบาลศาสตร์',
+                                    'คณะแพทยศาสตร์', 'คณะศิลปกรรมศาสตร์', 'คณะสถาปัตยกรรมศาสตร์', 'คณะสัตวแพทยศาสตร์',
+                                    'คณะวิทยาศาสตร์การกีฬา', 'วิทยาลัยวิทยาศาสตร์สาธารณสุข', 'บัณฑิตวิทยาลัย', 'สำนักวิชาทรัพยากรการเกษตร', 'อื่นๆ']
+                            } />
+                        </Form>
+                    </FormGroup>
+                    <FormGroup text="ข้อมูลทางการแพทย์">
+                        <Form text="โรคประจำตัว" width="full">
+                            <textarea className={`${inputClassName} w-full h-16`} />
+                        </Form>
+                        <Form text="หมู่เลือด" width="32" smWidth="48">
+                            <Selector choices={['A', 'B', 'O', 'AB']} />
+                        </Form>
+                        <Form text="RH" width="32" smWidth="48">
+                            <Selector choices={['+', '-']} />
+                        </Form>
+                        <div className="check">
+                            <label className="flex font-cu-heading text-normal cursor-pointer check-box">
+                                <input type="checkbox" />
+                                <div className="check-text flex">ท่านเคยบริจาคโลหิตมาก่อนหรือไม่</div>
+                            </label>
+                            <label className="flex font-cu-heading text-normal cursor-pointer check-box">
+                                <input type="checkbox" />
+                                <div className="check-text flex"><span>ท่านเคยเข้าร่วมบริจาคโลหิตกับโครงการ <br/><span className="text-cb-red font-semibold">CU BLOOD</span> มาก่อนหรือไม่</span></div>
+                            </label>
                         </div>
-                    </div>
-                    {/* Basic Information */}
-                    <div className="flex flex-col md:flex-row">
-                        <div className={titleClassName}>ข้อมูลทั่วไป</div>
-                        <hr className={borderOnSmall} />
-                        <div className={inputContainer}>
-                            {/* Top of Basic Information */}
-                            <div className="w-full flex flex-row justify-between flex-wrap sm:flex-row mb-6 md:ml-10" style={maxWidth}>
-                                {/* <div className="sm:mr-10 mb-6 sm:mb-0 w-1/2 sm:w-2/5">
-                                    <div className="font-cu-body font-medium">หมู่เลือด</div>
-                                    <select className={`${inputClassName} w-full h-8`}>
-                                        <option value="A">A</option>
-                                        <option value="B">B</option>
-                                        <option value="AB">AB</option>
-                                        <option value="O">O</option>
-                                    </select>
-                                </div> */}
-                                <div className="w-full sm:w-48 mb-6">
-                                    <div className="font-cu-body font-medium">ชื่อ</div>
-                                    <input className={`${inputClassName} w-full h-8`} type="text" required />
-                                </div>
-                                <div className="w-full sm:w-48 mb-6">
-                                    <div className="font-cu-body font-medium">นามสกุล</div>
-                                    <input className={`${inputClassName} w-full h-8`} type="text" required />
-                                </div>
-                                {/* </div> */}
-                                {/* Bottom of Basic Information */}
-                                {/* <div className="w-full flex flex-col sm:flex-row mb-6 md:ml-10" style={maxWidth}> */}
-                                <div className="w-full sm:w-48 mb-6">
-                                    <div className="font-cu-body font-medium">ชื่อเล่น</div>
-                                    <input className={`${inputClassName} w-full h-8`} type="text" required />
-                                </div>
-
-                                {/* <div className="w-full">
-                                    <div className="font-cu-body font-medium">ประวัติการแพ้ยา</div>
-                                    <textarea className={`${inputClassName} w-full h-32`} />
-                                </div> */}
-                                {/* </div> */}
-                                {/* <div className="w-full flex flex-col sm:flex-row mb-6 md:ml-10" style={maxWidth}> */}
-                                <div className="sm:mr-0 w-full sm:w-48 mb-6">
-                                    <div className="font-cu-body font-medium">วัน/เดือน/ปี เกิด</div>
-                                    <input className={`${inputClassName} w-full h-8`} type="date" />
-                                </div>
-                                {/* <div className="w-1/3"> */}
-                                <div className="w-24 sm:w-24 mb-6">
-                                    <div className="font-cu-body font-medium">เพศ</div>
-                                    <select className={`${inputClassName} w-full h-8`} style={p0}>
-                                        <option value="ชาย">ชาย</option>
-                                        <option value="หญิง">หญิง</option>
-                                    </select>
-                                </div>
-                                {/* </div> */}
-                                {/* <div className="w-1/3"> */}
-                                <div className="w-24 sm:w-24 mb-6">
-                                    <div className="font-cu-body font-medium">ไซส์เสื้อ</div>
-                                    <select className={`${inputClassName} w-full h-8`} style={p0}>
-                                        <option value="ชาย">M (38")</option>
-                                        <option value="หญิง">L (40")</option>
-                                        <option value="หญิง">XL (42")</option>
-                                        <option value="หญิง">XXL (44")</option>
-                                    </select>
-                                </div>
-                                {/* </div> */}
-                                {/* </div> */}
-                                {/* <div className="w-full flex flex-col sm:flex-row mb-6 md:ml-10" style={maxWidth}> */}
-                                {/* <div className="w-1/3"> */}
-                                <div className="w-24 sm:w-24 mb-6">
-                                    <div className="font-cu-body font-medium">น้ำหนัก</div>
-                                    <input className={`${inputClassName} w-full h-8`} type="number" />
-                                </div>
-                                {/* </div> */}
-                                {/* <div className="w-1/3"> */}
-                                <div className="w-24 sm:w-24 mb-6">
-                                    <div className="font-cu-body font-medium">สถานภาพ</div>
-                                    <select className={`${inputClassName} w-full h-8`} style={p0}>
-                                        <option value="ชาย">นิสิตจุฬา</option>
-                                        <option value="หญิง">นิสิตเก่า</option>
-                                        <option value="หญิง">บุคลากร</option>
-                                        <option value="หญิง">อาจารย์</option>
-                                    </select>
-                                </div>
-                                {/* </div> */}
-                                {/* <div className="w-1/3"> */}
-                                <div className="w-24 sm:w-24 mb-6">
-                                    <div className="font-cu-body font-medium">สัญชาติ</div>
-                                    <select className={`${inputClassName} w-full h-8`} style={p0}>
-                                        <option value="ชาย">ไทย</option>
-                                        <option value="หญิง">ต่างชาติ</option>
-                                    </select>
-                                </div>
-                                {/* </div> */}
-                                {/* <div className="w-1/3"> */}
-                                <div className="w-24 sm:w-24 mb-6">
-                                    <div className="font-cu-body font-medium">ชั้นปี</div>
-                                    <select className={`${inputClassName} w-full h-8`} style={p0}>
-                                        <option value="ชาย">1</option>
-                                        <option value="หญิง">2</option>
-                                        <option value="หญิง">3</option>
-                                        <option value="หญิง">4</option>
-                                        <option value="ชาย">5</option>
-                                        <option value="หญิง">6</option>
-                                        <option value="หญิง">ปริญญาโท (Master's degree)</option>
-                                        <option value="หญิง">ปริญญาเอก (Doctoral degree)</option>
-                                        <option value="หญิง">อื่นๆ (Other)</option>
-                                    </select>
-                                </div>
-                                {/* </div> */}
-                                {/* </div> */}
-                                {/* <div className="w-full flex flex-col sm:flex-row mb-6 md:ml-10" style={maxWidth}> */}
-                                <div className="w-full sm:w-48 mb-6">
-                                    <div className="font-cu-body font-medium">รหัสนิสิต</div>
-                                    <input className={`${inputClassName} w-full h-8`} type="text" required />
-                                </div>
-                            </div>
-                            {/* <div className="w-full flex flex-col sm:flex-row mb-16 sm:mb-10 md:ml-10" style={maxWidth}> */}
-
-                            {/* </div> */}
-                        </div>
-                    </div>
-                    {/* User Information */}
-                    <div className="flex flex-col md:flex-row">
-                        <div className={titleClassName}>บัญชีผู้ใช้</div>
-                        <hr className={borderOnSmall} />
-                        <div className={inputContainer}>
-                            {/* Top of User Information */}
-                            <div className="w-full flex flex-row flex-wrap justify-between sm:flex-row md:ml-10" style={maxWidth}>
-                                <div className="w-full sm:w-48 mb-6">
-                                    <div className="font-cu-body font-medium">ที่อยู่</div>
-                                    <input className={`${inputClassName} w-full h-8`} type="text" />
-                                </div>
-                                <div className="w-full sm:w-48 mb-6">
-                                    <div className="font-cu-body font-medium">อีเมล</div>
-                                    <input className={`${inputClassName} w-full h-8`} type="email" required />
-                                </div>
-                                {/* </div> */}
-                                {/* Bottom of User Information */}
-                                {/* <div className="w-full flex flex-col sm:flex-row md:ml-10" style={maxWidth}> */}
-                                <div className="w-full sm:w-48 mb-6">
-                                    <div className="font-cu-body font-medium">รหัสผ่านใหม่</div>
-                                    <input className={`${inputClassName} w-full h-8`} type="password" required />
-                                </div>
-                                <div className="w-full sm:w-48 mb-6">
-                                    <div className="font-cu-body font-medium">ยืนยันรหัสผ่าน</div>
-                                    <input className={`${inputClassName} w-full h-8`} type="password" required />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="flex flex-col items-center justify-center mt-12">
-                        <div className="flex items-center font-cu-heading text-normal">
-                            <input style={{ transform: "scale(1.5)" }} type="checkbox" />
-                            <div className="ml-6 text-wrap">
-                                I have <span className="text-cb-pink font-semibold">read the guide</span> and agreed to <span className="text-cb-pink font-semibold">Terms and Conditions</span>.
-                            </div>
-                        </div>
-                        <input className={`px-10 py-3 text-white bg-cb-red rounded-lg mt-12`} type="submit" value="ลงทะเบียน" id="confirm" />
+                    </FormGroup>
+                    <div className="flex flex-col items-center justify-center mt-6 md:mt-12">
+                        <label className="flex font-cu-heading text-normal cursor-pointer check-box">
+                            <input required type="checkbox" />
+                            <div className="check-text flex"><span>I have <a href="https://google.com" target="_blank" rel="noopener noreferrer" className="no-underline"><span className="text-cb-pink font-semibold">read the guide</span></a> and agreed to <span className="text-cb-pink font-semibold">Terms and Conditions</span>.</span></div>
+                        </label>
+                        <button disabled={!this.state.formValid} className="px-10 py-3 text-white bg-cb-red rounded-lg mt-6 btn" type="submit" id="confirm" >ลงทะเบียน</button>
                     </div>
                 </div>
             </form>

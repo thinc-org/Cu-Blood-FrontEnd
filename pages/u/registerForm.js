@@ -4,6 +4,7 @@ import FacebookButton from '@/shared-components/FacebookButton';
 import Header from '@/shared-components/TopicCenter';
 import Form from '@/register/local-components/RegisterFillForm';
 import I18 from '@/core/i18n';
+import '../../static/css/registerForm.css';
 
 class RegisterForm extends Component {
     render() {

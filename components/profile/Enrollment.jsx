@@ -76,7 +76,6 @@ class Enrollment extends Component {
             );
         })
         const changeDateModal = this.changeDateModal(this.state.modalOpener['changeDateModal'], 'changeDateModal', datesDuringDonation);
-        console.log(this.state.currentSessionInfo);
 
         return (
             <div className="bg-cb-grey-lighter pb-10">

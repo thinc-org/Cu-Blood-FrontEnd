@@ -48,7 +48,7 @@ class Profile extends Component {
                 <Enrollment commonsInfo={commonsInfo} sessionInfo={sessionInfo}/>      
                 <PersonalInfo />
                 <MedicalInfo />
-                <EnrollmentHistory />
+                <EnrollmentHistory commonsInfo={commonsInfo} sessionInfo={sessionInfo}/>
                 <FacebookButton />
                 <Footer />
             </div>

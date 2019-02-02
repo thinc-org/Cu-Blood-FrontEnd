@@ -55,7 +55,7 @@ class Enrollment extends Component {
         }
         
         
-        const datesDuringDonation = commonsInfo !== null ? this.betweenDonationDate(commonsInfo.startDate, commonsInfo.endDate) : null;
+        const datesDuringDonation = commonsInfo !== null ? commonsInfo.timeSlots : null;
         //Create fix date button if the user already registered for the current event
         const fixDateButton = this.state.currentSessionInfo !== null ? <button className="ml-2" onClick={() => this.toggleModal('changeDateModal')}><img className="w-6" src="/static/icons/fix.svg" alt="Fix logo" /></button> : null; 
         //Create the location content where there is the location name + link to map + button to open modal
@@ -83,6 +83,7 @@ class Enrollment extends Component {
         })
         //Create modal that can change date
         const changeDateModal = this.changeDateModal(this.state.modalOpener['changeDateModal'], 'changeDateModal', datesDuringDonation);
+        console.log(this.props.sessionInfo)
 
         return (
             <div className="bg-cb-grey-lighter pb-10">
@@ -164,9 +165,6 @@ class Enrollment extends Component {
 
     //Function to put information needed for enroll to API when click accepts
     putEnroll = (locationModal, locationId) => {
-        console.log("sessionId", this.state.currentSessionInfo.id);
-        console.log("locationId", locationId);
-        console.log("timeSlot", this.state.regisDate);
         axios.put('https://api-dev.fives.cloud/v0/profile/me/enroll', {
             sessionId: this.state.currentSessionInfo.id,
             locationId: locationId,
@@ -184,26 +182,12 @@ class Enrollment extends Component {
         .then(response => response.data)
         .then(data => data.result)
         .catch(e => null)
-        .then(result => this.setState({currentSessionInfo: result[result.length - 1], regisDate : result[result.length - 1].timeSlot}, () => console.log("setState of session info ", result)))
+        .then(result => this.setState({currentSessionInfo: result[result.length - 1], regisDate: result[result.length - 1].timeSlot}))
     }
 
     //Function to setState to regisDate for when date option is pick
     handleChange = (event) => {
         this.setState({regisDate: event.target.value})
-    }
-
-    //Create an array of dates between the start and end of donation
-    betweenDonationDate = (startDate, endDate) => {
-        let start = moment(startDate);
-        const end = moment(endDate);
-        let dates = [];
-
-        while(start <= end) {
-            dates.push(start.format('YYYY-MM-DD'));
-            start = start.clone().add(1, 'days');
-        }
-
-        return dates;
     }
 
     //Function to choose the type of button in content
@@ -227,7 +211,7 @@ class Enrollment extends Component {
           }
         
         // Turn the array of dates into options to select
-        const datesOption = dates !== null ? dates.map(date => <option key={date} value={date}>{date}</option>) : null;
+        const datesOption = dates !== null ? dates.map(date => <option key={date} value={date}>{moment(date).format('D MMMM')}</option>) : null;
         
         return (
         <div key={locationModal} className="fixed pin-l w-full h-full flex items-center justify-center" style={{backgroundColor: 'rgba(0,0,0,0.3)', top: 50}}>
@@ -310,7 +294,7 @@ class Enrollment extends Component {
             return null;
           }
         
-        const datesOption = dates !== null ? dates.map(date => <option key={date} value={date}>{date}</option>) : null;
+        const datesOption = dates !== null ? dates.map(date => <option key={date} value={date}>{moment(date).format('D MMMM')}</option>) : null;
 
         return (
         <div key={locationModal} className="fixed pin-l w-full h-full flex items-center justify-center" style={{backgroundColor: 'rgba(0,0,0,0.3)', top: 50}}>

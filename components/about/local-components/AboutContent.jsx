@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class AboutContent extends react.Component {
+export default class AboutContent extends React.Component {
     render() {
         return (
             <div className='layout-narrow py-8'>

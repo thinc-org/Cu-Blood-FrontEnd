@@ -36,7 +36,7 @@ class MyApp extends App {
           return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, userInfo: resp.data.result, status: resp.status } };
         })
         .catch((err) => { // force logout then redirect to same page
-          return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, status: err.response.status } };
+          return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, status: 401 } };
         })
     } 
     else if (ctx.pathname.includes('/chulaLogin')) { //

@@ -22,18 +22,18 @@ class Profile extends Component {
             .then(response => response.data)
             .catch(e => null)))
         .catch(console.log);
-
+        
         const [commonsData, sessionData] = data;
         return {
-          commonsData: commonsData ? commonsData : undefined,
-          sessionData: sessionData !== null ? sessionData : undefined,
+          commonsData,
+          sessionData,
         };
     }
     
     render() {
         const { commonsData, sessionData } = this.props;
-        const commonsInfo = commonsData !== undefined? commonsData.result : null;
-        const sessionInfo = sessionData !== undefined? sessionData.result : null;
+        const commonsInfo = commonsData && sessionData ? commonsData.result : null;
+        const sessionInfo = commonsData && sessionData ? sessionData.result : null;
 
         return (
             <div>

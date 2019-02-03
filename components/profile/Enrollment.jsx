@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from '@/shared-components/TopicLeft';
 import Detail from './Detail';
-import Card from '@/shared-components/Card';
+import Card from '@/shared-components/Card'
 
 class Enrollment extends Component {
     render() {

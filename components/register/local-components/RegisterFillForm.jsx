@@ -27,6 +27,8 @@ class RegisterFillForm extends Component {
                 isValid = (/^0[0-9]{9}$/i).test(value) ? true : false;
                 formErrors.phoneNumber = isValid ? "" : "เลขโทรศัพท์ไม่ถูกต้อง";
                 break;
+            default:
+                return;
         }
         // console.log(formErrors)
         this.setState({[name + "Valid"]: isValid, "formErrors": formErrors}, () => this.validateForm())

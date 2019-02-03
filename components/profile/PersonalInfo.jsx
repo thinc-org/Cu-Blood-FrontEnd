@@ -84,7 +84,7 @@ class PersonalInfo extends Component {
             return "AB Rh+";
 
             default:
-            return null
+            return null;
         }
     }
 

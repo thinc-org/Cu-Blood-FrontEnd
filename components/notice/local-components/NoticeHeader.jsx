@@ -1,11 +1,13 @@
 import React from 'react'
+import I18 from '@/core/i18n'
 
-export default class NoticeHeader extends React.Component {
+class NoticeHeader extends React.Component {
     render() {
+      const { t } = this.props;
         return (
             <div className="font-cu-heading bg-cb-pink-light">
                 <div className="layout-wide py-20 flex flex-col items-center md:items-start">
-                    <span className="text-6xl font-bold mb-8 text-black">ข้อควรรู้</span>
+                    <span className="text-6xl font-bold mb-8 text-black">{t ('noticeHeader')}</span>
                     <Subheader thai={"คุณสมบัติผู้บริจาคโลหิต"} english={"CHARACTERISTIC AND CRITERIA"} />
                     <Subheader thai={"ขั้นตอนการบริจาคโลหิตกับโครงการ"} english={"PROCEDURES"} />
                     <Subheader thai={"การเตรียมตัวก่อน-หลังบริจาคโลหิต"} english={"PRE-POST DONATION PREPARATION"} hasLineBreak={false} />
@@ -41,3 +43,5 @@ const LineBreak = ({ hasLineBreak = true }) => {
             null
         )
 }
+
+export default I18.withNamespaces('notice')(NoticeHeader);

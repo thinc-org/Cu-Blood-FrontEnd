@@ -12,7 +12,7 @@ export default class extends Component {
     }
 }
 
-export const Selector = ({ choices = [] }) => {
+export const Selector = ({ choices = [], value, name, onChange, disabled = false }) => {
     const options = choices.map((choice, index) => {
         return (
             <option required key={index} value={choice}>{choice}</option>
@@ -20,7 +20,7 @@ export const Selector = ({ choices = [] }) => {
     })
     return (
         <React.Fragment>
-            <select required className="bg-cb-grey-light rounded-lg mt-2 p-2 w-full h-8" selected="หญิง" style={{ padding: "0px" }}>
+            <select disabled={disabled} value={value} name={name} onChange={onChange} required className="bg-cb-grey-light rounded-lg mt-2 p-2 w-full h-8" style={{ padding: "0px" }}>
                 <option value=""></option>
                 {options}
             </select>
@@ -28,19 +28,19 @@ export const Selector = ({ choices = [] }) => {
     );
 }
 
-export const Input = ({ type, notRequired, value, name, onChange, error }) => {
+export const Input = ({ type, notRequired, value, name, onChange, error, disabled = false }) => {
 
     return notRequired ?
         (
             <React.Fragment>
-                <input value={value} name={name} onChange={onChange} className="bg-cb-grey-light rounded-lg mt-2 p-2 w-full h-8" type={type} />
+                <input value={value} name={name} onChange={onChange} disabled={disabled} className="bg-cb-grey-light rounded-lg mt-2 p-2 w-full h-8" type={type} />
                 <span className="font-cu-body font-medium">{error}</span>
             </React.Fragment>
 
         ) :
         (
             <React.Fragment>
-                <input value={value}  name={name} onChange={onChange} className="bg-cb-grey-light rounded-lg mt-2 p-2 w-full h-8" type={type} required />
+                <input value={value}  name={name} onChange={onChange} disabled={disabled} className="bg-cb-grey-light rounded-lg mt-2 p-2 w-full h-8" type={type} required />
                 <span className="font-cu-body font-medium text-cb-red">{error}</span>
             </React.Fragment >
         )

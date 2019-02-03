@@ -7,7 +7,6 @@ import EnrollmentHistory from '@/profile/EnrollmentHistory';
 import FacebookButton from '@/shared-components/FacebookButton';
 import Footer from '@/shared-components/Footer';
 import '../../static/css/profile.css';
-import { UserInfoConsumer } from '@/core/UserInfoProvider';
 import axios from '@/core/core';
 
 

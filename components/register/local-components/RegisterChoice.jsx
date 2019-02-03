@@ -52,11 +52,11 @@ class RegisterChoice extends Component {
                         </div>
                     </div> 
                 </div>
-                <div className="flex justify-between mx-20">
+                {/* <div className="flex justify-between mx-20">
                     <button className="bg-cb-red" onClick={this.testLoginSuccess}> login </button>
                     <button className="bg-cb-red" onClick={this.testLogout}> logout </button>
                     <button className="bg-cb-red" onClick={this.testInvalidateToken}> Invalidate Token </button>
-                </div>
+                </div> */}
             </div>
         );
     }

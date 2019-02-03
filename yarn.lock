@@ -746,6 +746,14 @@
     "@babel/helper-regex" "^7.0.0"
     regexpu-core "^4.1.3"
 
+"@babel/polyfill@^7.2.5":
+  version "7.2.5"
+  resolved "https://registry.yarnpkg.com/@babel/polyfill/-/polyfill-7.2.5.tgz#6c54b964f71ad27edddc567d065e57e87ed7fa7d"
+  integrity sha512-8Y/t3MWThtMLYr0YNC/Q76tqN1w30+b0uQMeFUYauG2UGTR19zyUtFrAzT23zNtBxPp+LbE5E/nwV/q/r3y6ug==
+  dependencies:
+    core-js "^2.5.7"
+    regenerator-runtime "^0.12.0"
+
 "@babel/preset-env@7.0.0":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@babel/preset-env/-/preset-env-7.0.0.tgz#f450f200c14e713f98cb14d113bf0c2cfbb89ca9"
@@ -929,9 +937,9 @@
     regenerator-runtime "^0.12.0"
 
 "@babel/runtime@^7.1.2":
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.2.0.tgz#b03e42eeddf5898e00646e4c840fa07ba8dcad7f"
-  integrity sha512-oouEibCbHMVdZSDlJBO6bZmID/zA/G/Qx3H1d3rSNPTD+L8UNKvCat7aKWSJ74zYbm5zWGh0GQN0hKj8zYFTCg==
+  version "7.3.1"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.3.1.tgz#574b03e8e8a9898eaf4a872a92ea20b7846f6f2a"
+  integrity sha512-7jGW8ppV0ant637pIqAcFfQDDH1orEPGJb8aXfUozuCU3QqX7rX4DA8iwrbPrR1hcH0FTTHz47yQnk+bl5xHQA==
   dependencies:
     regenerator-runtime "^0.12.0"
 
@@ -5263,9 +5271,9 @@ i18next-xhr-backend@^1.5.1:
   integrity sha512-9OLdC/9YxDvTFcgsH5t2BHCODHEotHCa6h7Ly0EUlUC7Y2GS09UeoHOGj3gWKQ3HCqXz8NlH4gOrK3NNc9vPuw==
 
 i18next@^13.0.0:
-  version "13.1.4"
-  resolved "https://registry.yarnpkg.com/i18next/-/i18next-13.1.4.tgz#2d07e7f191dec3b22f02420a89897dc25b29b291"
-  integrity sha512-qPmjdQrUQ4AGzKBGBpPLC7XiJoqbV/dGmDW/xmwbzAk60eavTkZ+s5FqoSAP2YeurPF8XpNWQaDvXNSWzT0ZYw==
+  version "13.1.5"
+  resolved "https://registry.yarnpkg.com/i18next/-/i18next-13.1.5.tgz#b1fbc35e00047e6f580288f6774b21b5d42649e6"
+  integrity sha512-tFaX79dg5IcO02I/p8ImZubrxZrOCf06eiAUBlqCjcHXSfC8wqUgI+Yp4qH0iZZV5jBG5z0RWLAamO72NnZiyg==
 
 iconv-lite@0.4.23:
   version "0.4.23"
@@ -7237,10 +7245,11 @@ next-cookies@^1.0.4:
     cookie "^0.3.1"
 
 next-i18next@^0.19.0:
-  version "0.19.0"
-  resolved "https://registry.yarnpkg.com/next-i18next/-/next-i18next-0.19.0.tgz#0a55e5e94f763848a7f7a9603e557b353d7329aa"
-  integrity sha512-tWARIZBGTnpX6v3JojvMVMEbSCOrVUl2ABJBG7FjbdcCebpJ9e4BSjon8V4G67DqG3rrm/uqK4NwVtXJ4Kt48A==
+  version "0.19.1"
+  resolved "https://registry.yarnpkg.com/next-i18next/-/next-i18next-0.19.1.tgz#179bbe68f1d8e5cefd30e823623b6bbe53b05c0a"
+  integrity sha512-U9dGS4ccIqenXDs14z8neWCAM16/kvy/6RXFGe4CE3bsW++kX5zjo0GFFHfCEe8SpI5w+AWIZIc+3ncnPegoTw==
   dependencies:
+    "@babel/polyfill" "^7.2.5"
     detect-node "^2.0.4"
     hoist-non-react-statics "^3.2.0"
     i18next "^13.0.0"

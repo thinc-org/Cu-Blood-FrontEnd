@@ -4,7 +4,6 @@ import PageHeader from '@/shared-components/TopicCenter';
 import AboutCard from '@/about/local-components/AboutCard';
 import Footer from '@/shared-components/Footer';
 import FacebookButton from '@/shared-components/FacebookButton';
-import I18 from '@/core/i18n';
 import AboutContent from '@/about/local-components/AboutContent';
 
 class About extends React.Component {
@@ -30,4 +29,4 @@ class About extends React.Component {
 }
 
 
-export default I18.withNamespaces('common')(About)
+export default About;

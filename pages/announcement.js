@@ -3,13 +3,9 @@ import AnnouncementHeader from '@/announcement/local-components/AnnouncementHead
 import AnnouncementCard from '@/announcement/local-components/AnnouncementCard'
 import Footer from '@/shared-components/Footer';
 import FacebookButton from '@/shared-components/FacebookButton';
-import I18 from '@/core/i18n';
 import axios from 'axios';
 import map from 'lodash/map';
 import moment from 'moment';
-
-
-// import Pager from '@/announcement/local-components/Pager';
 
 class Notice extends React.Component {
     constructor(props) {
@@ -175,7 +171,4 @@ class Notice extends React.Component {
     }
 }
 
-
-
-
-export default I18.withNamespaces('common')(Notice)
+export default Notice;

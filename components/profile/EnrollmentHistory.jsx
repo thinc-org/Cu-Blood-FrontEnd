@@ -41,10 +41,10 @@ class EnrollmentHistory extends Component {
     }
 
     chooseContent = (sessionInfo, commonsInfo) => {
-        if ((sessionInfo.length == 1) && (sessionInfo[sessionInfo.length - 1].project.id == commonsInfo.id)) {
+        if ((sessionInfo.length === 1) && (sessionInfo[sessionInfo.length - 1].project.id === commonsInfo.id)) {
             return (<div className="mb-8"><Card><Detail bigText="ไม่มีประวัติการเข้าร่วมกิจกรรม" smallText="No enrollment history is available"/></Card></div>);
         }
-        else if (sessionInfo[sessionInfo.length - 1].project.id == commonsInfo.id) {
+        else if (sessionInfo[sessionInfo.length - 1].project.id === commonsInfo.id) {
             const sessionExceptCurrent = sessionInfo.slice(0, -1);
             return(
                 sessionExceptCurrent.map(element => this.contentFunc(element.project.name, moment(element.timeSlot).add('years', (i18n.language === 'th' ? 543 : 0)).format('D MMMM YYYY')))

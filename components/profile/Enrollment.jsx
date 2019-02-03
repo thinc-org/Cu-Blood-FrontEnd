@@ -14,8 +14,8 @@ class Enrollment extends Component {
         super(props);
 
         this.state = {
-            regisDate: (this.props.sessionInfo !== null) && (this.props.sessionInfo[this.props.sessionInfo.length - 1].project.id == this.props.commonsInfo.id) ? this.props.sessionInfo[this.props.sessionInfo.length - 1].timeSlot : null,
-            currentSessionInfo: (this.props.sessionInfo !== null) && (this.props.sessionInfo[this.props.sessionInfo.length - 1].project.id == this.props.commonsInfo.id) ? this.props.sessionInfo[this.props.sessionInfo.length - 1] : null,
+            regisDate: (this.props.sessionInfo !== null) && (this.props.sessionInfo[this.props.sessionInfo.length - 1].project.id === this.props.commonsInfo.id) ? this.props.sessionInfo[this.props.sessionInfo.length - 1].timeSlot : null,
+            currentSessionInfo: (this.props.sessionInfo !== null) && (this.props.sessionInfo[this.props.sessionInfo.length - 1].project.id === this.props.commonsInfo.id) ? this.props.sessionInfo[this.props.sessionInfo.length - 1] : null,
             commonsInfo : this.props.commonsInfo,
             modalOpener : {changeDateModal : false}
         };
@@ -118,7 +118,7 @@ class Enrollment extends Component {
     //Function that creates the location and register button
     content = (thaiName, engName, urlLocation, locationToggle, locationId) => {
         const alreadyRegistered = this.state.currentSessionInfo !== null;
-        const isLocationPick = (this.state.currentSessionInfo !== null) && (this.state.currentSessionInfo.locationId == locationId)
+        const isLocationPick = (this.state.currentSessionInfo !== null) && (this.state.currentSessionInfo.locationId === locationId)
 
         //Choose what kind of button will show = register / change location / show QR
         const button = this.chooseButton(alreadyRegistered, isLocationPick, locationToggle);

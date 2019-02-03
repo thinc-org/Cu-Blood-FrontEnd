@@ -37,13 +37,7 @@ class Profile extends Component {
 
         return (
             <div>
-                <UserInfoConsumer>
-                    {({userInfo}) => {
-                        return (
-                            <ProfileHeader />
-                        )
-                    }}
-                </UserInfoConsumer>
+                <ProfileHeader />
                 <Enrollment commonsInfo={commonsInfo} sessionInfo={sessionInfo}/>      
                 <PersonalInfo />
                 <EnrollmentHistory commonsInfo={commonsInfo} sessionInfo={sessionInfo}/>

@@ -82,6 +82,9 @@ class PersonalInfo extends Component {
 
             case 7:
             return "AB Rh+";
+
+            default:
+            return null
         }
     }
 
@@ -92,6 +95,9 @@ class PersonalInfo extends Component {
 
             case 1:
             return "Female";
+
+            default:
+            return null;
         }
     }
 
@@ -117,6 +123,9 @@ class PersonalInfo extends Component {
 
             case 6:
             return "XXXL";
+            
+            default: 
+            return null;
         }
     }
 }

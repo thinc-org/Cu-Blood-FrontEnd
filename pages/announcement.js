@@ -8,16 +8,33 @@ import axios from 'axios';
 import map from 'lodash/map';
 import moment from 'moment';
 
+
+// import Pager from '@/announcement/local-components/Pager';
+
 class Notice extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentPage: 1
+            currentPage: 1,
+            dataFromApi: [],
+            totalPage: 10
         }
     }
 
-    static async getInitialProps() {
+    //Set totalPage to number of array.object / 10
 
+    // componentDidMount() {
+    //     const { announcementData } = this.props;
+    //     if (this.state.totalPage==-1) {
+    //         this.setState({
+    //             totalPage: (announcementData.length/10)
+    //         })
+    //     }
+    // }
+
+
+    //get data from api
+    static async getInitialProps() {
         const announcementDataPromise = axios.get(`https://api-dev.fives.cloud/v0/announcements/all/1`);
         const data = await Promise.all([announcementDataPromise]
             .map(p => p
@@ -31,6 +48,39 @@ class Notice extends React.Component {
                 return {
                     announcementData: announcementData ? announcementData.result.data : undefined
                 };
+
+    }
+
+    //go to next page
+    nextPage = () => {
+
+        let myPage = 10
+
+        if (this.state.currentPage < 10) {
+            myPage = this.state.currentPage + 1;
+            return (
+                this.setState({
+                    currentPage: myPage
+                })
+            )
+        } 
+        
+        
+    }
+
+    //go to previous page
+    previousPage = () => {
+        let myPage = 1
+
+        if (this.state.currentPage > 1) {
+            myPage = this.state.currentPage - 1;
+            return (
+                this.setState({
+                    currentPage: myPage
+                })
+            )
+        } 
+        
     }
 
     render() {
@@ -40,11 +90,14 @@ class Notice extends React.Component {
         const announcementDate = map(announcementData, 'updatedAt');
         const announcementImage = map(announcementData, 'displayImage');
 
-        console.log(announcementImage)
 
 
         const lengthOfArray = announcementData.length;
+        
 
+
+
+        //format date
         const announcementDateMoment = (props) => {
             let data = moment(announcementDate[props]).format('DD MMMM YYYY');
             return(
@@ -52,6 +105,7 @@ class Notice extends React.Component {
             );
         }
 
+        //array for cards
         const AnnouncementCardLoop = () => {
             let data = [];
             for(let i = 0; i < lengthOfArray; i++) {
@@ -62,12 +116,37 @@ class Notice extends React.Component {
         }
 
 
+        //page chooser
+        const Pager = (props) => {
+            const { currentPage, totalPage, next, previous } = props
+
+
+            return (
+                <div className='flex flex-row justify-center items-center pb-10 text-pink font-cu-heading text-2xl'>
+                    <button onClick={previous} className='bg-pink-lightest w-10 h-10 text-pink-dark rounded-full items-center justify-center flex'> {"<"} </button>
+
+                    <span className='mx-2'>
+                        {currentPage}
+                    </span>
+                    /
+                    <span className='mx-2'>
+                        {totalPage}
+                    </span>
+                    <button onClick={next} className='bg-pink-lightest text-pink-dark w-10 h-10 rounded-full items-center justify-center flex'> {'>'} </button>
+                </div>
+            )
+        }
+
+
+
+
         return (
             <div className="bg-grey-lightest">
                 <AnnouncementHeader />
                 <div className="flex flex-row flex-wrap pb-10 justify-center">
                      <AnnouncementCardLoop />
                 </div>
+                <Pager currentPage={this.state.currentPage} totalPage={this.state.totalPage} next={this.nextPage} previous={this.previousPage}/>
                 <FacebookButton />
                 <Footer />
             </div>

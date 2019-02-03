@@ -16,7 +16,7 @@ class Notice extends React.Component {
         super(props);
         this.state = {
             currentPage: 1,
-            dataFromApi: [],
+            dataFromApi: this.props.announcementData,
             totalPage: 10
         }
     }
@@ -50,17 +50,34 @@ class Notice extends React.Component {
                 };
 
     }
+    
+    getData = () => {
+        
+        const currentPage = this.state.currentPage;
+        axios.get(`https://api-dev.fives.cloud/v0/announcements/all/${currentPage}`)
+        .then(response => {
+            const temp = response.data.result.data
+            this.setState({
+                dataFromApi: temp
+            })
+        })
+
+        // console.log(announcementDataPromise);
+        
+    }
+    
 
     //go to next page
     nextPage = () => {
-
-        let myPage = 10
+        let myPage = 10;
+        let data = this.getData();
 
         if (this.state.currentPage < 10) {
             myPage = this.state.currentPage + 1;
             return (
                 this.setState({
-                    currentPage: myPage
+                    currentPage: myPage,
+                    dataFromApi: data
                 })
             )
         } 
@@ -71,12 +88,14 @@ class Notice extends React.Component {
     //go to previous page
     previousPage = () => {
         let myPage = 1
+        let data = this.getData();
 
         if (this.state.currentPage > 1) {
             myPage = this.state.currentPage - 1;
             return (
                 this.setState({
-                    currentPage: myPage
+                    currentPage: myPage,
+                    dataFromApi: data
                 })
             )
         } 
@@ -85,14 +104,16 @@ class Notice extends React.Component {
 
     render() {
 
-        const { announcementData } = this.props;
+        const announcementData = this.state.dataFromApi;
         const announcementTitle = map(announcementData, 'title');
         const announcementDate = map(announcementData, 'updatedAt');
         const announcementImage = map(announcementData, 'displayImage');
 
 
 
-        const lengthOfArray = announcementData.length;
+        const lengthOfArray = 10;
+
+        
         
 
 

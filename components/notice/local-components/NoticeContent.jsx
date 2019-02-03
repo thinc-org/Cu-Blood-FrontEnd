@@ -48,7 +48,7 @@ class NoticeContent extends React.Component {
         const contextPost8 = t('contextPost8t');
         const contextPost9 = t('contextPost9t');
         const contextPost10 = t('contextPost10t');
-        const contextPost11 = t('contextPost11t');
+
 
 
 
@@ -98,7 +98,6 @@ class NoticeContent extends React.Component {
                 <BulletPoint bullet={8} context={contextPost8} />
                 <BulletPoint bullet={9} context={contextPost9} />
                 <BulletPoint bullet={10} context={contextPost10} />
-                <BulletPoint bullet={11} context={contextPost11} />
                 <NoticeContact />
             </div>
         );

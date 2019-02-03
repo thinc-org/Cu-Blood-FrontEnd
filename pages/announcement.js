@@ -127,7 +127,7 @@ class Notice extends React.Component {
         const AnnouncementCardLoop = () => {
             let data = [];
             for(let i = 0; i < lengthOfArray; i++) {
-                data.push(<AnnouncementCard text={announcementTitle[i]} date={announcementDateMoment(i)} image={announcementImage[i]}/>);
+                data.push(<AnnouncementCard key={i} text={announcementTitle[i]} date={announcementDateMoment(i)} image={announcementImage[i]}/>);
             }
 
             return data;

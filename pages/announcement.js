@@ -17,21 +17,12 @@ class Notice extends React.Component {
         this.state = {
             currentPage: 1,
             dataFromApi: this.props.announcementData,
-            totalPage: 10
+            totalPage: this.props.numberOfPage,
+            isButtonDisabledRight: false,
+            isButtonDisabledLeft: true,
+
         }
     }
-
-    //Set totalPage to number of array.object / 10
-
-    // componentDidMount() {
-    //     const { announcementData } = this.props;
-    //     if (this.state.totalPage==-1) {
-    //         this.setState({
-    //             totalPage: (announcementData.length/10)
-    //         })
-    //     }
-    // }
-
 
     //get data from api
     static async getInitialProps() {
@@ -41,66 +32,80 @@ class Notice extends React.Component {
               .then(response => response.data)
               .catch(e => null)))
             .catch(console.log);
-
-    
-
         const [announcementData] = data;
                 return {
-                    announcementData: announcementData ? announcementData.result.data : undefined
+                    announcementData: announcementData ? announcementData.result.data : undefined,
+                    numberOfPage: announcementData ? announcementData.result.pageCount : undefined
                 };
-
     }
     
-    getData = () => {
+    getData = (myPage) => {
         
-        const currentPage = this.state.currentPage;
-        axios.get(`https://api-dev.fives.cloud/v0/announcements/all/${currentPage}`)
+        axios.get(`https://api-dev.fives.cloud/v0/announcements/all/${myPage}`)
         .then(response => {
             const temp = response.data.result.data
             this.setState({
                 dataFromApi: temp
             })
         })
-
-        // console.log(announcementDataPromise);
         
     }
     
+    update = (myPage) => {
+        this.setState({
+            // dataFromApi: data,
+            currentPage: myPage
+        })
+        this.getData(myPage);
+        window.scrollTo(0, 300);
+    }
+
+    disabledButton = (myPage) => {
+        if (myPage >= this.state.totalPage) {
+            this.setState({
+                isButtonDisabledRight: true
+            })
+        }
+        if (myPage < this.state.totalPage) {
+            this.setState({
+                isButtonDisabledRight: false
+            })
+        }
+        if (myPage > 1) {
+            this.setState({
+                isButtonDisabledLeft: false
+            })
+        } 
+        if (myPage <= 1) {
+            this.setState({
+                isButtonDisabledLeft: true
+            })
+        }
+
+    }
 
     //go to next page
     nextPage = () => {
-        let myPage = 10;
-        let data = this.getData();
-
-        if (this.state.currentPage < 10) {
-            myPage = this.state.currentPage + 1;
+        let myPage = this.state.currentPage + 1;
+        this.disabledButton(myPage)
+        console.log(myPage)
+        
             return (
-                this.setState({
-                    currentPage: myPage,
-                    dataFromApi: data
-                })
+                this.update(myPage)
             )
-        } 
-        
-        
-    }
+        }    
+
 
     //go to previous page
     previousPage = () => {
-        let myPage = 1
-        let data = this.getData();
-
-        if (this.state.currentPage > 1) {
-            myPage = this.state.currentPage - 1;
+        let myPage = this.state.currentPage - 1;
+        this.disabledButton(myPage)
+        console.log(myPage)
             return (
-                this.setState({
-                    currentPage: myPage,
-                    dataFromApi: data
-                })
+                this.update(myPage)
             )
-        } 
-        
-    }
+        }
+
 
     render() {
 
@@ -108,15 +113,11 @@ class Notice extends React.Component {
         const announcementTitle = map(announcementData, 'title');
         const announcementDate = map(announcementData, 'updatedAt');
         const announcementImage = map(announcementData, 'displayImage');
+        // console.log('page' + this.state.currentPage);
+        // console.log(this.state.isButtonDisabledLeft);
 
 
-
-        const lengthOfArray = 10;
-
-        
-        
-
-
+        const lengthOfArray = this.state.totalPage;
 
         //format date
         const announcementDateMoment = (props) => {
@@ -144,8 +145,7 @@ class Notice extends React.Component {
 
             return (
                 <div className='flex flex-row justify-center items-center pb-10 text-pink font-cu-heading text-2xl'>
-                    <button onClick={previous} className='bg-pink-lightest w-10 h-10 text-pink-dark rounded-full items-center justify-center flex'> {"<"} </button>
-
+                    <button disabled={this.state.isButtonDisabledLeft} onClick={previous} className='bg-pink-lightest w-10 h-10 text-pink-dark rounded-full items-center justify-center flex'> {"<"} </button>
                     <span className='mx-2'>
                         {currentPage}
                     </span>
@@ -153,12 +153,12 @@ class Notice extends React.Component {
                     <span className='mx-2'>
                         {totalPage}
                     </span>
-                    <button onClick={next} className='bg-pink-lightest text-pink-dark w-10 h-10 rounded-full items-center justify-center flex'> {'>'} </button>
+                    <button disabled={this.state.isButtonDisabledRight} onClick={next} className='bg-pink-lightest text-pink-dark w-10 h-10 rounded-full items-center justify-center flex'> {'>'} </button>
                 </div>
             )
         }
 
-
+        
 
 
         return (
@@ -167,7 +167,7 @@ class Notice extends React.Component {
                 <div className="flex flex-row flex-wrap pb-10 justify-center">
                      <AnnouncementCardLoop />
                 </div>
-                <Pager currentPage={this.state.currentPage} totalPage={this.state.totalPage} next={this.nextPage} previous={this.previousPage}/>
+                <Pager currentPage={this.state.currentPage} totalPage={this.state.totalPage} next={this.nextPage} previous={this.previousPage} isButtonDisabled={this.state.isButtonDisabled}/>
                 <FacebookButton />
                 <Footer />
             </div>

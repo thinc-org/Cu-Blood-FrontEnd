@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import Form, { Selector, Input, FormGroup } from '@/shared-components/Form';
+import map from 'lodash/map';
 
 class RegisterFillForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
             formValid: false,
+            username: "",
+            password: "",
+            passwordValid: false,
+            confirmedPassword: "",
+            confirmedPasswordValid: false,
             phoneNumber: "",
             phoneNumberValid: false,
             birthday: "",
@@ -14,7 +20,7 @@ class RegisterFillForm extends Component {
             weightValid: false,
             email: "",
             emailValid: false,
-            formErrors: { phoneNumber: "", birthday: "", weight: "", email: "" },
+            formErrors: { phoneNumber: "", birthday: "", weight: "", email: "", password: "" },
             address: "",
             firstName: "",
             lastName: "",
@@ -24,7 +30,9 @@ class RegisterFillForm extends Component {
             status: "",
             nationality: "",
             academicYear: "",
+            studentId: "",
             school: "",
+            medicalCondition: "",
             bloodType: "",
             rh: "",
             isDonated: false,
@@ -34,13 +42,21 @@ class RegisterFillForm extends Component {
     }
 
     componentDidMount() {
+        // autofill infi from context api
         if (!this.props.userInfo) return;
-        console.log(this.props)
+        console.log(this.props, 'did mount')
         let obj = {}
         let formErrors = {};
         for (const key in this.state) {
             if (key in this.props.userInfo) {
-                obj[key] = this.props.userInfo[key]
+                let value = this.props.userInfo[key]
+                if (key === "school") value = value.id - 1;
+                if (key === "bloodType") {
+                    obj.bloodType = value / 2;
+                    obj.rh = value % 2 === 0 ? 1 : 0;
+                } else {
+                    obj[key] = value
+                }
                 const result = this.validate(key, this.props.userInfo[key])
                 if (result) {
                     for (const errorKey in result.formErrors) {
@@ -66,17 +82,31 @@ class RegisterFillForm extends Component {
         let isValid = this.state[name + "Valid"]
         let formErrors = Object.assign({}, this.state.formErrors);
         switch (name) {
+            case "password":
+                const isMatched = value === this.state.confirmedPassword;
+                isValid = value.length >= 8;
+                formErrors.confirmedPassword = isMatched ? "" : "รหัสผ่านไม่ตรงกัน";
+                formErrors.password = isValid ? "" : "รหัสผ่านต้องมากกว่า 8 หลัก";
+                break;
+            case "confirmedPassword":
+                isValid = value === this.state.password;
+                formErrors.confirmedPassword = isValid ? "" : "รหัสผ่านไม่ตรงกัน";
+                break;
+
             case "phoneNumber":
                 isValid = (/^0[0-9]{9}$/i).test(value) ? true : false;
                 formErrors.phoneNumber = isValid ? "" : "เลขโทรศัพท์ไม่ถูกต้อง";
                 break;
             case "birthday":
-                const end = new Date(this.props.endDate);
+                // please fix bug: day 31 verification problem
+                const end = new Date(this.props.commonsData.endDate);
                 const endAge = new Date(end.getFullYear(), end.getMonth(), end.getDate() + 3).getTime() // three day as failsafe from actual date
                 const nowAge = Date.now();
                 const ageDifMs = ((endAge - nowAge > 0) ? endAge : nowAge) - new Date(value).getTime();
                 const ageDate = new Date(ageDifMs); // miliseconds from epoch
+                console.log(ageDate)
                 isValid = 17 <= Math.abs(ageDate.getUTCFullYear() - 1970);
+                console.log(Math.abs(ageDate.getUTCFullYear() - 1970))
                 formErrors.birthday = isValid ? "" : "คุณต้องมีอายุมากกว่า 17 ปี ในวันที่บริจาคเลือด";
                 break;
             case "weight":
@@ -109,11 +139,22 @@ class RegisterFillForm extends Component {
     }
 
     render() {
-        const { onSubmit, isEmail, isChulaId } = this.props;
+        const { onSubmit, isEmail, isChulaId, commonsData } = this.props;
         const inputClassName = `bg-cb-grey-light rounded-lg mt-2 p-2`;
         return (
             <form onSubmit={onSubmit} className="layout-wide flex flex-col items-center justify-center pb-10 sm:py-10">
                 <div>
+                    <FormGroup text="ข้อมูลในการเข้าสู่ระบบ">
+                        <Form text="ชื่อผู้ใข้" width="full">
+                            <Input disabled={isEmail} value={this.state.username} onChange={this.handleChange} name="username" type="text" />
+                        </Form>
+                        <Form text="รหัสผ่าน" width="full" smWidth="48">
+                            <Input value={this.state.password} onChange={this.handleChange} name="password" type="password" error={this.state.formErrors.password} />
+                        </Form>
+                        <Form text="ยืนยันรหัสผ่าน" width="full" smWidth="48">
+                            <Input value={this.state.confirmedPassword} onChange={this.handleChange} name="confirmedPassword" type="password" error={this.state.formErrors.confirmedPassword} />
+                        </Form>
+                    </FormGroup>
                     <FormGroup text="ข้อมูลติดต่อ">
                         <Form text="อีเมลล์" width="full" smWidth="48">
                             <Input disabled={isEmail} value={this.state.email} onChange={this.handleChange} name="email" type="email" error={this.state.formErrors.email} />
@@ -157,22 +198,15 @@ class RegisterFillForm extends Component {
                             <Selector disabled={isChulaId} value={this.state.academicYear} onChange={this.handleChange} name="academicYear" choices={['1', '2', '3', '4', '5', '6', "ปริญญาโท", 'ปริญญาเอก', 'อื่นๆ']} />
                         </Form>
                         <Form text="รหัสนิสิต" width="full" smWidth="48">
-                            <Input disabled={isChulaId} name="studentId" type="text" />
+                            <Input disabled={isChulaId} value={this.state.studentId} onChange={this.handleChange} name="studentId" type="text" />
                         </Form>
                         <Form text="คณะ" width="full" smWidth="48">
-                            <Selector disabled={isChulaId} value={this.state.school} onChange={this.handleChange} name="school" choices={
-                                ['คณะวิศวกรรมศาสตร์', 'คณะพาณิชยศาสตร์และการบัญชี', 'คณะวิทยาศาสตร์', 'คณะครุศาสตร์',
-                                    'คณะสหเวชศาสตร์ ', 'คณะอักษรศาสตร์', "คณะเภสัชศาสตร์", 'คณะเศรษฐศาสตร์', 'คณะทันตแพทยศาสตร์',
-                                    'คณะรัฐศาสตร์', 'คณะนิเทศศาสตร์', 'คณะจิตวิทยา', 'คณะนิติศาสตร์', 'คณะพยาบาลศาสตร์',
-                                    'คณะแพทยศาสตร์', 'คณะศิลปกรรมศาสตร์', 'คณะสถาปัตยกรรมศาสตร์', 'คณะสัตวแพทยศาสตร์',
-                                    'คณะวิทยาศาสตร์การกีฬา', 'วิทยาลัยวิทยาศาสตร์สาธารณสุข', 'บัณฑิตวิทยาลัย', 'สำนักวิชาทรัพยากรการเกษตร', 'อื่นๆ']
-                            } />
+                            <Selector disabled={isChulaId} value={this.state.school} onChange={this.handleChange} name="school" choices={map(commonsData.schools, 'nameTH')} />
                         </Form>
                     </FormGroup>
                     <FormGroup text="ข้อมูลทางการแพทย์">
-                        <Form text="โรคประจำตัว (ถ้ามี)" width="full">
-                            <textarea name="medicalCondition" className={`${inputClassName} w-full h-16`} />
-                            {/* not required == no state */}
+                        <Form text="โรคประจำตัว (ถ้าไม่มีให้กรอก -)" width="full">
+                            <textarea value={this.state.medicalCondition} onChange={this.handleChange} name="medicalCondition" className={`${inputClassName} w-full h-16`} />
                         </Form>
                         <Form text="หมู่เลือด" width="32" smWidth="48">
                             <Selector value={this.state.bloodType} onChange={this.handleChange} name="bloodType" choices={['A', 'B', 'O', 'AB']} />
@@ -208,7 +242,8 @@ const DonatedWithCubloodCheckBox = ({ isDonated }) => {
         isDonated ?
             (
                 <label className="flex font-cu-heading text-fnormal cursor-pointer check-box">
-                    <input name="isDonated" type="checkbox" />
+                    <input name="isJoinedProject" type="checkbox" />
+                    {/*  ask five tommorow about the correct name */}
                     <div className="check-text flex"><span>ท่านเคยเข้าร่วมบริจาคโลหิตกับโครงการ <br /><span className="text-cb-red font-semibold">CU BLOOD</span> มาก่อนหรือไม่</span></div>
                 </label>
             )

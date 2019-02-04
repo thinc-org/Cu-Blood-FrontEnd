@@ -9,6 +9,7 @@ class UserInfoProvider extends Component {
         this.state = {
             userInfo: {},
             isLogin: false,
+            isUpdated: false,
         }
     }
 
@@ -16,7 +17,8 @@ class UserInfoProvider extends Component {
         this.setState({
             userInfo: user,
             isLogin: true,
-        }, () => console.log(user, 'userInfo'))
+            isUpdated: true,
+        }, this.setState({isUpdated: false}))
     }
 
     logout = () => {
@@ -36,6 +38,7 @@ class UserInfoProvider extends Component {
                 isLogin: this.state.isLogin,
                 logout: this.logout,
                 deleteUserContext: this.deleteUserContext,
+                isUpdated: this.state.isUpdated,
             }}>
                 {this.props.children}
             </UserInfoContext.Provider>

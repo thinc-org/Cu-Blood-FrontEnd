@@ -10,51 +10,61 @@ import axios from '@/core/core';
 
 class RegisterForm extends Component {
 
+    constructor(props) {
+        super(props)
+    }
+
     static async getInitialProps() {
-        const endDate = await axios.get('https://api-dev.fives.cloud/v0/commons/')
-            .then(response => response.data.result.endDate)
+        const commonsData = await axios.get('https://api-dev.fives.cloud/v0/commons/')
+            .then(response => response.data.result)
             .catch(console.log)
 
-        return ({ endDate });
+        return ({ commonsData });
     }
 
     onSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
+        // convert form data to api format
         const data = {}
         let bloodType = 0;
         for (let element of form.elements) {
             let value = element.value;
-            if (element.tagName === 'BUTTON') { continue; }
-            else if (element.name === "bloodType") {
+            const name = element.name;
+            console.log(name, 'name', value, 'value', element, )
+            if (element.tagName === 'BUTTON') {
+                continue;
+            } else if (name === "bloodType") {
                 bloodType += 2 * Number(value);
-            } else if (element.name === "rh") {
+            } else if (name === "rh") {
                 bloodType += Number(value);
+            } else if (!isNaN(value) && name !== "phoneNumber" && name !== "password" && name !== "studentId") {
+                console.log(value, 'value')
+                value = Number(value)
             }
-            if (!isNaN(value)) value = Number(value);
-            if (value === "on") value = true;
-            if (value === "off") value = false;
-            data[element.name] = value;
+            if (value === "on" || value === "off") {
+                value = element.checked;
+            }
+            if (name === "school") value++;
+            data[name] = value;
         }
 
+        if(!data.isJoinedProject) data.isJoinedProject = false;
         data.bloodType = bloodType;
         console.log(data, 'data from form')
-        // axios.post('https://api-dev.fives.cloud/v0/profile/login', data)
-        //     .then(() => redirectTo('/u/profile'))
-        //     .catch((e) =>  {
-        //         // e.response && console.log(e.response.data.message)
-        //         window.location.href = ''
-        //     })
+        axios.post('https://api-dev.fives.cloud/v0/profile/login', data)
+            .then(console.log)
+            .catch(console.log)
     }
 
     render() {
-        const { endDate } = this.props;
+        const { commonsData } = this.props;
         return (
             <div>
                 <div className="bg-cb-grey-lighter"><Header english={`REGISTER`} thai={`ลงทะเบียน`} englishColor={`text-cb-pink`} borderColor={`border-cb-red`} /></div>
                 <div className="bg-white">
                     <UserInfoConsumer>
-                        {context => <Form endDate={endDate} onSubmit={this.onSubmit} userInfo={context.userInfo} isChulaId={false} />}
+                        {({ userInfo, isUpdated }) => (<Form key={isUpdated ? 0 : 1} commonsData={commonsData} onSubmit={this.onSubmit} userInfo={userInfo} isChulaId={false} />)}
                     </UserInfoConsumer>
                 </div>
                 {/* <div className="flex flex-col items-center text-white py-10" style={{ backgroundColor: '#8e9dc0' }}><FacebookButton /></div> */}

@@ -7,10 +7,10 @@ class NoticeHeader extends React.Component {
         return (
             <div className="font-cu-heading bg-cb-pink-light">
                 <div className="layout-wide py-20 flex flex-col items-center md:items-start">
-                    <span className="text-6xl font-bold mb-8 text-black">{t ('noticeHeader')}</span>
-                    <Subheader thai={"คุณสมบัติผู้บริจาคโลหิต"} english={"CHARACTERISTIC AND CRITERIA"} />
-                    <Subheader thai={"ขั้นตอนการบริจาคโลหิตกับโครงการ"} english={"PROCEDURES"} />
-                    <Subheader thai={"การเตรียมตัวก่อน-หลังบริจาคโลหิต"} english={"PRE-POST DONATION PREPARATION"} hasLineBreak={false} />
+                    <span className="text-6xl font-bold mb-8 text-black">{t('noticeHeader')}</span>
+                    <Subheader thai={t('topic1Big')} english={t('topic1Small')} />
+                    <Subheader thai={t('topic2Big')} english={t('topic2Small')} />
+                    <Subheader thai={t('topic3Big')} english={t('topic3Small')} hasLineBreak={false} />
                 </div>
             </div>
         );

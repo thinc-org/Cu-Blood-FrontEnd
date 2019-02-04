@@ -36,6 +36,7 @@ class PersonalInfo extends Component {
                                 {this.content(this.shirtSize(userInfo.shirtSize), "ไซส์เสื้อ")}
                                 {this.content(`${userInfo.isDonated === 1 ? "เคย" : "ไม่เคย"}`, "เคยปริจาคเลือด")}
                                 {this.content(`${userInfo.isEnrolled === 1 ? "เคย" : "ไม่เคย"}`, "เคยปริจาคกับทาง CU Blood")}
+                                {this.content(`${userInfo.nationality === 1 ? "ใช่" : "ไม่ใช่"}`, "เป็นชาวต่างชาติ")}
                             </div>                             
                         )
                     }}
@@ -58,7 +59,7 @@ class PersonalInfo extends Component {
 
     content = (bigText, smallText, isBold, align) => {
         return(
-            <div className="w-full special-half-width md:w-1/3 text-center special-text-align-left mb-8 special-mb-10"><Detail bigText={bigText} smallText={smallText} isBold={isBold} align={align} /></div>
+            <div className="w-full special-half-width md:w-1/3 text-left special-text-align-left mb-8 special-mb-10"><Detail bigText={bigText} smallText={smallText} isBold={isBold} align={align} /></div>
         );
     }
 

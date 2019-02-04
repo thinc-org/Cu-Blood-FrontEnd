@@ -15,7 +15,7 @@ export default class extends Component {
 export const Selector = ({ choices = [], value, name, onChange, disabled = false }) => {
     const options = choices.map((choice, index) => {
         return (
-            <option required key={index} value={choice}>{choice}</option>
+            <option required key={index} value={index}>{choice}</option>
         )
     })
     return (

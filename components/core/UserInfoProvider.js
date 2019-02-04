@@ -16,7 +16,7 @@ class UserInfoProvider extends Component {
         this.setState({
             userInfo: user,
             isLogin: true,
-        })
+        }, () => console.log(user, 'userInfo'))
     }
 
     logout = () => {

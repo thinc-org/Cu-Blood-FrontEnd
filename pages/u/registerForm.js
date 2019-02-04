@@ -15,17 +15,29 @@ class RegisterForm extends Component {
             .then(response => response.data.result.endDate)
             .catch(console.log)
 
-        return({endDate});
+        return ({ endDate });
     }
 
     onSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
         const data = {}
+        let bloodType = 0;
         for (let element of form.elements) {
-          if (element.tagName === 'BUTTON') { continue; }
-          data[element.name] = element.value;
+            let value = element.value;
+            if (element.tagName === 'BUTTON') { continue; }
+            else if (element.name === "bloodType") {
+                bloodType += 2 * Number(value);
+            } else if (element.name === "rh") {
+                bloodType += Number(value);
+            }
+            if (!isNaN(value)) value = Number(value);
+            if (value === "on") value = true;
+            if (value === "off") value = false;
+            data[element.name] = value;
         }
+
+        data.bloodType = bloodType;
         console.log(data, 'data from form')
         // axios.post('https://api-dev.fives.cloud/v0/profile/login', data)
         //     .then(() => redirectTo('/u/profile'))
@@ -34,15 +46,15 @@ class RegisterForm extends Component {
         //         window.location.href = ''
         //     })
     }
-    
+
     render() {
-        const {endDate} = this.props;
-        return(
+        const { endDate } = this.props;
+        return (
             <div>
-                <div className="bg-cb-grey-lighter"><Header english={`REGISTER`} thai={`ลงทะเบียน`} englishColor={`text-cb-pink`} borderColor={`border-cb-red`}/></div>
+                <div className="bg-cb-grey-lighter"><Header english={`REGISTER`} thai={`ลงทะเบียน`} englishColor={`text-cb-pink`} borderColor={`border-cb-red`} /></div>
                 <div className="bg-white">
                     <UserInfoConsumer>
-                        {context => <Form endDate={endDate} onSubmit={this.onSubmit} userInfo={context.userInfo} isChulaId={true} />}
+                        {context => <Form endDate={endDate} onSubmit={this.onSubmit} userInfo={context.userInfo} isChulaId={false} />}
                     </UserInfoConsumer>
                 </div>
                 {/* <div className="flex flex-col items-center text-white py-10" style={{ backgroundColor: '#8e9dc0' }}><FacebookButton /></div> */}

@@ -23,25 +23,34 @@ class RegisterFillForm extends Component {
             shirtSize: "",
             status: "",
             nationality: "",
-            year: "",
-            faculty: "",
+            academicYear: "",
+            school: "",
             bloodType: "",
             rh: "",
-            donatedBefore: false,
+            isDonated: false,
             accepted: false,
             moreThan3: false,
         };
     }
 
     componentDidMount() {
-        if (!this.props.userInfo) return
+        if (!this.props.userInfo) return;
+        console.log(this.props)
         let obj = {}
+        let formErrors = {};
         for (const key in this.state) {
             if (key in this.props.userInfo) {
                 obj[key] = this.props.userInfo[key]
+                const result = this.validate(key, this.props.userInfo[key])
+                if (result) {
+                    for (const errorKey in result.formErrors) {
+                        const message = result.formErrors[errorKey];
+                        if (message !== "") formErrors[errorKey] = message;
+                    }
+                    obj = Object.assign({}, obj, result, { formErrors });
+                }
             }
         }
-        console.log(obj)
         this.setState(obj)
     }
 
@@ -50,7 +59,7 @@ class RegisterFillForm extends Component {
         const name = target.name;
         const value = target.type === 'checkbox' ? target.checked : target.value
         this.setState({ [name]: value },
-            () => this.validate(name, value))
+            () => this.setState(this.validate(name, value), () => this.validateForm()))
     }
 
     validate = (name, value) => {
@@ -81,16 +90,13 @@ class RegisterFillForm extends Component {
                 formErrors.email = isValid ? "" : "อีเมลล์ของคุณไม่ถูกต้อง";
                 break;
             default:
-                this.validateForm()
                 return;
         }
-        // console.log(formErrors)
-        this.setState({ [name + "Valid"]: isValid, "formErrors": formErrors }, () => this.validateForm())
+        return { [name + "Valid"]: isValid, "formErrors": formErrors }
     }
 
-
     validateForm = () => {
-        let isValid = this.state.accepted && ((this.state.nationality === "ไทย" && this.state.nationality !== "thai") || this.state.moreThan3);
+        let isValid = this.state.accepted && ((this.state.nationality == 0) || this.state.moreThan3);
         if (isValid) {
             for (const key in this.state) {
                 if ((key.toString().includes('Valid') && key.toString() !== 'formValid' && this.state[key] === false) || this.state[key] === "") {
@@ -116,7 +122,7 @@ class RegisterFillForm extends Component {
                             <Input value={this.state.phoneNumber} onChange={this.handleChange} name="phoneNumber" type="text" error={this.state.formErrors.phoneNumber} />
                         </Form>
                         <Form text="ที่อยู่" width="full">
-                            <textarea value={this.state.address} onChange={this.handleChange} name="address" required className={`${inputClassName} w-full h-16`} />
+                            <textarea value={this.state.address ? this.state.address : ""} onChange={this.handleChange} name="address" required className={`${inputClassName} w-full h-16`} />
                         </Form>
                     </FormGroup>
                     <FormGroup text="ข้อมูลทั่วไป">
@@ -133,7 +139,7 @@ class RegisterFillForm extends Component {
                             <Input value={this.state.birthday} onChange={this.handleChange} name="birthday" type="date" error={this.state.formErrors.birthday} />
                         </Form>
                         <Form text="เพศ" width="24">
-                            <Selector value={this.state.sex} onChange={this.handleChange} name="gender" choices={['ชาย', 'หญิง']} />
+                            <Selector value={this.state.gender} onChange={this.handleChange} name="gender" choices={['ชาย', 'หญิง']} />
                         </Form>
                         <Form text="ไซส์เสื้อ" width="24">
                             <Selector value={this.state.shirtSize} onChange={this.handleChange} name="shirtSize" choices={['M (38")', 'L (40")', 'XL (42")', 'XXL (44")']} />
@@ -148,13 +154,13 @@ class RegisterFillForm extends Component {
                             <Selector value={this.state.nationality} onChange={this.handleChange} name="nationality" choices={['ไทย', 'ต่างชาติ']} />
                         </Form>
                         <Form text="ชั้นปี" width="24">
-                            <Selector disabled={isChulaId} value={this.state.year} onChange={this.handleChange} name="year" choices={['1', '2', '3', '4', '5', '6', "ปริญญาโท", 'ปริญญาเอก', 'อื่นๆ']} />
+                            <Selector disabled={isChulaId} value={this.state.academicYear} onChange={this.handleChange} name="academicYear" choices={['1', '2', '3', '4', '5', '6', "ปริญญาโท", 'ปริญญาเอก', 'อื่นๆ']} />
                         </Form>
                         <Form text="รหัสนิสิต" width="full" smWidth="48">
-                            <Input disabled={isChulaId} name="id" type="text" />
+                            <Input disabled={isChulaId} name="studentId" type="text" />
                         </Form>
                         <Form text="คณะ" width="full" smWidth="48">
-                            <Selector disabled={isChulaId} value={this.state.faculty} onChange={this.handleChange} name="faculty" choices={
+                            <Selector disabled={isChulaId} value={this.state.school} onChange={this.handleChange} name="school" choices={
                                 ['คณะวิศวกรรมศาสตร์', 'คณะพาณิชยศาสตร์และการบัญชี', 'คณะวิทยาศาสตร์', 'คณะครุศาสตร์',
                                     'คณะสหเวชศาสตร์ ', 'คณะอักษรศาสตร์', "คณะเภสัชศาสตร์", 'คณะเศรษฐศาสตร์', 'คณะทันตแพทยศาสตร์',
                                     'คณะรัฐศาสตร์', 'คณะนิเทศศาสตร์', 'คณะจิตวิทยา', 'คณะนิติศาสตร์', 'คณะพยาบาลศาสตร์',
@@ -176,10 +182,10 @@ class RegisterFillForm extends Component {
                         </Form>
                         <div className="check">
                             <label className="flex font-cu-heading text-normal cursor-pointer check-box">
-                                <input checked={this.state.donatedBefore} onChange={this.handleChange} name="donatedBefore" type="checkbox" />
+                                <input checked={this.state.isDonated} onChange={this.handleChange} name="isDonated" type="checkbox" />
                                 <div className="check-text flex">ท่านเคยบริจาคโลหิตมาก่อนหรือไม่</div>
                             </label>
-                            <DonatedWithCubloodCheckBox donatedBefore={this.state.donatedBefore} />
+                            <DonatedWithCubloodCheckBox isDonated={this.state.isDonated} />
                             <LiveMoreThan3yearsCheckBox nationality={this.state.nationality} moreThan={this.state.moreThan3} handleChange={this.handleChange} />
                         </div>
                     </FormGroup>
@@ -197,12 +203,12 @@ class RegisterFillForm extends Component {
 
 }
 
-const DonatedWithCubloodCheckBox = ({ donatedBefore }) => {
+const DonatedWithCubloodCheckBox = ({ isDonated }) => {
     return (
-        donatedBefore ?
+        isDonated ?
             (
                 <label className="flex font-cu-heading text-fnormal cursor-pointer check-box">
-                    <input name="jonedCublood" type="checkbox" />
+                    <input name="isDonated" type="checkbox" />
                     <div className="check-text flex"><span>ท่านเคยเข้าร่วมบริจาคโลหิตกับโครงการ <br /><span className="text-cb-red font-semibold">CU BLOOD</span> มาก่อนหรือไม่</span></div>
                 </label>
             )
@@ -215,7 +221,7 @@ const DonatedWithCubloodCheckBox = ({ donatedBefore }) => {
 
 const LiveMoreThan3yearsCheckBox = ({ nationality, moreThan3, handleChange }) => {
     return (
-        (nationality === "ต่างชาติ" || nationality === "foreigner") ?
+        (nationality == 1) ?
             (
                 <label className="flex font-cu-heading text-fnormal cursor-pointer check-box">
                     <input checked={moreThan3} onChange={handleChange} name="moreThan3" required type="checkbox" />

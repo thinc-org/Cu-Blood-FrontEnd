@@ -27,10 +27,15 @@ class PersonalInfo extends Component {
                                 {this.content(`${moment(userInfo.birthday).add('years', (i18n.language === 'th' ? 543 : 0)).format('D MMMM YYYY')}`, "วัน / เดือน / ปี เกิด")}
                                 {this.content(`${userInfo.username}`, "ที่อยู่อีเมล")}
                                 {this.content(`${userInfo.phoneNumber}`, "เบอร์โทรศัพท์")}
-                                {this.content(`${userInfo.citizenId}`, "เลขประจำตัวประชาชน")}
+                                {this.content(`${userInfo.address ? userInfo.address : "ไม่ได้ระบุ"}`, "ที่อยู่บ้าน")}
+                                {this.content(userInfo.studentId, "รหัสนิสิต")}
+                                {this.content(userInfo.school.nameTH, "คณะที่ศึกษา")}
+                                {this.content(`ปี ${userInfo.academicYear}`, "ชั้นปี")}
                                 {this.content(`${this.bloodType(userInfo.bloodType)}`, "หมู่เลือด")}
                                 {this.content(`${userInfo.weight} kg`, "น้ำหนัก")}
                                 {this.content(this.shirtSize(userInfo.shirtSize), "ไซส์เสื้อ")}
+                                {this.content(`${userInfo.isDonated === 1 ? "เคย" : "ไม่เคย"}`, "เคยปริจาคเลือด")}
+                                {this.content(`${userInfo.isEnrolled === 1 ? "เคย" : "ไม่เคย"}`, "เคยปริจาคกับทาง CU Blood")}
                             </div>                             
                         )
                     }}

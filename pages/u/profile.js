@@ -31,7 +31,7 @@ class Profile extends Component {
     
     render() {
         const { commonsData, sessionData } = this.props;
-        const commonsInfo = commonsData && sessionData ? commonsData.result : null;
+        const commonsInfo = commonsData ? commonsData.result : null;
         const sessionInfo = commonsData && sessionData ? sessionData.result : null;
 
         return (

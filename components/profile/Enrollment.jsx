@@ -21,7 +21,7 @@ class Enrollment extends Component {
         };
     }
     
-    componentWillMount() {
+    componentDidMount() {
         if (this.state.commonsInfo !== null) {
             this.state.commonsInfo.registrationPoints.map(element => this.setState(
             prevState => ({

@@ -53,7 +53,11 @@ class Notice extends React.Component {
             currentPage: myPage
         })
         this.getData(myPage);
-        window.scrollTo(0, 300);
+        window.scrollTo({
+            top: 300,
+            left: 0,
+            behavior: 'smooth'
+          });
     }
 
     disabledButton = (myPage) => {

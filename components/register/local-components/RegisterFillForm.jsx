@@ -122,7 +122,7 @@ class RegisterFillForm extends Component {
     }
 
     validateForm = () => {
-        let isValid = this.state.accepted && ((this.state.nationality === 0) || this.state.moreThan3);
+        let isValid = this.state.accepted && ((this.state.nationality == 0) || this.state.moreThan3);
         if (isValid) {
             for (const key in this.state) {
                 if ((key.toString().includes('Valid') && key.toString() !== 'formValid' && this.state[key] === false) || this.state[key] === "") {
@@ -252,7 +252,7 @@ const DonatedWithCubloodCheckBox = ({ isDonated }) => {
 
 const LiveMoreThan3yearsCheckBox = ({ nationality, moreThan3, handleChange }) => {
     return (
-        (nationality === 1) ?
+        (nationality == 1) ?
             (
                 <label className="flex font-cu-heading text-fnormal cursor-pointer check-box">
                     <input checked={moreThan3} onChange={handleChange} name="moreThan3" required type="checkbox" />

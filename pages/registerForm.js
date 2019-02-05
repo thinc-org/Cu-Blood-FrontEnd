@@ -5,7 +5,7 @@ import Header from '@/shared-components/TopicCenter';
 import Form from '@/register/local-components/RegisterFillForm';
 import I18 from '@/core/i18n';
 import '../static/css/registerForm.css';
-
+import redirectTo from '@/core/redirectTo';
 import axios from '@/core/core';
 
 class RegisterForm extends Component {
@@ -48,8 +48,8 @@ class RegisterForm extends Component {
         data.bloodType = bloodType;
         console.log(data, 'data from form')
         axios.post('https://api-dev.fives.cloud/v0/profile/create-account', data)
-            .then(redirectTo('/chulaLogin'))
-            .catch(e => alert(e.result))
+            .then(() => redirectTo('/chulaLogin'))
+            .catch(e => console.log(e))
     }
 
     render() {

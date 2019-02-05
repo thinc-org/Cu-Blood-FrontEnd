@@ -23,7 +23,7 @@ class UserInfoProvider extends Component {
 
     logout = () => {
         axios.post('https://api-dev.fives.cloud/v0/profile/logout')
-            .finally(() => window.location.href = '')
+            .then(() => window.location.reload())
     }
 
     deleteUserContext = () => {

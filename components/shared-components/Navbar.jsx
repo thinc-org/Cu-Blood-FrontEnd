@@ -46,17 +46,26 @@ const Navbar = ({ onExpandListener, t }) => {
 };
 
 const LoginOrLogout = ({ isLogin, logout, username }) => {
-    return isLogin ?
+    if (isLogin === true) {
+        return
         (
             <React.Fragment>
                 <Link href="/u/profile" prefetch><a className="no-underline"><li className="text-cb-red hidden md:block mr-5 special-truncate">{username}</li></a></Link>
                 <a className="no-underline cursor-pointer" onClick={logout}><li className="text-cb-red hidden md:block">ออกจากระบบ</li></a>
             </React.Fragment>
         )
-        :
+    } else if (isLogin === false) {
+        return
         (
             <Link href="/chulaLogin" prefetch><a className="no-underline"><li className="text-cb-red hidden md:block">เข้าสู่ระบบ</li></a></Link>
         )
+    } else {
+        return
+        (
+            null
+        )
+    }
+
 }
 
 export default I18.withNamespaces('common')(Navbar);

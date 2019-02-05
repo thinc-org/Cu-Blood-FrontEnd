@@ -8,7 +8,7 @@ class UserInfoProvider extends Component {
         super(props);
         this.state = {
             userInfo: {},
-            isLogin: false,
+            isLogin: null,
             isUpdated: false,
         }
     }

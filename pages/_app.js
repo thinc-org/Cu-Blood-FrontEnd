@@ -50,6 +50,7 @@ class MyApp extends App {
         })
     } 
     else if (ctx.res) { 
+      console.log('res')
       response = await axios.get('profile/me', { headers })
         .then(resp => { // add userInfo to context when already log in
           return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, userInfo: resp.data.result, status: resp.status } };

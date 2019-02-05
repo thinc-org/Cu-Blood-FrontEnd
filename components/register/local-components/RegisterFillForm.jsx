@@ -96,7 +96,7 @@ class RegisterFillForm extends Component {
                 isValid = value.length >= 8;
                 formErrors.confirmedPassword = isMatched ? "" : "รหัสผ่านไม่ตรงกัน";
                 formErrors.password = isValid ? "" : "รหัสผ่านต้องมากกว่า 8 หลัก";
-                break;
+                return { "passwordValid": isValid, "confirmedPasswordValid": isMatched , "formErrors": formErrors };
             case "confirmedPassword":
                 isValid = true;
                 isValid = value === this.state.password;

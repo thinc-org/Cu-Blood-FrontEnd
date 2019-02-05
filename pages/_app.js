@@ -85,7 +85,7 @@ class MyApp extends App {
           />
           <UserInfoProvider>
             <UserInfoConsumer>
-              {context => response ? <AddUserInfo key={JSON.stringify(context.userInfo) === JSON.stringify(response.userInfo) ? 0 : 1} context={context} userInfo={response.userInfo} /> : <ForceLogout context={context} noRedirect={true} />}
+              {context => response ? <AddUserInfo key={JSON.stringify(context.userInfo) === JSON.stringify(response.userInfo) ? 0 : 1} context={context} userInfo={response.userInfo} /> : context.isLogin === null && <ForceLogout context={context} noRedirect={true} />}
             </UserInfoConsumer>
             <Main {...pageProps}>
               <Component {...pageProps} />

@@ -34,7 +34,6 @@ class EnrollmentHistory extends Component {
                 </div>
             );
         }
-
         return(
             <div className="bg-cb-grey-lighter">
                 <div className="layout-wide pb-2">

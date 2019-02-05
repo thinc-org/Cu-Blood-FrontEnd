@@ -43,4 +43,4 @@ class FacebookCard extends React.Component {
     };
 }
 
-export default FacebookCard;
+export default I18.withNamespaces('common')(FacebookCard);

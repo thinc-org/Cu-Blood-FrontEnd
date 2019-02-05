@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import Form, { Selector, Input, FormGroup } from '@/shared-components/Form';
+import map from 'lodash/map';
 
 class RegisterFillForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
             formValid: false,
+            username: "",
+            password: "",
+            passwordValid: false,
+            confirmedPassword: "",
+            confirmedPasswordValid: false,
             phoneNumber: "",
             phoneNumberValid: false,
             birthday: "",
@@ -14,7 +20,7 @@ class RegisterFillForm extends Component {
             weightValid: false,
             email: "",
             emailValid: false,
-            formErrors: { phoneNumber: "", birthday: "", weight: "", email: "" },
+            formErrors: { phoneNumber: "", birthday: "", weight: "", email: "", password: "" },
             address: "",
             firstName: "",
             lastName: "",
@@ -23,25 +29,43 @@ class RegisterFillForm extends Component {
             shirtSize: "",
             status: "",
             nationality: "",
-            year: "",
-            faculty: "",
+            academicYear: "",
+            studentId: "",
+            schoolId: "",
+            medicalCondition: "",
             bloodType: "",
             rh: "",
-            donatedBefore: false,
+            isDonated: false,
             accepted: false,
             moreThan3: false,
         };
     }
 
     componentDidMount() {
-        if (!this.props.userInfo) return
+        // autofill infi from context api
+        if (!this.props.userInfo) return;
         let obj = {}
+        let formErrors = {};
         for (const key in this.state) {
             if (key in this.props.userInfo) {
-                obj[key] = this.props.userInfo[key]
+                let value = this.props.userInfo[key]
+                if (key === "school") value = value.id - 1;
+                if (key === "bloodType") {
+                    obj.bloodType = value / 2;
+                    obj.rh = value % 2 === 0 ? 1 : 0;
+                } else {
+                    obj[key] = value
+                }
+                const result = this.validate(key, this.props.userInfo[key])
+                if (result) {
+                    for (const errorKey in result.formErrors) {
+                        const message = result.formErrors[errorKey];
+                        if (message !== "") formErrors[errorKey] = message;
+                    }
+                    obj = Object.assign({}, obj, result, { formErrors });
+                }
             }
         }
-        console.log(obj)
         this.setState(obj)
     }
 
@@ -50,20 +74,31 @@ class RegisterFillForm extends Component {
         const name = target.name;
         const value = target.type === 'checkbox' ? target.checked : target.value
         this.setState({ [name]: value },
-            () => this.validate(name, value))
+            () => this.setState(this.validate(name, value), () => this.validateForm()))
     }
 
     validate = (name, value) => {
         let isValid = this.state[name + "Valid"]
         let formErrors = Object.assign({}, this.state.formErrors);
         switch (name) {
+            case "password":
+                const isMatched = value === this.state.confirmedPassword;
+                isValid = value.length >= 8;
+                formErrors.confirmedPassword = isMatched ? "" : "รหัสผ่านไม่ตรงกัน";
+                formErrors.password = isValid ? "" : "รหัสผ่านต้องมากกว่า 8 หลัก";
+                break;
+            case "confirmedPassword":
+                isValid = value === this.state.password;
+                formErrors.confirmedPassword = isValid ? "" : "รหัสผ่านไม่ตรงกัน";
+                break;
             case "phoneNumber":
                 isValid = (/^0[0-9]{9}$/i).test(value) ? true : false;
                 formErrors.phoneNumber = isValid ? "" : "เลขโทรศัพท์ไม่ถูกต้อง";
                 break;
             case "birthday":
-                const end = new Date(this.props.endDate);
-                const endAge = new Date(end.getFullYear(), end.getMonth(), end.getDate() + 3).getTime() // three day as failsafe from actual date
+                // please fix bug: day 31 verification problem
+                const end = new Date(this.props.commonsData.endDate);
+                const endAge = new Date(end.getFullYear(), end.getMonth(), end.getDate() + 3).getTime(); // three day as failsafe from actual date
                 const nowAge = Date.now();
                 const ageDifMs = ((endAge - nowAge > 0) ? endAge : nowAge) - new Date(value).getTime();
                 const ageDate = new Date(ageDifMs); // miliseconds from epoch
@@ -81,16 +116,13 @@ class RegisterFillForm extends Component {
                 formErrors.email = isValid ? "" : "อีเมลล์ของคุณไม่ถูกต้อง";
                 break;
             default:
-                this.validateForm()
                 return;
         }
-        // console.log(formErrors)
-        this.setState({ [name + "Valid"]: isValid, "formErrors": formErrors }, () => this.validateForm())
+        return { [name + "Valid"]: isValid, "formErrors": formErrors }
     }
 
-
     validateForm = () => {
-        let isValid = this.state.accepted && ((this.state.nationality === "ไทย" && this.state.nationality !== "thai") || this.state.moreThan3);
+        let isValid = this.state.accepted && ((this.state.nationality == 0) || this.state.moreThan3);
         if (isValid) {
             for (const key in this.state) {
                 if ((key.toString().includes('Valid') && key.toString() !== 'formValid' && this.state[key] === false) || this.state[key] === "") {
@@ -103,11 +135,22 @@ class RegisterFillForm extends Component {
     }
 
     render() {
-        const { onSubmit, isEmail, isChulaId } = this.props;
+        const { onSubmit, isEmail, isChulaId, commonsData } = this.props;
         const inputClassName = `bg-cb-grey-light rounded-lg mt-2 p-2`;
         return (
             <form onSubmit={onSubmit} className="layout-wide flex flex-col items-center justify-center pb-10 sm:py-10">
                 <div>
+                    <FormGroup text="ข้อมูลในการเข้าสู่ระบบ">
+                        <Form text="ชื่อผู้ใข้" width="full">
+                            <Input disabled={isEmail} value={this.state.username} onChange={this.handleChange} name="username" type="text" />
+                        </Form>
+                        <Form text="รหัสผ่าน" width="full" smWidth="48">
+                            <Input value={this.state.password} onChange={this.handleChange} name="password" type="password" error={this.state.formErrors.password} />
+                        </Form>
+                        <Form text="ยืนยันรหัสผ่าน" width="full" smWidth="48">
+                            <Input value={this.state.confirmedPassword} onChange={this.handleChange} name="confirmedPassword" type="password" error={this.state.formErrors.confirmedPassword} />
+                        </Form>
+                    </FormGroup>
                     <FormGroup text="ข้อมูลติดต่อ">
                         <Form text="อีเมลล์" width="full" smWidth="48">
                             <Input disabled={isEmail} value={this.state.email} onChange={this.handleChange} name="email" type="email" error={this.state.formErrors.email} />
@@ -116,7 +159,7 @@ class RegisterFillForm extends Component {
                             <Input value={this.state.phoneNumber} onChange={this.handleChange} name="phoneNumber" type="text" error={this.state.formErrors.phoneNumber} />
                         </Form>
                         <Form text="ที่อยู่" width="full">
-                            <textarea value={this.state.address} onChange={this.handleChange} name="address" required className={`${inputClassName} w-full h-16`} />
+                            <textarea value={this.state.address ? this.state.address : ""} onChange={this.handleChange} name="address" required className={`${inputClassName} w-full h-16`} />
                         </Form>
                     </FormGroup>
                     <FormGroup text="ข้อมูลทั่วไป">
@@ -133,7 +176,7 @@ class RegisterFillForm extends Component {
                             <Input value={this.state.birthday} onChange={this.handleChange} name="birthday" type="date" error={this.state.formErrors.birthday} />
                         </Form>
                         <Form text="เพศ" width="24">
-                            <Selector value={this.state.sex} onChange={this.handleChange} name="gender" choices={['ชาย', 'หญิง']} />
+                            <Selector value={this.state.gender} onChange={this.handleChange} name="gender" choices={['ชาย', 'หญิง']} />
                         </Form>
                         <Form text="ไซส์เสื้อ" width="24">
                             <Selector value={this.state.shirtSize} onChange={this.handleChange} name="shirtSize" choices={['M (38")', 'L (40")', 'XL (42")', 'XXL (44")']} />
@@ -148,25 +191,18 @@ class RegisterFillForm extends Component {
                             <Selector value={this.state.nationality} onChange={this.handleChange} name="nationality" choices={['ไทย', 'ต่างชาติ']} />
                         </Form>
                         <Form text="ชั้นปี" width="24">
-                            <Selector disabled={isChulaId} value={this.state.year} onChange={this.handleChange} name="year" choices={['1', '2', '3', '4', '5', '6', "ปริญญาโท", 'ปริญญาเอก', 'อื่นๆ']} />
+                            <Selector disabled={isChulaId} value={this.state.academicYear} onChange={this.handleChange} name="academicYear" choices={['1', '2', '3', '4', '5', '6', "ปริญญาโท", 'ปริญญาเอก', 'อื่นๆ']} />
                         </Form>
                         <Form text="รหัสนิสิต" width="full" smWidth="48">
-                            <Input disabled={isChulaId} name="id" type="text" />
+                            <Input disabled={isChulaId} value={this.state.studentId} onChange={this.handleChange} name="studentId" type="text" />
                         </Form>
                         <Form text="คณะ" width="full" smWidth="48">
-                            <Selector disabled={isChulaId} value={this.state.faculty} onChange={this.handleChange} name="faculty" choices={
-                                ['คณะวิศวกรรมศาสตร์', 'คณะพาณิชยศาสตร์และการบัญชี', 'คณะวิทยาศาสตร์', 'คณะครุศาสตร์',
-                                    'คณะสหเวชศาสตร์ ', 'คณะอักษรศาสตร์', "คณะเภสัชศาสตร์", 'คณะเศรษฐศาสตร์', 'คณะทันตแพทยศาสตร์',
-                                    'คณะรัฐศาสตร์', 'คณะนิเทศศาสตร์', 'คณะจิตวิทยา', 'คณะนิติศาสตร์', 'คณะพยาบาลศาสตร์',
-                                    'คณะแพทยศาสตร์', 'คณะศิลปกรรมศาสตร์', 'คณะสถาปัตยกรรมศาสตร์', 'คณะสัตวแพทยศาสตร์',
-                                    'คณะวิทยาศาสตร์การกีฬา', 'วิทยาลัยวิทยาศาสตร์สาธารณสุข', 'บัณฑิตวิทยาลัย', 'สำนักวิชาทรัพยากรการเกษตร', 'อื่นๆ']
-                            } />
+                            <Selector disabled={isChulaId} value={this.state.schoolId} onChange={this.handleChange} name="schoolId" choices={map(commonsData.schools, 'nameTH')} />
                         </Form>
                     </FormGroup>
                     <FormGroup text="ข้อมูลทางการแพทย์">
-                        <Form text="โรคประจำตัว (ถ้ามี)" width="full">
-                            <textarea name="medicalCondition" className={`${inputClassName} w-full h-16`} />
-                            {/* not required == no state */}
+                        <Form text="โรคประจำตัว (ถ้าไม่มีให้กรอก -)" width="full">
+                            <textarea value={this.state.medicalCondition} onChange={this.handleChange} name="medicalCondition" className={`${inputClassName} w-full h-16`} />
                         </Form>
                         <Form text="หมู่เลือด" width="32" smWidth="48">
                             <Selector value={this.state.bloodType} onChange={this.handleChange} name="bloodType" choices={['A', 'B', 'O', 'AB']} />
@@ -176,10 +212,10 @@ class RegisterFillForm extends Component {
                         </Form>
                         <div className="check">
                             <label className="flex font-cu-heading text-normal cursor-pointer check-box">
-                                <input checked={this.state.donatedBefore} onChange={this.handleChange} name="donatedBefore" type="checkbox" />
+                                <input checked={this.state.isDonated} onChange={this.handleChange} name="isDonated" type="checkbox" />
                                 <div className="check-text flex">ท่านเคยบริจาคโลหิตมาก่อนหรือไม่</div>
                             </label>
-                            <DonatedWithCubloodCheckBox donatedBefore={this.state.donatedBefore} />
+                            <DonatedWithCubloodCheckBox isDonated={this.state.isDonated} />
                             <LiveMoreThan3yearsCheckBox nationality={this.state.nationality} moreThan={this.state.moreThan3} handleChange={this.handleChange} />
                         </div>
                     </FormGroup>
@@ -197,12 +233,13 @@ class RegisterFillForm extends Component {
 
 }
 
-const DonatedWithCubloodCheckBox = ({ donatedBefore }) => {
+const DonatedWithCubloodCheckBox = ({ isDonated }) => {
     return (
-        donatedBefore ?
+        isDonated ?
             (
-                <label className="flex font-cu-heading text-fnormal cursor-pointer check-box">
-                    <input name="jonedCublood" type="checkbox" />
+                <label className="flex font-cu-heading text-normal cursor-pointer check-box">
+                    <input name="isEnrolled" type="checkbox" />
+                    {/*  ask five tommorow about the correct name */}
                     <div className="check-text flex"><span>ท่านเคยเข้าร่วมบริจาคโลหิตกับโครงการ <br /><span className="text-cb-red font-semibold">CU BLOOD</span> มาก่อนหรือไม่</span></div>
                 </label>
             )
@@ -215,7 +252,7 @@ const DonatedWithCubloodCheckBox = ({ donatedBefore }) => {
 
 const LiveMoreThan3yearsCheckBox = ({ nationality, moreThan3, handleChange }) => {
     return (
-        (nationality === "ต่างชาติ" || nationality === "foreigner") ?
+        (nationality == 1) ?
             (
                 <label className="flex font-cu-heading text-fnormal cursor-pointer check-box">
                     <input checked={moreThan3} onChange={handleChange} name="moreThan3" required type="checkbox" />

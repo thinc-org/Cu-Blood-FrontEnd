@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from '@/shared-components/TopicLeft';
 import Card from '@/shared-components/Card';
-import Detail from '@/profile/Detail';
+import Detail from './Detail';
 import moment from 'moment';
 import I18 from '@/core/i18n';
 let i18n = I18.i18n

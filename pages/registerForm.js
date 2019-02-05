@@ -3,7 +3,6 @@ import Footer from '@/shared-components/Footer';
 import FacebookButton from '@/shared-components/FacebookButton';
 import Header from '@/shared-components/TopicCenter';
 import Form from '@/register/local-components/RegisterFillForm';
-import I18 from '@/core/i18n';
 import '../static/css/registerForm.css';
 import redirectTo from '@/core/redirectTo';
 import axios from '@/core/core';
@@ -68,4 +67,4 @@ class RegisterForm extends Component {
     }
 }
 
-export default I18.withNamespaces('common')(RegisterForm);
+export default RegisterForm;

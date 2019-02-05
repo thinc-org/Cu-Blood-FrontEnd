@@ -4,13 +4,14 @@ import PageHeader from '@/shared-components/TopicCenter';
 import AboutCard from '@/about/local-components/AboutCard';
 import Footer from '@/shared-components/Footer';
 import FacebookButton from '@/shared-components/FacebookButton';
-import I18 from '@/core/i18n';
+import AboutContent from '@/about/local-components/AboutContent';
 
 class About extends React.Component {
     render() {
         return (
             <div>
                 <AboutHeader />
+                <AboutContent/>
                 <PageHeader english="STAFFS" englishColor="text-pink" thai="บุคลากร" borderColor="border-red" />
                 <div className="layout-wide flex flex-wrap flex-row justify-center pb-10">
                     <AboutCard englishName="Boom" myRole="Front-end" picture="/static/logo/ios-globe.svg" />
@@ -28,4 +29,4 @@ class About extends React.Component {
 }
 
 
-export default I18.withNamespaces('common')(About)
+export default About;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from '@/shared-components/TopicLeft';
-import Detail from '@/profile/Detail';
+import Detail from './Detail';
 import { UserInfoConsumer } from '@/core/UserInfoProvider';
 import moment from 'moment';
 import I18, {Link} from '@/core/i18n';

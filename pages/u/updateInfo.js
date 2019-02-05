@@ -37,6 +37,8 @@ class RegisterForm extends Component {
                 bloodType += Number(value);
             } else if (!isNaN(value) && name !== "phoneNumber" && name !== "password") {
                 value = Number(value);
+            } else if(name === "password" && value === "") {
+                continue;
             }
             if (value === "on" || value === "off") {
                 value = element.checked ? 1 : 0;

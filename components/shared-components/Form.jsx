@@ -5,7 +5,7 @@ export default class extends Component {
         const { children, text, width = "auto", smWidth = "auto" } = this.props
         return (
             <div className={`w-${width} sm:w-${smWidth} mb-6`}>
-                <div className="font-cu-body font-medium">{text}</div>
+                <div className="font-cu-body font-bold text-grey-darker">{text}</div>
                 {children}
             </div>
         );
@@ -20,7 +20,7 @@ export const Selector = ({ choices = [], value, name, onChange, disabled = false
     })
     return (
         <React.Fragment>
-            <select disabled={disabled} value={value} name={name} onChange={onChange} required className="bg-cb-grey-light rounded-lg mt-2 p-2 w-full h-8" style={{ padding: "0px" }}>
+            <select disabled={disabled} value={value} name={name} onChange={onChange} required className="bg-cb-grey-light rounded-lg mt-2 px-4 py-2 w-full font-cu-body" style={{height: "40px"}} >
                 <option value=""></option>
                 {options}
             </select>
@@ -33,14 +33,14 @@ export const Input = ({ type, notRequired, value, name, onChange, error, disable
     return notRequired ?
         (
             <React.Fragment>
-                <input value={value} name={name} onChange={onChange} disabled={disabled} className="bg-cb-grey-light rounded-lg mt-2 p-2 w-full h-8" type={type} />
+                <input value={value} name={name} onChange={onChange} disabled={disabled} className="bg-cb-grey-light rounded-lg mt-2 px-4 py-5 font-cu-body w-full" style={{height: "40px"}} type={type} />
                 <span className="font-cu-body font-medium">{error}</span>
             </React.Fragment>
 
         ) :
         (
             <React.Fragment>
-                <input value={value}  name={name} onChange={onChange} disabled={disabled} className="bg-cb-grey-light rounded-lg mt-2 p-2 w-full h-8" type={type} required />
+                <input value={value}  name={name} onChange={onChange} disabled={disabled} className="bg-cb-grey-light rounded-lg mt-2 px-4 py-5 font-cu-body w-full" style={{height: "40px"}} type={type} required />
                 <span className="font-cu-body font-medium text-cb-red">{error}</span>
             </React.Fragment >
         )

@@ -3,7 +3,7 @@ import Header from '@/shared-components/TopicLeft';
 import Detail from '@/profile/Detail';
 import { UserInfoConsumer } from '@/core/UserInfoProvider';
 import moment from 'moment';
-import I18 from '@/core/i18n';
+import I18, {Link} from '@/core/i18n';
 let i18n = I18.i18n
 
 class PersonalInfo extends Component {    
@@ -13,7 +13,7 @@ class PersonalInfo extends Component {
             <div className="layout-wide">
                 <div className="flex items-center justify-between">
                     <Header english="PERSONAL INFORMATION" thai="ข้อมูลส่วนตัว" englishColor="text-cb-pink" borderColor="border-cb-red" />  
-                    <button><img className="w-6" src="/static/icons/fix.svg" alt="Fix logo" /> </button>
+                    <Link href="/u/updateInfo" prefetch><button><img className="w-6" src="/static/icons/fix.svg" alt="Fix logo" /> </button></Link>
                 </div>
                 <UserInfoConsumer>
                     {({userInfo}) => {

@@ -19,7 +19,7 @@ class ChulaLogin extends Component {
         }
         if(data.username==="" && data.password==="") return;
         axios.post('https://api-dev.fives.cloud/v0/profile/login', data)
-            .then(() => redirectTo('/u/registerForm'))
+            .then(() => redirectTo('/u/profile'))
             .catch((e) =>  {
                 // e.response && console.log(e.response.data.message)
                 window.location.href = ''

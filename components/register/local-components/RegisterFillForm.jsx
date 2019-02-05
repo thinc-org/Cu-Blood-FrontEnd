@@ -31,7 +31,7 @@ class RegisterFillForm extends Component {
             nationality: "",
             academicYear: "",
             studentId: "",
-            school: "",
+            schoolId: "",
             medicalCondition: "",
             bloodType: "",
             rh: "",
@@ -44,7 +44,6 @@ class RegisterFillForm extends Component {
     componentDidMount() {
         // autofill infi from context api
         if (!this.props.userInfo) return;
-        console.log(this.props, 'did mount')
         let obj = {}
         let formErrors = {};
         for (const key in this.state) {
@@ -100,13 +99,11 @@ class RegisterFillForm extends Component {
             case "birthday":
                 // please fix bug: day 31 verification problem
                 const end = new Date(this.props.commonsData.endDate);
-                const endAge = new Date(end.getFullYear(), end.getMonth(), end.getDate() + 3).getTime() // three day as failsafe from actual date
+                const endAge = new Date(end.getFullYear(), end.getMonth(), end.getDate() + 3).getTime(); // three day as failsafe from actual date
                 const nowAge = Date.now();
                 const ageDifMs = ((endAge - nowAge > 0) ? endAge : nowAge) - new Date(value).getTime();
                 const ageDate = new Date(ageDifMs); // miliseconds from epoch
-                console.log(ageDate)
                 isValid = 17 <= Math.abs(ageDate.getUTCFullYear() - 1970);
-                console.log(Math.abs(ageDate.getUTCFullYear() - 1970))
                 formErrors.birthday = isValid ? "" : "คุณต้องมีอายุมากกว่า 17 ปี ในวันที่บริจาคเลือด";
                 break;
             case "weight":
@@ -142,7 +139,7 @@ class RegisterFillForm extends Component {
         const { onSubmit, isEmail, isChulaId, commonsData } = this.props;
         const inputClassName = `bg-cb-grey-light rounded-lg mt-2 p-2`;
         return (
-            <form onSubmit={onSubmit} className="layout-wide flex flex-col items-center justify-center pb-10 sm:py-10">
+            <form onSubmit={onSubmit} className="layout-wide flex flex-col items-center justify-center pb-10 sm:py-10 appearance-none">
                 <div>
                     <FormGroup text="ข้อมูลในการเข้าสู่ระบบ">
                         <Form text="ชื่อผู้ใข้" width="full">
@@ -201,7 +198,7 @@ class RegisterFillForm extends Component {
                             <Input disabled={isChulaId} value={this.state.studentId} onChange={this.handleChange} name="studentId" type="text" />
                         </Form>
                         <Form text="คณะ" width="full" smWidth="48">
-                            <Selector disabled={isChulaId} value={this.state.school} onChange={this.handleChange} name="school" choices={map(commonsData.schools, 'nameTH')} />
+                            <Selector disabled={isChulaId} value={this.state.schoolId} onChange={this.handleChange} name="schoolId" choices={map(commonsData.schools, 'nameTH')} />
                         </Form>
                     </FormGroup>
                     <FormGroup text="ข้อมูลทางการแพทย์">
@@ -241,8 +238,8 @@ const DonatedWithCubloodCheckBox = ({ isDonated }) => {
     return (
         isDonated ?
             (
-                <label className="flex font-cu-heading text-fnormal cursor-pointer check-box">
-                    <input name="isJoinedProject" type="checkbox" />
+                <label className="flex font-cu-heading text-normal cursor-pointer check-box">
+                    <input name="isEnrolled" type="checkbox" />
                     {/*  ask five tommorow about the correct name */}
                     <div className="check-text flex"><span>ท่านเคยเข้าร่วมบริจาคโลหิตกับโครงการ <br /><span className="text-cb-red font-semibold">CU BLOOD</span> มาก่อนหรือไม่</span></div>
                 </label>

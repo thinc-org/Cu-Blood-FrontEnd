@@ -4,10 +4,9 @@ import FacebookButton from '@/shared-components/FacebookButton';
 import Header from '@/shared-components/TopicCenter';
 import Form from '@/register/local-components/RegisterFillForm';
 import I18 from '@/core/i18n';
-import '../../static/css/registerForm.css';
-import { UserInfoConsumer } from '@/core/UserInfoProvider';
+import '../static/css/registerForm.css';
+
 import axios from '@/core/core';
-import redirectTo from '@/core/redirectTo';
 
 class RegisterForm extends Component {
 
@@ -32,7 +31,7 @@ class RegisterForm extends Component {
         for (let element of form.elements) {
             let value = element.value;
             const name = element.name;
-            console.log(name, 'name', value, 'value', element, )
+            console.log(name, 'name', value, 'value', element)
             if (element.tagName === 'BUTTON') {
                 continue;
             } else if (name === "bloodType") {
@@ -49,12 +48,12 @@ class RegisterForm extends Component {
             data[name] = value;
         }
 
-        if(!data.isEnrolled) data.isEnrolled = 0;
+        if (!data.isEnrolled) data.isEnrolled = 0;
         data.bloodType = bloodType;
         console.log(data, 'data from form')
         axios.post('https://api-dev.fives.cloud/v0/profile/create-account', data)
-            .then(redirectTo('/chulaLogin'))
-            .catch(e => alert(e.result))
+            .then(console.log)
+            .catch(console.log)
     }
 
     render() {
@@ -63,9 +62,7 @@ class RegisterForm extends Component {
             <div>
                 <div className="bg-cb-grey-lighter"><Header english={`REGISTER`} thai={`ลงทะเบียน`} englishColor={`text-cb-pink`} borderColor={`border-cb-red`} /></div>
                 <div className="bg-white">
-                    <UserInfoConsumer>
-                        {({ userInfo, isUpdated }) => (<Form key={isUpdated ? 0 : 1} commonsData={commonsData} onSubmit={this.onSubmit} userInfo={userInfo} isChulaId={false} />)}
-                    </UserInfoConsumer>
+                    <Form commonsData={commonsData} onSubmit={this.onSubmit} isChulaId={false} />
                 </div>
                 {/* <div className="flex flex-col items-center text-white py-10" style={{ backgroundColor: '#8e9dc0' }}><FacebookButton /></div> */}
                 <FacebookButton />

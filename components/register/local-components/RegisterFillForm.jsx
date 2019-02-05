@@ -72,7 +72,8 @@ class RegisterFillForm extends Component {
             obj.emailValid = true;
         }
         if(this.props.updateInfo) {
-            
+            obj.passwordValid = true;
+            obj.confirmedPasswordValid = true;
         }
         console.log(obj, 'obj')
         this.setState(obj)
@@ -96,7 +97,7 @@ class RegisterFillForm extends Component {
                 isValid = value.length >= 8;
                 formErrors.confirmedPassword = isMatched ? "" : "รหัสผ่านไม่ตรงกัน";
                 formErrors.password = isValid ? "" : "รหัสผ่านต้องมากกว่า 8 หลัก";
-                break;
+                return { "passwordValid": isValid, "confirmedPasswordValid": isMatched , "formErrors": formErrors };
             case "confirmedPassword":
                 isValid = true;
                 isValid = value === this.state.password;
@@ -156,10 +157,10 @@ class RegisterFillForm extends Component {
                             <Input disabled={updateInfo} value={this.state.username} onChange={this.handleChange} name="username" type="text" />
                         </Form>
                         <Form text="รหัสผ่าน" width="full" smWidth="48">
-                            <Input value={this.state.password} onChange={this.handleChange} name="password" type="password" error={this.state.formErrors.password} />
+                            <Input notRequired={updateInfo} value={this.state.password} onChange={this.handleChange} name="password" type="password" error={this.state.formErrors.password} />
                         </Form>
                         <Form text="ยืนยันรหัสผ่าน" width="full" smWidth="48">
-                            <Input value={this.state.confirmedPassword} onChange={this.handleChange} name="confirmedPassword" type="password" error={this.state.formErrors.confirmedPassword} />
+                            <Input notRequired={updateInfo} value={this.state.confirmedPassword} onChange={this.handleChange} name="confirmedPassword" type="password" error={this.state.formErrors.confirmedPassword} />
                         </Form>
                     </FormGroup>
                     <FormGroup text="ข้อมูลติดต่อ">

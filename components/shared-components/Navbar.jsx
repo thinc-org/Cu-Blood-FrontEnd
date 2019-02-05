@@ -18,8 +18,8 @@ const Navbar = ({ onExpandListener, t }) => {
                         <div className="border-l mx-4 h-8 block"></div>
                         <ul className="list-reset py-6 text-grey-darkest hidden md:flex">
                             <Link href="/about" prefetch><a className="no-underline text-grey-darkest"><li className="mx-3">เกี่ยวกับเรา</li></a></Link>
-                            <li className="mx-3">ข้อควรรู้</li>
-                            <li className="mx-3">ข่าวประกาศ</li>
+                            <Link href="/notice" prefetch><a className="no-underline text-grey-darkest"><li className="mx-3">ข้อควรรู้</li></a></Link>
+                            <Link href="/announcement" prefetch><a className="no-underline text-grey-darkest"><li className="mx-3">ข่าวประกาศ</li></a></Link>
                             <Link href="/contact" prefetch><a className="no-underline text-grey-darkest"><li className="mx-3">ติดต่อเรา</li></a></Link>
                         </ul>
                     </div>
@@ -46,17 +46,22 @@ const Navbar = ({ onExpandListener, t }) => {
 };
 
 const LoginOrLogout = ({ isLogin, logout, username }) => {
-    return isLogin ?
-        (
+    if (isLogin === true) {
+        return (
             <React.Fragment>
                 <Link href="/u/profile" prefetch><a className="no-underline"><li className="text-cb-red hidden md:block mr-5 special-truncate">{username}</li></a></Link>
                 <a className="no-underline cursor-pointer" onClick={logout}><li className="text-cb-red hidden md:block">ออกจากระบบ</li></a>
             </React.Fragment>
         )
-        :
-        (
+    } else if (isLogin === false) {
+        return (
             <Link href="/chulaLogin" prefetch><a className="no-underline"><li className="text-cb-red hidden md:block">เข้าสู่ระบบ</li></a></Link>
         )
+    } else {
+        return (
+            null
+        )
+    }
 }
 
 export default I18.withNamespaces('common')(Navbar);

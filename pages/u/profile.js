@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import I18 from '@/core/i18n';
-import ProfileHeader from '@/profile/ProfileHeader';
-import Enrollment from '@/profile/Enrollment';
-import PersonalInfo from '@/profile/PersonalInfo';
-import EnrollmentHistory from '@/profile/EnrollmentHistory';
+import ProfileHeader from '@/profile/local-components/ProfileHeader';
+import Enrollment from '@/profile/local-components/Enrollment';
+import PersonalInfo from '@/profile/local-components/PersonalInfo';
+import EnrollmentHistory from '@/profile/local-components/EnrollmentHistory';
 import FacebookButton from '@/shared-components/FacebookButton';
 import Footer from '@/shared-components/Footer';
 import '../../static/css/profile.css';

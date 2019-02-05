@@ -33,7 +33,7 @@ class MyApp extends App {
     if (ctx.pathname.includes('/u/')) {
       response = await axios.get('https://api-dev.fives.cloud/v0/profile/me', { headers })
         .then(resp => { // add userinfo to context
-          console.log('fetch from server', resp.data)
+          console.log('fetch from server', resp)
           return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, userInfo: resp.data.result, status: resp.status } };
         })
         .catch((err) => { // force logout then redirect to same page
@@ -71,7 +71,7 @@ class MyApp extends App {
         <Container>
           <UserInfoProvider>
             <UserInfoConsumer>
-              {context => response && <ForceLogout context={context} />}
+              {context => <ForceLogout context={context} />}
             </UserInfoConsumer>
           </UserInfoProvider>
         </Container>
@@ -85,7 +85,7 @@ class MyApp extends App {
           />
           <UserInfoProvider>
             <UserInfoConsumer>
-              {context => response && <AddUserInfo key={JSON.stringify(context.userInfo) === JSON.stringify(response.userInfo) ? 0 : 1} context={context} userInfo={response.userInfo} /> }
+              {context => response ? <AddUserInfo key={JSON.stringify(context.userInfo) === JSON.stringify(response.userInfo) ? 0 : 1} context={context} userInfo={response.userInfo} /> : context.isLogin === null && <ForceLogout context={context} noRedirect={true} />}
             </UserInfoConsumer>
             <Main {...pageProps}>
               <Component {...pageProps} />
@@ -118,7 +118,7 @@ class ForceLogout extends Component {
   componentDidMount() {
     const { context } = this.props;
     context.deleteUserContext();
-    redirectTo('/chulaLogin');
+    if(!this.props.noRedirect) redirectTo('/chulaLogin');
   }
 
   render() {

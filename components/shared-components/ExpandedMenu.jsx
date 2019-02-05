@@ -45,8 +45,8 @@ const ExpandedMenu = ({ onCloseListener, className, t }) => {
                     </UserInfoConsumer>
                     <ul className="list-reset text-grey-darkest flex flex-col ml-6 my-3">
                         <Link href="/about" prefetch><span onClick={onCloseListener}><a><li className="my-3">เกี่ยวกับเรา</li></a></span></Link>
-                        <li className="my-3">ข้อควรรู้</li>
-                        <Link href="/u/abt" prefetch><span onClick={onCloseListener}><a><li className="my-3">ข่าวประกาศ</li></a></span></Link>
+                        <Link href="/notice" prefetch><span onClick={onCloseListener}><a><li className="my-3">ข้อควรรู้</li></a></span></Link>
+                        <Link href="/announcement" prefetch><span onClick={onCloseListener}><a><li className="my-3">ข่าวประกาศ</li></a></span></Link>
                         <Link href="/contact" prefetch><span onClick={onCloseListener}><a><li className="my-3">ติดต่อเรา</li></a></span></Link>
                         <UserInfoConsumer>
                             {(context) => context.isLogin ? null : <Link href="/chulaLogin" prefetch><span onClick={onCloseListener}><a><li className="my-3 text-cb-red">เข้าสู่ระบบ</li></a></span></Link>}

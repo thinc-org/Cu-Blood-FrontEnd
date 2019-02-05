@@ -1,0 +1,47 @@
+.check {
+    margin-left: 10px;
+}
+
+.check-box input {
+    display: none;
+}
+  
+.check-text:before  {
+    position: relative;
+    right: 10px;
+    content: '';
+    border-radius: 0.25rem;
+    width: 20px;
+    padding-left: 3px;
+    padding-top: 1px;
+    height: 20px;
+    display: inline-block;
+    background-color: #eee;
+}
+
+.check-box:hover .check-text:before {
+    background-color: rgba(230, 82, 82, 0.5);
+}
+  
+.check-box input:checked + .check-text:before {
+    content: '\2714';
+    color: #ffffff;
+    right: 10px;
+    background-color: #f57aa7;
+}
+
+.btn:disabled {
+    background-color: #dae1e7;
+}
+
+:invalid {
+    box-shadow: none;
+}
+  
+:-moz-submit-invalid {
+    box-shadow: none;
+}
+  
+:-moz-ui-invalid {
+    box-shadow:none;
+}

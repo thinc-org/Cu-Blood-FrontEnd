@@ -22,7 +22,7 @@ class ChulaLogin extends Component {
             .then(() => redirectTo('/u/profile'))
             .catch((e) =>  {
                 // e.response && console.log(e.response.data.message)
-                window.location.href = '/chulaLogin'
+                window.location.href = ''
             })
     }
 

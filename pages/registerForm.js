@@ -10,10 +10,6 @@ import axios from '@/core/core';
 
 class RegisterForm extends Component {
 
-    constructor(props) {
-        super(props)
-    }
-
     static async getInitialProps() {
         const commonsData = await axios.get('https://api-dev.fives.cloud/v0/commons/')
             .then(response => response.data.result)
@@ -52,8 +48,8 @@ class RegisterForm extends Component {
         data.bloodType = bloodType;
         console.log(data, 'data from form')
         axios.post('https://api-dev.fives.cloud/v0/profile/create-account', data)
-            .then(console.log)
-            .catch(console.log)
+            .then(redirectTo('/chulaLogin'))
+            .catch(e => alert(e.result))
     }
 
     render() {

@@ -11,10 +11,6 @@ import redirectTo from '@/core/redirectTo';
 
 class RegisterForm extends Component {
 
-    constructor(props) {
-        super(props)
-    }
-
     static async getInitialProps() {
         const commonsData = await axios.get('https://api-dev.fives.cloud/v0/commons/')
             .then(response => response.data.result)
@@ -53,7 +49,7 @@ class RegisterForm extends Component {
         data.bloodType = bloodType;
         console.log(data, 'data from form')
         axios.post('https://api-dev.fives.cloud/v0/profile/create-account', data)
-            .then(redirectTo('/chulaLogin'))
+            .then(console.log)
             .catch(e => alert(e.result))
     }
 

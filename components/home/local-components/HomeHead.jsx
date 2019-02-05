@@ -17,7 +17,7 @@ class HomeHead extends Component {
             <span className="text font-bold">จุฬาลงกรณ์มหาวิทยาลัย</span>
             ร่วมกันบริจาคโลหิตให้แก่สภากาชาดไทย
           </div>
-          <Link href="/register" prefetch>
+          <Link href="/u/profile" prefetch>
             <button className="text-2xl bg-cb-red rounded-lg text-white px-20 py-4 mb-8 leading-none">ลงทะเบียน</button>
           </Link>
           <Link href="/about" prefetch><a className="no-underline">

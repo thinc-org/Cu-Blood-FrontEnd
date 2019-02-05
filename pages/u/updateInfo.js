@@ -48,9 +48,9 @@ class RegisterForm extends Component {
         if(!data.isEnrolled) data.isEnrolled = 0;
         data.bloodType = bloodType;
         console.log(data, 'data from form')
-        axios.post('https://api-dev.fives.cloud/v0/profile/create-account', data)
-            .then(console.log)
-            .catch(e => alert(e.result))
+        axios.put('https://api-dev.fives.cloud/v0/profile/me/update', data)
+            .then(() => redirectTo('/u/profile'))
+            .catch(e => console.log(e))
     }
 
     render() {
@@ -60,7 +60,7 @@ class RegisterForm extends Component {
                 <div className="bg-cb-grey-lighter"><Header english={`REGISTER`} thai={`ลงทะเบียน`} englishColor={`text-cb-pink`} borderColor={`border-cb-red`} /></div>
                 <div className="bg-white">
                     <UserInfoConsumer>
-                        {({ userInfo, isUpdated }) => (<Form key={isUpdated ? 0 : 1} commonsData={commonsData} onSubmit={this.onSubmit} userInfo={userInfo} isChulaId={false} />)}
+                        {({ userInfo, isUpdated }) => (<Form key={isUpdated ? 0 : 1} commonsData={commonsData} onSubmit={this.onSubmit} userInfo={userInfo} updateInfo={true} isEmail={true} />)}
                     </UserInfoConsumer>
                 </div>
                 {/* <div className="flex flex-col items-center text-white py-10" style={{ backgroundColor: '#8e9dc0' }}><FacebookButton /></div> */}

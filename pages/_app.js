@@ -33,6 +33,7 @@ class MyApp extends App {
     if (ctx.pathname.includes('/u/')) {
       response = await axios.get('https://api-dev.fives.cloud/v0/profile/me', { headers })
         .then(resp => { // add userinfo to context
+          console.log('fetch from server', resp.data)
           return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, userInfo: resp.data.result, status: resp.status } };
         })
         .catch((err) => { // force logout then redirect to same page
@@ -64,6 +65,7 @@ class MyApp extends App {
 
   render() {
     const { Component, pageProps, response } = this.props
+    console.log(response, "response")
     if (response && response.status === 401) {
       return (
         <Container>
@@ -83,7 +85,7 @@ class MyApp extends App {
           />
           <UserInfoProvider>
             <UserInfoConsumer>
-              {context => response && <AddUserInfo context={context} userInfo={response.userInfo} />}
+              {context => response && <AddUserInfo key={JSON.stringify(context.userInfo) === JSON.stringify(response.userInfo) ? 0 : 1} context={context} userInfo={response.userInfo} /> }
             </UserInfoConsumer>
             <Main {...pageProps}>
               <Component {...pageProps} />
@@ -100,6 +102,7 @@ class MyApp extends App {
 class AddUserInfo extends Component {
 
   componentDidMount() {
+    console.log('addUser info fetch')
     const { userInfo, context } = this.props;
     context.addUserInfo(userInfo);
   }

@@ -21,9 +21,9 @@ class Enrollment extends Component {
         };
     }
     
-    componentWillMount() {
+    componentDidMount() {
         if (this.state.commonsInfo !== null) {
-            this.state.commonsInfo.registrationPoints.map(element => this.setState(
+            this.state.commonsInfo.locations.map(element => this.setState(
             prevState => ({
                 modalOpener: {
                     ...prevState.modalOpener,
@@ -59,23 +59,23 @@ class Enrollment extends Component {
         //Create fix date button if the user already registered for the current event
         const fixDateButton = this.state.currentSessionInfo !== null ? <button className="ml-2" onClick={() => this.toggleModal('changeDateModal')}><img className="w-6" src="/static/icons/fix.svg" alt="Fix logo" /></button> : null; 
         //Create the location content where there is the location name + link to map + button to open modal
-        const locationContent = commonsInfo.registrationPoints.map(element => this.content(element.nameTH, element.nameEN, element.googleMapsURL, element.nameEN.replace(/\s+/g, ""), element.id));
+        const locationContent = commonsInfo.locations.map(element => this.content(element.nameTH, element.nameEN, element.googleMapsURL, element.nameEN.replace(/\s+/g, ""), element.id));
         //Mapping to create the register modal
-        const registerEnrollModal = commonsInfo.registrationPoints.map(element => {
+        const registerEnrollModal = commonsInfo.locations.map(element => {
             const locationName = element.nameEN.replace(/\s+/g, "");
             return(
                 this.firstEnrollModal(this.state.modalOpener[locationName], element.nameTH, element.nameEN, locationName, element.id, commonsInfo.id, datesDuringDonation)
                 );
         });
         //Mapping to create modal to change location
-        const changeLocationModal = commonsInfo.registrationPoints.map(element => {
+        const changeLocationModal = commonsInfo.locations.map(element => {
             const locationNamePutEnroll = element.nameEN.replace(/\s+/g, "") + "PutEnroll";
             return(
                 this.putEnrollModal(this.state.modalOpener[locationNamePutEnroll], element.nameTH, element.nameEN, locationNamePutEnroll, element.id)
                 );
         });
         //Mapping to create modal that shows QR code
-        const QRCodeModal = commonsInfo.registrationPoints.map(element => {
+        const QRCodeModal = commonsInfo.locations.map(element => {
             const locationNameQRCode = element.nameEN.replace(/\s+/g, "") + "QRCode";
             return(
                 this.QRCodeModal(this.state.modalOpener[locationNameQRCode], locationNameQRCode, element.nameTH)

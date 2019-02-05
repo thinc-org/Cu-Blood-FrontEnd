@@ -44,14 +44,14 @@ class RegisterFillForm extends Component {
     componentDidMount() {
         // autofill infi from context api
         if (!this.props.userInfo) return;
+        console.log(this.props.userInfo, 'userInfo')
         let obj = {}
         let formErrors = {};
         for (const key in this.state) {
             if (key in this.props.userInfo) {
                 let value = this.props.userInfo[key]
-                if (key === "school") value = value.id - 1;
                 if (key === "bloodType") {
-                    obj.bloodType = value / 2;
+                    obj.bloodType = Math.floor(value / 2);
                     obj.rh = value % 2 === 0 ? 1 : 0;
                 } else {
                     obj[key] = value
@@ -64,8 +64,17 @@ class RegisterFillForm extends Component {
                     }
                     obj = Object.assign({}, obj, result, { formErrors });
                 }
+            } else if (key === "schoolId" && this.props.userInfo.school) {
+                obj.schoolId = this.props.userInfo.school.id - 1;
             }
         }
+        if(this.props.isEmail) {
+            obj.emailValid = true;
+        }
+        if(this.props.updateInfo) {
+            
+        }
+        console.log(obj, 'obj')
         this.setState(obj)
     }
 
@@ -82,12 +91,14 @@ class RegisterFillForm extends Component {
         let formErrors = Object.assign({}, this.state.formErrors);
         switch (name) {
             case "password":
+                isValid = true;
                 const isMatched = value === this.state.confirmedPassword;
                 isValid = value.length >= 8;
                 formErrors.confirmedPassword = isMatched ? "" : "รหัสผ่านไม่ตรงกัน";
                 formErrors.password = isValid ? "" : "รหัสผ่านต้องมากกว่า 8 หลัก";
                 break;
             case "confirmedPassword":
+                isValid = true;
                 isValid = value === this.state.password;
                 formErrors.confirmedPassword = isValid ? "" : "รหัสผ่านไม่ตรงกัน";
                 break;
@@ -125,7 +136,7 @@ class RegisterFillForm extends Component {
         let isValid = this.state.accepted && ((this.state.nationality == 0) || this.state.moreThan3);
         if (isValid) {
             for (const key in this.state) {
-                if ((key.toString().includes('Valid') && key.toString() !== 'formValid' && this.state[key] === false) || this.state[key] === "") {
+                if ((key.toString().includes('Valid') && key.toString() !== 'formValid' && this.state[key] === false) || (!this.state[key + 'Valid'] && this.state[key] === "")) {
                     isValid = false;
                     break;
                 }
@@ -135,14 +146,14 @@ class RegisterFillForm extends Component {
     }
 
     render() {
-        const { onSubmit, isEmail, isChulaId, commonsData } = this.props;
-        const inputClassName = `bg-cb-grey-light rounded-lg mt-2 p-2`;
+        const { onSubmit, isEmail, isChulaId, commonsData, updateInfo } = this.props;
+        const inputClassName = `bg-cb-grey-light rounded-lg mt-2 px-4 py-4 font-cu-body`;
         return (
             <form onSubmit={onSubmit} className="layout-wide flex flex-col items-center justify-center pb-10 sm:py-10">
                 <div>
                     <FormGroup text="ข้อมูลในการเข้าสู่ระบบ">
-                        <Form text="ชื่อผู้ใข้" width="full">
-                            <Input disabled={isEmail} value={this.state.username} onChange={this.handleChange} name="username" type="text" />
+                        <Form text="ชื่อผู้ใช้" width="full">
+                            <Input disabled={updateInfo} value={this.state.username} onChange={this.handleChange} name="username" type="text" />
                         </Form>
                         <Form text="รหัสผ่าน" width="full" smWidth="48">
                             <Input value={this.state.password} onChange={this.handleChange} name="password" type="password" error={this.state.formErrors.password} />
@@ -159,7 +170,7 @@ class RegisterFillForm extends Component {
                             <Input value={this.state.phoneNumber} onChange={this.handleChange} name="phoneNumber" type="text" error={this.state.formErrors.phoneNumber} />
                         </Form>
                         <Form text="ที่อยู่" width="full">
-                            <textarea value={this.state.address ? this.state.address : ""} onChange={this.handleChange} name="address" required className={`${inputClassName} w-full h-16`} />
+                            <textarea value={this.state.address ? this.state.address : ""} onChange={this.handleChange} name="address" style={{height: "100px", resize: "none"}} required className={`${inputClassName} w-full`} />
                         </Form>
                     </FormGroup>
                     <FormGroup text="ข้อมูลทั่วไป">
@@ -202,7 +213,7 @@ class RegisterFillForm extends Component {
                     </FormGroup>
                     <FormGroup text="ข้อมูลทางการแพทย์">
                         <Form text="โรคประจำตัว (ถ้าไม่มีให้กรอก -)" width="full">
-                            <textarea value={this.state.medicalCondition} onChange={this.handleChange} name="medicalCondition" className={`${inputClassName} w-full h-16`} />
+                            <textarea value={this.state.medicalCondition} onChange={this.handleChange} name="medicalCondition" style={{height: "100px", resize: "none"}} className={`${inputClassName} w-full`} />
                         </Form>
                         <Form text="หมู่เลือด" width="32" smWidth="48">
                             <Selector value={this.state.bloodType} onChange={this.handleChange} name="bloodType" choices={['A', 'B', 'O', 'AB']} />

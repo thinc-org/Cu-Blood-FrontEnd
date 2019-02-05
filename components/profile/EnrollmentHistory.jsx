@@ -18,14 +18,22 @@ class EnrollmentHistory extends Component {
             <div className="bg-cb-grey-lighter pb-10">
                 <div className="layout-wide">
                     <Header english="ENROLLMENT" thai="ลงทะเบียนเข้าร่วม" englishColor="text-cb-pink" borderColor="border-cb-red" />
-                    <Card>
-                        <Detail bigText="ขณะนี้ข้อมูลมีปัญหา โปรดลองใหม่อีกครั้ง" smallText="Error in retrieving information, please try again later"/>
-                    </Card>
+                    <div className="mb-8"><Card><Detail bigText="ขณะนี้ข้อมูลมีปัญหา โปรดลองใหม่อีกครั้ง" smallText="Error in retrieving information, please try again later"/></Card></div>
                 </div>
             </div>
             );
         }
 
+        else if (sessionInfo === null) {
+            return(
+                <div className="bg-cb-grey-lighter pb-10">
+                    <div className="layout-wide">
+                        <Header english="ENROLLMENT" thai="ลงทะเบียนเข้าร่วม" englishColor="text-cb-pink" borderColor="border-cb-red" />
+                        <div className="mb-8"><Card><Detail bigText="ไม่มีประวัติการเข้าร่วมกิจกรรม" smallText="No enrollment history is available"/></Card></div>
+                    </div>
+                </div>
+            );
+        }
         return(
             <div className="bg-cb-grey-lighter">
                 <div className="layout-wide pb-2">

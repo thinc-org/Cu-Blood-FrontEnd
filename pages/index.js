@@ -45,7 +45,6 @@ class App extends Component {
   }
 
   render() {
-    // const { announcementData, statData, facebookPosts} = this.props;
     const { announcementData, statData, facebookPosts, calendarEvents } = this.props;
     
     console.log(this.statDataPromise)

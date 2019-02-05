@@ -139,7 +139,7 @@ class RegisterFillForm extends Component {
         const { onSubmit, isEmail, isChulaId, commonsData } = this.props;
         const inputClassName = `bg-cb-grey-light rounded-lg mt-2 p-2`;
         return (
-            <form onSubmit={onSubmit} className="layout-wide flex flex-col items-center justify-center pb-10 sm:py-10 appearance-none">
+            <form onSubmit={onSubmit} className="layout-wide flex flex-col items-center justify-center pb-10 sm:py-10">
                 <div>
                     <FormGroup text="ข้อมูลในการเข้าสู่ระบบ">
                         <Form text="ชื่อผู้ใข้" width="full">

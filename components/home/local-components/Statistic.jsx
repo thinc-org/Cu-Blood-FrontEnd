@@ -3,20 +3,21 @@ import axios from '@/core/core'
 import StatisticContent from "./StatisticContent";
 import Header from "@/shared-components/TopicCenter";
 import map from 'lodash/map';
+import I18 from '@/core/i18n';
 
 class Statistic extends Component {
-    
+
     render() {
-        const data = this.props.statData;
-        const statNumber = map(data, 'id');
-        const statContent = map(data, 'title');
+        const {statData, t} = this.props;
+        const statNumber = map(statData, 'id');
+        const statContent = map(statData, 'title');
 
         let contentStyle = "border-cb-grey-border border-b sm:border-b-0 w-full sm:w-1/2 text-center pb-6 sm:flex justify-center";
 
         return (
             <div className="bg-cb-grey-lighter">
                 <div className="layout-wide flex flex-col items-center font-cu-heading">
-                    <Header borderColor="border-cb-red" english="STATISTIC" thai="ข้อมูลทางสถิติ" englishColor="text-cb-pink" />
+                    <Header borderColor="border-cb-red" english={t('statisticHeaderSmall')} thai={t('statisticHeaderBig')} englishColor="text-cb-pink" />
                     <div className="flex flex-col items-center mb-10">
                         <div className="border-cb-grey-border sm:border-b flex flex-col sm:flex-row w-full justify-center items-center">
                             <div className={`${contentStyle} sm:border-r sm:pr-6`}>
@@ -34,11 +35,11 @@ class Statistic extends Component {
                                 <StatisticContent number={statNumber[3]} content={statContent[3]} />
                             </div>
                         </div>
-                    </div>                    
+                    </div>
                 </div>
             </div>
         );
     }
 }
 
-export default Statistic;
+export default I18.withNamespaces('index')(Statistic);

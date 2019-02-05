@@ -1,0 +1,14 @@
+{
+    "homeHeaderText1" : "โครงการรณรงค์ให้นิสิตปัจจุบัน นิสิตเก่า คณาจารย์ และบุคลากร ของ ",
+    "homeHeaderTextBold" : "จุฬาลงกรณ์มหาวิทยาลัย",
+    "homeHeaderText2" : " ร่วมกันบริจาคโลหิตให้แก่สภากาชาดไทย",
+    "registerButton" : "ลงทะเบียน",
+    "aboutCuButton" : "เกี่ยวกับโครงการ",
+    "lookAnnouncment": "ดูข่่าวประกาศทั้งหมด",
+    "announcementHeaderSmall" : "announcement",
+    "announcementHeaderBig" : "ข่าวประกาศ",
+    "statisticHeaderSmall": "STATISTIC",
+    "statisticHeaderBig": "ข้อมูลทางสถิติ",
+    "calendarHeaderSmall": "Calendar",
+    "calendarHeaderBig" : "ปฏิทินกิจกรรม"
+}

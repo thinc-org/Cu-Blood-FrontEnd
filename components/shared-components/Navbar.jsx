@@ -18,8 +18,8 @@ const Navbar = ({ onExpandListener, t }) => {
                         <div className="border-l mx-4 h-8 block"></div>
                         <ul className="list-reset py-6 text-grey-darkest hidden md:flex">
                             <Link href="/about" prefetch><a className="no-underline text-grey-darkest"><li className="mx-3">เกี่ยวกับเรา</li></a></Link>
-                            <li className="mx-3">ข้อควรรู้</li>
-                            <li className="mx-3">ข่าวประกาศ</li>
+                            <Link href="/notice" prefetch><a className="no-underline text-grey-darkest"><li className="mx-3">ข้อควรรู้</li></a></Link>
+                            <Link href="/announcement" prefetch><a className="no-underline text-grey-darkest"><li className="mx-3">ข่าวประกาศ</li></a></Link>
                             <Link href="/contact" prefetch><a className="no-underline text-grey-darkest"><li className="mx-3">ติดต่อเรา</li></a></Link>
                         </ul>
                     </div>

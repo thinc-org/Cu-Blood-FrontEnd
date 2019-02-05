@@ -1,0 +1,15 @@
+{
+    "homeHeaderText1" : "An organization that encourages current students, alumnis, faculty members, and staff of ",
+    "homeHeaderTextBold" : "Chulalongkorn University",
+    "homeHeaderText2" : " to donate blood to the Thai Red Cross Society.",
+    "registerButton" : "Register",
+    "aboutCuButton" : "About Us",
+    "lookAnnouncment": "look all announcement",
+    "announcementHeaderSmall" : "ข่าวประกาศ",
+    "announcementHeaderBig" : "announcement",
+    "statisticHeaderSmall": "ข้อมูลทางสถิติ",
+    "statisticHeaderBig": "STATISTIC",
+    "calendarHeaderSmall" : "ปฏิทินกิจกรรม",
+    "calendarHeaderBig" : "CALENDAR"
+
+}

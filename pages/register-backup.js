@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import Footer from '@/shared-components/Footer';
 import FacebookButton from '@/shared-components/FacebookButton';
 import RegisterChoice from '@/register/local-components/RegisterChoice';
-import I18 from '@/core/i18n';
 
 class RegistrationPage1 extends Component {
     render() {
@@ -16,4 +15,4 @@ class RegistrationPage1 extends Component {
     }
 }
 
-export default I18.withNamespaces('common')(RegistrationPage1);
+export default RegistrationPage1;

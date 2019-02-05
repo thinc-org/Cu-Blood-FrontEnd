@@ -11,11 +11,11 @@ class ContactContent extends Component {
                 <div className="w-full sm:w-1/2 border-cb-grey-border border-t sm:border-t-0 sm:border-l pt-6 sm:pt-0 sm:pl-8 flex flex-col font-semibold">
                     <div className="flex items-center pb-6 sm:pb-0">
                         <div className="mr-4"><img className="w-6" src="/static/icons/telephone.svg" alt="Phone logo"/></div>
-                        <div>091-234-5678</div>
+                        <div>unknown</div>
                     </div>
                     <div className="flex items-center">
                         <div className="mr-4"><img className="w-6" src="/static/icons/mail.svg" alt="Phone logo"/></div>
-                        <div>cu.blood@gmail.com</div>
+                        <div>chulab157s6@gmail.com</div>
                     </div>
                 </div>
             </div>

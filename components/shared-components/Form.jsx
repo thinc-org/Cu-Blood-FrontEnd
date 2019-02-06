@@ -34,7 +34,7 @@ export const Input = ({ type, notRequired, value, name, onChange, error, disable
         (
             <React.Fragment>
                 <input value={value} name={name} onChange={onChange} disabled={disabled} className="bg-cb-grey-light rounded-lg mt-2 px-4 py-5 font-cu-body w-full" style={{height: "40px"}} type={type} />
-                <span className="font-cu-body font-medium">{error}</span>
+                <span className="font-cu-body font-medium text-cb-red">{error}</span>
             </React.Fragment>
 
         ) :

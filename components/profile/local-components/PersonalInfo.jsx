@@ -17,7 +17,7 @@ class PersonalInfo extends Component {
                 </div>
                 <UserInfoConsumer>
                     {({userInfo}) => {
-                        if ((userInfo === undefined) || (userInfo === null)) {
+                        if (!userInfo || !userInfo.uuid) {
                             return (<div className="w-full flex mb-10"><Detail bigText="ขณะนี้ข้อมูลมีปัญหา โปรดลองใหม่อีกครั้ง" smallText="Error in retrieving information, please try again later"/></div>);
                         }
                         return(

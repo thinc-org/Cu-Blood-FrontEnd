@@ -6,7 +6,10 @@ const devProxy = {
   '/v0': {
     target: 'https://api-dev.fives.cloud/v0/',
     pathRewrite: { '^/v0': '/' },
-    changeOrigin: true
+    changeOrigin: true,
+    cookieDomainRewrite: "localhost:3000",
+    secure: false,
+    logLevel: 'debug'
   }
 }
 const env = process.env.NODE_ENV
@@ -20,6 +23,7 @@ const handle = app.getRequestHandler();
 (async () => {
   await app.prepare()
   const server = express()
+  server.enable('trust proxy');
 
   if (dev && devProxy) {
     const proxyMiddleware = require('http-proxy-middleware')

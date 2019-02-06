@@ -20,7 +20,7 @@ class App extends Component {
     const dateFormat = year + '-' + month + '-' + day;
     const lastDateFormat = (year-1) + '-' + month + '-' + day;
 
-    const announcementdataPromise = axios.get('https://api-dev.fives.cloud/v0/announcements/all/1')
+    const announcementdataPromise = axios.get('/announcements/all/1')
     const statDataPromise = axios.get(`https://api-dev.fives.cloud/v0/commons/insights/sessions/${lastDateFormat}/${dateFormat}/all`)
     const FacebookPostsPromise = axios.get('https://api-dev.fives.cloud/v0/commons/facebook/posts')
     const calendarEventsPromise = axios.get('https://api-dev.fives.cloud/v0/events/all/1')

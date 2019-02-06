@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import Link from 'next/link';
-import I18 from '@/core/i18n';
+import I18, {Link} from '@/core/i18n';
 
 class HomeHead extends Component {
   render() {

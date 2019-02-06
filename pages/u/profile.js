@@ -18,7 +18,7 @@ class Profile extends Component {
         } : undefined;
 
         const commonsDataPromise = axios.get('https://api-dev.fives.cloud/v0/commons');
-        const sessionDataPromise = axios.get('https://api-dev.fives.cloud/v0/profile/me/sessions', headers);
+        const sessionDataPromise = axios.get('https://api-dev.fives.cloud/v0/profile/me/sessions', {headers});
 
         const data = await Promise.all([commonsDataPromise, sessionDataPromise]
             .map(p => p
@@ -27,7 +27,6 @@ class Profile extends Component {
             .catch(console.log);
 
         const [commonsData, sessionData] = data;
-        console.log(data, headers, 'data from session')
         return {
             commonsData,
             sessionData,

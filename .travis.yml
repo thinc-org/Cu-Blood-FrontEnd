@@ -1,17 +1,10 @@
 language: node_js
 node_js:
-  - "stable"
+- stable
 cache:
   directories:
-    - node_modules
+  - node_modules
 script:
-  - yarn test
-  - yarn gencss
-  - yarn next:build
-deploy:
-  provider: surge
-  skip_cleanup: true
-  domain: new5558.surge.sh
-  project: ./out/
-  on:
-    branch: master
+- yarn test
+- yarn gencss
+- yarn next:build

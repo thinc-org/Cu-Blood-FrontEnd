@@ -31,9 +31,9 @@ class MyApp extends App {
     let response;
     // if is in user page
     if (ctx.pathname.includes('/u/')) {
-      response = await axios.get('https://api-dev.fives.cloud/v0/profile/me', { headers })
+      response = await axios.get('/profile/me', { headers })
         .then(resp => { // add userinfo to context
-          console.log('fetch from server', resp)
+          // console.log('fetch from server', resp)
           return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, userInfo: resp.data.result, status: resp.status } };
         })
         .catch((err) => { // force logout then redirect to same page
@@ -41,7 +41,7 @@ class MyApp extends App {
         })
     } 
     else if (ctx.pathname.includes('/chulaLogin')) { //
-      response = await axios.get('https://api-dev.fives.cloud/v0/profile/me', { headers })
+      response = await axios.get('/profile/me', { headers })
         .then(resp => { // redirect if already login
           redirectTo('/', ctx);
         })
@@ -50,7 +50,7 @@ class MyApp extends App {
         })
     } 
     else if (ctx.res) { 
-      response = await axios.get('https://api-dev.fives.cloud/v0/profile/me', { headers })
+      response = await axios.get('/profile/me', { headers })
         .then(resp => { // add userInfo to context when already log in
           return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, userInfo: resp.data.result, status: resp.status } };
         })
@@ -65,7 +65,6 @@ class MyApp extends App {
 
   render() {
     const { Component, pageProps, response } = this.props
-    console.log(response, "response")
     if (response && response.status === 401) {
       return (
         <Container>

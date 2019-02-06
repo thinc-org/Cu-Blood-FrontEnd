@@ -17,13 +17,13 @@ class AboutContent extends React.Component {
                             {t('aboutContentsubBody4-1')}
                         </div >
                         <div className='py-4 font-semibold'>
-                            “ บริจาคโลหิต 1 ล้านซีซีในโอกาสครบรอบวิศวฯจุฬาฯ 100 ปี ”
+                            {t('aboutContentsubBody4-2')}
                         </div>
                         <div className='py-4'>
-                            โดยในปีแรกกําหนดให้ผู้เข้าร่วมมีเพียงนิสิตปัจจุบัน และนิสิตเก่า คณะวิศวกรรมศาสตร์เท่านั้น ต่อมาจึงได้ขยายไปยังนิสิต นิสิตเก่า คณาจารย์และบุคลากรของทุกคณะหรือ หน่วยงานภายใน จุฬาลงกรณ์มหาวิทยาลัย ด้วยความร่วมแรงร่วมใจและการสนับสนุน จากทุกภาคส่วนทําให้เกิดโครงก
+                            {t('aboutContentsubBody4-3')}
                         </div>
                         <div className='py-4 text-pink'>
-                            “ เลือดชมพู CUB0157 หรือ CU Blood ”
+                            {t('aboutContentsubBody4-4')}
                         </div>
                     </div>
                 } />

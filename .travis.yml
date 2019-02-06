@@ -13,6 +13,6 @@ deploy:
   skip_cleanup: true
   app: cu-blood   
   on:
-    repo: new5558/Cu-Blood-FrontEnd
+    branch: new-auth
   api_key:
     secure: FXnORjhA58YnGM+0dslJFLZ47SG8kfYMh6fhcqrYA8SEb1amOb1AkKA7Y/TSXU8isTXmAtobvLA+cEkHEO/JgzOOscJyMy7OhS8rGvaOyNNXn/xXP2NIpn8ls4synkxSNH7iXO4UltCinxpMqRNFGikZVSlGGQx601mapbLfaQf/7Ak954x7Q/DpoiqRHY89vD7yOSnxlbcXGknN4iL8NJTaNWt+OUtIbaQvHLJed1lzjO9JWqqd4DHc7fbxtjIMCYTQ6hgT2tbZt+rHFtZCdlabmEubTzy2bRruNxqgK9SzDFaDTfrZ7wgUcq8R23GtU8NhCUycmn4zRgnB4ewnhC2XDrIhEaGeyUR25AHfk+odBnAM12VaKQFiwd8kUm1cQVUJ41+tpXggMLc68NvEwITz3KhVz/gWA6n1jpoWZ+UnBxHrlOarJDoYB0+rh/Ct7ACFCdOqB+CsTfpdUeeZlHbx1YFU1VfTFUheqNoG17Z5cq7ZJ5m3DFO1mQx/D1oENp9v3ODA0YjMEVyy9WO+Ha9NeGjPgkZoHA8sOjeyoDNwTgrgmfidbI8gHt4wsuoaRDm8HDwTlfYGynLtT67oH6Qo9IDiC4R/0pHB1I72JGXNoTtVo6bsBfN+EIMk3WKG/k24jJ26/CWRfhmQ4E8S27+t2MXgvQIkDKwQzXUxuFM=

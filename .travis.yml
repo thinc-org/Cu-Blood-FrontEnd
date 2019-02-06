@@ -10,12 +10,8 @@ script:
 - yarn next:build
 deploy:
   provider: heroku
-  api_key:
-    secure: 
-  app: Cu-Blood-FrontEnd
+  api_key: 9341a02c-7b6c-41a1-9696-583ea3ca0171
+  app: cu-blood
   on:
     repo: new5558/Cu-Blood-FrontEnd
     branch: new-auth
-env:
-  global:
-    secure: j+IYNFUlKADlWdf4fKjin0MGrYcb0BFb1S3iCb1oIiT4INkSUSnVwvXxY8OJXwFIJifVjCnbGNsW8EDdiVS0rDgc+8r3hl3RBf8W/2KgMykg/6Q9y+rXJ+7y8r4tdolatBSc7ql1UgqtMnZvztc9QU1fGu2NlmyyMwlD1yvv4TsBTa1zQHSjVcaKEOd07IMwQ31xDD0y8KLgYHJIitA7TDRUnl09xvfyGr7u2a9QJiwmkH5UK+Ge8fyeZBVJ4EhWM9OIA4v8zzQgNuP0po+9vX6iwz2A7ukbgfbKYgGhf2o0MIoeeCH+55PO0TbpI4RAmammMkARW3JB3rv7rKT2b3cTYcPObZkk8h6TpPDuTZLBUrg/W6HsvaEMjay8Njfg4mWr4vNtmqUf7whHrTOXtPXROeJtbbeeZU30i/attxecV9RGpA8XduvYSeSxhPk8ODy2yhXot8yTPGOfTh12YM4vuXKm3i9dUNX47LD/7Wi23XyKIeH5Th59WHybk81KFU+rptvUV/qMixrn5IVB8GwpbKeqnWjgObnmOE1ZoSH6yBXgB386otIPDVxjnvThFiO6zDUPMTV9hIFodAQwrRSOLzMvL7KH2cgpiQTba7IriXo04d8lmZAnF0lH5Nf6cNA/MxUZ/lAjirr4SVdd07A2S41Zfk4y+49sUH14Y2A=

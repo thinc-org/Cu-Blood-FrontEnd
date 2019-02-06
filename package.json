@@ -24,6 +24,8 @@
   "scripts": {
     "next:dev": "next",
     "next:build": "next build",
+    "postinstall": "yarn gencss",
+    "heroku-postbuild": "yarn next:build",
     "next:start": "next start",
     "gencss": "postcss ./components/core/tw.css -o ./components/core/tailwind.css",
     "start:tw": "postcss ./components/core/tw.css -o ./components/core/tailwind.css -w",

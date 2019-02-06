@@ -101,7 +101,6 @@ class MyApp extends App {
 class AddUserInfo extends Component {
 
   componentDidMount() {
-    console.log('addUser info fetch')
     const { userInfo, context } = this.props;
     context.addUserInfo(userInfo);
   }

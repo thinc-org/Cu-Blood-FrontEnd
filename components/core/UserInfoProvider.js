@@ -18,7 +18,7 @@ class UserInfoProvider extends Component {
             userInfo: user,
             isLogin: true,
             isUpdated: true,
-        }, () => this.setState({isUpdated: false},  () => console.log(this.state.userInfo, "fetch from context")))
+        }, () => this.setState({isUpdated: false}))
     }
 
     logout = () => {

@@ -29,7 +29,7 @@
     "next:start": "next start",
     "gencss": "postcss ./components/core/tw.css -o ./components/core/tailwind.css",
     "start:tw": "postcss ./components/core/tw.css -o ./components/core/tailwind.css -w",
-    "start": "yarn start:prod",
+    "start": "NODE_ENV=production node server.js",
     "build": "react-scripts build",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -38,7 +38,7 @@
     "go": "concurrently --kill-others \"yarn start:tw\" \"yarn next:dev\"",
     "full": "concurrently --kill-others \"yarn start:tw\" \"yarn next:start\"",
     "export": "yarn next:build | next export",
-    "start:prod": "NODE_ENV=production node server.js"
+    "start:prod": "node server.js"
   },
   "eslintConfig": {
     "extends": "react-app"

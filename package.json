@@ -38,7 +38,7 @@
     "go": "concurrently --kill-others \"yarn start:tw\" \"yarn next:dev\"",
     "full": "concurrently --kill-others \"yarn start:tw\" \"yarn next:start\"",
     "export": "yarn next:build | next export",
-    "start:prod": "node server.js"
+    "start:prod": "NODE_ENV=production node server.js"
   },
   "eslintConfig": {
     "extends": "react-app"

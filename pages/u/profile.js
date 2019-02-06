@@ -11,24 +11,29 @@ import axios from '@/core/core';
 
 
 class Profile extends Component {
-    static async getInitialProps() {
+    static async getInitialProps({req}) {
+
+        const headers = req ? {
+            cookie: req.headers.cookie,
+        } : undefined;
 
         const commonsDataPromise = axios.get('https://api-dev.fives.cloud/v0/commons');
-        const sessionDataPromise = axios.get('https://api-dev.fives.cloud/v0/profile/me/sessions');
+        const sessionDataPromise = axios.get('https://api-dev.fives.cloud/v0/profile/me/sessions', headers);
 
         const data = await Promise.all([commonsDataPromise, sessionDataPromise]
-        .map(p => p
-            .then(response => response.data)
-            .catch(e => null)))
-        .catch(console.log);
-        
+            .map(p => p
+                .then(response => response.data)
+                .catch(e => null)))
+            .catch(console.log);
+
         const [commonsData, sessionData] = data;
+        console.log(data, headers, 'data from session')
         return {
-          commonsData,
-          sessionData,
+            commonsData,
+            sessionData,
         };
     }
-    
+
     render() {
         const { commonsData, sessionData } = this.props;
         const commonsInfo = commonsData ? commonsData.result : null;
@@ -37,9 +42,9 @@ class Profile extends Component {
         return (
             <div>
                 <ProfileHeader />
-                <Enrollment commonsInfo={commonsInfo} sessionInfo={sessionInfo}/>      
+                <Enrollment commonsInfo={commonsInfo} sessionInfo={sessionInfo} />
                 <PersonalInfo />
-                <EnrollmentHistory commonsInfo={commonsInfo} sessionInfo={sessionInfo}/>
+                <EnrollmentHistory commonsInfo={commonsInfo} sessionInfo={sessionInfo} />
                 <FacebookButton />
                 <Footer />
             </div>

@@ -1,6 +1,5 @@
 import React from 'react';
 import I18 from '@/core/i18n';
-let i18n = I18.i18n;
 
 class AboutContent extends React.Component {
     render() {

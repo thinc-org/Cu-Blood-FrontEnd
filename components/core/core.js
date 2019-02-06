@@ -1,7 +1,11 @@
 import axios from 'axios'
-
+let baseURL = 'http://localhost:3000/v0'
+if( process.env.NODE_ENV === "production" ) {
+    baseURL = 'https://api-dev.fives.cloud/v0/';
+}
 const instance = axios.create({    
-    baseURL: 'https://jsonplaceholder.typicode.com',
+    baseURL,
+    withCredentials: true,
 });
 
 instance.interceptors.request.use(function (config) {

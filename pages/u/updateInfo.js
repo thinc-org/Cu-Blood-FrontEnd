@@ -3,9 +3,11 @@ import Footer from '@/shared-components/Footer';
 import FacebookButton from '@/shared-components/FacebookButton';
 import Header from '@/shared-components/TopicCenter';
 import Form from '@/register/local-components/RegisterFillForm';
-import '../static/css/registerForm.css';
-import redirectTo from '@/core/redirectTo';
+import I18 from '@/core/i18n';
+import '../../static/css/registerForm.css';
+import { UserInfoConsumer } from '@/core/UserInfoProvider';
 import axios from '@/core/core';
+import redirectTo from '@/core/redirectTo';
 
 class RegisterForm extends Component {
 
@@ -34,6 +36,8 @@ class RegisterForm extends Component {
                 bloodType += Number(value);
             } else if (!isNaN(value) && name !== "phoneNumber" && name !== "password") {
                 value = Number(value);
+            } else if(name === "password" && value === "") {
+                continue;
             }
             if (value === "on" || value === "off") {
                 value = element.checked ? 1 : 0;
@@ -42,10 +46,10 @@ class RegisterForm extends Component {
             data[name] = value;
         }
 
-        if (!data.isEnrolled) data.isEnrolled = 0;
+        if(!data.isEnrolled) data.isEnrolled = 0;
         data.bloodType = bloodType;
-        axios.post('https://api-dev.fives.cloud/v0/profile/create-account', data)
-            .then(() => redirectTo('/chulaLogin'))
+        axios.put('https://api-dev.fives.cloud/v0/profile/me/update', data)
+            .then(() => redirectTo('/u/profile'))
             .catch(e => console.log(e))
     }
 
@@ -55,7 +59,9 @@ class RegisterForm extends Component {
             <div>
                 <div className="bg-cb-grey-lighter"><Header english={`REGISTER`} thai={`ลงทะเบียน`} englishColor={`text-cb-pink`} borderColor={`border-cb-red`} /></div>
                 <div className="bg-white">
-                    <Form commonsData={commonsData} onSubmit={this.onSubmit} isChulaId={false} />
+                    <UserInfoConsumer>
+                        {({ userInfo, isUpdated }) => (<Form key={isUpdated ? 0 : 1} commonsData={commonsData} onSubmit={this.onSubmit} userInfo={userInfo} updateInfo={true} isEmail={true} />)}
+                    </UserInfoConsumer>
                 </div>
                 {/* <div className="flex flex-col items-center text-white py-10" style={{ backgroundColor: '#8e9dc0' }}><FacebookButton /></div> */}
                 <FacebookButton />
@@ -65,4 +71,4 @@ class RegisterForm extends Component {
     }
 }
 
-export default RegisterForm;
+export default I18.withNamespaces('common')(RegisterForm);

@@ -1,0 +1,19 @@
+@media screen and (min-width: 425px) and (max-width: 768px) {
+    .special-half-width {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 425px) {
+    .special-text-align-left {
+        text-align: left;
+    }
+
+    .special-mb-10 {
+        margin-bottom: 2.5rem;
+    }
+
+    .special-mb-0 {
+        margin-bottom: 0rem;
+    }
+}

@@ -13,18 +13,14 @@ import CalendarContainer from '@/home/local-components/CalendarContainer';
 class App extends Component {
 
   static async getInitialProps() {
-
     const date = new Date();
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
     const day = date.getDate();
     const dateFormat = year + '-' + month + '-' + day;
     const lastDateFormat = (year-1) + '-' + month + '-' + day;
- 
-    
-    
 
-    const announcementdataPromise = axios.get('https://api-dev.fives.cloud/v0/announcements/all/1')
+    const announcementdataPromise = axios.get('/announcements/all/1')
     const statDataPromise = axios.get(`https://api-dev.fives.cloud/v0/commons/insights/sessions/${lastDateFormat}/${dateFormat}/all`)
     const FacebookPostsPromise = axios.get('https://api-dev.fives.cloud/v0/commons/facebook/posts')
     const calendarEventsPromise = axios.get('https://api-dev.fives.cloud/v0/events/all/1')
@@ -46,8 +42,6 @@ class App extends Component {
 
   render() {
     const { announcementData, statData, facebookPosts, calendarEvents } = this.props;
-    
-    console.log(this.statDataPromise)
 
     return (
       <div className="font-sans border-black flex flex-col content-center w-full" >

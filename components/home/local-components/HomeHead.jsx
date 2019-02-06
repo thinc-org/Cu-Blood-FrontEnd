@@ -4,7 +4,7 @@ import I18 from '@/core/i18n';
 
 class HomeHead extends Component {
   render() {
-    const {t} = this.props;
+    const { t } = this.props;
     return (
       <div className="bg-cover bg-center" style={{ backgroundImage: 'url(../../../static/home/homehead.jpg)' }}>
         <div style={{ background: 'rgba(0, 0, 0, 0.5)' }}>
@@ -14,10 +14,10 @@ class HomeHead extends Component {
           </div>
             <div className="text-3xl font-normal mb-6 text-grey-lightest lg:w-2/5">
               {t('homeHeaderText1')}
-            <span className="text font-bold">{t('homeHeaderTextBold')}</span>
+              <span className="text font-bold">{t('homeHeaderTextBold')}</span>
               {t('homeHeaderText2')}
-          </div>
-            <Link href="/register" prefetch>
+            </div>
+            <Link href="/u/profile" prefetch>
               <button className="text-2xl bg-cb-red rounded-lg text-white px-20 py-4 mb-8 leading-none">{t('registerButton')}</button>
             </Link>
             <div className="w-auto flex justify-center md:justify-start">

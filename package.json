@@ -26,7 +26,7 @@
     "next:start": "next start",
     "gencss": "postcss ./components/core/tw.css -o ./components/core/tailwind.css",
     "start:tw": "postcss ./components/core/tw.css -o ./components/core/tailwind.css -w",
-    "start": "next start -p 8000",
+    "start": "NODE_ENV=production node server.js",
     "build": "react-scripts build",
     "test": "jest",
     "test:watch": "jest --watch",

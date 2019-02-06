@@ -42,8 +42,6 @@ class App extends Component {
 
   render() {
     const { announcementData, statData, facebookPosts, calendarEvents } = this.props;
-    
-    console.log(this.statDataPromise)
 
     return (
       <div className="font-sans border-black flex flex-col content-center w-full" >

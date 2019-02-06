@@ -156,7 +156,6 @@ class Enrollment extends Component {
             locationId: locationId,
             timeSlot: this.state.regisDate
         })
-        .then(console.log)
         .then(() => this.getSessionInfo())
         .then(() => this.toggleModal(locationModal))
         .catch(console.log)
@@ -169,7 +168,6 @@ class Enrollment extends Component {
             locationId: locationId,
             timeSlot: this.state.regisDate
         })
-        .then(console.log)
         .then(() => this.getSessionInfo())
         .then(() => this.toggleModal(locationModal))
         .catch(console.log)

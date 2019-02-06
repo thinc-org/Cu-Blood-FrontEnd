@@ -8,6 +8,7 @@ class RegisterFillForm extends Component {
         this.state = {
             formValid: false,
             username: "",
+            usernameValid: false,
             password: "",
             passwordValid: false,
             confirmedPassword: "",
@@ -18,9 +19,9 @@ class RegisterFillForm extends Component {
             birthdayValid: false,
             weight: "",
             weightValid: false,
-            email: "",
-            emailValid: false,
-            formErrors: { phoneNumber: "", birthday: "", weight: "", email: "", password: "" },
+            // email: "",
+            // emailValid: false,
+            formErrors: { phoneNumber: "", birthday: "", weight: "", username: "", password: "" },
             address: "",
             firstName: "",
             lastName: "",
@@ -44,7 +45,6 @@ class RegisterFillForm extends Component {
     componentDidMount() {
         // autofill infi from context api
         if (!this.props.userInfo) return;
-        console.log(this.props.userInfo, 'userInfo')
         let obj = {}
         let formErrors = {};
         for (const key in this.state) {
@@ -68,14 +68,10 @@ class RegisterFillForm extends Component {
                 obj.schoolId = this.props.userInfo.school.id - 1;
             }
         }
-        if(this.props.isEmail) {
-            obj.emailValid = true;
-        }
         if(this.props.updateInfo) {
             obj.passwordValid = true;
             obj.confirmedPasswordValid = true;
         }
-        console.log(obj, 'obj')
         this.setState(obj)
     }
 
@@ -121,11 +117,11 @@ class RegisterFillForm extends Component {
                 isValid = 20 < value;
                 formErrors.weight = isValid ? "" : "กรุณากรอกน้ำหนักให้ถูกต้อง";
                 break;
-            case "email":
+            case "username":
                 isValid = 20 < value;
                 const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                 isValid = re.test(value.toLowerCase());
-                formErrors.email = isValid ? "" : "อีเมลล์ของคุณไม่ถูกต้อง";
+                formErrors.username = isValid ? "" : "อีเมลล์ของคุณไม่ถูกต้อง";
                 break;
             default:
                 return;
@@ -143,7 +139,7 @@ class RegisterFillForm extends Component {
                 }
             }
         }
-        this.setState({ formValid: isValid }, () => console.log(this.state))
+        this.setState({ formValid: isValid })
     }
 
     render() {
@@ -153,8 +149,8 @@ class RegisterFillForm extends Component {
             <form onSubmit={onSubmit} className="layout-wide flex flex-col items-center justify-center pb-10 sm:py-10">
                 <div>
                     <FormGroup text="ข้อมูลในการเข้าสู่ระบบ">
-                        <Form text="ชื่อผู้ใช้" width="full">
-                            <Input disabled={updateInfo} value={this.state.username} onChange={this.handleChange} name="username" type="text" />
+                        <Form text="อีเมลล์" width="full">
+                            <Input disabled={updateInfo} value={this.state.username} onChange={this.handleChange} name="username" type="text" error={this.state.formErrors.username} />
                         </Form>
                         <Form text="รหัสผ่าน" width="full" smWidth="48">
                             <Input notRequired={updateInfo} value={this.state.password} onChange={this.handleChange} name="password" type="password" error={this.state.formErrors.password} />
@@ -164,9 +160,9 @@ class RegisterFillForm extends Component {
                         </Form>
                     </FormGroup>
                     <FormGroup text="ข้อมูลติดต่อ">
-                        <Form text="อีเมลล์" width="full" smWidth="48">
+                        {/* <Form text="อีเมลล์" width="full" smWidth="48">
                             <Input disabled={isEmail} value={this.state.email} onChange={this.handleChange} name="email" type="email" error={this.state.formErrors.email} />
-                        </Form>
+                        </Form> */}
                         <Form text="เบอร์โทรศัพท์" width="full" smWidth="48">
                             <Input value={this.state.phoneNumber} onChange={this.handleChange} name="phoneNumber" type="text" error={this.state.formErrors.phoneNumber} />
                         </Form>

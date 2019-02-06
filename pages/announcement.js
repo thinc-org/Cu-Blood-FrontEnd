@@ -88,8 +88,7 @@ class Notice extends React.Component {
     nextPage = () => {
         let myPage = this.state.currentPage + 1;
         this.disabledButton(myPage)
-        console.log(myPage)
-        
+
             return (
                 this.update(myPage)
             )
@@ -100,7 +99,6 @@ class Notice extends React.Component {
     previousPage = () => {
         let myPage = this.state.currentPage - 1;
         this.disabledButton(myPage)
-        console.log(myPage)
             return (
                 this.update(myPage)
             )

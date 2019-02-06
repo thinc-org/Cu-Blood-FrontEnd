@@ -28,7 +28,6 @@ class RegisterForm extends Component {
         for (let element of form.elements) {
             let value = element.value;
             const name = element.name;
-            console.log(name, 'name', value, 'value', element, )
             if (element.tagName === 'BUTTON') {
                 continue;
             } else if (name === "bloodType") {
@@ -49,7 +48,6 @@ class RegisterForm extends Component {
 
         if(!data.isEnrolled) data.isEnrolled = 0;
         data.bloodType = bloodType;
-        console.log(data, 'data from form')
         axios.put('https://api-dev.fives.cloud/v0/profile/me/update', data)
             .then(() => redirectTo('/u/profile'))
             .catch(e => console.log(e))

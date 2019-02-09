@@ -133,7 +133,8 @@ const BulletHeader = (props) => {
 const NoticeContact = () => {
     return (
         <div className="flex justify-center text-center font-cu-heading font-medium text-2xl p-8">
-            สามารถสอบถามรายละเอียดเพิ่มเติมได้ที่ <br />
+            {t('NoticeContact1')} <br />
+            {t('NoticeContact2')}
             โทร.0 2256 4300 , 0 2263 9600-99 ต่อ 1101,1760,1761
         </div>
     )

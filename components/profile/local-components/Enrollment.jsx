@@ -39,6 +39,7 @@ class Enrollment extends Component {
 
     render() {
         i18n.language === 'th' ? moment.locale('th') : moment.locale('en')
+        const { t } = this.props;
         const commonsInfo = this.state.commonsInfo;
         
         //Render when there is no commonsInfo passed through
@@ -108,7 +109,7 @@ class Enrollment extends Component {
                         <div className="w-full mb-8 font-cu-heading flex flex-col md:flex-row text-center md:text-left justify-between items-center">
                             <div className="text-3xl">{commonsInfo.name}</div>
                             <div className="text-sm sm:text-base flex mt-4 sm:mt-0 items-center">
-                                <div className="mr-2">เวลาที่เลือก:</div> 
+                                <div className="mr-2">{t('enrollmentViewTime')}</div> 
                                 <div className="text-cb-pink">{this.state.regisDate !== null ? moment(this.state.regisDate).format('D MMMM') : '-'}</div>
                                 <div className="text-cb-pink ml-2">{this.state.regisTimeId !== null? this.showTimeId() : null}</div>
                                 {fixDateButton}
@@ -118,8 +119,8 @@ class Enrollment extends Component {
                             {locationContent}
                         </div>
                         <div className="w-full flex flex-col sm:flex-row items-center sm:justify-between mt-8">
-                            <div className="mb-8 sm:mb-0 text-center sm:text-left"><Detail bigText={`${moment(commonsInfo.registrationStartDate).add('years', (i18n.language === 'th' ? 543 : 0)).format('D MMMM')} - ${moment(commonsInfo.registrationEndDate).add('years', (i18n.language === 'th' ? 543 : 0)).format('D MMMM')}`} smallText="วันลงทะเบียน" isBold={true} /></div>
-                            <div className="text-center sm:text-right"><Detail bigText={`${moment(commonsInfo.startDate).add('years', (i18n.language === 'th' ? 543 : 0)).format('D MMMM')} - ${moment(commonsInfo.endDate).add('years', (i18n.language === 'th' ? 543 : 0)).format('D MMMM')}`} smallText="วันบริจาคโลหิต" isBold={true} /></div>
+                            <div className="mb-8 sm:mb-0 text-center sm:text-left"><Detail bigText={`${moment(commonsInfo.registrationStartDate).add('years', (i18n.language === 'th' ? 543 : 0)).format('D MMMM')} - ${moment(commonsInfo.registrationEndDate).add('years', (i18n.language === 'th' ? 543 : 0)).format('D MMMM')}`} smallText={t('enrollmentRegisPeriod')} isBold={true} /></div>
+                            <div className="text-center sm:text-right"><Detail bigText={`${moment(commonsInfo.startDate).add('years', (i18n.language === 'th' ? 543 : 0)).format('D MMMM')} - ${moment(commonsInfo.endDate).add('years', (i18n.language === 'th' ? 543 : 0)).format('D MMMM')}`} smallText={t('enrollmentDonatePeriod')} isBold={true} /></div>
                         </div>
                     </Card>
                     {/* Modal that will show when click */}
@@ -134,6 +135,7 @@ class Enrollment extends Component {
 
     //Function that creates the location and register button
     content = (thaiName, engName, urlLocation, locationToggle, locationId) => {
+        const { t } = this.props;
         const alreadyRegistered = this.state.currentSessionInfo !== null;
         const isLocationPick = (this.state.currentSessionInfo !== null) && (this.state.currentSessionInfo.locationId === locationId)
 
@@ -144,7 +146,7 @@ class Enrollment extends Component {
             <div key={engName} className="flex flex-col md:flex-row items-center justify-between mb-8">
                 <div className="text-center md:text-left mb-4 md:mb-0"><Detail bigText={thaiName} smallText={engName} /></div>
                 <div className="flex font-cu-body items-center">
-                    <a href={`${urlLocation}`} target="_blank" rel="noopener noreferrer" className="text-base mr-8 text-center" style={{ color: "#58595b" }}>ดูแผนที่</a>
+                    <a href={`${urlLocation}`} target="_blank" rel="noopener noreferrer" className="text-base mr-8 text-center" style={{ color: "#58595b" }}>{t('enrollmentViewMap')}</a>
                     {button}
                 </div>
             </div>
@@ -214,16 +216,17 @@ class Enrollment extends Component {
     }
 
     //Function to choose the type of button in content
-    chooseButton = (registeredCondition, locationCondition, locationModal, locationId) => {
+    chooseButton = (registeredCondition, locationCondition, locationModal) => {
+        const { t } = this.props;
         if (registeredCondition) {
             if (locationCondition) {
                 return(<button onClick={() => this.toggleModal(locationModal + "QRCode")} className="text-base bg-cb-pink-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#de5c8e" }}>QR Code</button>);
             }
-            return (<button onClick={() => this.toggleModal(locationModal + "PutEnroll")} className="text-base bg-cb-grey-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#696969" }}>เปลี่ยนสถานที่</button>);
+            return (<button onClick={() => this.toggleModal(locationModal + "PutEnroll")} className="text-base bg-cb-grey-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#696969" }}>{t('enrollmentChangeLocation')}</button>);
         }
 
         return(
-            <button onClick={() => this.toggleModal(locationModal)} className="text-base bg-cb-pink-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#de5c8e" }}>ลงทะเบียน</button>
+            <button onClick={() => this.toggleModal(locationModal)} className="text-base bg-cb-pink-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#de5c8e" }}>{t('enrollmentRegister')}</button>
         );
     }
 
@@ -242,6 +245,7 @@ class Enrollment extends Component {
 
     // Function takes care of popup for first enrollment
     firstEnrollModal = (show, thaiName, engName, locationModal, locationId, projectId, dates) => {
+        const { t } = this.props;
         if(!show) {
             return null;
           }
@@ -255,29 +259,29 @@ class Enrollment extends Component {
         <div key={locationModal} className="fixed pin-l w-full h-full flex items-center justify-center" style={{backgroundColor: 'rgba(0,0,0,0.3)', top: 50}}>
             <div className="layout-wide flex justify-center">
                 <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{minWidth: '250px'}}>
-                    <div className="mb-6 px-4 sm:px-10 font-semibold">ยืนยันการลงทะเบียนสถานที่บริจาคโลหิต</div>
+                    <div className="mb-6 px-4 sm:px-10 font-semibold">{t('enrollmentChangeLocationHeader')}</div>
                     <div className="bg-cb-grey-lighter py-6 w-full px-4 sm:px-10 flex flex-col justify-center items-center">
                         <Detail bigText={`${thaiName}`} smallText={`${engName}`} />
                         <div className="mt-4 flex flex-col items-end">
                             <div className="flex items-center">
-                                <div className="mr-4">เลือกวันที่บริจาค:</div>        
+                                <div className="mr-4">{t('enrollmentRegisterChooseDate')}</div>        
                                 <select className="w-32" value={this.state.regisDate} onChange={this.handleChangeDate}>
                                     <option value={null}>YYYY-MM-DD</option>
                                     {datesOption}
                                 </select>
                             </div>
                             <div className="flex items-center mt-4">
-                                <div className="mr-4">เลือกช่วงเวลาบริจาค:</div>        
+                                <div className="mr-4">{t('enrollmentRegisterChooseTime')}</div>        
                                 <select className="w-32" value={String(this.state.regisTimeId)} onChange={this.handleChangeTimeId}>
-                                    <option value={null}>เริ่ม - จบ</option>
+                                    <option value={null}>{t('enrollmentRegisterTimeOption')}</option>
                                     {timeSlotsOption}
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div className="pt-6 flex justify-between px-4 sm:px-10">
-                        <button onClick={() => this.toggleModal(locationModal)}>ยกเลิก</button>
-                        <button className={formUnfilled ? "text-grey cursor-not-allowed" : "text-cb-pink"} onClick={() => this.postEnroll(locationModal, locationId, projectId)} disabled={formUnfilled}>ยืนยัน</button>   
+                        <button onClick={() => this.toggleModal(locationModal)}>{t('enrollmentCancel')}</button>
+                        <button className={formUnfilled ? "text-grey cursor-not-allowed" : "text-cb-pink"} onClick={() => this.postEnroll(locationModal, locationId, projectId)} disabled={formUnfilled}>{t('enrollmentConfirm')}</button>   
                     </div>               
                 </div>
             </div>
@@ -287,6 +291,7 @@ class Enrollment extends Component {
 
     //Function that takes care of modal when user wants to change location
     putEnrollModal = (show, thaiName, engName, locationModal, locationId) => {
+        const { t } = this.props;
         if(!show) {
             return null;
           }
@@ -295,13 +300,13 @@ class Enrollment extends Component {
         <div key={locationModal} className="fixed pin-l w-full h-full flex items-center justify-center" style={{backgroundColor: 'rgba(0,0,0,0.3)', top: 50}}>
             <div className="layout-wide flex justify-center">
                 <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{minWidth: '250px'}}>
-                    <div className="mb-6 px-4 sm:px-10 font-semibold">ยืนยันการลงทะเบียนสถานที่บริจาคโลหิต</div>
+                    <div className="mb-6 px-4 sm:px-10 font-semibold">{t('enrollmentRegisterHeader')}</div>
                     <div className="bg-cb-grey-lighter py-6 w-full px-4 sm:px-10 flex flex-col justify-center items-center">
                         <Detail bigText={`${thaiName}`} smallText={`${engName}`} />
                     </div>
                     <div className="pt-6 flex justify-between px-4 sm:px-10">
-                        <button onClick={() => this.toggleModal(locationModal)}>ยกเลิก</button>
-                        <button className="text-cb-pink" onClick={() => this.putEnroll(locationModal, locationId)}>ยืนยัน</button>   
+                        <button onClick={() => this.toggleModal(locationModal)}>{t('enrollmentCancel')}</button>
+                        <button className="text-cb-pink" onClick={() => this.putEnroll(locationModal, locationId)}>{t('enrollmentConfirm')}</button>   
                     </div>               
                 </div>
             </div>
@@ -311,6 +316,7 @@ class Enrollment extends Component {
 
     //Function that take cares of modal for showing QRCode
     QRCodeModal = (show, locationModal, locationNameTH) => {
+        const { t } = this.props;
         if(!show) {
             return null;
           }
@@ -326,7 +332,7 @@ class Enrollment extends Component {
                         <div className="text-cb-pink text-base">{locationNameTH}</div>
                     </div>
                     <div className="pt-6 flex justify-center px-4 sm:px-10">
-                        <button onClick={() => this.toggleModal(locationModal)}>ปิดหน้าต่าง</button> 
+                        <button onClick={() => this.toggleModal(locationModal)}>{t('enrollmentQRCodeClose')}</button> 
                     </div>               
                 </div>
             </div>
@@ -336,6 +342,7 @@ class Enrollment extends Component {
 
     //Function that takes care of modal when user wants to change date
     changeDateModal = (show, locationModal, dates) => {
+        const { t } = this.props;
         if(!show) {
             return null;
           }
@@ -347,7 +354,7 @@ class Enrollment extends Component {
         <div key={locationModal} className="fixed pin-l w-full h-full flex items-center justify-center" style={{backgroundColor: 'rgba(0,0,0,0.3)', top: 50}}>
             <div className="layout-wide flex justify-center">
                 <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{minWidth: '250px'}}>
-                    <div className="mb-6 px-4 sm:px-10 font-semibold">กรุณาเลือกวันที่และเวลาใหม่</div>
+                    <div className="mb-6 px-4 sm:px-10 font-semibold">{t('enrollmentChangeDate')}</div>
                     <div className="bg-cb-grey-lighter py-6 w-full px-4 sm:px-10 flex flex-col justify-center items-center">
                         <select className="w-32" value={this.state.regisDate} onChange={this.handleChangeDate}>
                             {datesOption}
@@ -359,8 +366,8 @@ class Enrollment extends Component {
                         </select>
                     </div>
                     <div className="pt-6 flex justify-between px-4 sm:px-10">
-                        <button onClick={() => this.toggleModal(locationModal)}>ยกเลิก</button>
-                        <button className="text-cb-pink" onClick={() => this.putEnroll(locationModal, this.state.currentSessionInfo.locationId)}>ยืนยัน</button>
+                        <button onClick={() => this.toggleModal(locationModal)}>{t('enrollmentCancel')}</button>
+                        <button className="text-cb-pink" onClick={() => this.putEnroll(locationModal, this.state.currentSessionInfo.locationId)}>{t('enrollmentConfirm')}</button>
                     </div>               
                 </div>
             </div>
@@ -369,4 +376,4 @@ class Enrollment extends Component {
     }
 }
 
-export default Enrollment;
+export default I18.withNamespaces('profile')(Enrollment);

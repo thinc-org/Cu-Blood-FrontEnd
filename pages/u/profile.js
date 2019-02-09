@@ -50,4 +50,4 @@ class Profile extends Component {
     }
 }
 
-export default I18.withNamespaces('profile')(Profile);
+export default Profile;

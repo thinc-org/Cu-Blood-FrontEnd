@@ -26,5 +26,14 @@
     "personalInfoStudentId" : "Student ID",
     "personalInfoFaculty" : "Faculty",
     "personalInfoYear" : "Year",
-    "personalInfoBlood" : "Blood Type"    
+    "personalInfoBlood" : "Blood Type",
+    "personalInfoWeight" : "Weight",
+    "personalInfoShirt" : "Shirt Size",
+    "personalInfoDonateBefore" : "Donated Blood Before",
+    "personalInfoDonateCUBlood" : "Donated with CU Blood Before",
+    "personalInfoForeigner" : "Foreigner",
+    "personalInfoDid" : "Yes",
+    "personalInfoDidNot" : "No",
+    "personalInfoYes" : "Yes",
+    "personalInfoNo" : "No"    
 }

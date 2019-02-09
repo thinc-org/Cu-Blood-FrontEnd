@@ -34,11 +34,11 @@ class PersonalInfo extends Component {
                                 {this.content(userInfo.school.nameTH, t('personalInfoFaculty'))}
                                 {this.content(this.academicYear(userInfo.academicYear), t('personalInfoYear'))}
                                 {this.content(this.bloodType(userInfo.bloodType), t('personalInfoBlood'))}
-                                {this.content(`${userInfo.weight} kg`, "น้ำหนัก")}
-                                {this.content(this.shirtSize(userInfo.shirtSize), "ไซส์เสื้อ")}
-                                {this.content(userInfo.isDonated === 1 ? "เคย" : "ไม่เคย", "เคยปริจาคเลือด")}
-                                {this.content(userInfo.isEnrolled === 1 ? "เคย" : "ไม่เคย", "เคยปริจาคกับทาง CU Blood")}
-                                {this.content(userInfo.nationality === 1 ? "ใช่" : "ไม่ใช่", "เป็นชาวต่างชาติ")}
+                                {this.content(`${userInfo.weight} kg`, t('personalInfoWeight'))}
+                                {this.content(this.shirtSize(userInfo.shirtSize), t('personalInfoShirt'))}
+                                {this.content(userInfo.isDonated === 1 ? t('personalInfoDid') : t('personalInfoDidNot'), t('personalInfoDonateBefore'))}
+                                {this.content(userInfo.isEnrolled === 1 ? t('personalInfoDid') : t('personalInfoDidNot'), t('personalInfoDonateCUBlood'))}
+                                {this.content(userInfo.nationality === 1 ? t('personalInfoYes') : t('personalInfoNo'), t('personalInfoForeigner'))}
                             </div>                             
                         )
                     }}

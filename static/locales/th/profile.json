@@ -26,5 +26,14 @@
     "personalInfoStudentId" : "รหัสนิสิต",
     "personalInfoFaculty" : "คณะที่ศึกษา",
     "personalInfoYear" : "ชั้นปี",
-    "personalInfoBlood" : "หมู่เลือด"
+    "personalInfoBlood" : "หมู่เลือด",
+    "personalInfoWeight" : "น้ำหนัก",
+    "personalInfoShirt" : "ไซส์เสื้อ",
+    "personalInfoDonateBefore" : "เคยปริจาคเลือด",
+    "personalInfoDonateCUBlood" : "เคยปริจาคกับทาง CU Blood",
+    "personalInfoForeigner" : "เป็นชาวต่างชาติ",
+    "personalInfoDid" : "เคย",
+    "personalInfoDidNot" : "ไม่เคย",
+    "personalInfoYes" : "ใช่",
+    "personalInfoNo" : "ไม่ใช่"
 }

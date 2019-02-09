@@ -10,8 +10,8 @@ class ContactContent extends Component {
                 </div>
                 <div className="w-full sm:w-1/2 border-cb-grey-border border-t sm:border-t-0 sm:border-l pt-6 sm:pt-0 sm:pl-8 flex flex-col font-semibold">
                     <div className="flex items-center pb-6 sm:pb-0 mb-2">
-                        <div className="mr-4 flex items-center"><img className="w-6" src="/static/icons/telephone.svg" alt="Phone logo"/></div>
-                        <div></div>
+                        <div className="mr-4 flex items-center"><img className="w-6" src="/static/icons/facebook.svg" alt="Facebook logo"/></div>
+                        <div>Facebook CU Blood</div>
                     </div>
                     <div className="flex items-center">
                         <div className="mr-4 flex items-center"><img className="w-6" src="/static/icons/mail.svg" alt="Phone logo"/></div>

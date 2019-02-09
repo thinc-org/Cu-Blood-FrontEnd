@@ -25,7 +25,6 @@ class Profile extends Component {
                 .then(response => response.data)
                 .catch(e => null)))
             .catch(console.log);
-
         const [commonsData, sessionData] = data;
         return {
             commonsData,

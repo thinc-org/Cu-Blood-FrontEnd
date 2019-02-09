@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from '@/shared-components/TopicLeft';
 import Detail from './Detail';
 import Card from '@/shared-components/Card';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import I18 from '@/core/i18n';
 import axios from '@/core/core';
 import QRCode from 'qrcode.react';
@@ -15,6 +15,7 @@ class Enrollment extends Component {
 
         this.state = {
             regisDate: (this.props.sessionInfo !== null) && (this.props.sessionInfo[this.props.sessionInfo.length - 1].project.id === this.props.commonsInfo.id) ? this.props.sessionInfo[this.props.sessionInfo.length - 1].timeSlot : null,
+            regisTimeId: (this.props.sessionInfo !== null) && (this.props.sessionInfo[this.props.sessionInfo.length - 1].project.id === this.props.commonsInfo.id) ? this.props.sessionInfo[this.props.sessionInfo.length - 1].timeId : null,
             currentSessionInfo: (this.props.sessionInfo !== null) && (this.props.sessionInfo[this.props.sessionInfo.length - 1].project.id === this.props.commonsInfo.id) ? this.props.sessionInfo[this.props.sessionInfo.length - 1] : null,
             commonsInfo : this.props.commonsInfo,
             modalOpener : {changeDateModal : false}
@@ -54,6 +55,21 @@ class Enrollment extends Component {
             );
         }
         
+        const regisStartDate = moment(commonsInfo.registrationStartDate).format('MM/DD/YYYY');
+        const regisEndDate = moment(commonsInfo.registrationEndDate).format('MM/DD/YYYY');
+        const userDate = moment().tz('Asia/Bangkok').format('MM/DD/YYYY');
+        if (Date.parse(userDate) <= Date.parse(regisStartDate) || Date.parse(userDate) >= Date.parse(regisEndDate)) {
+            return(
+                <div className="bg-cb-grey-lighter pb-10">
+                    <div className="layout-wide">
+                        <Header english="ENROLLMENT" thai="ลงทะเบียนเข้าร่วม" englishColor="text-cb-pink" borderColor="border-cb-red" />
+                        <Card>
+                            <Detail bigText="ขณะนี้ไม่ได้อยู่ในช่วงเปิดให้ลงทะเบียน" smallText="Currently, it is not in the registration period."/>
+                        </Card>
+                    </div>
+                </div>
+            );
+        }
         
         const datesDuringDonation = commonsInfo !== null ? commonsInfo.timeSlots : null;
         //Create fix date button if the user already registered for the current event
@@ -92,8 +108,9 @@ class Enrollment extends Component {
                         <div className="w-full mb-8 font-cu-heading flex flex-col md:flex-row text-center md:text-left justify-between items-center">
                             <div className="text-3xl">{commonsInfo.name}</div>
                             <div className="text-sm sm:text-base flex mt-4 sm:mt-0 items-center">
-                                <div className="mr-2">วันที่เลือกปริจาคโลหิต:</div> 
+                                <div className="mr-2">เวลาที่เลือก:</div> 
                                 <div className="text-cb-pink">{this.state.regisDate !== null ? moment(this.state.regisDate).format('D MMMM') : '-'}</div>
+                                <div className="text-cb-pink ml-2">{this.state.regisTimeId !== null? this.showTimeId() : null}</div>
                                 {fixDateButton}
                             </div>
                         </div>
@@ -136,7 +153,8 @@ class Enrollment extends Component {
 
     //Function to toggle modal on/off
     toggleModal = (locationName) => {
-        const registeredDate = this.state.currentSessionInfo !== null ? this.state.currentSessionInfo.timeSlot : null
+        const registeredDate = this.state.currentSessionInfo !== null ? this.state.currentSessionInfo.timeSlot : null;
+        const registeredTimeId = this.state.currentSessionInfo !== null ? this.state.currentSessionInfo.timeId : null;
         const stateOfModal = this.state.modalOpener[locationName];
         this.setState(
             prevState => ({
@@ -144,7 +162,8 @@ class Enrollment extends Component {
                     ...prevState.modalOpener,
                     [locationName] : !stateOfModal
                 },
-                regisDate : registeredDate
+                regisDate : registeredDate,
+                regisTimeId: registeredTimeId
             })
         );
     }
@@ -154,7 +173,8 @@ class Enrollment extends Component {
         axios.post('https://api-dev.fives.cloud/v0/profile/me/enroll', {
             projectId: projectId,
             locationId: locationId,
-            timeSlot: this.state.regisDate
+            timeSlot: this.state.regisDate,
+            timeId: this.state.regisTimeId
         })
         .then(() => this.getSessionInfo())
         .then(() => this.toggleModal(locationModal))
@@ -166,7 +186,8 @@ class Enrollment extends Component {
         axios.put('https://api-dev.fives.cloud/v0/profile/me/enroll', {
             sessionId: this.state.currentSessionInfo.id,
             locationId: locationId,
-            timeSlot: this.state.regisDate
+            timeSlot: this.state.regisDate,
+            timeId: this.state.regisTimeId
         })
         .then(() => this.getSessionInfo())
         .then(() => this.toggleModal(locationModal))
@@ -183,8 +204,13 @@ class Enrollment extends Component {
     }
 
     //Function to setState to regisDate for when date option is pick
-    handleChange = (event) => {
+    handleChangeDate = (event) => {
         this.setState({regisDate: event.target.value})
+    }
+
+    //Function setState to regisTimeId for when time slot option is pick
+    handleChangeTimeId = (event) => {
+        this.setState({regisTimeId: Number(event.target.value)})
     }
 
     //Function to choose the type of button in content
@@ -201,6 +227,19 @@ class Enrollment extends Component {
         );
     }
 
+    //Function to show the timeId on the enrollment
+    showTimeId = () => {
+        const timeId = Number(this.state.regisTimeId);
+        switch(timeId) {
+            case 2: 
+            return "09:00 - 12:00";
+            case 3: 
+            return "13:00 - 16:00";
+            default:
+            return null;
+        }
+    }
+
     // Function takes care of popup for first enrollment
     firstEnrollModal = (show, thaiName, engName, locationModal, locationId, projectId, dates) => {
         if(!show) {
@@ -209,26 +248,36 @@ class Enrollment extends Component {
         
         // Turn the array of dates into options to select
         const datesOption = dates !== null ? dates.map(date => <option key={date} value={moment(date).format('YYYY-MM-DD')}>{moment(date).format('D MMMM')}</option>) : null;
-        
+        const timeSlotsOption = this.state.commonsInfo !== null ? this.state.commonsInfo.times.map(time => <option key={time.id} value={time.id}>{moment(time.startTime, 'HH:mm:ss').format('HH:mm')} - {moment(time.endTime, 'HH:mm:ss').format('HH:mm')}</option>) : null;
+        const formUnfilled = this.state.regisDate === null || this.state.regisTimeId === null
+
         return (
         <div key={locationModal} className="fixed pin-l w-full h-full flex items-center justify-center" style={{backgroundColor: 'rgba(0,0,0,0.3)', top: 50}}>
             <div className="layout-wide flex justify-center">
                 <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{minWidth: '250px'}}>
                     <div className="mb-6 px-4 sm:px-10 font-semibold">ยืนยันการลงทะเบียนสถานที่บริจาคโลหิต</div>
-                    <div className="bg-cb-grey-lighter py-6 w-full px-4 sm:px-10 flex flex-col justify-center">
+                    <div className="bg-cb-grey-lighter py-6 w-full px-4 sm:px-10 flex flex-col justify-center items-center">
                         <Detail bigText={`${thaiName}`} smallText={`${engName}`} />
-                        <div className="mt-4 flex justify-center items-center">
-                            <label>เลือกวันที่บริจาค: 
-                                <select className="w-32" value={this.state.regisDate} onChange={this.handleChange}>
+                        <div className="mt-4 flex flex-col items-end">
+                            <div className="flex items-center">
+                                <div className="mr-4">เลือกวันที่บริจาค:</div>        
+                                <select className="w-32" value={this.state.regisDate} onChange={this.handleChangeDate}>
                                     <option value={null}>YYYY-MM-DD</option>
                                     {datesOption}
                                 </select>
-                            </label>
+                            </div>
+                            <div className="flex items-center mt-4">
+                                <div className="mr-4">เลือกช่วงเวลาบริจาค:</div>        
+                                <select className="w-32" value={String(this.state.regisTimeId)} onChange={this.handleChangeTimeId}>
+                                    <option value={null}>เริ่ม - จบ</option>
+                                    {timeSlotsOption}
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div className="pt-6 flex justify-between px-4 sm:px-10">
                         <button onClick={() => this.toggleModal(locationModal)}>ยกเลิก</button>
-                        <button className="text-cb-pink" onClick={() => this.postEnroll(locationModal, locationId, projectId)}>ยืนยัน</button>   
+                        <button className={formUnfilled ? "text-grey cursor-not-allowed" : "text-cb-pink"} onClick={() => this.postEnroll(locationModal, locationId, projectId)} disabled={formUnfilled}>ยืนยัน</button>   
                     </div>               
                 </div>
             </div>
@@ -292,15 +341,21 @@ class Enrollment extends Component {
           }
         
         const datesOption = dates !== null ? dates.map(date => <option key={date} value={moment(date).format('YYYY-MM-DD')}>{moment(date).format('D MMMM')}</option>) : null;
-
+        const timeSlotsOption = this.state.commonsInfo !== null ? this.state.commonsInfo.times.map(time => <option key={time.id} value={time.id}>{moment(time.startTime, 'HH:mm:ss').format('HH:mm')} - {moment(time.endTime, 'HH:mm:ss').format('HH:mm')}</option>) : null;
+        
         return (
         <div key={locationModal} className="fixed pin-l w-full h-full flex items-center justify-center" style={{backgroundColor: 'rgba(0,0,0,0.3)', top: 50}}>
             <div className="layout-wide flex justify-center">
                 <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{minWidth: '250px'}}>
-                    <div className="mb-6 px-4 sm:px-10 font-semibold">กรุณาเลือกวันที่ใหม่</div>
+                    <div className="mb-6 px-4 sm:px-10 font-semibold">กรุณาเลือกวันที่และเวลาใหม่</div>
                     <div className="bg-cb-grey-lighter py-6 w-full px-4 sm:px-10 flex flex-col justify-center items-center">
-                        <select className="w-32" value={this.state.regisDate} onChange={this.handleChange}>
+                        <select className="w-32" value={this.state.regisDate} onChange={this.handleChangeDate}>
                             {datesOption}
+                        </select>
+                    </div>
+                    <div className="bg-cb-grey-lighter py-6 w-full px-4 sm:px-10 flex flex-col justify-center items-center">
+                        <select className="w-32" value={String(this.state.regisTimeId)} onChange={this.handleChangeTimeId}>
+                            {timeSlotsOption}
                         </select>
                     </div>
                     <div className="pt-6 flex justify-between px-4 sm:px-10">

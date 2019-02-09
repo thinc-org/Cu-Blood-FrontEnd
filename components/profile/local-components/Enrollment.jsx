@@ -15,7 +15,7 @@ class Enrollment extends Component {
 
         this.state = {
             regisDate: (this.props.sessionInfo !== null) && (this.props.sessionInfo[this.props.sessionInfo.length - 1].project.id === this.props.commonsInfo.id) ? this.props.sessionInfo[this.props.sessionInfo.length - 1].timeSlot : null,
-            regisTimeId: (this.props.sessionInfo !== null) && (this.props.sessionInfo[this.props.sessionInfo.length - 1].project.id === this.props.commonsInfo.id) ? this.props.sessionInfo[this.props.sessionInfo.length - 1].timeId : null,
+            regisTimeId: null,
             currentSessionInfo: (this.props.sessionInfo !== null) && (this.props.sessionInfo[this.props.sessionInfo.length - 1].project.id === this.props.commonsInfo.id) ? this.props.sessionInfo[this.props.sessionInfo.length - 1] : null,
             commonsInfo : this.props.commonsInfo,
             modalOpener : {changeDateModal : false}
@@ -34,6 +34,11 @@ class Enrollment extends Component {
                 }
             })
             ));
+        }
+
+        if (this.state.commonsInfo !== null && this.state.currentSessionInfo !== null) {
+            const timeId = this.getTimeId();
+            this.setState({regisTimeId: timeId})
         }
     }
 
@@ -156,7 +161,7 @@ class Enrollment extends Component {
     //Function to toggle modal on/off
     toggleModal = (locationName) => {
         const registeredDate = this.state.currentSessionInfo !== null ? this.state.currentSessionInfo.timeSlot : null;
-        const registeredTimeId = this.state.currentSessionInfo !== null ? this.state.currentSessionInfo.timeId : null;
+        const registeredTimeId = this.state.currentSessionInfo !== null ? this.getTimeId() : null;
         const stateOfModal = this.state.modalOpener[locationName];
         this.setState(
             prevState => ({
@@ -240,6 +245,17 @@ class Enrollment extends Component {
             return "13:00 - 16:00";
             default:
             return null;
+        }
+    }
+
+    //Function to turn time label from /profile/session to timeId
+    getTimeId = () => {
+        if (this.state.currentSessionInfo.time.label === "ช่วงเช้า") {
+            return 2;
+        }
+
+        else if (this.state.currentSessionInfo.time.label === "ช่วงบ่าย") {
+            return 3;
         }
     }
 
@@ -360,7 +376,7 @@ class Enrollment extends Component {
                             {datesOption}
                         </select>
                     </div>
-                    <div className="bg-cb-grey-lighter py-6 w-full px-4 sm:px-10 flex flex-col justify-center items-center">
+                    <div className="bg-cb-grey-lighter pb-6 w-full px-4 sm:px-10 flex flex-col justify-center items-center">
                         <select className="w-32" value={String(this.state.regisTimeId)} onChange={this.handleChangeTimeId}>
                             {timeSlotsOption}
                         </select>

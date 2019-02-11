@@ -37,6 +37,12 @@
 :invalid {
     box-shadow: none;
 }
+
+select, input {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
   
 :-moz-submit-invalid {
     box-shadow: none;

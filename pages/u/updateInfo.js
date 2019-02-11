@@ -57,7 +57,7 @@ class RegisterForm extends Component {
         const { commonsData } = this.props;
         return (
             <div>
-                <div className="bg-cb-grey-lighter"><Header english={`REGISTER`} thai={`ลงทะเบียน`} englishColor={`text-cb-pink`} borderColor={`border-cb-red`} /></div>
+                <div className="bg-cb-grey-lighter"><Header english={`EDIT INFO`} thai={`แก้ไขข้อมุล`} englishColor={`text-cb-pink`} borderColor={`border-cb-red`} /></div>
                 <div className="bg-white">
                     <UserInfoConsumer>
                         {({ userInfo, isUpdated }) => (<Form key={isUpdated ? 0 : 1} commonsData={commonsData} onSubmit={this.onSubmit} userInfo={userInfo} updateInfo={true} isEmail={true} />)}

@@ -13,6 +13,10 @@ export default class extends Component {
 }
 
 export const Selector = ({ choices = [], value, name, onChange, disabled = false }) => {
+    const select = {
+        background: "url(../../static/icons/arrow-down.svg) right 5px center / 12px 15px no-repeat #efefef",
+        height: "40px"
+    }
     const options = choices.map((choice, index) => {
         return (
             <option required key={index} value={index}>{choice}</option>
@@ -20,7 +24,7 @@ export const Selector = ({ choices = [], value, name, onChange, disabled = false
     })
     return (
         <React.Fragment>
-            <select disabled={disabled} value={value} name={name} onChange={onChange} required className="bg-cb-grey-light rounded-lg mt-2 px-4 py-2 w-full font-cu-body" style={{height: "40px"}} >
+            <select disabled={disabled} value={value} name={name} onChange={onChange} required className="rounded-lg mt-2 px-4 py-2 w-full font-cu-body" style={select} >
                 <option value=""></option>
                 {options}
             </select>

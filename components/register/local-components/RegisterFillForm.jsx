@@ -163,7 +163,7 @@ class RegisterFillForm extends Component {
             <form onSubmit={onSubmit} className="layout-wide flex flex-col items-center justify-center pb-10 sm:py-10">
                 <div>
                     <FormGroup text="ข้อมูลในการเข้าสู่ระบบ">
-                        <Form text="อีเมล์" width="full">
+                        <Form text="อีเมล์" width="full" smWidth="full">
                             <Input disabled={updateInfo} value={this.state.username} onChange={this.handleChange} name="username" type="text" error={this.state.formErrors.username} />
                         </Form>
                         <Form text="รหัสผ่าน" width="full" smWidth="48">
@@ -180,7 +180,7 @@ class RegisterFillForm extends Component {
                         <Form text="หมายเลขโทรศัพท์" width="full" smWidth="48">
                             <Input value={this.state.phoneNumber} onChange={this.handleChange} name="phoneNumber" type="text" error={this.state.formErrors.phoneNumber} />
                         </Form>
-                        <Form text="ที่อยู่ปัจจุบัน" width="full">
+                        <Form text="ที่อยู่ปัจจุบัน" width="full" smWidth="full">
                             <textarea value={this.state.address ? this.state.address : ""} onChange={this.handleChange} name="address" style={{ height: "100px", resize: "none" }} required className={`${inputClassName} w-full`} />
                         </Form>
                     </FormGroup>
@@ -223,7 +223,7 @@ class RegisterFillForm extends Component {
                         </Form>
                     </FormGroup>
                     <FormGroup text="ข้อมูลทางการแพทย์">
-                        <Form text="โรคประจำตัว (ถ้าไม่มีให้กรอก -)" width="full">
+                        <Form text="โรคประจำตัว (ถ้าไม่มีให้กรอก -)" width="full" smWidth="full">
                             <textarea value={this.state.medicalCondition} onChange={this.handleChange} name="medicalCondition" style={{ height: "100px", resize: "none" }} className={`${inputClassName} w-full`} />
                         </Form>
                         <Form text="หมู่โลหิต" width="32" smWidth="48">
@@ -246,7 +246,7 @@ class RegisterFillForm extends Component {
                             <input checked={this.state.accepted} onChange={this.handleChange} name="accepted" required type="checkbox" />
                             <div className="check-text flex"><span>I have <a href="https://google.com" target="_blank" rel="noopener noreferrer" className="no-underline"><span className="text-cb-pink font-semibold">read the guide</span></a> and agreed to <span className="text-cb-pink font-semibold">Terms and Conditions</span>.</span></div>
                         </label>
-                        <button disabled={!this.state.formValid} className="px-10 py-3 text-white bg-cb-red rounded-lg mt-6 btn" type="submit" id="confirm" >ลงทะเบียน</button>
+                        <button disabled={!this.state.formValid} className="px-10 pb-3 pt-4 text-white bg-cb-red rounded-lg mt-6 btn font-cu-heading " type="submit" id="confirm" >ลงทะเบียน</button>
                     </div>
                 </div>
             </form>

@@ -76,8 +76,7 @@ class Enrollment extends Component {
                 </div>
             );
         }
-        
-        console.log(this.state.currentSessionInfo);
+
         const datesDuringDonation = commonsInfo !== null ? commonsInfo.timeSlots : null;
         //Create fix date button if the user already registered for the current event
         const fixDateButton = this.state.currentSessionInfo !== null ? <button className="ml-2" onClick={() => this.toggleModal('changeDateModal')}><img className="w-6" src="/static/icons/fix.svg" alt="Fix logo" /></button> : null; 
@@ -344,7 +343,7 @@ class Enrollment extends Component {
                 <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{minWidth: '250px'}}>
                     <div className="mb-6 px-4 sm:px-10 font-semibold">QR Code</div>
                     <div className="bg-cb-grey-lighter py-6 w-full px-4 sm:px-10 flex flex-col justify-center items-center">
-                        <QRCode value={this.state.currentSessionInfo.id} renderAs="svg" size="125" />
+                        <QRCode value={this.state.currentSessionInfo.id} renderAs="svg" size={125} />
                         <div className="mt-4 mb-1">{this.state.commonsInfo.name}</div>
                         <div className="text-cb-pink text-base">{locationNameTH}</div>
                     </div>

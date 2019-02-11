@@ -98,7 +98,7 @@ class NoticeContent extends React.Component {
                 <BulletPoint bullet={8} context={contextPost8} />
                 <BulletPoint bullet={9} context={contextPost9} />
                 <BulletPoint bullet={10} context={contextPost10} />
-                <NoticeContact />
+                <NoticeContact t = {t}/>
             </div>
         );
     }

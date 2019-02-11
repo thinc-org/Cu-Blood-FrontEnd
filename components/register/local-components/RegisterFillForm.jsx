@@ -21,7 +21,7 @@ class RegisterFillForm extends Component {
             weightValid: false,
             // email: "",
             // emailValid: false,
-            formErrors: { phoneNumber: "", birthday: "", weight: "", username: "", password: "" },
+            formErrors: { phoneNumber: "", birthday: "", weight: "", username: "", password: "", studentId: "" },
             address: "",
             firstName: "",
             lastName: "",
@@ -32,6 +32,7 @@ class RegisterFillForm extends Component {
             nationality: "",
             academicYear: "",
             studentId: "",
+            studentIdValid: false,
             schoolId: "",
             medicalCondition: "",
             bloodType: "",
@@ -39,6 +40,7 @@ class RegisterFillForm extends Component {
             isDonated: false,
             accepted: false,
             moreThan3: false,
+            requiresStudentlId: true,
         };
     }
 
@@ -68,7 +70,7 @@ class RegisterFillForm extends Component {
                 obj.schoolId = this.props.userInfo.school.id - 1;
             }
         }
-        if(this.props.updateInfo) {
+        if (this.props.updateInfo) {
             obj.passwordValid = true;
             obj.confirmedPasswordValid = true;
         }
@@ -93,7 +95,7 @@ class RegisterFillForm extends Component {
                 isValid = value.length >= 8;
                 formErrors.confirmedPassword = isMatched ? "" : "รหัสผ่านไม่ตรงกัน";
                 formErrors.password = isValid ? "" : "รหัสผ่านต้องมากกว่า 8 หลัก";
-                return { "passwordValid": isValid, "confirmedPasswordValid": isMatched , "formErrors": formErrors };
+                return { "passwordValid": isValid, "confirmedPasswordValid": isMatched, "formErrors": formErrors };
             case "confirmedPassword":
                 isValid = true;
                 isValid = value === this.state.password;
@@ -106,7 +108,7 @@ class RegisterFillForm extends Component {
             case "birthday":
                 // please fix bug: day 31 verification problem
                 const end = new Date(this.props.commonsData.endDate);
-                const endAge = new Date(end.getFullYear(), end.getMonth(), end.getDate() + 3).getTime(); // three day as failsafe from actual date
+                const endAge = new Date(end.getFullYear(), end.getMonth(), end.getDate() + 7).getTime(); // three day as failsafe from actual date
                 const nowAge = Date.now();
                 const ageDifMs = ((endAge - nowAge > 0) ? endAge : nowAge) - new Date(value).getTime();
                 const ageDate = new Date(ageDifMs); // miliseconds from epoch
@@ -122,6 +124,17 @@ class RegisterFillForm extends Component {
                 const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                 isValid = re.test(value.toLowerCase());
                 formErrors.username = isValid ? "" : "อีเมลล์ของคุณไม่ถูกต้อง";
+                break;
+            case "status":
+                // alumni (options no.1) don't need school id
+                if (value == 1) {
+                    formErrors.studentId = ""
+                    return { requiresStudentlId: false, studentIdValid: true, studentId : "", "formErrors": formErrors }
+                };
+                return { requiresStudentlId: true, studentIdValid: false, studentId: "" };
+            case "studentId":
+                isValid = value.length === 10 && Number(value) == value;
+                formErrors.studentId = isValid ? "" : "กรุณากรอกรหัสให้ครบ 10 หลัก";
                 break;
             default:
                 return;
@@ -143,13 +156,14 @@ class RegisterFillForm extends Component {
     }
 
     render() {
-        const { onSubmit, isEmail, isChulaId, commonsData, updateInfo } = this.props;
+        const { onSubmit, isChulaId, commonsData, updateInfo } = this.props;
+        // const { onSubmit, isEmail, isChulaId, commonsData, updateInfo } = this.props; // leave isEmail for ldap implementation
         const inputClassName = `bg-cb-grey-light rounded-lg mt-2 px-4 py-4 font-cu-body`;
         return (
             <form onSubmit={onSubmit} className="layout-wide flex flex-col items-center justify-center pb-10 sm:py-10">
                 <div>
                     <FormGroup text="ข้อมูลในการเข้าสู่ระบบ">
-                        <Form text="อีเมลล์" width="full">
+                        <Form text="อีเมล์" width="full" smWidth="full">
                             <Input disabled={updateInfo} value={this.state.username} onChange={this.handleChange} name="username" type="text" error={this.state.formErrors.username} />
                         </Form>
                         <Form text="รหัสผ่าน" width="full" smWidth="48">
@@ -163,11 +177,11 @@ class RegisterFillForm extends Component {
                         {/* <Form text="อีเมลล์" width="full" smWidth="48">
                             <Input disabled={isEmail} value={this.state.email} onChange={this.handleChange} name="email" type="email" error={this.state.formErrors.email} />
                         </Form> */}
-                        <Form text="เบอร์โทรศัพท์" width="full" smWidth="48">
+                        <Form text="หมายเลขโทรศัพท์" width="full" smWidth="48">
                             <Input value={this.state.phoneNumber} onChange={this.handleChange} name="phoneNumber" type="text" error={this.state.formErrors.phoneNumber} />
                         </Form>
-                        <Form text="ที่อยู่" width="full">
-                            <textarea value={this.state.address ? this.state.address : ""} onChange={this.handleChange} name="address" style={{height: "100px", resize: "none"}} required className={`${inputClassName} w-full`} />
+                        <Form text="ที่อยู่ปัจจุบัน" width="full" smWidth="full">
+                            <textarea value={this.state.address ? this.state.address : ""} onChange={this.handleChange} name="address" style={{ height: "100px", resize: "none" }} required className={`${inputClassName} w-full`} />
                         </Form>
                     </FormGroup>
                     <FormGroup text="ข้อมูลทั่วไป">
@@ -190,7 +204,7 @@ class RegisterFillForm extends Component {
                             <Selector value={this.state.shirtSize} onChange={this.handleChange} name="shirtSize" choices={['M (38")', 'L (40")', 'XL (42")', 'XXL (44")']} />
                         </Form>
                         <Form text="น้ำหนัก" width="24">
-                            <Input value={this.state.weight} onChange={this.handleChange} name="weight" type="number" error={this.state.formErrors.weight} />
+                            <Input value={this.state.weight} onChange={this.handleChange} name="weight" type="text" error={this.state.formErrors.weight} />
                         </Form>
                         <Form text="สถานภาพ" width="24">
                             <Selector value={this.state.status} onChange={this.handleChange} name="status" choices={['นิสิตจุฬา', 'นิสิตเก่า', 'บุคลากร', 'อาจารย์']} />
@@ -201,18 +215,18 @@ class RegisterFillForm extends Component {
                         <Form text="ชั้นปี" width="24">
                             <Selector disabled={isChulaId} value={this.state.academicYear} onChange={this.handleChange} name="academicYear" choices={['1', '2', '3', '4', '5', '6', "ปริญญาโท", 'ปริญญาเอก', 'อื่นๆ']} />
                         </Form>
-                        <Form text="รหัสนิสิต" width="full" smWidth="48">
-                            <Input disabled={isChulaId} value={this.state.studentId} onChange={this.handleChange} name="studentId" type="text" />
+                        <Form text="รหัสนักศึกษา/บุคลากร" width="full" smWidth="48">
+                            <Input disabled={isChulaId || !this.state.requiresStudentlId} value={this.state.studentId} onChange={this.handleChange} name="studentId" type="text" error={this.state.formErrors.studentId} />
                         </Form>
                         <Form text="คณะ" width="full" smWidth="48">
                             <Selector disabled={isChulaId} value={this.state.schoolId} onChange={this.handleChange} name="schoolId" choices={map(commonsData.schools, 'nameTH')} />
                         </Form>
                     </FormGroup>
                     <FormGroup text="ข้อมูลทางการแพทย์">
-                        <Form text="โรคประจำตัว (ถ้าไม่มีให้กรอก -)" width="full">
-                            <textarea value={this.state.medicalCondition} onChange={this.handleChange} name="medicalCondition" style={{height: "100px", resize: "none"}} className={`${inputClassName} w-full`} />
+                        <Form text="โรคประจำตัว (ถ้าไม่มีให้กรอก -)" width="full" smWidth="full">
+                            <textarea value={this.state.medicalCondition} onChange={this.handleChange} name="medicalCondition" style={{ height: "100px", resize: "none" }} className={`${inputClassName} w-full`} />
                         </Form>
-                        <Form text="หมู่เลือด" width="32" smWidth="48">
+                        <Form text="หมู่โลหิต" width="32" smWidth="48">
                             <Selector value={this.state.bloodType} onChange={this.handleChange} name="bloodType" choices={['A', 'B', 'O', 'AB']} />
                         </Form>
                         <Form text="RH" width="32" smWidth="48">
@@ -232,7 +246,7 @@ class RegisterFillForm extends Component {
                             <input checked={this.state.accepted} onChange={this.handleChange} name="accepted" required type="checkbox" />
                             <div className="check-text flex"><span>I have <a href="https://google.com" target="_blank" rel="noopener noreferrer" className="no-underline"><span className="text-cb-pink font-semibold">read the guide</span></a> and agreed to <span className="text-cb-pink font-semibold">Terms and Conditions</span>.</span></div>
                         </label>
-                        <button disabled={!this.state.formValid} className="px-10 py-3 text-white bg-cb-red rounded-lg mt-6 btn" type="submit" id="confirm" >ลงทะเบียน</button>
+                        <button disabled={!this.state.formValid} className="px-10 pb-3 pt-4 text-white bg-cb-red rounded-lg mt-6 btn font-cu-heading " type="submit" id="confirm" >ลงทะเบียน</button>
                     </div>
                 </div>
             </form>

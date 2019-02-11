@@ -45,3 +45,7 @@
 :-moz-ui-invalid {
     box-shadow:none;
 }
+
+input:disabled {
+    background-color: rgb(185, 184, 190);
+}

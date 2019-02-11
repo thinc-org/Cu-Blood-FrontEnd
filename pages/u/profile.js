@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import I18 from '@/core/i18n';
 import ProfileHeader from '@/profile/local-components/ProfileHeader';
 import Enrollment from '@/profile/local-components/Enrollment';
 import PersonalInfo from '@/profile/local-components/PersonalInfo';
@@ -25,7 +24,6 @@ class Profile extends Component {
                 .then(response => response.data)
                 .catch(e => null)))
             .catch(console.log);
-
         const [commonsData, sessionData] = data;
         return {
             commonsData,
@@ -51,4 +49,4 @@ class Profile extends Component {
     }
 }
 
-export default I18.withNamespaces('private')(Profile);
+export default Profile;

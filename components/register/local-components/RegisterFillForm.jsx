@@ -152,7 +152,7 @@ class RegisterFillForm extends Component {
                 }
             }
         }
-        this.setState({ formValid: isValid }, () => console.log(this.state))
+        this.setState({ formValid: isValid })
     }
 
     render() {

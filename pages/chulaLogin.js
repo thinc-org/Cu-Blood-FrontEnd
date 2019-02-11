@@ -70,7 +70,7 @@ class ChulaLogin extends Component {
             <div className="flex flex-col special-height">
                 <div className="layout-wide flex flex-row items-center special-height">
                     <div className="w-full mr-12 md:mr-32 hidden sm:flex sm:flex-col">
-                        <img src="../static/icons/bulb.svg" style={{ height: "40px", width: "35px" }} />
+                        <img src="../static/icons/bulb.svg" alt="bulb" style={{ height: "40px", width: "35px" }} />
                         <span className="font-bold text-xl text-cb-pink my-2 font-cu-heading">รู้หรือไม่...</span>
                         <span className="font-bold text-xl my-2 font-cu-heading">การบริจาคโลหิตลดความเสี่ยงจากโรคต่าง ๆ</span>
                         <p className="text-base my-2 font-cu-body" style={{ color: "#9A9A9A" }}>

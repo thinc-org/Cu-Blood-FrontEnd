@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 import Header from '@/shared-components/TopicLeft'
-import { Link } from '@/core/i18n';
+import I18, { Link } from '@/core/i18n';
 
 class UserLogin extends Component {
 
     render() {
-        const { onSubmit, errorMessage, username, password, onChange} = this.props;
+        const { onSubmit, errorMessage, username, password, onChange, t} = this.props;
         return (
             <div>
                 <Header borderColor="border-cb-red" english="LOGIN" thai="เข้าสู่ระบบ" englishColor="text-cb-pink" />
@@ -28,4 +28,5 @@ class UserLogin extends Component {
     }
 }
 
-export default UserLogin;
+
+export default I18.withNamespaces('login')(UserLogin)

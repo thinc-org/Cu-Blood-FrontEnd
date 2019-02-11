@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Footer from '@/shared-components/Footer';
 import FacebookButton from '@/shared-components/FacebookButton';
 import Login from '@/shared-components/UserLogin'
@@ -14,29 +14,40 @@ class ChulaLogin extends Component {
         const form = e.target;
         const data = {}
         for (let element of form.elements) {
-          if (element.tagName === 'BUTTON') { continue; }
-          data[element.name] = element.value;
+            if (element.tagName === 'BUTTON') { continue; }
+            data[element.name] = element.value;
         }
-        if(data.username==="" && data.password==="") return;
+        if (data.username === "" && data.password === "") return;
         axios.post('https://api-dev.fives.cloud/v0/profile/login', data)
             .then(() => redirectTo('/u/profile'))
-            .catch((e) =>  {
+            .catch((e) => {
                 // e.response && console.log(e.response.data.message)
                 window.location.href = ''
             })
     }
 
     render() {
-        return(
+        return (
             <div className="flex flex-col special-height">
                 <div className="layout-wide flex flex-row items-center special-height">
-                    <div className="w-full text-sm mr-12 md:mr-32 hidden sm:block">orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</div>
+                    <div className="w-full mr-12 md:mr-32 hidden sm:flex sm:flex-col">
+                        <img src="../static/icons/bulb.svg" style={{height:"40px", width:"35px"}}/>
+                        <span className="font-bold text-xl text-cb-pink my-2 font-cu-heading">รู้หรือไม่...</span>
+                        <span className="font-bold text-xl my-2 font-cu-heading">การบริจาคโลหิตลดความเสี่ยงจากโรคต่าง ๆ</span>
+                        <p className="text-base my-2 font-cu-body" style={{color: "#9A9A9A"}}>
+                        ไม่ว่าจะเป็นโรคมะเร็งชนิดต่างๆ เช่น มะเร็งตับ
+                        มะเร็งปอด มะเร็งลําไส้ใหญ่ มะเร็งกระเพาะอาหาร
+                        และอื่นๆ ทั้งยังช่วยลดปริมาณธาตุเหล็กส่วนเกิน
+                        ในร่างกาย อันเป็นปัจจัยของการเกิดโรค
+                        “เส้นเลือดหัวใจอุดตัน
+                        </p>
+                    </div>
                     <div className="w-full">
-                        <Login onSubmit={this.onSubmit}/>
+                        <Login onSubmit={this.onSubmit} />
                     </div>
                 </div>
                 <div className="flex flex-col items-center text-white mt-10 special-padding-buttom" style={{ backgroundColor: '#8e9dc0' }}><FacebookButton /></div>
-                <Footer/>
+                <Footer />
             </div>
         );
     }

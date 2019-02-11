@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 
+const select = {
+    background: "url(../../static/icons/arrow-down.svg) right 5px center / 12px 15px no-repeat #efefef",
+    height: "40px"
+}
+
 export default class extends Component {
     render() {
         const { children, text, width = "auto", smWidth = "auto" } = this.props
@@ -13,10 +18,6 @@ export default class extends Component {
 }
 
 export const Selector = ({ choices = [], value, name, onChange, disabled = false }) => {
-    const select = {
-        background: "url(../../static/icons/arrow-down.svg) right 5px center / 12px 15px no-repeat #efefef",
-        height: "40px"
-    }
     const options = choices.map((choice, index) => {
         return (
             <option required key={index} value={index}>{choice}</option>
@@ -34,19 +35,19 @@ export const Selector = ({ choices = [], value, name, onChange, disabled = false
 
 export const Input = ({ type, notRequired, value, name, onChange, error, disabled = false }) => {
 
-    return notRequired ?
+    return type === 'date' ?
         (
             <React.Fragment>
-                <input value={value} name={name} onChange={onChange} disabled={disabled} className="bg-cb-grey-light rounded-lg mt-2 px-4 font-cu-body w-full" style={{height: "40px"}} type={type} />
+                <input value={value} name={name} onChange={onChange} disabled={disabled} className="bg-cb-grey-light rounded-lg mt-2 px-4 font-cu-body w-full" style={select} type={type} required={notRequired ? null : true} />
                 <span className="font-cu-body font-medium text-cb-red">{error}</span>
             </React.Fragment>
 
         ) :
         (
             <React.Fragment>
-                <input value={value}  name={name} onChange={onChange} disabled={disabled} className="bg-cb-grey-light rounded-lg mt-2 px-4 font-cu-body w-full" style={{height: "40px"}} type={type} required />
+                <input value={value} name={name} onChange={onChange} disabled={disabled} className="bg-cb-grey-light rounded-lg mt-2 px-4 font-cu-body w-full" style={{height: "40px"}} type={type} required={notRequired ? null : true} />
                 <span className="font-cu-body font-medium text-cb-red">{error}</span>
-            </React.Fragment >
+            </React.Fragment>
         )
 }
 

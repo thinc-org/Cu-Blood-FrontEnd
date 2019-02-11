@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import I18 from '@/core/i18n';
 import ProfileHeader from '@/profile/local-components/ProfileHeader';
 import Enrollment from '@/profile/local-components/Enrollment';
 import PersonalInfo from '@/profile/local-components/PersonalInfo';

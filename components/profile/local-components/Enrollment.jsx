@@ -37,7 +37,7 @@ class Enrollment extends Component {
         }
 
         if (this.state.commonsInfo !== null && this.state.currentSessionInfo !== null) {
-            const timeId = this.getTimeId();
+            const timeId = this.getTimeId(this.state.currentSessionInfo);
             this.setState({regisTimeId: timeId})
         }
     }
@@ -77,6 +77,7 @@ class Enrollment extends Component {
             );
         }
         
+        console.log(this.state.currentSessionInfo);
         const datesDuringDonation = commonsInfo !== null ? commonsInfo.timeSlots : null;
         //Create fix date button if the user already registered for the current event
         const fixDateButton = this.state.currentSessionInfo !== null ? <button className="ml-2" onClick={() => this.toggleModal('changeDateModal')}><img className="w-6" src="/static/icons/fix.svg" alt="Fix logo" /></button> : null; 
@@ -161,7 +162,7 @@ class Enrollment extends Component {
     //Function to toggle modal on/off
     toggleModal = (locationName) => {
         const registeredDate = this.state.currentSessionInfo !== null ? this.state.currentSessionInfo.timeSlot : null;
-        const registeredTimeId = this.state.currentSessionInfo !== null ? this.getTimeId() : null;
+        const registeredTimeId = this.state.currentSessionInfo !== null ? this.getTimeId(this.state.currentSessionInfo) : null;
         const stateOfModal = this.state.modalOpener[locationName];
         this.setState(
             prevState => ({
@@ -207,7 +208,7 @@ class Enrollment extends Component {
         .then(response => response.data)
         .then(data => data.result)
         .catch(e => null)
-        .then(result => this.setState({currentSessionInfo: result[result.length - 1], regisDate: result[result.length - 1].timeSlot}))
+        .then(result => this.setState({currentSessionInfo: result[result.length - 1], regisDate: result[result.length - 1].timeSlot, regisTimeId: this.getTimeId(result[result.length - 1])}))
     }
 
     //Function to setState to regisDate for when date option is pick
@@ -249,12 +250,12 @@ class Enrollment extends Component {
     }
 
     //Function to turn time label from /profile/session to timeId
-    getTimeId = () => {
-        if (this.state.currentSessionInfo.time.label === "ช่วงเช้า") {
+    getTimeId = (currentSessionInfo) => {
+        if (currentSessionInfo.time.label === "ช่วงเช้า") {
             return 2;
         }
 
-        else if (this.state.currentSessionInfo.time.label === "ช่วงบ่าย") {
+        else if (currentSessionInfo.time.label === "ช่วงบ่าย") {
             return 3;
         }
     }

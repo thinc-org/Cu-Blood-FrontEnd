@@ -106,7 +106,7 @@ class RegisterFillForm extends Component {
             case "birthday":
                 // please fix bug: day 31 verification problem
                 const end = new Date(this.props.commonsData.endDate);
-                const endAge = new Date(end.getFullYear(), end.getMonth(), end.getDate() + 3).getTime(); // three day as failsafe from actual date
+                const endAge = new Date(end.getFullYear(), end.getMonth(), end.getDate() + 7).getTime(); // three day as failsafe from actual date
                 const nowAge = Date.now();
                 const ageDifMs = ((endAge - nowAge > 0) ? endAge : nowAge) - new Date(value).getTime();
                 const ageDate = new Date(ageDifMs); // miliseconds from epoch
@@ -143,7 +143,8 @@ class RegisterFillForm extends Component {
     }
 
     render() {
-        const { onSubmit, isEmail, isChulaId, commonsData, updateInfo } = this.props;
+        const { onSubmit, isChulaId, commonsData, updateInfo } = this.props;
+        // const { onSubmit, isEmail, isChulaId, commonsData, updateInfo } = this.props; // leave isEmail for ldap implementation
         const inputClassName = `bg-cb-grey-light rounded-lg mt-2 px-4 py-4 font-cu-body`;
         return (
             <form onSubmit={onSubmit} className="layout-wide flex flex-col items-center justify-center pb-10 sm:py-10">

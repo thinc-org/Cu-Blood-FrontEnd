@@ -9,12 +9,12 @@ class ContactContent extends Component {
                     <div>View on <a href="https://maps.google.com/maps?hl=en&q=International+School+of+Engineering+(ISE)&ll=13.7369765,100.534143,14z&t=m&z=19" target="_blank" rel="noopener noreferrer" className="font-semibold no-underline text-cb-red">Google Maps</a></div>
                 </div>
                 <div className="w-full sm:w-1/2 border-cb-grey-border border-t sm:border-t-0 sm:border-l pt-6 sm:pt-0 sm:pl-8 flex flex-col font-semibold">
-                    <div className="flex items-center pb-6 sm:pb-0">
-                        <div className="mr-4"><img className="w-6" src="/static/icons/telephone.svg" alt="Phone logo"/></div>
-                        <div>unknown</div>
+                    <div className="flex items-center pb-6 sm:pb-0 mb-2">
+                        <div className="mr-4 flex items-center"><img className="w-6" src="/static/icons/facebook.svg" alt="Facebook logo"/></div>
+                        <div>Facebook CU Blood</div>
                     </div>
                     <div className="flex items-center">
-                        <div className="mr-4"><img className="w-6" src="/static/icons/mail.svg" alt="Phone logo"/></div>
+                        <div className="mr-4 flex items-center"><img className="w-6" src="/static/icons/mail.svg" alt="Phone logo"/></div>
                         <div>chulab157s6@gmail.com</div>
                     </div>
                 </div>

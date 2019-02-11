@@ -204,7 +204,7 @@ class RegisterFillForm extends Component {
                             <Selector value={this.state.shirtSize} onChange={this.handleChange} name="shirtSize" choices={['M (38")', 'L (40")', 'XL (42")', 'XXL (44")']} />
                         </Form>
                         <Form text="น้ำหนัก" width="24">
-                            <Input value={this.state.weight} onChange={this.handleChange} name="weight" type="number" error={this.state.formErrors.weight} />
+                            <Input value={this.state.weight} onChange={this.handleChange} name="weight" type="text" error={this.state.formErrors.weight} />
                         </Form>
                         <Form text="สถานภาพ" width="24">
                             <Selector value={this.state.status} onChange={this.handleChange} name="status" choices={['นิสิตจุฬา', 'นิสิตเก่า', 'บุคลากร', 'อาจารย์']} />

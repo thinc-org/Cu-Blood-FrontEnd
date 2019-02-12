@@ -56,7 +56,6 @@ class ChulaLogin extends Component {
     handleChange = (e) => {
         const value = e.target.value;
         const name = e.target.name;
-        console.log('handle change', name. value)
         this.setState({ [name]: value }, () => this.validateForm())
     }
 

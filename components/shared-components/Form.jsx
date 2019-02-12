@@ -53,7 +53,7 @@ export const Input = ({ type, notRequired, value, name, onChange, error, disable
 
 export class FormGroup extends Component {
     render() {
-        const titleClassName = "text-center w-full md:w-64 border-cb-grey-border md:border-r font-cu-heading text-2xl";
+        const titleClassName = "w-full md:w-64 border-cb-grey-border md:border-r font-cu-heading text-2xl";
         const borderOnSmall = "border-cb-grey-border w-full border md:hidden my-2";
         const inputContainer = "w-full flex flex-col items-center md:items-start";
         const maxWidth = { maxWidth: "26.5rem" };

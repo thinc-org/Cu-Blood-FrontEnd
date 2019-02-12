@@ -65,10 +65,6 @@ class ChulaLogin extends Component {
         }))
     }
 
-    componentDidUpdate() {
-        console.log('update', this.state)
-    }
-
     render() {
         return (
             <div className="flex flex-col special-height">

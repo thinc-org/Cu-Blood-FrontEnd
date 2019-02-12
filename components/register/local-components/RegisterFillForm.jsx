@@ -218,7 +218,7 @@ class RegisterFillForm extends Component {
                             <Selector disabled={isChulaId} value={this.state.academicYear} onChange={this.handleChange} name="academicYear" choices={['1', '2', '3', '4', '5', '6', "ปริญญาโท", 'ปริญญาเอก', 'อื่นๆ']} />
                         </Form>
                         <Form text={t('id')} width="full" smWidth="48">
-                            <Input disabled={isChulaId || !this.state.requiresStudentlId} value={this.state.studentId} onChange={this.handleChange} name="studentId" type="text" error={this.state.formErrors.studentId} />
+                            <Input disabled={isChulaId || !this.state.requiresStudentlId} value={this.state.studentId} onChange={this.handleChange} name="studentId" type="text" error={t(this.state.formErrors.studentId)} />
                         </Form>
                         <Form text={t('faculty')} width="full" smWidth="48">
                             <Selector disabled={isChulaId} value={this.state.schoolId} onChange={this.handleChange} name="schoolId" choices={map(commonsData.schools, 'nameTH')} />

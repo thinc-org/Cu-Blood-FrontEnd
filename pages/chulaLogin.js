@@ -14,7 +14,8 @@ class ChulaLogin extends Component {
         this.state = {
             username: "",
             password: "",
-            errorMessage: ""
+            errorMessage: "",
+            formValid: false,
         }
     }
 
@@ -26,13 +27,6 @@ class ChulaLogin extends Component {
         for (let element of form.elements) {
             if (element.tagName === 'BUTTON') { continue; }
             data[element.name] = element.value;
-        }
-        if (data.username === "" || data.password === "") {
-            state = {
-                errorMessage: "โปรดกรอกอีเมล์และรหัสผ่านของท่าน"
-            }
-            this.setState(state)
-            return;
         }
         axios.post('https://api-dev.fives.cloud/v0/profile/login', data)
             .then(() => {
@@ -62,7 +56,18 @@ class ChulaLogin extends Component {
     handleChange = (e) => {
         const value = e.target.value;
         const name = e.target.name;
-        this.setState({ [name]: value })
+        console.log('handle change', name. value)
+        this.setState({ [name]: value }, () => this.validateForm())
+    }
+
+    validateForm = () => {
+        this.setState(prevState => ({
+            formValid: prevState.username !== "" && prevState.password !=="",
+        }))
+    }
+
+    componentDidUpdate() {
+        console.log('update', this.state)
     }
 
     render() {
@@ -88,6 +93,7 @@ class ChulaLogin extends Component {
                             username={this.state.username}
                             password={this.state.password}
                             onChange={this.handleChange}
+                            formValid={this.state.formValid}
                         />
                     </div>
                 </div>

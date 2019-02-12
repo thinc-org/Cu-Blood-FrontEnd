@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Form, { Selector, Input, FormGroup } from '@/shared-components/Form';
 import map from 'lodash/map';
 import I18 from '@/core/i18n';
+let i18n = I18.i18n;
 
 class RegisterFillForm extends Component {
     constructor(props) {
@@ -200,7 +201,7 @@ class RegisterFillForm extends Component {
                             <Input value={this.state.birthday} onChange={this.handleChange} name="birthday" type="date" error={t(this.state.formErrors.birthday)} />
                         </Form>
                         <Form text={t('sex')} width="24">
-                            <Selector value={this.state.gender} onChange={this.handleChange} name="gender" choices={['ชาย', 'หญิง']} />
+                            <Selector value={this.state.gender} onChange={this.handleChange} name="gender" choices={[t('male'), t('female')]} />
                         </Form>
                         <Form text={t('shirtSize')} width="24">
                             <Selector value={this.state.shirtSize} onChange={this.handleChange} name="shirtSize" choices={['M (38")', 'L (40")', 'XL (42")', 'XXL (44")']} />
@@ -209,19 +210,19 @@ class RegisterFillForm extends Component {
                             <Input value={this.state.weight} onChange={this.handleChange} name="weight" type="text" error={this.state.formErrors.weight} />
                         </Form>
                         <Form text={t('status')} width="24">
-                            <Selector value={this.state.status} onChange={this.handleChange} name="status" choices={['นิสิตจุฬา', 'นิสิตเก่า', 'บุคลากร', 'อาจารย์']} />
+                            <Selector value={this.state.status} onChange={this.handleChange} name="status" choices={[t('currentChula'), t('alumni'), t('staff'), t('instructor')]} />
                         </Form>
                         <Form text={t('nationality')} width="24">
-                            <Selector value={this.state.nationality} onChange={this.handleChange} name="nationality" choices={['ไทย', 'ต่างชาติ']} />
+                            <Selector value={this.state.nationality} onChange={this.handleChange} name="nationality" choices={[t('thai'), t('instructor')]} />
                         </Form>
                         <Form text={t('year')} width="24">
-                            <Selector disabled={isChulaId} value={this.state.academicYear} onChange={this.handleChange} name="academicYear" choices={['1', '2', '3', '4', '5', '6', "ปริญญาโท", 'ปริญญาเอก', 'อื่นๆ']} />
+                            <Selector disabled={isChulaId} value={this.state.academicYear} onChange={this.handleChange} name="academicYear" choices={['1', '2', '3', '4', '5', '6', t('masterDegree'), t('doctoralDegree'), t('others')]} />
                         </Form>
                         <Form text={t('id')} width="full" smWidth="48">
                             <Input disabled={isChulaId || !this.state.requiresStudentlId} value={this.state.studentId} onChange={this.handleChange} name="studentId" type="text" error={t(this.state.formErrors.studentId)} />
                         </Form>
                         <Form text={t('faculty')} width="full" smWidth="48">
-                            <Selector disabled={isChulaId} value={this.state.schoolId} onChange={this.handleChange} name="schoolId" choices={map(commonsData.schools, 'nameTH')} />
+                            <Selector disabled={isChulaId} value={this.state.schoolId} onChange={this.handleChange} name="schoolId" choices={map(commonsData.schools, i18n.language === 'th' ? 'nameTH' :  'nameEN')} />
                         </Form>
                     </FormGroup>
                     <FormGroup text={t('medicalInfo')}>

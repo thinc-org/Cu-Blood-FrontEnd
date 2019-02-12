@@ -29,13 +29,13 @@
     "medicalInfo": "Medical Info",
     "congenitalDisease": "Congenital Disease",
     "bloodType": "Blood Type",
-    "haveYouEverDonatedBlood": "Have you ever donated blood before",
+    "haveYouEverDonatedBlood": "Have you ever devoted",
     "accept1": "I have ",
     "accept2": "read the guide",
     "accept3": " and agreed to ",
     "accept4": "Terms and Conditions (if don't have put -)",
     "register": "Register",
-    "donatedWithCUBlood1": "Have Have you ever donated blood with ",
-    "donatedWithCUBlood2": " before",
-    "liveMoreThan3Years": "you have to live in Thailand not less than 3 years and have an exact address"
+    "donatedWithCUBlood1": "Have you ever devoted the blood ",
+    "donatedWithCUBlood2": "project before",
+    "liveMoreThan3Years": "I have been live in thailand "
 }

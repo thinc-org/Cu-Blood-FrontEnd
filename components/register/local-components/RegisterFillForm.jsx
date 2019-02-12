@@ -224,7 +224,7 @@ class RegisterFillForm extends Component {
                             <Selector disabled={isChulaId} value={this.state.schoolId} onChange={this.handleChange} name="schoolId" choices={map(commonsData.schools, 'nameTH')} />
                         </Form>
                     </FormGroup>
-                    <FormGroup text={t('')}>
+                    <FormGroup text={t('medicalInfo')}>
                         <Form text={t('congenitalDisease')} width="full" smWidth="full">
                             <textarea value={this.state.medicalCondition} onChange={this.handleChange} name="medicalCondition" style={{ height: "100px", resize: "none" }} className={`${inputClassName} w-full`} />
                         </Form>

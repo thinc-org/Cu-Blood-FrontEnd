@@ -14,14 +14,10 @@ class App extends Component {
 
   static async getInitialProps() {
     const date = new Date();
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    const dateFormat = year + '-' + month + '-' + day;
-    const lastDateFormat = (year-1) + '-' + month + '-' + day;
 
+    const year = date.getFullYear();
     const announcementdataPromise = axios.get('/announcements/all/1')
-    const statDataPromise = axios.get(`https://api-dev.fives.cloud/v0/commons/insights/sessions/${lastDateFormat}/${dateFormat}/all`)
+    const statDataPromise = axios.get(`/commons/insights/blood-types/${year}`)
     const FacebookPostsPromise = axios.get('https://api-dev.fives.cloud/v0/commons/facebook/posts')
     const calendarEventsPromise = axios.get('https://api-dev.fives.cloud/v0/events/all/1')
 
@@ -34,22 +30,22 @@ class App extends Component {
     const [announcementData, statData, facebookPosts, calendarEvents] = data;
     return {
       announcementData: announcementData ? announcementData.result.data : undefined,
-      statData: statData ? statData : undefined,
+      statData: statData ? statData.result : undefined,
       facebookPosts: facebookPosts ? facebookPosts.result : undefined,
       calendarEvents: calendarEvents ? calendarEvents.result.data : undefined,
+      year,
     };
   }
 
   render() {
-    const { announcementData, statData, facebookPosts, calendarEvents } = this.props;
-
+    const { announcementData, statData, facebookPosts, calendarEvents, year } = this.props;
     return (
       <div className="font-sans border-black flex flex-col content-center w-full" >
         <HomeHead />
         <UrgentAnnouncement />
         <Announcement announcementData={announcementData} />
         <CalendarContainer calendarEvents={calendarEvents}/>
-        <Statistic statData={statData} />
+        <Statistic statData={statData} year={year}/>
         <FacebookContainer posts={facebookPosts} />
         <Footer />
       </div>

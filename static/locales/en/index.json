@@ -7,9 +7,13 @@
     "lookAnnouncment": "look all announcement",
     "announcementHeaderSmall" : "ข่าวประกาศ",
     "announcementHeaderBig" : "announcement",
-    "statisticHeaderSmall": "ข้อมูลทางสถิติ",
-    "statisticHeaderBig": "STATISTIC",
+    "statisticHeaderSmall": "หมู่โลหิตที่ได้รับบริจาคในปี",
+    "statisticHeaderBig": "DONATED BLOOD TYPE IN ",
     "calendarHeaderSmall" : "ปฏิทินกิจกรรม",
-    "calendarHeaderBig" : "CALENDAR"
-
+    "calendarHeaderBig" : "CALENDAR",
+    "bloodTypeA": "BloodType A",
+    "bloodTypeB": "BloodType B",
+    "bloodTypeO": "BloodType O",
+    "bloodTypeAB": "BloodType AB",
+    "totalDonors": "Total Donors"
 }

@@ -1,3 +1,10 @@
 {
-    "language": "Thai"
+    "language": "Thai",
+    "about": "เกี่ยวกับเรา",
+    "notice": "ข้อควรรู้",
+    "announcement": "ข่าวประกาศ",
+    "contact": "ติดต่อเรา",
+    "logout": "ออกจากระบบ",
+    "login": "เข้าสู่ระบบ",
+    "profile": "ไปที่หน้าโปรไฟล์"
 }

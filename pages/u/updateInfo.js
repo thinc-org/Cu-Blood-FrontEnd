@@ -54,10 +54,10 @@ class RegisterForm extends Component {
     }
 
     render() {
-        const { commonsData } = this.props;
+        const { commonsData, t } = this.props;
         return (
             <div>
-                <div className="bg-cb-grey-lighter"><Header english={`REGISTER`} thai={`ลงทะเบียน`} englishColor={`text-cb-pink`} borderColor={`border-cb-red`} /></div>
+                <div className="bg-cb-grey-lighter"><Header english={t('editInfoSmall')} thai={t('editInfoBig')} englishColor={`text-cb-pink`} borderColor={`border-cb-red`} /></div>
                 <div className="bg-white">
                     <UserInfoConsumer>
                         {({ userInfo, isUpdated }) => (<Form key={isUpdated ? 0 : 1} commonsData={commonsData} onSubmit={this.onSubmit} userInfo={userInfo} updateInfo={true} isEmail={true} />)}
@@ -71,4 +71,4 @@ class RegisterForm extends Component {
     }
 }
 
-export default I18.withNamespaces('common')(RegisterForm);
+export default I18.withNamespaces('updateInfo')(RegisterForm);

@@ -23,7 +23,7 @@ const FacebookApp = ({ posts }) => {
         (
             <React.Fragment>
                 <PageHeader borderColor="border-white" thaiColor="white" thai="CU Blood on Facebook" englishColor="text-grey-light text-xs" english="OUR ACTIVITY" />
-                <div className="flex flex-col justify-between items-center lg:items-stretch lg:flex-row w-full" >
+                <div className="flex flex-col justify-between items-center lg:items-stretch lg:flex-row w-full mb-3" >
                     <FacebookCard post={posts[0]} />
                     <FacebookCard post={posts[1]} />
                     <FacebookCard post={posts[2]} hasMarginBottom={false} />

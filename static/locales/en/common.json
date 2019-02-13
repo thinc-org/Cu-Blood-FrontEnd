@@ -1,3 +1,10 @@
 {
-    "language": "English"
+    "language": "English",
+    "about": "About",
+    "notice": "Notice",
+    "announcement": "Announcement",
+    "contact": "Contact",
+    "logout": "Logout",
+    "login": "Login",
+    "profile": "Profile"
 }

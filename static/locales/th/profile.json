@@ -35,5 +35,6 @@
     "personalInfoDid" : "เคย",
     "personalInfoDidNot" : "ไม่เคย",
     "personalInfoYes" : "ใช่",
-    "personalInfoNo" : "ไม่ใช่"
+    "personalInfoNo" : "ไม่ใช่",
+    "changeUserInfo" : "แก้ไขข้อมูล"
 }

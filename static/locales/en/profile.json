@@ -35,5 +35,6 @@
     "personalInfoDid" : "Yes",
     "personalInfoDidNot" : "No",
     "personalInfoYes" : "Yes",
-    "personalInfoNo" : "No"    
+    "personalInfoNo" : "No",
+    "changeUserInfo" : "Edit Info"    
 }

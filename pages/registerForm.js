@@ -3,6 +3,7 @@ import Footer from '@/shared-components/Footer';
 import FacebookButton from '@/shared-components/FacebookButton';
 import Header from '@/shared-components/TopicCenter';
 import Form from '@/register/local-components/RegisterFillForm';
+import I18 from '@/core/i18n';
 import '../static/css/registerForm.css';
 import redirectTo from '@/core/redirectTo';
 import axios from '@/core/core';
@@ -50,10 +51,10 @@ class RegisterForm extends Component {
     }
 
     render() {
-        const { commonsData } = this.props;
+        const { commonsData, t } = this.props;
         return (
             <div>
-                <div className="bg-cb-grey-lighter"><Header english={`REGISTER`} thai={`ลงทะเบียน`} englishColor={`text-cb-pink`} borderColor={`border-cb-red`} /></div>
+                <div className="bg-cb-grey-lighter"><Header english={t('registerSmall')} thai={t('registerBig')} englishColor={`text-cb-pink`} borderColor={`border-cb-red`} /></div>
                 <div className="bg-white">
                     <Form commonsData={commonsData} onSubmit={this.onSubmit} isChulaId={false} />
                 </div>
@@ -65,4 +66,4 @@ class RegisterForm extends Component {
     }
 }
 
-export default RegisterForm;
+export default I18.withNamespaces('register')(RegisterForm);

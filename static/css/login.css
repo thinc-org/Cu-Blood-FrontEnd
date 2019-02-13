@@ -7,3 +7,7 @@
         padding-bottom: 2.5rem;
     }
 }
+
+.btn:disabled {
+    background-color: #dae1e7;
+}

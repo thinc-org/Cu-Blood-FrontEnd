@@ -1,20 +1,23 @@
 import React from 'react';
+import I18 from '@/core/i18n';
 
-export default class AnnouncementHeader extends React.Component {
+class AnnouncementHeader extends React.Component {
 
     render() {
+      const { t } = this.props;
         return (
             <div className="font-cu-heading bg-cb-pink-light">
                 <div className="layout-wide py-20 text-center md:text-left" >
                     <div className="text-6xl font-bold mb-6 text-black">
-                        ข่าวประกาศ
+                        {t('announcementTitle')}
                     </div>
                     <div className="text-3xl text-grey-darkest" >
-                        คณาจารย์จุฬาฯ ได้รับรางวัลนักวิจัยดีเด่นแห่งชาติ 3 สาขา <br/>
-                        รางวัลผลงานวิจัย วิทยานิพนธ์และผลงานประดิษฐ์คิดค้น ปี 2562
+                        {t('announcementIntroBody1')}<br/>
+                        {t('announcementIntroBody2')}
                     </div>
                 </div>
             </div>
         );
     }
 }
+export default I18.withNamespaces('announcement')(AnnouncementHeader);

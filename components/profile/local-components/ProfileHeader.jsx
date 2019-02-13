@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { UserInfoConsumer } from '@/core/UserInfoProvider';
+import I18 from '@/core/i18n';
 
 class ProfileHeader extends Component {
     render() {
+        const { t } = this.props;
         return (
             <div className="bg-cb-pink-light">
                 <div className="layout-wide flex flex-col py-16 font-cu-heading text-center md:text-left">
-                    <div className="text-6xl text-black font-bold mb-6">ประวัติส่วนตัว</div>
+                    <div className="text-6xl text-black font-bold mb-6">{t('profileHeader')}</div>
                     <UserInfoConsumer>
                         {({userInfo}) => {
                             if ((userInfo === null) || (userInfo === undefined)) {
@@ -27,4 +29,4 @@ class ProfileHeader extends Component {
     }
 }
 
-export default ProfileHeader;
+export default I18.withNamespaces('profile')(ProfileHeader);

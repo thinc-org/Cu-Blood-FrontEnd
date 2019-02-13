@@ -165,7 +165,7 @@ class RegisterFillForm extends Component {
         return (
             <form onSubmit={onSubmit} className="layout-wide flex flex-col items-center justify-center pb-10 sm:py-10">
                 <div>
-                    <FormGroup text={t('userCredenticals')}>
+                    <FormGroup text={t('userCredentials')}>
                         <Form text={t('email')} width="full" smWidth="full">
                             <Input disabled={updateInfo} value={this.state.username} onChange={this.handleChange} name="username" type="text" error={t(this.state.formErrors.username)} />
                         </Form>

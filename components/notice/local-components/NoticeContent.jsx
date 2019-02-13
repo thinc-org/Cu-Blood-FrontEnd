@@ -98,7 +98,7 @@ class NoticeContent extends React.Component {
                 <BulletPoint bullet={8} context={contextPost8} />
                 <BulletPoint bullet={9} context={contextPost9} />
                 <BulletPoint bullet={10} context={contextPost10} />
-                <NoticeContact />
+                <NoticeContact t = {t}/>
             </div>
         );
     }
@@ -130,11 +130,12 @@ const BulletHeader = (props) => {
     )
 }
 
-const NoticeContact = () => {
+const NoticeContact = (props) => {
+  const { t } = props
     return (
         <div className="flex justify-center text-center font-cu-heading font-medium text-2xl p-8">
-            สามารถสอบถามรายละเอียดเพิ่มเติมได้ที่ <br />
-            โทร.0 2256 4300 , 0 2263 9600-99 ต่อ 1101,1760,1761
+            {t('NoticeContact1')} <br />
+            {t('NoticeContact2')}
         </div>
     )
 }
@@ -143,7 +144,7 @@ const NoticeContact = () => {
 
 
 const Context13 = (props) => {
-    const { bullet, context } = props
+    const { bullet, context, t } = props
     return (
         <div className="bg-white font-cu-heading text-xl py-4 layout-narrow flex flex-col md:flex-row items-start justify-start">
             <div className="bg-pink-lightest w-16 h-16 text-pink-dark text-2xl p-4 rounded-full flex flex-col items-center justify-center mr-6 mb-4 md:mb-0" style={{minWidth: '64px'}}>
@@ -153,14 +154,20 @@ const Context13 = (props) => {
                 {context}
                 <div>
                     <div className='py-4'>
-                        <span className='text-pink font-bold'>3.1</span> การคัดเลือกผู้บริจาคโลหิตอายุมากกว่า 60 จนถึง 65 ปี (ไม่รับบริจาคในหน่วยรับบริจาคโลหิตเคลื่อนที่)
+                        <span className='text-pink font-bold'>3.1</span>
+                        {t('context13_3_1_title')}
                      </div>
-                    <span className=' font-semibold'>1.1 :</span> เป็นผู้บริจาคโลหิตประจํามาโดยตลอดจนกระทั่งอายุ 60 ปี <br />
-                    <span className=' font-semibold'>1.2 :</span> บริจาคโลหิตได้ไม่เกินปีละ 3 ครั้ง คือทุก 4 เดือน <br />
-                    <span className=' font-semibold'>1.3 :</span> ตรวจ Complete Blood Count (CBC),Serum Ferritin (SF) ปีละ 1 ครั้ง เพื่อประกอบการให้คําปรึกษาด้านสุขภาพทั่วไป และสําหรับแพทย์ใช้ผลการตรวจ SF ในการติดตามและปรับการให้ธาตุเหล็กทด<br />
+                    <span className=' font-semibold'>1.1 :</span> {t('context13_1_1')} <br />
+                    <span className=' font-semibold'>1.2 :</span>{t('context13_1_2')}  <br />
+                    <span className=' font-semibold'>1.3 :</span> {t('context13_1_3')}<br />
                     <div className='pt-4'>
-                        <span className='text-pink font-bold'>3.2</span> ผู้บริจาคโลหิตอายุมากกว่า 65 ปีจนถึง 70 ปี (ไม่รับบริจาคในหน่วยรับบริจาคโลหิตเคลื่อนที่)
+                        <span className='text-pink font-bold'>3.2</span> {t('context13_3_2_title')}
                     </div>
+                    <span className=' font-semibold'>2.1 :</span> {t('context13_2_1')} <br />
+                    <span className=' font-semibold'>2.2 :</span>{t('context13_2_2')}  <br />
+                    <span className=' font-semibold'>2.3 :</span> {t('context13_2_3')}<br />
+                    <span className=' font-semibold'>2.4 :</span> {t('context13_2_4')}<br />
+
                 </div>
             </div>
         </div>

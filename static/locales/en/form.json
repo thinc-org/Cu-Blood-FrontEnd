@@ -6,7 +6,7 @@
     "pleaseSpecifyCorrectWeight": "Please specify the correct weight.",
     "emailNotCorrect": "Email address is not valid.",
     "numberMustBe10Digit": "ID must be 10 digits.",
-    "userCredenticals": "User Credenticals",
+    "userCredentials": "User Credentials",
     "email": "Email",
     "password": "Password",
     "confirmPassword": "Confirm Password",

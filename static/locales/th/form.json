@@ -6,7 +6,7 @@
     "pleaseSpecifyCorrectWeight": "กรุณากรอกน้ำหนักให้ถูกต้อง",
     "emailNotCorrect": "อีเมลล์ของคุณไม่ถูกต้อง",
     "numberMustBe10Digit": "กรุณากรอกรหัสให้ครบ 10 หลัก",
-    "userCredenticals": "ข้อมูลในการเข้าสู่ระบบ",
+    "userCredentials": "ข้อมูลในการเข้าสู่ระบบ",
     "email": "อีเมล์",
     "password": "รหัสผ่าน",
     "confirmPassword": "ยืนยันรหัสผ่าน",

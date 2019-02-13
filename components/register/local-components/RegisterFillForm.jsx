@@ -213,7 +213,7 @@ class RegisterFillForm extends Component {
                             <Selector value={this.state.status} onChange={this.handleChange} name="status" choices={[t('currentChula'), t('alumni'), t('staff'), t('instructor')]} />
                         </Form>
                         <Form text={t('nationality')} width="24">
-                            <Selector value={this.state.nationality} onChange={this.handleChange} name="nationality" choices={[t('thai'), t('instructor')]} />
+                            <Selector value={this.state.nationality} onChange={this.handleChange} name="nationality" choices={[t('thai'), t('foreigner')]} />
                         </Form>
                         <Form text={t('year')} width="24">
                             <Selector disabled={isChulaId} value={this.state.academicYear} onChange={this.handleChange} name="academicYear" choices={['1', '2', '3', '4', '5', '6', t('masterDegree'), t('doctoralDegree'), t('others')]} />

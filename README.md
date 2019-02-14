@@ -3,7 +3,15 @@
 
 ## Starting Development Server
 ```
-yarn go
+yarn start:prod
+```
+
+## Run production mode
+```
+yarn install
+yarn gencss
+yarn next:build
+yarn start
 ```
 
 Runs the app in the development mode.<br>

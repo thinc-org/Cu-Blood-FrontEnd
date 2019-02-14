@@ -6,6 +6,9 @@
 yarn start:prod
 ```
 
+Runs the app in the development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
 ## Run production mode
 ```
 yarn install
@@ -14,8 +17,8 @@ yarn next:build
 yarn start
 ```
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Need pm2 to always run the node  
+and nginx to reverse proxy to port 80
 
 ## Directory Referencing
 

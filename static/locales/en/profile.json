@@ -1,5 +1,7 @@
 {
     "profileHeader" : "Personal Information",
+    "enrollmentSmallHeader" : "ลงทะเบียนเข้าร่วม",
+    "enrollmentBigHeader" : "ENROLLMENT",
     "enrollmentViewTime" : "Registered Time",
     "enrollmentViewMap" : "View on map",
     "enrollmentRegister" : "Register",
@@ -15,6 +17,8 @@
     "enrollmentDonatePeriod" : "Blood Donation Period",
     "enrollmentCancel" : "Cancel",
     "enrollmentConfirm" : "Confirm",
+    "personalInfoSmallHeader" : "ข้อมูลส่วนตัว",
+    "personalInfoBigHeader" : "PERSONAL INFORMATION",
     "personalInfoName" : "Full Name (NickName)",
     "personalInfoSex" : "Sex",
     "personalInfoBirthday" : "Birthday",
@@ -36,5 +40,9 @@
     "personalInfoDidNot" : "No",
     "personalInfoYes" : "Yes",
     "personalInfoNo" : "No",
-    "changeUserInfo" : "Edit Info"    
+    "changeUserInfo" : "Edit Info",
+    "medicalInfoSmallHeader" : "โรคประจำตัว / ประวัติการแพ้ยา",
+    "medicalInfoBigHeader" : "MEDICAL CONDITIONS",
+    "enrollmentHistorySmallHeader" : "ประวัติการเข้าร่วมกิจกรรม",
+    "enrollmentHistoryBigHeader" : "ENROLLMENT HISTORY"    
 }

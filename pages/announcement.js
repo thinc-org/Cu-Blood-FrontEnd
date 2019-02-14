@@ -16,7 +16,6 @@ class Notice extends React.Component {
             totalPage: this.props.numberOfPage,
             isButtonDisabledRight: false,
             isButtonDisabledLeft: true,
-
         }
     }
 

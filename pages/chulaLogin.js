@@ -19,7 +19,7 @@ class ChulaLogin extends Component {
         }
     }
 
-    onSubmit = (e,t) => {
+    onSubmit = (e, t) => {
         e.preventDefault();
         const form = e.target;
         const data = {}
@@ -39,10 +39,28 @@ class ChulaLogin extends Component {
             })
             .catch((e) => {
                 if (e.response) {
-                    state = {
-                        username: "",
-                        password: "",
-                        errorMessage: e.response.data.message
+                    const message = e.response.data.message;
+                    switch (message) {
+                        case "Invalid credentials":
+                            state = {
+                                username: "",
+                                password: "",
+                                errorMessage: "wrongPassword"
+                            }
+                            break;
+                        case "User not found":
+                            state = {
+                                password: "",
+                                errorMessage: "userNotFound"
+                            }
+                            break;
+                        default:
+                            state = {
+                                username: "",
+                                password: "",
+                                errorMessage: message
+                            }
+                            break;
                     }
                 } else {
                     state = {
@@ -61,12 +79,12 @@ class ChulaLogin extends Component {
 
     validateForm = () => {
         this.setState(prevState => ({
-            formValid: prevState.username !== "" && prevState.password !=="",
+            formValid: prevState.username !== "" && prevState.password !== "",
         }))
     }
 
     render() {
-      const {t} = this.props;
+        const { t } = this.props;
         return (
             <div className="flex flex-col special-height">
                 <div className="layout-wide flex flex-row items-center special-height">

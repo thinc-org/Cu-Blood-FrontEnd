@@ -3,5 +3,7 @@
   "userLoginLogin" : "เข้าสู่ระบบ",
   "userLoginRegister" : "ลงทะเบียน",
   "userLogin_Password": "รหัสผ่าน",
-  "userLoginForgotPassword": "ลืมรหัสผ่าน?"
+  "userLoginForgotPassword": "ลืมรหัสผ่าน?",
+  "userLoginTitleBig": "เข้าสู่ระบบ",
+  "userLoginTitleSmall": "LOGIN"
 }

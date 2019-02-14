@@ -8,7 +8,7 @@ class UserLogin extends Component {
         const { onSubmit, errorMessage, username, password, onChange, formValid, t} = this.props;
         return (
             <div>
-                <Header borderColor="border-cb-red" english="LOGIN" thai="เข้าสู่ระบบ" englishColor="text-cb-pink" />
+                <Header borderColor="border-cb-red" english={t('userLoginTitleSmall')} thai={t('userLoginTitleBig')} englishColor="text-cb-pink" />
                 <div className="text-red mb-4">{errorMessage}</div>
                 <form onSubmit={onSubmit}>
                     <span className="font-cu-heading">{t('userLogin_Email')}</span>

@@ -9,7 +9,7 @@ class UserLogin extends Component {
         return (
             <div>
                 <Header borderColor="border-cb-red" english={t('userLoginTitleSmall')} thai={t('userLoginTitleBig')} englishColor="text-cb-pink" />
-                <div className="text-red mb-4">{errorMessage}</div>
+                <div className="text-red mb-4">{t(errorMessage)}</div>
                 <form onSubmit={onSubmit}>
                     <span className="font-cu-heading">{t('userLogin_Email')}</span>
                     <input autocomplete="new-username" className="bg-cb-grey-light rounded-lg mt-2 w-full h-8 mb-10 p-6" value={username} onChange={onChange} type="text" name="username" />

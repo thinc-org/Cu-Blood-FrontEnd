@@ -19,7 +19,7 @@ class ChulaLogin extends Component {
         }
     }
 
-    onSubmit = (e, t) => {
+    onSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
         const data = {}

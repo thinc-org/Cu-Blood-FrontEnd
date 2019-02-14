@@ -5,7 +5,6 @@ import Footer from '@/shared-components/Footer';
 import FacebookButton from '@/shared-components/FacebookButton';
 import axios from 'axios';
 import map from 'lodash/map';
-import moment from 'moment';
 
 class Notice extends React.Component {
     constructor(props) {
@@ -16,7 +15,6 @@ class Notice extends React.Component {
             totalPage: this.props.numberOfPage,
             isButtonDisabledRight: false,
             isButtonDisabledLeft: true,
-
         }
     }
 
@@ -117,19 +115,11 @@ class Notice extends React.Component {
 
         const lengthOfArray = this.state.totalPage;
 
-        //format date
-        const announcementDateMoment = (props) => {
-            let data = moment(announcementDate[props]).format('DD MMMM YYYY');
-            return(
-                data
-            );
-        }
-
         //array for cards
         const AnnouncementCardLoop = () => {
             let data = [];
             for(let i = 0; i < lengthOfArray; i++) {
-                data.push(<AnnouncementCard key={i} text={announcementTitle[i]} date={announcementDateMoment(i)} image={announcementImage[i]}/>);
+                data.push(<AnnouncementCard key={i} text={announcementTitle[i]} date={announcementDate[i]} image={announcementImage[i]}/>);
             }
 
             return data;

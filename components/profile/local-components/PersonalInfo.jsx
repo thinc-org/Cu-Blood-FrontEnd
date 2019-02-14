@@ -13,7 +13,7 @@ class PersonalInfo extends Component {
         return (
             <div className="layout-wide">
                 <div className="flex items-center justify-between">
-                    <Header english="PERSONAL INFORMATION" thai="ข้อมูลส่วนตัว" englishColor="text-cb-pink" borderColor="border-cb-red" />
+                    <Header english={t('personalInfoSmallHeader')} thai={t('personalInfoBigHeader')} englishColor="text-cb-pink" borderColor="border-cb-red" />
                     <Link href="/u/updateInfo" prefetch>
                         <div className="flex font-cu-heading text-sm items-center">
                             <div className="mr-2 hidden sm:block">{t('changeUserInfo')}</div>
@@ -49,7 +49,7 @@ class PersonalInfo extends Component {
                     }}
                 </UserInfoConsumer>
                 <hr className="w-full max-w-xs border border-cb-grey-border" />
-                <Header english="MEDICAL CONDITIONS" thai="โรคประจำตัว / ประวัติการแพ้ยา" englishColor="text-cb-pink" borderColor="border-cb-red" />
+                <Header english={t('medicalInfoSmallHeader')} thai={t('medicalInfoBigHeader')} englishColor="text-cb-pink" borderColor="border-cb-red" />
                 <UserInfoConsumer>
                     {({ userInfo }) => {
                         if ((userInfo === null) || (userInfo === undefined)) {

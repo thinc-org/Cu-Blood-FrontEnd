@@ -1,3 +1,11 @@
 {
-  
+  "userLogin_Email" : "Email",
+  "userLoginLogin" : "LOGIN",
+  "userLoginRegister" : "REGISTER",
+  "userLogin_Password": "Password",
+  "userLoginForgotPassword": "Forgot Password?",
+  "userLoginTitleSmall": "เข้าสู่ระบบ",
+  "userLoginTitleBig": "LOGIN",
+  "wrongPassword": "Wrong password",
+  "userNotFound": "User not found"
 }

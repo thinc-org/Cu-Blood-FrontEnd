@@ -52,7 +52,7 @@ class Enrollment extends Component {
             return (
                 <div className="bg-cb-grey-lighter pb-10">
                     <div className="layout-wide">
-                        <Header english="ENROLLMENT" thai="ลงทะเบียนเข้าร่วม" englishColor="text-cb-pink" borderColor="border-cb-red" />
+                        <Header english={t('enrollmentSmallHeader')} thai={t('enrollmentBigHeader')} englishColor="text-cb-pink" borderColor="border-cb-red" />
                         <Card>
                             <Detail bigText="ขณะนี้ข้อมูลมีปัญหา โปรดลองใหม่อีกครั้ง" smallText="Error in retrieving information, please try again later"/>
                         </Card>
@@ -68,7 +68,7 @@ class Enrollment extends Component {
             return(
                 <div className="bg-cb-grey-lighter pb-10">
                     <div className="layout-wide">
-                        <Header english="ENROLLMENT" thai="ลงทะเบียนเข้าร่วม" englishColor="text-cb-pink" borderColor="border-cb-red" />
+                        <Header english={t('enrollmentSmallHeader')} thai={t('enrollmentBigHeader')} englishColor="text-cb-pink" borderColor="border-cb-red" />
                         <Card>
                             <Detail bigText="ขณะนี้ไม่ได้อยู่ในช่วงเปิดให้ลงทะเบียน" smallText="Currently, it is not in the registration period."/>
                         </Card>
@@ -109,7 +109,7 @@ class Enrollment extends Component {
         return (
             <div className="bg-cb-grey-lighter pb-10">
                 <div className="layout-wide">
-                    <Header english="ENROLLMENT" thai="ลงทะเบียนเข้าร่วม" englishColor="text-cb-pink" borderColor="border-cb-red" />
+                    <Header english={t('enrollmentSmallHeader')} thai={t('enrollmentBigHeader')} englishColor="text-cb-pink" borderColor="border-cb-red" />
                     <Card>
                         <div className="w-full mb-8 font-cu-heading flex flex-col md:flex-row text-center md:text-left justify-between items-center">
                             <div className="text-3xl">{commonsInfo.name}</div>

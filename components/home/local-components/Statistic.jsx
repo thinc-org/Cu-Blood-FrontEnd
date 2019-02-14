@@ -42,11 +42,11 @@ class Statistic extends Component {
                             <div className="flex flex-col sm:flex-row w-full items-center">
                                 <div className={`${contentStyle} pt-6 sm:border-b-0 sm:border-r sm:pr-6`}>
                                     {/* <StatisticContent number={statNumber[2]} content={statContent[2]} /> */}
-                                    <StatisticContent number={data[3]} content={t('bloodTypeO')} />
+                                    <StatisticContent number={data[2]} content={t('bloodTypeO')} />
                                 </div>
                                 <div className={`text-center w-full sm:w-1/2 sm:border-b-0 pt-6 sm:pl-6 sm:flex sm:justify-center`}>
                                     {/* <StatisticContent number={statNumber[3]} content={statContent[3]} /> */}
-                                    <StatisticContent number={data[0]} content={t('bloodTypeAB')} />
+                                    <StatisticContent number={data[3]} content={t('bloodTypeAB')} />
                                 </div>
                             </div>
                             <div className="sm:absolute w-full h-full">

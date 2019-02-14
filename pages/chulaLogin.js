@@ -39,10 +39,28 @@ class ChulaLogin extends Component {
             })
             .catch((e) => {
                 if (e.response) {
-                    state = {
-                        username: "",
-                        password: "",
-                        errorMessage: e.response.data.message
+                    const message = e.response.data.message;
+                    switch (message) {
+                        case "Invalid credentials":
+                            state = {
+                                username: "",
+                                password: "",
+                                errorMessage: "wrongPassword"
+                            }
+                            break;
+                        case "User not found":
+                            state = {
+                                password: "",
+                                errorMessage: "userNotFound"
+                            }
+                            break;
+                        default:
+                            state = {
+                                username: "",
+                                password: "",
+                                errorMessage: message
+                            }
+                            break;
                     }
                 } else {
                     state = {
@@ -61,24 +79,21 @@ class ChulaLogin extends Component {
 
     validateForm = () => {
         this.setState(prevState => ({
-            formValid: prevState.username !== "" && prevState.password !=="",
+            formValid: prevState.username !== "" && prevState.password !== "",
         }))
     }
 
     render() {
+        const { t } = this.props;
         return (
             <div className="flex flex-col special-height">
                 <div className="layout-wide flex flex-row items-center special-height">
                     <div className="w-full mr-12 md:mr-32 hidden sm:flex sm:flex-col">
                         <img src="../static/icons/bulb.svg" alt="bulb" style={{ height: "40px", width: "35px" }} />
-                        <span className="font-bold text-xl text-cb-pink my-2 font-cu-heading">รู้หรือไม่...</span>
-                        <span className="font-bold text-xl my-2 font-cu-heading">การบริจาคโลหิตลดความเสี่ยงจากโรคต่าง ๆ</span>
+                        <span className="font-bold text-xl text-cb-pink my-2 font-cu-heading">{t('chulaLoginDoYouKnow')}</span>
+                        <span className="font-bold text-xl my-2 font-cu-heading">{t('chulaLoginDYKfirstLine')}</span>
                         <p className="text-base my-2 font-cu-body" style={{ color: "#9A9A9A" }}>
-                            ไม่ว่าจะเป็นโรคมะเร็งชนิดต่างๆ เช่น มะเร็งตับ
-                            มะเร็งปอด มะเร็งลําไส้ใหญ่ มะเร็งกระเพาะอาหาร
-                            และอื่นๆ ทั้งยังช่วยลดปริมาณธาตุเหล็กส่วนเกิน
-                            ในร่างกาย อันเป็นปัจจัยของการเกิดโรค
-                            “เส้นเลือดหัวใจอุดตัน
+                            {t('chulaLoginDYKBody')}
                         </p>
                     </div>
                     <div className="w-full">

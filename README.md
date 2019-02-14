@@ -1,4 +1,4 @@
-# CU Blood Component Template
+# CU Blood FrontEnd
 
 
 ## Starting Development Server

@@ -249,7 +249,7 @@ class RegisterFillForm extends Component {
                             <input checked={this.state.accepted} onChange={this.handleChange} name="accepted" required type="checkbox" />
                             <div className="check-text flex"><span>{t('accept1')}<a href="https://google.com" target="_blank" rel="noopener noreferrer" className="no-underline"><span className="text-cb-pink font-semibold">{t('accept2')}</span></a>{t('accept3')}<span className="text-cb-pink font-semibold">{t('accept4')}</span>.</span></div>
                         </label>
-                        <button disabled={!this.state.formValid} className="px-10 pb-3 pt-4 text-white bg-cb-red rounded-lg mt-6 btn font-cu-heading " type="submit" id="confirm" >{t('register')}</button>
+                        <button disabled={!this.state.formValid} className="px-10 pb-3 pt-4 text-white bg-cb-red rounded-lg mt-6 btn font-cu-heading " type="submit" id="confirm" >{t(updateInfo ? "updateInfo" : "register")}</button>
                     </div>
                 </div>
             </form>

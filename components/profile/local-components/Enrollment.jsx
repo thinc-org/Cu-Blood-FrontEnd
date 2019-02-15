@@ -6,7 +6,6 @@ import moment from 'moment-timezone';
 import I18 from '@/core/i18n';
 import axios from '@/core/core';
 import QRCode from 'qrcode.react';
-// import { CompositeDisposable } from 'rx';
 let i18n = I18.i18n
 
 class Enrollment extends Component {
@@ -140,7 +139,7 @@ class Enrollment extends Component {
     }
 
     //Function to toggle modal on/off
-    toggleModal = (locationName, type) => {
+    toggleModal = (locationName = null, type = null) => {
         const regisDate = this.state.currentSessionInfo !== null ? this.state.currentSessionInfo.timeSlot : null;
         const regisTimeId = this.state.currentSessionInfo !== null ? this.getTimeId(this.state.currentSessionInfo) : null;
         this.setState({
@@ -154,7 +153,7 @@ class Enrollment extends Component {
     }
 
     //Function to post information needed for enroll to API when click accepts
-    postEnroll = (locationModal, locationId, projectId) => {
+    postEnroll = (locationId, projectId) => {
         axios.post('https://api-dev.fives.cloud/v0/profile/me/enroll', {
             projectId: projectId,
             locationId: locationId,
@@ -167,7 +166,7 @@ class Enrollment extends Component {
     }
 
     //Function to put information needed for enroll to API when click accepts
-    putEnroll = (locationModal, locationId) => {
+    putEnroll = (locationId) => {
         axios.put('https://api-dev.fives.cloud/v0/profile/me/enroll', {
             sessionId: this.state.currentSessionInfo.id,
             locationId: locationId,
@@ -238,7 +237,7 @@ class Enrollment extends Component {
     }
 
     // Function takes care of popup for first enrollment
-    firstEnrollModal = (thaiName, engName, locationModal, locationId, projectId, dates) => {
+    firstEnrollModal = (thaiName, engName, locationId, projectId, dates) => {
         const { t } = this.props;
         const select = {
             background: "url(../../../static/icons/arrow-down.svg) right 5px center / 12px 15px no-repeat #ffffff",
@@ -250,7 +249,7 @@ class Enrollment extends Component {
         const formUnfilled = this.state.regisDate === null || this.state.regisTimeId === null
 
         return (
-            <div key={locationModal} className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 50 }}>
+            <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 50 }}>
                 <div className="layout-wide flex justify-center">
                     <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{ minWidth: '250px' }}>
                         <div className="mb-6 px-4 sm:px-10 font-semibold">{t('enrollmentChangeLocationHeader')}</div>
@@ -275,7 +274,7 @@ class Enrollment extends Component {
                         </div>
                         <div className="pt-6 flex justify-between px-4 sm:px-10">
                             <button onClick={() => this.toggleModal(null, null)}>{t('enrollmentCancel')}</button>
-                            <button className={formUnfilled ? "text-grey cursor-not-allowed" : "text-cb-pink"} onClick={() => this.postEnroll(locationModal, locationId, projectId)} disabled={formUnfilled}>{t('enrollmentConfirm')}</button>
+                            <button className={formUnfilled ? "text-grey cursor-not-allowed" : "text-cb-pink"} onClick={() => this.postEnroll(locationId, projectId)} disabled={formUnfilled}>{t('enrollmentConfirm')}</button>
                         </div>
                     </div>
                 </div>
@@ -284,11 +283,11 @@ class Enrollment extends Component {
     }
 
     //Function that takes care of modal when user wants to change location
-    putEnrollModal = (thaiName, engName, locationModal, locationId) => {
+    putEnrollModal = (thaiName, engName, locationId) => {
         const { t } = this.props;
 
         return (
-            <div key={locationModal} className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 50 }}>
+            <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 50 }}>
                 <div className="layout-wide flex justify-center">
                     <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{ minWidth: '250px' }}>
                         <div className="mb-6 px-4 sm:px-10 font-semibold">{t('enrollmentRegisterHeader')}</div>
@@ -297,7 +296,7 @@ class Enrollment extends Component {
                         </div>
                         <div className="pt-6 flex justify-between px-4 sm:px-10">
                             <button onClick={() => this.toggleModal(null, null)}>{t('enrollmentCancel')}</button>
-                            <button className="text-cb-pink" onClick={() => this.putEnroll(locationModal, locationId)}>{t('enrollmentConfirm')}</button>
+                            <button className="text-cb-pink" onClick={() => this.putEnroll(locationId)}>{t('enrollmentConfirm')}</button>
                         </div>
                     </div>
                 </div>
@@ -306,11 +305,11 @@ class Enrollment extends Component {
     }
 
     //Function that take cares of modal for showing QRCode
-    QRCodeModal = (locationModal, locationNameTH) => {
+    QRCodeModal = (locationNameTH) => {
         const { t } = this.props;
 
         return (
-            <div key={locationModal} className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 50 }}>
+            <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 50 }}>
                 <div className="layout-wide flex justify-center">
                     <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{ minWidth: '250px' }}>
                         <div className="mb-6 px-4 sm:px-10 font-semibold">QR Code</div>
@@ -329,7 +328,7 @@ class Enrollment extends Component {
     }
 
     //Function that takes care of modal when user wants to change date
-    changeDateModal = (locationModal, dates) => {
+    changeDateModal = (dates) => {
         const { t } = this.props;
         const select = {
             background: "url(../../../static/icons/arrow-down.svg) right 5px center / 12px 15px no-repeat #ffffff",
@@ -339,7 +338,7 @@ class Enrollment extends Component {
         const timeSlotsOption = this.state.commonsInfo !== null ? this.state.commonsInfo.times.map(time => <option key={time.id} value={time.id}>{moment(time.startTime, 'HH:mm:ss').format('HH:mm')} - {moment(time.endTime, 'HH:mm:ss').format('HH:mm')}</option>) : null;
 
         return (
-            <div key={locationModal} className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 50 }}>
+            <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 50 }}>
                 <div className="layout-wide flex justify-center">
                     <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{ minWidth: '250px' }}>
                         <div className="mb-6 px-4 sm:px-10 font-semibold">{t('enrollmentChangeDate')}</div>
@@ -355,7 +354,7 @@ class Enrollment extends Component {
                         </div>
                         <div className="pt-6 flex justify-between px-4 sm:px-10">
                             <button onClick={() => this.toggleModal(null, null)}>{t('enrollmentCancel')}</button>
-                            <button className="text-cb-pink" onClick={() => this.putEnroll(locationModal, this.state.currentSessionInfo.locationId)}>{t('enrollmentConfirm')}</button>
+                            <button className="text-cb-pink" onClick={() => this.putEnroll(this.state.currentSessionInfo.locationId)}>{t('enrollmentConfirm')}</button>
                         </div>
                     </div>
                 </div>

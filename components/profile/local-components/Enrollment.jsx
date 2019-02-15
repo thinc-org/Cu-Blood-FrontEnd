@@ -13,10 +13,21 @@ class Enrollment extends Component {
         super(props);
 
         this.state = {
-            regisDate: (this.props.sessionInfo !== null) && (this.props.sessionInfo[this.props.sessionInfo.length - 1].project.id === this.props.commonsInfo.id) ? this.props.sessionInfo[this.props.sessionInfo.length - 1].timeSlot : null,
-            regisTimeId: null,
+            regisDate: (this.props.sessionInfo !== null) && (this.props.sessionInfo[this.props.sessionInfo.length - 1].project.id === this.props.commonsInfo.id) ? this.props.sessionInfo[this.props.sessionInfo.length - 1].timeSlot : "",
+            regisTimeId: "",
             currentSessionInfo: (this.props.sessionInfo !== null) && (this.props.sessionInfo[this.props.sessionInfo.length - 1].project.id === this.props.commonsInfo.id) ? this.props.sessionInfo[this.props.sessionInfo.length - 1] : null,
             commonsInfo: this.props.commonsInfo,
+            agree: {
+                agree1: false,
+                agree2: false,
+                agree3: false,
+                agree4: false,
+                agree5: false,
+                agree6: false,
+                agree7: false,
+                agree8: false,
+                allAgree: false,
+            },
             modalStatus: {
                 location: null,
                 type: null
@@ -68,7 +79,7 @@ class Enrollment extends Component {
         //Create fix date button if the user already registered for the current event
         const fixDateButton = this.state.currentSessionInfo !== null ? <button className="ml-2" onClick={() => this.toggleModal(null, 'fixDateModal')}><img className="w-6" src="/static/icons/fix.svg" alt="Fix logo" /></button> : null;
         //Create the location content where there is the location name + link to map + button to open modal
-        const locationContent = commonsInfo.locations.map(element => this.content(element.nameTH, element.nameEN, element.googleMapsURL, element, element.id));
+        const locationContent = commonsInfo.locations.map(element => this.content(element.nameTH, element.nameEN, element.googleMapsURL, element));
         //Mapping to create the register modal
         const datesDuringDonation = commonsInfo !== null ? commonsInfo.timeSlots : null;
         //Create modal that can change date
@@ -82,7 +93,7 @@ class Enrollment extends Component {
                             <div className="text-3xl">{commonsInfo.name}</div>
                             <div className="text-sm sm:text-base flex mt-4 sm:mt-0 items-center">
                                 <div className="mr-2">{t('enrollmentViewTime')}</div>
-                                <div className="text-cb-pink">{this.state.regisDate !== null ? moment(this.state.regisDate).format('D MMMM') : '-'}</div>
+                                <div className="text-cb-pink">{this.state.regisDate ? moment(this.state.regisDate).format('D MMMM') : '-'}</div>
                                 <div className="text-cb-pink ml-2">{this.state.regisTimeId !== null ? this.showTimeId() : null}</div>
                                 {fixDateButton}
                             </div>
@@ -103,7 +114,6 @@ class Enrollment extends Component {
 
     modalGenerator = (modalStatus, datesDuringDonation, commonsInfo) => {
         const { location, type } = modalStatus;
-        const locationName = location ? location.nameEN.replace(/\s+/g, "") : null;
         switch (type) {
             case "firstEnrollModal":
                 return this.firstEnrollModal(location.nameTH, location.nameEN, location.id, commonsInfo.id, datesDuringDonation);
@@ -112,17 +122,19 @@ class Enrollment extends Component {
             case "QRCodeModal":
                 return this.QRCodeModal(location.nameTH);
             case "fixDateModal":
-                return this.changeDateModal(datesDuringDonation)
+                return this.changeDateModal(datesDuringDonation);
+            case "confirmModal":
+                return this.confirmModal(location.id, commonsInfo.id);
             default:
                 return null;
         }
     }
 
     //Function that creates the location and register button
-    content = (thaiName, engName, urlLocation, element, locationId) => {
+    content = (thaiName, engName, urlLocation, element) => {
         const { t } = this.props;
         const alreadyRegistered = this.state.currentSessionInfo !== null;
-        const isLocationPick = (this.state.currentSessionInfo !== null) && (this.state.currentSessionInfo.locationId === locationId)
+        const isLocationPick = (this.state.currentSessionInfo !== null) && (this.state.currentSessionInfo.locationId === element.id)
 
         //Choose what kind of button will show = register / change location / show QR
         const button = this.chooseButton(alreadyRegistered, isLocationPick, element);
@@ -139,14 +151,24 @@ class Enrollment extends Component {
     }
 
     //Function to toggle modal on/off
-    toggleModal = (locationName = null, type = null) => {
-        const regisDate = this.state.currentSessionInfo !== null ? this.state.currentSessionInfo.timeSlot : null;
-        const regisTimeId = this.state.currentSessionInfo !== null ? this.getTimeId(this.state.currentSessionInfo) : null;
+    toggleModal = (locationName, type) => {
+        let regisDate, regisTimeId, location
+        if (locationName !== (this.state.modalStatus.location ? this.state.modalStatus.location.id : null)) {
+            //default case
+            regisDate = this.state.currentSessionInfo !== null ? this.state.currentSessionInfo.timeSlot : "";
+            regisTimeId = this.state.currentSessionInfo !== null ? this.getTimeId(this.state.currentSessionInfo) : "";
+            location = locationName
+        } else {
+            // special case when open confirmModal from firstEnrollmentModal
+            regisDate = this.state.regisDate;
+            regisTimeId = this.state.regisTimeId;
+            location = this.state.modalStatus.location
+        }
         this.setState({
             regisDate,
             regisTimeId,
             modalStatus: {
-                location: locationName,
+                location,
                 type: type,
             }
         });
@@ -195,6 +217,34 @@ class Enrollment extends Component {
     //Function setState to regisTimeId for when time slot option is pick
     handleChangeTimeId = (event) => {
         this.setState({ regisTimeId: Number(event.target.value) })
+    }
+
+    handleCheckboxChange = (event) => {
+        this.setState({
+            "agree": {
+                ...this.state.agree,
+                [event.target.name]: event.target.checked
+            }
+        }, () => this.validateConfirmModal())
+    }
+
+    validateConfirmModal = () => {
+        const agree = this.state.agree
+        let allAgree = true;
+        for (const key in agree) {
+            if (agree[key] === true || key === 'allAgree') {
+                continue;
+            } else {
+                allAgree = false;
+                break;
+            }
+        }
+        this.setState(prevState => ({
+            "agree": {
+                ...prevState.agree,
+                allAgree
+            }
+        }));
     }
 
     //Function to choose the type of button in content
@@ -246,27 +296,27 @@ class Enrollment extends Component {
         // Turn the array of dates into options to select
         const datesOption = dates !== null ? dates.map(date => <option key={date} value={moment(date).format('YYYY-MM-DD')}>{moment(date).format('D MMMM')}</option>) : null;
         const timeSlotsOption = this.state.commonsInfo !== null ? this.state.commonsInfo.times.map(time => <option key={time.id} value={time.id}>{moment(time.startTime, 'HH:mm:ss').format('HH:mm')} - {moment(time.endTime, 'HH:mm:ss').format('HH:mm')}</option>) : null;
-        const formUnfilled = this.state.regisDate === null || this.state.regisTimeId === null
+        const formUnfilled = !this.state.regisDate || !this.state.regisTimeId;
 
         return (
             <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 50 }}>
                 <div className="layout-wide flex justify-center">
-                    <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{ minWidth: '250px' }}>
-                        <div className="mb-6 px-4 sm:px-10 font-semibold">{t('enrollmentChangeLocationHeader')}</div>
+                    <form className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{ minWidth: '250px' }}>
+                        <div className="mb-6 px-4 sm:px-10 font-semibold">{t('enrollmentRegisterHeader')}</div>
                         <div className="bg-cb-grey-lighter py-6 w-full px-4 sm:px-10 flex flex-col justify-center items-center">
                             <Detail bigText={`${thaiName}`} smallText={`${engName}`} />
                             <div className="mt-4 flex flex-col items-end">
                                 <div className="flex items-center">
                                     <div className="mr-4">{t('enrollmentRegisterChooseDate')}</div>
                                     <select className="w-32 select" style={select} value={this.state.regisDate} onChange={this.handleChangeDate}>
-                                        <option value={null}>YYYY-MM-DD</option>
+                                        <option value="">YYYY-MM-DD</option>
                                         {datesOption}
                                     </select>
                                 </div>
                                 <div className="flex items-center mt-4">
                                     <div className="mr-4">{t('enrollmentRegisterChooseTime')}</div>
                                     <select className="w-32" style={select} value={String(this.state.regisTimeId)} onChange={this.handleChangeTimeId}>
-                                        <option value={null}>{t('enrollmentRegisterTimeOption')}</option>
+                                        <option value="">{t('enrollmentRegisterTimeOption')}</option>
                                         {timeSlotsOption}
                                     </select>
                                 </div>
@@ -274,9 +324,9 @@ class Enrollment extends Component {
                         </div>
                         <div className="pt-6 flex justify-between px-4 sm:px-10">
                             <button onClick={() => this.toggleModal(null, null)}>{t('enrollmentCancel')}</button>
-                            <button className={formUnfilled ? "text-grey cursor-not-allowed" : "text-cb-pink"} onClick={() => this.postEnroll(locationId, projectId)} disabled={formUnfilled}>{t('enrollmentConfirm')}</button>
+                            <button className={formUnfilled ? "text-grey cursor-not-allowed" : "text-cb-pink"} onClick={() => this.toggleModal(locationId, "confirmModal")} disabled={formUnfilled}>{t('enrollmentConfirm')}</button>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         );
@@ -290,7 +340,7 @@ class Enrollment extends Component {
             <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 50 }}>
                 <div className="layout-wide flex justify-center">
                     <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{ minWidth: '250px' }}>
-                        <div className="mb-6 px-4 sm:px-10 font-semibold">{t('enrollmentRegisterHeader')}</div>
+                        <div className="mb-6 px-4 sm:px-10 font-semibold">{t('enrollmentChangeLocationHeader')}</div>
                         <div className="bg-cb-grey-lighter py-6 w-full px-4 sm:px-10 flex flex-col justify-center items-center">
                             <Detail bigText={`${thaiName}`} smallText={`${engName}`} />
                         </div>
@@ -361,6 +411,58 @@ class Enrollment extends Component {
             </div>
         );
     }
+
+    confirmModal = (locationId, projectId) => {
+        const { t } = this.props;
+        return (
+            <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 50 }}>
+                <div className="layout-wide flex justify-center">
+                    <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{ minWidth: '250px', maxHeight: '75vh' }}>
+                        <div className="mb-6 px-4 sm:px-10 font-semibold">ข้อควรปฏิบัติก่อนไปบริจาคโลหิต</div>
+                        <div className="overflow-y-scroll scroll px-4">
+                            <label className="flex font-cu-heading text-normal cursor-pointer check-box">
+                                <input checked={this.state.agree1} onChange={this.handleCheckboxChange} name="agree1" type="checkbox" />
+                                <div className="check-text text-sm text-left">รับประทานอาหารก่อนมาบริจาคโลหิต โดยหลีกเลี่ยงอาหารที่มีไขมันสูง และอาหารที่ประกอบด้วยกะทิ เช่น ข้าวขาหมู ข้าวมันไก่ ข้าวเหนียวไก่ทอด กระเทียมเจียว เป็นต้น </div>
+                            </label>
+                            <label className="flex font-cu-heading text-normal cursor-pointer check-box">
+                                <input checked={this.state.agree2} onChange={this.handleCheckboxChange} name="agree2" type="checkbox" />
+                                <div className="check-text text-sm text-left">ดื่มน้ำอย่างน้อย 3-4 แก้ว ก่อนมาบริจาคโลหิต</div>
+                            </label>
+                            <label className="flex font-cu-heading text-normal cursor-pointer check-box">
+                                <input checked={this.state.agree3} onChange={this.handleCheckboxChange} name="agree3" type="checkbox" />
+                                <div className="check-text text-sm text-left">นอนหลับพักผ่อนให้เพียงพออย่างน้อย 6 ชั่วโมง ในคืนก่อนวันที่จะมาบริจาคโลหิต </div>
+                            </label>
+                            <label className="flex font-cu-heading text-normal cursor-pointer check-box">
+                                <input checked={this.state.agree4} onChange={this.handleCheckboxChange} name="agree4" type="checkbox" />
+                                <div className="check-text text-sm text-left">สุขภาพแข็งแรง ไม่เป็นไข้หวัด หรืออยู่ระหว่างรับประทานยาแก้อักเสบใดๆ </div>
+                            </label>
+                            <label className="flex font-cu-heading text-normal cursor-pointer check-box">
+                                <input checked={this.state.agree5} onChange={this.handleCheckboxChange} name="agree5" type="checkbox" />
+                                <div className="check-text text-sm text-left">งดดื่มเครื่องดื่มที่มีแอลกอฮอล์ ก่อนมาบริจาคอย่างน้อย 24 ชั่วโมง </div>
+                            </label>
+                            <label className="flex font-cu-heading text-normal cursor-pointer check-box">
+                                <input checked={this.state.agree6} onChange={this.handleCheckboxChange} name="agree6" type="checkbox" />
+                                <div className="check-text text-sm text-left">งดสูบบุหรี่ก่อนและหลังบริจาคโลหิต 1 ชั่วโมง</div>
+                            </label>
+                            <label className="flex font-cu-heading text-normal cursor-pointer check-box">
+                                <input checked={this.state.agree7} onChange={this.handleCheckboxChange} name="agree7" type="checkbox" />
+                                <div className="check-text text-sm text-left">ไม่ได้เจาะหู/สัก/ฝังเข็ม ในช่วง 1 ปีที่ผ่านมา </div>
+                            </label>
+                            <label className="flex font-cu-heading text-normal cursor-pointer check-box">
+                                <input checked={this.state.agree8} onChange={this.handleCheckboxChange} name="agree8" type="checkbox" />
+                                <div className="check-text text-sm text-left">ในช่วง 6 เดือนที่ผ่านมา ไม่ได้มีการผ่าตัดใหญ่</div>
+                            </label>
+                        </div>
+                        <div className="pt-6 flex justify-between px-4 sm:px-10">
+                            <button onClick={() => this.toggleModal(null, null)}>{t('enrollmentCancel')}</button>
+                            <button className={!this.state.agree.allAgree ? "text-grey cursor-not-allowed" : "text-cb-pink"} onClick={() => this.postEnroll(locationId, projectId)} disabled={!this.state.agree.allAgree}>{t('enrollmentConfirm')}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
 }
 
 export default I18.withNamespaces('profile')(Enrollment);

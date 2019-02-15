@@ -75,3 +75,13 @@ select, input {
 input:disabled {
     background-color: rgb(185, 184, 190);
 }
+
+.scroll::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+}

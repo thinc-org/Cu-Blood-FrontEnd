@@ -233,7 +233,7 @@ class RegisterFillForm extends Component {
                             <Selector value={this.state.bloodType} onChange={this.handleChange} name="bloodType" choices={['A', 'B', 'O', 'AB']} />
                         </Form>
                         <Form text="RH" width="32" smWidth="48">
-                            <Selector value={this.state.rh} onChange={this.handleChange} name="rh" choices={['+', '-']} />
+                            <Selector value={this.state.rh} onChange={this.handleChange} name="rh" choices={['+', '-', t('unknown')]} />
                         </Form>
                         <div className="check">
                             <label className="flex font-cu-heading text-normal cursor-pointer check-box">

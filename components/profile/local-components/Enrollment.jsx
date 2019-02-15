@@ -235,7 +235,6 @@ class Enrollment extends Component {
             return 3;
         }
     }
-}
 
     // Function takes care of popup for first enrollment
     firstEnrollModal = (thaiName, engName, locationId, projectId, dates) => {
@@ -362,5 +361,6 @@ class Enrollment extends Component {
             </div>
         );
     }
+}
 
 export default I18.withNamespaces('profile')(Enrollment);

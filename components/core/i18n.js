@@ -6,6 +6,7 @@ const options = {
     // lng: 'th',
     localeSubpaths: true,
     serverLanguageDetection: false,
+    // browserLanguageDetection: false,
     // fallbackLng: 'en'
 }
 

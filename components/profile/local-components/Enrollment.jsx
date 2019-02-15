@@ -95,13 +95,13 @@ class Enrollment extends Component {
                             <div className="text-center sm:text-right"><Detail bigText={`${moment(commonsInfo.startDate).add('years', (i18n.language === 'th' ? 543 : 0)).format('D MMMM')} - ${moment(commonsInfo.endDate).add('years', (i18n.language === 'th' ? 543 : 0)).format('D MMMM')}`} smallText={t('enrollmentDonatePeriod')} isBold={true} /></div>
                         </div>
                     </Card>
-                    {this.modal(this.state.modalStatus, datesDuringDonation, commonsInfo)}
+                    {this.modalGenerator(this.state.modalStatus, datesDuringDonation, commonsInfo)}
                 </div>
             </div>
         );
     }
 
-    modal = (modalStatus, datesDuringDonation, commonsInfo) => {
+    modalGenerator = (modalStatus, datesDuringDonation, commonsInfo) => {
         const { location, type } = modalStatus;
         const locationName = location ? location.nameEN.replace(/\s+/g, "") : null;
         switch (type) {
@@ -235,6 +235,7 @@ class Enrollment extends Component {
             return 3;
         }
     }
+}
 
     // Function takes care of popup for first enrollment
     firstEnrollModal = (thaiName, engName, locationId, projectId, dates) => {
@@ -361,6 +362,5 @@ class Enrollment extends Component {
             </div>
         );
     }
-}
 
 export default I18.withNamespaces('profile')(Enrollment);

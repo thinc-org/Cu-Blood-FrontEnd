@@ -108,11 +108,11 @@ class Enrollment extends Component {
             case "firstEnrollModal":
                 return this.firstEnrollModal(location.nameTH, location.nameEN, locationName, location.id, commonsInfo.id, datesDuringDonation);
             case "putEnrollModal":
-                return this.putEnrollModal(location.nameTH, location.nameEN, locationName, location.id);
+                return this.putEnrollModal(location.nameTH, location.nameEN, location.id);
             case "QRCodeModal":
-                return this.QRCodeModal(locationName, location.nameTH);
+                return this.QRCodeModal(location.nameTH);
             case "fixDateModal":
-                return this.changeDateModal(location, datesDuringDonation)
+                return this.changeDateModal(datesDuringDonation)
             default:
                 return null;
         }

@@ -207,7 +207,7 @@ class RegisterFillForm extends Component {
                             <Selector value={this.state.shirtSize} onChange={this.handleChange} name="shirtSize" choices={['M (38")', 'L (40")', 'XL (42")', 'XXL (44")']} />
                         </Form>
                         <Form text={t('weight')} width="24">
-                            <Input value={this.state.weight} onChange={this.handleChange} name="weight" type="text" error={this.state.formErrors.weight} />
+                            <Input value={this.state.weight} onChange={this.handleChange} name="weight" type="text" error={t(this.state.formErrors.weight)} />
                         </Form>
                         <Form text={t('status')} width="24">
                             <Selector value={this.state.status} onChange={this.handleChange} name="status" choices={[t('currentChula'), t('alumni'), t('staff'), t('instructor')]} />

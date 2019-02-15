@@ -43,13 +43,13 @@ class ChulaLogin extends Component {
                     switch (message) {
                         case "Invalid credentials":
                             state = {
-                                username: "",
                                 password: "",
                                 errorMessage: "wrongPassword"
                             }
                             break;
                         case "User not found":
                             state = {
+                                username: "",
                                 password: "",
                                 errorMessage: "userNotFound"
                             }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import I18 from '@/core/i18n';
+import I18, { Link } from '@/core/i18n';
 let i18n = I18.i18n;
 
 class AnnouncementContent extends Component {
@@ -14,9 +14,15 @@ class AnnouncementContent extends Component {
         return (
             <div>
                 {content}
-                <div className="flex w-full items-center justify-end my-6">
-                    <div className="font-medium mr-2" style={{ colo: "#333333" }}>{t('lookAnnouncment')}</div>
-                    <img src='/static/home/forward-arrow2.svg' alt="arrow" className="w-6 pb-2" />
+                <div className="w-full my-6">
+                    <Link href="/announcement" prefetch>
+                        <div className="flex justify-end cursor-pointer">
+                            <div className="font-medium mr-2" style={{ colo: "#333333" }}>{t('lookAnnouncment')}</div>
+                            <div>
+                                <img src='/static/home/forward-arrow2.svg' alt="arrow" className="w-6" />
+                            </div>
+                        </div>
+                    </Link>
                 </div>
             </div>
         );

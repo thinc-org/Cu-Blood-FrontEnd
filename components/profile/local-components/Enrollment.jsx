@@ -106,7 +106,7 @@ class Enrollment extends Component {
         const locationName = location ? location.nameEN.replace(/\s+/g, "") : null;
         switch (type) {
             case "firstEnrollModal":
-                return this.firstEnrollModal(location.nameTH, location.nameEN, locationName, location.id, commonsInfo.id, datesDuringDonation);
+                return this.firstEnrollModal(location.nameTH, location.nameEN, location.id, commonsInfo.id, datesDuringDonation);
             case "putEnrollModal":
                 return this.putEnrollModal(location.nameTH, location.nameEN, location.id);
             case "QRCodeModal":

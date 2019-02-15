@@ -18,24 +18,14 @@ class Enrollment extends Component {
             regisTimeId: null,
             currentSessionInfo: (this.props.sessionInfo !== null) && (this.props.sessionInfo[this.props.sessionInfo.length - 1].project.id === this.props.commonsInfo.id) ? this.props.sessionInfo[this.props.sessionInfo.length - 1] : null,
             commonsInfo: this.props.commonsInfo,
-            modalOpener: { changeDateModal: false }
+            modalStatus: {
+                location: null,
+                type: null
+            },
         };
     }
 
     componentDidMount() {
-        if (this.state.commonsInfo !== null) {
-            this.state.commonsInfo.locations.map(element => this.setState(
-                prevState => ({
-                    modalOpener: {
-                        ...prevState.modalOpener,
-                        [element.nameEN.replace(/\s+/g, "")]: false,
-                        [element.nameEN.replace(/\s+/g, "") + "PutEnroll"]: false,
-                        [element.nameEN.replace(/\s+/g, "") + "QRCode"]: false
-                    }
-                })
-            ));
-        }
-
         if (this.state.commonsInfo !== null && this.state.currentSessionInfo !== null) {
             const timeId = this.getTimeId(this.state.currentSessionInfo);
             this.setState({ regisTimeId: timeId })
@@ -46,7 +36,6 @@ class Enrollment extends Component {
         i18n.language === 'th' ? moment.locale('th') : moment.locale('en')
         const { t } = this.props;
         const commonsInfo = this.state.commonsInfo;
-        console.log(this.state, 'states')
 
         //Render when there is no commonsInfo passed through
         if (commonsInfo === null) {
@@ -77,35 +66,13 @@ class Enrollment extends Component {
                 </div>
             );
         }
-
-        const datesDuringDonation = commonsInfo !== null ? commonsInfo.timeSlots : null;
         //Create fix date button if the user already registered for the current event
-        const fixDateButton = this.state.currentSessionInfo !== null ? <button className="ml-2" onClick={() => this.toggleModal('changeDateModal')}><img className="w-6" src="/static/icons/fix.svg" alt="Fix logo" /></button> : null;
+        const fixDateButton = this.state.currentSessionInfo !== null ? <button className="ml-2" onClick={() => this.toggleModal(null, 'fixDateModal')}><img className="w-6" src="/static/icons/fix.svg" alt="Fix logo" /></button> : null;
         //Create the location content where there is the location name + link to map + button to open modal
-        const locationContent = commonsInfo.locations.map(element => this.content(element.nameTH, element.nameEN, element.googleMapsURL, element.nameEN.replace(/\s+/g, ""), element.id));
+        const locationContent = commonsInfo.locations.map(element => this.content(element.nameTH, element.nameEN, element.googleMapsURL, element, element.id));
         //Mapping to create the register modal
-        const registerEnrollModal = commonsInfo.locations.map(element => {
-            const locationName = element.nameEN.replace(/\s+/g, "");
-            return (
-                this.firstEnrollModal(this.state.modalOpener[locationName], element.nameTH, element.nameEN, locationName, element.id, commonsInfo.id, datesDuringDonation)
-            );
-        });
-        //Mapping to create modal to change location
-        const changeLocationModal = commonsInfo.locations.map(element => {
-            const locationNamePutEnroll = element.nameEN.replace(/\s+/g, "") + "PutEnroll";
-            return (
-                this.putEnrollModal(this.state.modalOpener[locationNamePutEnroll], element.nameTH, element.nameEN, locationNamePutEnroll, element.id)
-            );
-        });
-        //Mapping to create modal that shows QR code
-        const QRCodeModal = commonsInfo.locations.map(element => {
-            const locationNameQRCode = element.nameEN.replace(/\s+/g, "") + "QRCode";
-            return (
-                this.QRCodeModal(this.state.modalOpener[locationNameQRCode], locationNameQRCode, element.nameTH)
-            );
-        })
+        const datesDuringDonation = commonsInfo !== null ? commonsInfo.timeSlots : null;
         //Create modal that can change date
-        const changeDateModal = this.changeDateModal(this.state.modalOpener['changeDateModal'], 'changeDateModal', datesDuringDonation);
 
         return (
             <div className="bg-cb-grey-lighter pb-10">
@@ -129,24 +96,37 @@ class Enrollment extends Component {
                             <div className="text-center sm:text-right"><Detail bigText={`${moment(commonsInfo.startDate).add('years', (i18n.language === 'th' ? 543 : 0)).format('D MMMM')} - ${moment(commonsInfo.endDate).add('years', (i18n.language === 'th' ? 543 : 0)).format('D MMMM')}`} smallText={t('enrollmentDonatePeriod')} isBold={true} /></div>
                         </div>
                     </Card>
-                    {/* Modal that will show when click */}
-                    {registerEnrollModal}
-                    {changeLocationModal}
-                    {QRCodeModal}
-                    {changeDateModal}
+                    {this.modal(this.state.modalStatus, datesDuringDonation, commonsInfo)}
                 </div>
             </div>
         );
     }
 
+    modal = (modalStatus, datesDuringDonation, commonsInfo) => {
+        const { location, type } = modalStatus;
+        const locationName = location ? location.nameEN.replace(/\s+/g, "") : null;
+        switch (type) {
+            case "firstEnrollModal":
+                return this.firstEnrollModal(location.nameTH, location.nameEN, locationName, location.id, commonsInfo.id, datesDuringDonation);
+            case "putEnrollModal":
+                return this.putEnrollModal(location.nameTH, location.nameEN, locationName, location.id);
+            case "QRCodeModal":
+                return this.QRCodeModal(locationName, location.nameTH);
+            case "fixDateModal":
+                return this.changeDateModal(location, datesDuringDonation)
+            default:
+                return null;
+        }
+    }
+
     //Function that creates the location and register button
-    content = (thaiName, engName, urlLocation, locationToggle, locationId) => {
+    content = (thaiName, engName, urlLocation, element, locationId) => {
         const { t } = this.props;
         const alreadyRegistered = this.state.currentSessionInfo !== null;
         const isLocationPick = (this.state.currentSessionInfo !== null) && (this.state.currentSessionInfo.locationId === locationId)
 
         //Choose what kind of button will show = register / change location / show QR
-        const button = this.chooseButton(alreadyRegistered, isLocationPick, locationToggle);
+        const button = this.chooseButton(alreadyRegistered, isLocationPick, element);
 
         return (
             <div key={engName} className="flex flex-col md:flex-row items-center justify-between mb-8">
@@ -160,20 +140,17 @@ class Enrollment extends Component {
     }
 
     //Function to toggle modal on/off
-    toggleModal = (locationName) => {
-        const registeredDate = this.state.currentSessionInfo !== null ? this.state.currentSessionInfo.timeSlot : null;
-        const registeredTimeId = this.state.currentSessionInfo !== null ? this.getTimeId(this.state.currentSessionInfo) : null;
-        const stateOfModal = this.state.modalOpener[locationName];
-        this.setState(
-            prevState => ({
-                modalOpener: {
-                    ...prevState.modalOpener,
-                    [locationName]: !stateOfModal
-                },
-                regisDate: registeredDate,
-                regisTimeId: registeredTimeId
-            })
-        );
+    toggleModal = (locationName, type) => {
+        const regisDate = this.state.currentSessionInfo !== null ? this.state.currentSessionInfo.timeSlot : null;
+        const regisTimeId = this.state.currentSessionInfo !== null ? this.getTimeId(this.state.currentSessionInfo) : null;
+        this.setState({
+            regisDate,
+            regisTimeId,
+            modalStatus: {
+                location: locationName,
+                type: type,
+            }
+        });
     }
 
     //Function to post information needed for enroll to API when click accepts
@@ -185,7 +162,7 @@ class Enrollment extends Component {
             timeId: this.state.regisTimeId
         })
             .then(() => this.getSessionInfo())
-            .then(() => this.toggleModal(locationModal))
+            .then(() => this.toggleModal(null, null))
             .catch(console.log)
     }
 
@@ -198,7 +175,7 @@ class Enrollment extends Component {
             timeId: this.state.regisTimeId
         })
             .then(() => this.getSessionInfo())
-            .then(() => this.toggleModal(locationModal))
+            .then(() => this.toggleModal(null, null))
             .catch(console.log)
     }
 
@@ -226,13 +203,13 @@ class Enrollment extends Component {
         const { t } = this.props;
         if (registeredCondition) {
             if (locationCondition) {
-                return (<button onClick={() => this.toggleModal(locationModal + "QRCode")} className="text-base bg-cb-pink-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#de5c8e" }}>QR Code</button>);
+                return (<button onClick={() => this.toggleModal(locationModal, "QRCodeModal")} className="text-base bg-cb-pink-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#de5c8e" }}>QR Code</button>);
             }
-            return (<button onClick={() => this.toggleModal(locationModal + "PutEnroll")} className="text-base bg-cb-grey-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#696969" }}>{t('enrollmentChangeLocation')}</button>);
+            return (<button onClick={() => this.toggleModal(locationModal, "putEnrollModal")} className="text-base bg-cb-grey-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#696969" }}>{t('enrollmentChangeLocation')}</button>);
         }
 
         return (
-            <button onClick={() => this.toggleModal(locationModal)} className="text-base bg-cb-pink-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#de5c8e" }}>{t('enrollmentRegister')}</button>
+            <button onClick={() => this.toggleModal(locationModal, 'firstEnrollModal')} className="text-base bg-cb-pink-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#de5c8e" }}>{t('enrollmentRegister')}</button>
         );
     }
 
@@ -261,15 +238,10 @@ class Enrollment extends Component {
     }
 
     // Function takes care of popup for first enrollment
-    firstEnrollModal = (show, thaiName, engName, locationModal, locationId, projectId, dates) => {
+    firstEnrollModal = (thaiName, engName, locationModal, locationId, projectId, dates) => {
         const { t } = this.props;
-        if (!show) {
-            return null;
-        }
-
         const select = {
             background: "url(../../../static/icons/arrow-down.svg) right 5px center / 12px 15px no-repeat #ffffff",
-            // height: "40px"
         }
 
         // Turn the array of dates into options to select
@@ -302,7 +274,7 @@ class Enrollment extends Component {
                             </div>
                         </div>
                         <div className="pt-6 flex justify-between px-4 sm:px-10">
-                            <button onClick={() => this.toggleModal(locationModal)}>{t('enrollmentCancel')}</button>
+                            <button onClick={() => this.toggleModal(null, null)}>{t('enrollmentCancel')}</button>
                             <button className={formUnfilled ? "text-grey cursor-not-allowed" : "text-cb-pink"} onClick={() => this.postEnroll(locationModal, locationId, projectId)} disabled={formUnfilled}>{t('enrollmentConfirm')}</button>
                         </div>
                     </div>
@@ -312,11 +284,8 @@ class Enrollment extends Component {
     }
 
     //Function that takes care of modal when user wants to change location
-    putEnrollModal = (show, thaiName, engName, locationModal, locationId) => {
+    putEnrollModal = (thaiName, engName, locationModal, locationId) => {
         const { t } = this.props;
-        if (!show) {
-            return null;
-        }
 
         return (
             <div key={locationModal} className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 50 }}>
@@ -327,7 +296,7 @@ class Enrollment extends Component {
                             <Detail bigText={`${thaiName}`} smallText={`${engName}`} />
                         </div>
                         <div className="pt-6 flex justify-between px-4 sm:px-10">
-                            <button onClick={() => this.toggleModal(locationModal)}>{t('enrollmentCancel')}</button>
+                            <button onClick={() => this.toggleModal(null, null)}>{t('enrollmentCancel')}</button>
                             <button className="text-cb-pink" onClick={() => this.putEnroll(locationModal, locationId)}>{t('enrollmentConfirm')}</button>
                         </div>
                     </div>
@@ -337,11 +306,8 @@ class Enrollment extends Component {
     }
 
     //Function that take cares of modal for showing QRCode
-    QRCodeModal = (show, locationModal, locationNameTH) => {
+    QRCodeModal = (locationModal, locationNameTH) => {
         const { t } = this.props;
-        if (!show) {
-            return null;
-        }
 
         return (
             <div key={locationModal} className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 50 }}>
@@ -354,7 +320,7 @@ class Enrollment extends Component {
                             <div className="text-cb-pink text-base">{locationNameTH}</div>
                         </div>
                         <div className="pt-6 flex justify-center px-4 sm:px-10">
-                            <button onClick={() => this.toggleModal(locationModal)}>{t('enrollmentQRCodeClose')}</button>
+                            <button onClick={() => this.toggleModal(null, null)}>{t('enrollmentQRCodeClose')}</button>
                         </div>
                     </div>
                 </div>
@@ -363,10 +329,10 @@ class Enrollment extends Component {
     }
 
     //Function that takes care of modal when user wants to change date
-    changeDateModal = (show, locationModal, dates) => {
+    changeDateModal = (locationModal, dates) => {
         const { t } = this.props;
-        if (!show) {
-            return null;
+        const select = {
+            background: "url(../../../static/icons/arrow-down.svg) right 5px center / 12px 15px no-repeat #ffffff",
         }
 
         const datesOption = dates !== null ? dates.map(date => <option key={date} value={moment(date).format('YYYY-MM-DD')}>{moment(date).format('D MMMM')}</option>) : null;
@@ -378,17 +344,17 @@ class Enrollment extends Component {
                     <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{ minWidth: '250px' }}>
                         <div className="mb-6 px-4 sm:px-10 font-semibold">{t('enrollmentChangeDate')}</div>
                         <div className="bg-cb-grey-lighter py-6 w-full px-4 sm:px-10 flex flex-col justify-center items-center">
-                            <select className="w-32" value={this.state.regisDate} onChange={this.handleChangeDate}>
+                            <select style={select} className="w-32" value={this.state.regisDate} onChange={this.handleChangeDate}>
                                 {datesOption}
                             </select>
                         </div>
                         <div className="bg-cb-grey-lighter pb-6 w-full px-4 sm:px-10 flex flex-col justify-center items-center">
-                            <select className="w-32" value={String(this.state.regisTimeId)} onChange={this.handleChangeTimeId}>
+                            <select style={select} className="w-32" value={String(this.state.regisTimeId)} onChange={this.handleChangeTimeId}>
                                 {timeSlotsOption}
                             </select>
                         </div>
                         <div className="pt-6 flex justify-between px-4 sm:px-10">
-                            <button onClick={() => this.toggleModal(locationModal)}>{t('enrollmentCancel')}</button>
+                            <button onClick={() => this.toggleModal(null, null)}>{t('enrollmentCancel')}</button>
                             <button className="text-cb-pink" onClick={() => this.putEnroll(locationModal, this.state.currentSessionInfo.locationId)}>{t('enrollmentConfirm')}</button>
                         </div>
                     </div>

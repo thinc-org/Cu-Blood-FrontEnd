@@ -44,7 +44,7 @@ export const Input = ({ type, notRequired, value, name, onChange, error, disable
         ) :
         (
             <React.Fragment>
-                <input value={value} autoComplete={type === "password" ? "new-password" : "on"} name={name} onChange={onChange} disabled={disabled} className="bg-cb-grey-light rounded-lg mt-2 px-4 font-cu-body w-full" style={{height: "40px"}} type={type} required={notRequired ? null : true} />
+                <input value={value} autoComplete={type === "password" ? "new-password" : "on"} name={name} onChange={onChange} disabled={disabled} className="bg-cb-grey-light rounded-lg mt-2 px-4 font-cu-body w-full" style={{ height: "40px" }} type={type} required={notRequired ? null : true} />
                 <span className="font-cu-body font-medium text-cb-red">{error}</span>
             </React.Fragment>
         )
@@ -67,6 +67,18 @@ export class FormGroup extends Component {
                     </div>
                 </div>
             </div>
+        )
+    }
+}
+
+export class SmallCheckbox extends Component {
+    render() {
+        const {text ,name, checked, onChange} = this.props
+        return (
+            <label className="flex font-cu-heading text-normal cursor-pointer check-box" >
+                <input checked={checked} onChange={onChange} name={name} type="checkbox" />
+                <div className="check-text text-sm text-left inline-flex" style={{display: "-webkit-box"}}><div>{text}</div></div>
+            </label>
         )
     }
 }

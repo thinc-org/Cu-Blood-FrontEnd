@@ -3,6 +3,7 @@ import Footer from '@/shared-components/Footer';
 import FacebookButton from '@/shared-components/FacebookButton';
 import Header from '@/shared-components/TopicCenter';
 import Form from '@/register/local-components/RegisterFillForm';
+import I18 from '@/core/i18n';
 import '../static/css/registerForm.css';
 import redirectTo from '@/core/redirectTo';
 import axios from '@/core/core';
@@ -10,11 +11,14 @@ import axios from '@/core/core';
 class RegisterForm extends Component {
 
     static async getInitialProps() {
-        const commonsData = await axios.get('https://api-dev.fives.cloud/v0/commons/')
+        const commonsData = await axios.get('/commons/')
             .then(response => response.data.result)
             .catch(console.log)
 
-        return ({ commonsData });
+        return ({ 
+            commonsData,
+            namespacesRequired: ['common', 'register', 'form'], 
+        });
     }
 
     onSubmit = (e) => {
@@ -29,7 +33,7 @@ class RegisterForm extends Component {
             if (element.tagName === 'BUTTON') {
                 continue;
             } else if (name === "bloodType") {
-                bloodType += 2 * Number(value);
+                bloodType += 3 * Number(value);
             } else if (name === "rh") {
                 bloodType += Number(value);
             } else if (!isNaN(value) && name !== "phoneNumber" && name !== "password") {
@@ -44,16 +48,16 @@ class RegisterForm extends Component {
 
         if (!data.isEnrolled) data.isEnrolled = 0;
         data.bloodType = bloodType;
-        axios.post('https://api-dev.fives.cloud/v0/profile/create-account', data)
+        axios.post('/profile/create-account', data)
             .then(() => redirectTo('/chulaLogin'))
             .catch(e => console.log(e))
     }
 
     render() {
-        const { commonsData } = this.props;
+        const { commonsData, t } = this.props;
         return (
             <div>
-                <div className="bg-cb-grey-lighter"><Header english={`REGISTER`} thai={`ลงทะเบียน`} englishColor={`text-cb-pink`} borderColor={`border-cb-red`} /></div>
+                <div className="bg-cb-grey-lighter"><Header english={t('registerSmall')} thai={t('registerBig')} englishColor={`text-cb-pink`} borderColor={`border-cb-red`} /></div>
                 <div className="bg-white">
                     <Form commonsData={commonsData} onSubmit={this.onSubmit} isChulaId={false} />
                 </div>
@@ -65,4 +69,4 @@ class RegisterForm extends Component {
     }
 }
 
-export default RegisterForm;
+export default I18.withNamespaces('register')(RegisterForm);

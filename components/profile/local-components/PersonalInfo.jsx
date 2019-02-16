@@ -3,29 +3,34 @@ import Header from '@/shared-components/TopicLeft';
 import Detail from './Detail';
 import { UserInfoConsumer } from '@/core/UserInfoProvider';
 import moment from 'moment';
-import I18, {Link} from '@/core/i18n';
+import I18, { Link } from '@/core/i18n';
 let i18n = I18.i18n
 
-class PersonalInfo extends Component {    
-    render() {   
-        i18n.language === 'th' ? moment.locale('th') : moment.locale('en') 
-        const { t } = this.props;  
-        return(
+class PersonalInfo extends Component {
+    render() {
+        i18n.language === 'th' ? moment.locale('th') : moment.locale('en')
+        const { t } = this.props;
+        return (
             <div className="layout-wide">
                 <div className="flex items-center justify-between">
-                    <Header english="PERSONAL INFORMATION" thai="ข้อมูลส่วนตัว" englishColor="text-cb-pink" borderColor="border-cb-red" />  
-                    <Link href="/u/updateInfo" prefetch><button><img className="w-6" src="/static/icons/fix.svg" alt="Fix logo" /> </button></Link>
+                    <Header english={t('personalInfoSmallHeader')} thai={t('personalInfoBigHeader')} englishColor="text-cb-pink" borderColor="border-cb-red" />
+                    <Link href="/u/updateInfo" prefetch>
+                        <div className="flex font-cu-heading text-sm items-center">
+                            <div className="mr-2 hidden sm:block">{t('changeUserInfo')}</div>
+                            <button><img className="w-6" src="/static/icons/fix.svg" alt="Fix logo" /></button>
+                        </div>
+                    </Link>
                 </div>
                 <UserInfoConsumer>
-                    {({userInfo}) => {
+                    {({ userInfo }) => {
                         if (!userInfo || !userInfo.uuid) {
-                            return (<div className="w-full flex mb-10"><Detail bigText="ขณะนี้ข้อมูลมีปัญหา โปรดลองใหม่อีกครั้ง" smallText="Error in retrieving information, please try again later"/></div>);
+                            return (<div className="w-full flex mb-10"><Detail bigText="ขณะนี้ข้อมูลมีปัญหา โปรดลองใหม่อีกครั้ง" smallText="Error in retrieving information, please try again later" /></div>);
                         }
-                        return(
+                        return (
                             <div className="w-full flex flex-row flex-wrap mb-2 special-mb-0">
                                 {this.content(`${userInfo.firstName} ${userInfo.lastName} (${userInfo.nickname})`, t('personalInfoName'), true)}
                                 {this.content(this.gender(userInfo.gender), t('personalInfoSex'))}
-                                {this.content(moment(userInfo.birthday).add('years', (i18n.language === 'th' ? 543 : 0)).format('D MMMM YYYY'), t('personalInfoBirthday'))}
+                                {this.content(moment(userInfo.birthday).add((i18n.language === 'th' ? 543 : 0), 'years').format('D MMMM YYYY'), t('personalInfoBirthday'))}
                                 {this.content(userInfo.username, t('personalInfoEmail'))}
                                 {this.content(userInfo.phoneNumber, t('personalInfoTel'))}
                                 {this.content(userInfo.address !== null && userInfo.address !== "-" ? userInfo.address : t('personalInfoNoAddress'), t('personalInfoAddress'))}
@@ -39,147 +44,149 @@ class PersonalInfo extends Component {
                                 {this.content(userInfo.isDonated === 1 ? t('personalInfoDid') : t('personalInfoDidNot'), t('personalInfoDonateBefore'))}
                                 {this.content(userInfo.isEnrolled === 1 ? t('personalInfoDid') : t('personalInfoDidNot'), t('personalInfoDonateCUBlood'))}
                                 {this.content(userInfo.nationality === 1 ? t('personalInfoYes') : t('personalInfoNo'), t('personalInfoForeigner'))}
-                            </div>                             
+                            </div>
                         )
                     }}
                 </UserInfoConsumer>
-                <hr className="w-full max-w-xs border border-cb-grey-border"/>
-                <Header english="MEDICAL CONDITIONS" thai="โรคประจำตัว / ประวัติการแพ้ยา" englishColor="text-cb-pink" borderColor="border-cb-red" />
+                <hr className="w-full max-w-xs border border-cb-grey-border" />
+                <Header english={t('medicalInfoSmallHeader')} thai={t('medicalInfoBigHeader')} englishColor="text-cb-pink" borderColor="border-cb-red" />
                 <UserInfoConsumer>
-                    {({userInfo}) => {
+                    {({ userInfo }) => {
                         if ((userInfo === null) || (userInfo === undefined)) {
-                            return (<div className="w-full flex mb-10"><Detail bigText="ขณะนี้ข้อมูลมีปัญหา โปรดลองใหม่อีกครั้ง" smallText="Error in retrieving information, please try again later"/></div>);
+                            return (<div className="w-full flex mb-10"><Detail bigText="ขณะนี้ข้อมูลมีปัญหา โปรดลองใหม่อีกครั้ง" smallText="Error in retrieving information, please try again later" /></div>);
                         }
                         return (
-                            <div className="font-cb-body text-xl mb-10">{userInfo.medicalCondition}</div>    
+                            <div className="font-cb-body text-xl mb-10">{userInfo.medicalCondition}</div>
                         )
-                    }}                  
+                    }}
                 </UserInfoConsumer>
             </div>
         );
     }
 
     content = (bigText, smallText, isBold, align) => {
-        return(
+        return (
             <div className="w-full special-half-width md:w-1/3 text-center special-text-align-left mb-8 special-mb-10"><Detail bigText={bigText} smallText={smallText} isBold={isBold} align={align} /></div>
         );
     }
 
     bloodType = (reference) => {
-        switch(reference) {
+        const bloodRef = Math.floor(reference / 3);
+        const rhRef = reference % 3;
+        let blood = null
+        switch (bloodRef) {
             case 0:
-            return "A Rh-";
-
+                blood = "A";
+                break;
             case 1:
-            return "A Rh+";
-
+                blood = "B";
+                break;
             case 2:
-            return "B Rh-";
-
+                blood = "O";
+                break;
             case 3:
-            return "B Rh+";
-
-            case 4:
-            return "O Rh-";
-
-            case 5:
-            return "O Rh+";
-
-            case 6:
-            return "AB Rh-";
-
-            case 7:
-            return "AB Rh+";
-
-            default:
-            return null;
+                blood = "AB";
+                break;
         }
+        let rh = null;
+        switch(rhRef) {
+            case 0:
+                rh = "Rh+";
+                break;
+            case 1:
+                rh = "Rh-";
+                break;
+            case 2:
+                rh = ""
+                break;
+        }
+        return `${blood} ${rh}`
     }
 
     gender = (reference) => {
-        switch(reference) {
+        switch (reference) {
             case 0:
-            return "Male";
+                return "Male";
 
             case 1:
-            return "Female";
+                return "Female";
 
             default:
-            return null;
+                return null;
         }
     }
 
     shirtSize = (reference) => {
-        switch(reference) {
+        switch (reference) {
             case 0:
-            return "M (38\")";
+                return "M (38\")";
 
             case 1:
-            return "L (40\")";
+                return "L (40\")";
 
             case 2:
-            return "XL (42\")";
+                return "XL (42\")";
 
             case 3:
-            return "XXL (44\")";
-            
-            default: 
-            return null;
+                return "XXL (44\")";
+
+            default:
+                return null;
         }
     }
 
     academicYear = (reference) => {
-        switch(reference) {
+        switch (reference) {
             case 0:
-            return "ปี 1";
+                return "ปี 1";
 
             case 1:
-            return "ปี 2";
+                return "ปี 2";
 
             case 2:
-            return "ปี 3";
+                return "ปี 3";
 
             case 3:
-            return "ปี 4";
+                return "ปี 4";
 
             case 4:
-            return "ปี 5";
+                return "ปี 5";
 
             case 5:
-            return "ปี 6";
+                return "ปี 6";
 
             case 6:
-            return "ปริญญาโท";
-            
+                return "ปริญญาโท";
+
             case 7:
-            return "ปริญญาเอก";
+                return "ปริญญาเอก";
 
             case 8:
-            return "อื่นๆ"
+                return "อื่นๆ"
 
-            default: 
-            return null;
+            default:
+                return null;
         }
     }
 
     status = (reference) => {
-        switch(reference) {
+        switch (reference) {
             case 0:
-            return "นิสิตจุฬา";
+                return "นิสิตจุฬา";
 
             case 1:
-            return "นิสิตเก่า";
+                return "นิสิตเก่า";
 
             case 2:
-            return "บุคลากร";
+                return "บุคลากร";
 
             case 3:
-            return "อาจารย์";
+                return "อาจารย์";
 
             default:
-            return null;
+                return null;
         }
-    } 
+    }
 }
 
 export default I18.withNamespaces('profile')(PersonalInfo);

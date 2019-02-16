@@ -12,11 +12,14 @@ import redirectTo from '@/core/redirectTo';
 class RegisterForm extends Component {
 
     static async getInitialProps() {
-        const commonsData = await axios.get('https://api-dev.fives.cloud/v0/commons/')
+        const commonsData = await axios.get('/commons/')
             .then(response => response.data.result)
             .catch(console.log)
 
-        return ({ commonsData });
+        return {
+            commonsData,
+            namespacesRequired: ['common', 'register', 'form'],
+        };
     }
 
     onSubmit = (e) => {
@@ -31,12 +34,12 @@ class RegisterForm extends Component {
             if (element.tagName === 'BUTTON') {
                 continue;
             } else if (name === "bloodType") {
-                bloodType += 2 * Number(value);
+                bloodType += 3 * Number(value);
             } else if (name === "rh") {
                 bloodType += Number(value);
             } else if (!isNaN(value) && name !== "phoneNumber" && name !== "password") {
                 value = Number(value);
-            } else if(name === "password" && value === "") {
+            } else if (name === "password" && value === "") {
                 continue;
             }
             if (value === "on" || value === "off") {
@@ -46,18 +49,18 @@ class RegisterForm extends Component {
             data[name] = value;
         }
 
-        if(!data.isEnrolled) data.isEnrolled = 0;
+        if (!data.isEnrolled) data.isEnrolled = 0;
         data.bloodType = bloodType;
-        axios.put('https://api-dev.fives.cloud/v0/profile/me/update', data)
+        axios.put('/profile/me/update', data)
             .then(() => redirectTo('/u/profile'))
             .catch(e => console.log(e))
     }
 
     render() {
-        const { commonsData } = this.props;
+        const { commonsData, t } = this.props;
         return (
             <div>
-                <div className="bg-cb-grey-lighter"><Header english={`EDIT INFO`} thai={`แก้ไขข้อมุล`} englishColor={`text-cb-pink`} borderColor={`border-cb-red`} /></div>
+                <div className="bg-cb-grey-lighter"><Header english={t('editInfoSmall')} thai={t('editInfoBig')} englishColor={`text-cb-pink`} borderColor={`border-cb-red`} /></div>
                 <div className="bg-white">
                     <UserInfoConsumer>
                         {({ userInfo, isUpdated }) => (<Form key={isUpdated ? 0 : 1} commonsData={commonsData} onSubmit={this.onSubmit} userInfo={userInfo} updateInfo={true} isEmail={true} />)}
@@ -71,4 +74,4 @@ class RegisterForm extends Component {
     }
 }
 
-export default I18.withNamespaces('common')(RegisterForm);
+export default I18.withNamespaces('updateInfo')(RegisterForm);

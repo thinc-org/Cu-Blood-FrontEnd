@@ -7,8 +7,17 @@
     "lookAnnouncment": "ดูข่่าวประกาศทั้งหมด",
     "announcementHeaderSmall" : "announcement",
     "announcementHeaderBig" : "ข่าวประกาศ",
-    "statisticHeaderSmall": "STATISTIC",
-    "statisticHeaderBig": "ข้อมูลทางสถิติ",
+    "statisticHeaderSmall": "DONATED BLOOD TYPE IN ",
+    "statisticHeaderBig": "โลหิตที่ได้รับบริจาคในปี ",
     "calendarHeaderSmall": "Calendar",
-    "calendarHeaderBig" : "ปฏิทินกิจกรรม"
+    "calendarHeaderBig" : "ปฏิทินกิจกรรม",
+    "bloodTypeA": "หมู่โลหิต A",
+    "bloodTypeB": "หมู่โลหิต B",
+    "bloodTypeO": "หมู่โลหิต O",
+    "bloodTypeAB": "หมู่โลหิต AB",
+    "totalDonors": "จำนวนผู้บริจาคทั้งหมด",
+    "donationDate": "วันบริจาคเลือด",
+    "endOfRegistrationDate": "ปิดการลงทะเบียน",
+    "left": "อีก",
+    "days": "วัน"
 }

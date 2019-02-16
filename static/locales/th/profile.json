@@ -1,5 +1,7 @@
 {
     "profileHeader" : "ประวัติส่วนตัว",
+    "enrollmentSmallHeader" : "ENROLLMENT",
+    "enrollmentBigHeader" : "ลงทะเบียนเข้าร่วม",
     "enrollmentViewTime" : "เวลาที่เลือก",
     "enrollmentViewMap" : "ดูแผนที่",
     "enrollmentRegister" : "ลงทะเบียน",
@@ -15,6 +17,8 @@
     "enrollmentDonatePeriod" : "วันบริจาคโลหิต",
     "enrollmentCancel" : "ยกเลิก",
     "enrollmentConfirm" : "ยืนยัน",
+    "personalInfoSmallHeader" : "PERSONAL INFORMATION",
+    "personalInfoBigHeader" : "ข้อมูลส่วนตัว",
     "personalInfoName" : "ชื่อ - นามสกุล (ชื่อเล่น)",
     "personalInfoSex" : "เพศ",
     "personalInfoBirthday" : "วัน / เดือน / ปี เกิด",
@@ -35,5 +39,20 @@
     "personalInfoDid" : "เคย",
     "personalInfoDidNot" : "ไม่เคย",
     "personalInfoYes" : "ใช่",
-    "personalInfoNo" : "ไม่ใช่"
+    "personalInfoNo" : "ไม่ใช่",
+    "changeUserInfo" : "แก้ไขข้อมูล",
+    "medicalInfoSmallHeader" : "MEDICAL CONDITIONS",
+    "medicalInfoBigHeader" : "โรคประจำตัว / ประวัติการแพ้ยา",
+    "enrollmentHistorySmallHeader" : "ENROLLMENT HISTORY",
+    "enrollmentHistoryBigHeader" : "ประวัติการเข้าร่วมกิจกรรม",
+    "donateInstruction" : "ข้อควรปฏิบัติก่อนไปบริจาคโลหิต",
+    "agree1" : "รับประทานอาหารก่อนมาบริจาคโลหิต โดยหลีกเลี่ยงอาหารที่มีไขมันสูง และอาหารที่ประกอบด้วยกะทิ เช่น ข้าวขาหมู ข้าวมันไก่ ข้าวเหนียวไก่ทอด กระเทียมเจียว เป็นต้น ",
+    "agree2" : "ดื่มน้ำอย่างน้อย 3-4 แก้ว ก่อนมาบริจาคโลหิต",
+    "agree3" : "นอนหลับพักผ่อนให้เพียงพออย่างน้อย 6 ชั่วโมง ในคืนก่อนวันที่จะมาบริจาคโลหิต",
+    "agree4" : "สุขภาพแข็งแรง ไม่เป็นไข้หวัด หรืออยู่ระหว่างรับประทานยาแก้อักเสบใดๆ",
+    "agree5" : "งดดื่มเครื่องดื่มที่มีแอลกอฮอล์ ก่อนมาบริจาคอย่างน้อย 24 ชั่วโมง",
+    "agree6" : "งดสูบบุหรี่ก่อนและหลังบริจาคโลหิต 1 ชั่วโมง",
+    "agree7" : "ไม่ได้เจาะหู/สัก/ฝังเข็ม ในช่วง 1 ปีที่ผ่านมา",
+    "agree8" : "ในช่วง 6 เดือนที่ผ่านมา ไม่ได้มีการผ่าตัดใหญ่"
+    
 }

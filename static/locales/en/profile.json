@@ -1,5 +1,7 @@
 {
     "profileHeader" : "Personal Information",
+    "enrollmentSmallHeader" : "ลงทะเบียนเข้าร่วม",
+    "enrollmentBigHeader" : "ENROLLMENT",
     "enrollmentViewTime" : "Registered Time",
     "enrollmentViewMap" : "View on map",
     "enrollmentRegister" : "Register",
@@ -15,6 +17,8 @@
     "enrollmentDonatePeriod" : "Blood Donation Period",
     "enrollmentCancel" : "Cancel",
     "enrollmentConfirm" : "Confirm",
+    "personalInfoSmallHeader" : "ข้อมูลส่วนตัว",
+    "personalInfoBigHeader" : "PERSONAL INFORMATION",
     "personalInfoName" : "Full Name (NickName)",
     "personalInfoSex" : "Sex",
     "personalInfoBirthday" : "Birthday",
@@ -35,5 +39,19 @@
     "personalInfoDid" : "Yes",
     "personalInfoDidNot" : "No",
     "personalInfoYes" : "Yes",
-    "personalInfoNo" : "No"    
+    "personalInfoNo" : "No",
+    "changeUserInfo" : "Edit Info",
+    "medicalInfoSmallHeader" : "โรคประจำตัว / ประวัติการแพ้ยา",
+    "medicalInfoBigHeader" : "MEDICAL CONDITIONS",
+    "enrollmentHistorySmallHeader" : "ประวัติการเข้าร่วมกิจกรรม",
+    "enrollmentHistoryBigHeader" : "ENROLLMENT HISTORY",
+    "donateInstruction" : "Instructions for Blood Donation",
+    "agree1" : "Before going to donate your blood,  make sure to have a meal before donate about 2 hours. Please avoid fats food and coconut milk such as Stewed prom leg, Hainanese chicken rice, Fried chicken with sticky rice, and deep fried garlic.",
+    "agree2" : "Drinking at least 3-4 cups of water before donation.",
+    "agree3" : "Have at least 6 hours-sleep the night before blood donation.",
+    "agree4" : "In healthy condition, not having a cold or taking any antibiotics.",
+    "agree5" : "Avoid alcoholic drinks at least 24 hours before donation.",
+    "agree6" : "Avoid smoking 1 hour before and after donation.",
+    "agree7" : "Not having ear or body piercings/tattoos/acupuncture in one year.",
+    "agree8" : "Not having major surgery in the past 6 months."
 }

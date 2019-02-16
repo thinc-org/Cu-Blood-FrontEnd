@@ -12,7 +12,7 @@ import redirectTo from '@/core/redirectTo';
 class RegisterForm extends Component {
 
     static async getInitialProps() {
-        const commonsData = await axios.get('https://api-dev.fives.cloud/v0/commons/')
+        const commonsData = await axios.get('/commons/')
             .then(response => response.data.result)
             .catch(console.log)
 
@@ -48,7 +48,7 @@ class RegisterForm extends Component {
 
         if(!data.isEnrolled) data.isEnrolled = 0;
         data.bloodType = bloodType;
-        axios.put('https://api-dev.fives.cloud/v0/profile/me/update', data)
+        axios.put('/profile/me/update', data)
             .then(() => redirectTo('/u/profile'))
             .catch(e => console.log(e))
     }

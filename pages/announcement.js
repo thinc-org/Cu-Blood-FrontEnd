@@ -20,7 +20,7 @@ class Notice extends React.Component {
 
     //get data from api
     static async getInitialProps() {
-        const announcementDataPromise = axios.get(`https://api-dev.fives.cloud/v0/announcements/all/1`);
+        const announcementDataPromise = axios.get(`/announcements/all/1`);
         const data = await Promise.all([announcementDataPromise]
             .map(p => p
               .then(response => response.data)
@@ -35,7 +35,7 @@ class Notice extends React.Component {
     
     getData = (myPage) => {
         
-        axios.get(`https://api-dev.fives.cloud/v0/announcements/all/${myPage}`)
+        axios.get(`/announcements/all/${myPage}`)
         .then(response => {
             const temp = response.data.result.data
             this.setState({

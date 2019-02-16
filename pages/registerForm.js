@@ -11,7 +11,7 @@ import axios from '@/core/core';
 class RegisterForm extends Component {
 
     static async getInitialProps() {
-        const commonsData = await axios.get('https://api-dev.fives.cloud/v0/commons/')
+        const commonsData = await axios.get('/commons/')
             .then(response => response.data.result)
             .catch(console.log)
 
@@ -45,7 +45,7 @@ class RegisterForm extends Component {
 
         if (!data.isEnrolled) data.isEnrolled = 0;
         data.bloodType = bloodType;
-        axios.post('https://api-dev.fives.cloud/v0/profile/create-account', data)
+        axios.post('/profile/create-account', data)
             .then(() => redirectTo('/chulaLogin'))
             .catch(e => console.log(e))
     }

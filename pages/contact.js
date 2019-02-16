@@ -8,9 +8,9 @@ import ContactContent from '@/contact/local-components/ContactContent';
 
 class Contact extends Component {
     static async getInitialProps() {
-        const facebookPosts = await axios.get('https://api-dev.fives.cloud/api/v1/public/facebook')
+        const facebookPosts = await axios.get('/commons/facebook/posts/')
         .then(response => response.data)
-        .then(result => result.data)
+        .then(result => result.result)
         .catch(console.log);
 
         return {facebookPosts};

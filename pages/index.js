@@ -18,9 +18,9 @@ class App extends Component {
     const year = date.getFullYear();
     const announcementdataPromise = axios.get('/announcements/all/1')
     const statDataPromise = axios.get(`/commons/insights/blood-types/${year}`)
-    const FacebookPostsPromise = axios.get('https://api-dev.fives.cloud/v0/commons/facebook/posts')
-    const calendarEventsPromise = axios.get('https://api-dev.fives.cloud/v0/events/all/1')
-    const commonsDataPromise = axios.get('https://api-dev.fives.cloud/v0/commons');
+    const FacebookPostsPromise = axios.get('/commons/facebook/posts')
+    const calendarEventsPromise = axios.get('/events/all/1')
+    const commonsDataPromise = axios.get('/commons');
 
     const data = await Promise.all([announcementdataPromise, statDataPromise, FacebookPostsPromise, calendarEventsPromise, commonsDataPromise]
       .map(p => p

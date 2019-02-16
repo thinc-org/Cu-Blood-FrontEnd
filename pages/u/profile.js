@@ -16,8 +16,8 @@ class Profile extends Component {
             cookie: req.headers.cookie,
         } : undefined;
 
-        const commonsDataPromise = axios.get('https://api-dev.fives.cloud/v0/commons');
-        const sessionDataPromise = axios.get('https://api-dev.fives.cloud/v0/profile/me/sessions', {headers});
+        const commonsDataPromise = axios.get('/commons');
+        const sessionDataPromise = axios.get('/profile/me/sessions', {headers});
 
         const data = await Promise.all([commonsDataPromise, sessionDataPromise]
             .map(p => p

@@ -51,6 +51,9 @@
     "year4":"ปี 4",
     "year5":"ปี 5",
     "year6":"ปี 6",
+    "other":"อื่นๆ",
     "masterDegree":"ปริญญาโท",
     "doctorateDegree":"ปริญญาเอก",
+    "sexMale": "ชาย",
+    "sexFem" : "หญิง"
 }

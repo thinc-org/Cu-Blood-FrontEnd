@@ -60,6 +60,9 @@
     "year4":"Year 4",
     "year5":"Year 5",
     "year6":"Year 6",
+    "other": "other",
     "masterDegree":"Master's Degree",
-    "doctorateDegree":"Doctorate Degree"
+    "doctorateDegree":"Doctorate Degree",
+    "sexMale" : "Male",
+    "sexFem" : "Female"
 }

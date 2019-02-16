@@ -22,7 +22,7 @@ class UserInfoProvider extends Component {
     }
 
     logout = () => {
-        axios.post('https://api-dev.fives.cloud/v0/profile/logout')
+        axios.post('/profile/logout')
             .then(() => window.location.reload())
     }
 

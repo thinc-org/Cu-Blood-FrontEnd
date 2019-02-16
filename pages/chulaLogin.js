@@ -19,7 +19,13 @@ class ChulaLogin extends Component {
         }
     }
 
-    onSubmit = (e,t) => {
+    static async getInitialProps() {
+        return {
+            namespacesRequired: ['common', 'login'],
+        }
+    }
+
+    onSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
         const data = {}
@@ -28,7 +34,7 @@ class ChulaLogin extends Component {
             if (element.tagName === 'BUTTON') { continue; }
             data[element.name] = element.value;
         }
-        axios.post('https://api-dev.fives.cloud/v0/profile/login', data)
+        axios.post('/profile/login', data)
             .then(() => {
                 // clear username password before proceed to next page as security failsafe
                 this.setState({
@@ -39,10 +45,28 @@ class ChulaLogin extends Component {
             })
             .catch((e) => {
                 if (e.response) {
-                    state = {
-                        username: "",
-                        password: "",
-                        errorMessage: e.response.data.message
+                    const message = e.response.data.message;
+                    switch (message) {
+                        case "Invalid credentials":
+                            state = {
+                                password: "",
+                                errorMessage: "wrongPassword"
+                            }
+                            break;
+                        case "User not found":
+                            state = {
+                                username: "",
+                                password: "",
+                                errorMessage: "userNotFound"
+                            }
+                            break;
+                        default:
+                            state = {
+                                username: "",
+                                password: "",
+                                errorMessage: message
+                            }
+                            break;
                     }
                 } else {
                     state = {
@@ -61,12 +85,12 @@ class ChulaLogin extends Component {
 
     validateForm = () => {
         this.setState(prevState => ({
-            formValid: prevState.username !== "" && prevState.password !=="",
+            formValid: prevState.username !== "" && prevState.password !== "",
         }))
     }
 
     render() {
-      const {t} = this.props;
+        const { t } = this.props;
         return (
             <div className="flex flex-col special-height">
                 <div className="layout-wide flex flex-row items-center special-height">

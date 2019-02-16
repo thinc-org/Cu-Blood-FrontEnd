@@ -11,11 +11,14 @@ import axios from '@/core/core';
 class RegisterForm extends Component {
 
     static async getInitialProps() {
-        const commonsData = await axios.get('https://api-dev.fives.cloud/v0/commons/')
+        const commonsData = await axios.get('/commons/')
             .then(response => response.data.result)
             .catch(console.log)
 
-        return ({ commonsData });
+        return ({ 
+            commonsData,
+            namespacesRequired: ['common', 'register', 'form'], 
+        });
     }
 
     onSubmit = (e) => {
@@ -30,7 +33,7 @@ class RegisterForm extends Component {
             if (element.tagName === 'BUTTON') {
                 continue;
             } else if (name === "bloodType") {
-                bloodType += 2 * Number(value);
+                bloodType += 3 * Number(value);
             } else if (name === "rh") {
                 bloodType += Number(value);
             } else if (!isNaN(value) && name !== "phoneNumber" && name !== "password") {
@@ -45,7 +48,7 @@ class RegisterForm extends Component {
 
         if (!data.isEnrolled) data.isEnrolled = 0;
         data.bloodType = bloodType;
-        axios.post('https://api-dev.fives.cloud/v0/profile/create-account', data)
+        axios.post('/profile/create-account', data)
             .then(() => redirectTo('/chulaLogin'))
             .catch(e => console.log(e))
     }

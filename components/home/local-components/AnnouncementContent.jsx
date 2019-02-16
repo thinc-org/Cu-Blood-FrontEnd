@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import I18 from '@/core/i18n';
+import I18, { Link } from '@/core/i18n';
 let i18n = I18.i18n;
 
 class AnnouncementContent extends Component {
@@ -14,9 +14,15 @@ class AnnouncementContent extends Component {
         return (
             <div>
                 {content}
-                <div className="flex w-full items-center justify-end my-6">
-                    <div className="font-medium mr-2" style={{ colo: "#333333" }}>{t('lookAnnouncment')}</div>
-                    <img src='/static/home/forward-arrow2.svg' alt="arrow" className="w-6 pb-2" />
+                <div className="w-full my-6">
+                    <Link href="/announcement" prefetch>
+                        <div className="flex justify-end cursor-pointer">
+                            <div className="font-medium mr-2" style={{ colo: "#333333" }}>{t('lookAnnouncment')}</div>
+                            <div>
+                                <img src='/static/home/forward-arrow2.svg' alt="arrow" className="w-6" />
+                            </div>
+                        </div>
+                    </Link>
                 </div>
             </div>
         );
@@ -29,7 +35,7 @@ class AnnouncementContent extends Component {
                     <img src='/static/home/megaphone.svg' alt="Megaphone" className="w-8 mr-6" />
                     <div>
                         <div className="text-xl font-medium mb-1" style={{ color: "#333333" }}>{title}</div>
-                        <div className="text-cb-pink font-normal font-cu-body">{moment(date).add('years', (lang === 'th' ? 543 : 0)).format('dddd, D MMMM YYYY')}</div>
+                        <div className="text-cb-pink font-normal font-cu-body">{moment(date).add((lang === 'th' ? 543 : 0), 'years').format('dddd, D MMMM YYYY')}</div>
                     </div>
                 </div>
             )

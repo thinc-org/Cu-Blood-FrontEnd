@@ -5,5 +5,7 @@
   "userLogin_Password": "Password",
   "userLoginForgotPassword": "Forgot Password?",
   "userLoginTitleSmall": "เข้าสู่ระบบ",
-  "userLoginTitleBig": "LOGIN"
+  "userLoginTitleBig": "LOGIN",
+  "wrongPassword": "Wrong password",
+  "userNotFound": "User not found"
 }

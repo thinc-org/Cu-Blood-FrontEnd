@@ -55,8 +55,8 @@ class RegisterFillForm extends Component {
             if (key in this.props.userInfo) {
                 let value = this.props.userInfo[key]
                 if (key === "bloodType") {
-                    obj.bloodType = Math.floor(value / 2);
-                    obj.rh = value % 2 === 0 ? 1 : 0;
+                    obj.bloodType = Math.floor(value / 3);
+                    obj.rh = value % 3;
                 } else {
                     obj[key] = value
                 }
@@ -207,7 +207,7 @@ class RegisterFillForm extends Component {
                             <Selector value={this.state.shirtSize} onChange={this.handleChange} name="shirtSize" choices={['M (38")', 'L (40")', 'XL (42")', 'XXL (44")']} />
                         </Form>
                         <Form text={t('weight')} width="24">
-                            <Input value={this.state.weight} onChange={this.handleChange} name="weight" type="text" error={this.state.formErrors.weight} />
+                            <Input value={this.state.weight} onChange={this.handleChange} name="weight" type="text" error={t(this.state.formErrors.weight)} />
                         </Form>
                         <Form text={t('status')} width="24">
                             <Selector value={this.state.status} onChange={this.handleChange} name="status" choices={[t('currentChula'), t('alumni'), t('staff'), t('instructor')]} />
@@ -233,7 +233,7 @@ class RegisterFillForm extends Component {
                             <Selector value={this.state.bloodType} onChange={this.handleChange} name="bloodType" choices={['A', 'B', 'O', 'AB']} />
                         </Form>
                         <Form text="RH" width="32" smWidth="48">
-                            <Selector value={this.state.rh} onChange={this.handleChange} name="rh" choices={['+', '-']} />
+                            <Selector value={this.state.rh} onChange={this.handleChange} name="rh" choices={['+', '-', t('unknown')]} />
                         </Form>
                         <div className="check">
                             <label className="flex font-cu-heading text-normal cursor-pointer check-box">
@@ -249,7 +249,7 @@ class RegisterFillForm extends Component {
                             <input checked={this.state.accepted} onChange={this.handleChange} name="accepted" required type="checkbox" />
                             <div className="check-text flex"><span>{t('accept1')}<a href="https://google.com" target="_blank" rel="noopener noreferrer" className="no-underline"><span className="text-cb-pink font-semibold">{t('accept2')}</span></a>{t('accept3')}<span className="text-cb-pink font-semibold">{t('accept4')}</span>.</span></div>
                         </label>
-                        <button disabled={!this.state.formValid} className="px-10 pb-3 pt-4 text-white bg-cb-red rounded-lg mt-6 btn font-cu-heading " type="submit" id="confirm" >{t('register')}</button>
+                        <button disabled={!this.state.formValid} className="px-10 pb-3 pt-4 text-white bg-cb-red rounded-lg mt-6 btn font-cu-heading " type="submit" id="confirm" >{t(updateInfo ? "updateInfo" : "register")}</button>
                     </div>
                 </div>
             </form>

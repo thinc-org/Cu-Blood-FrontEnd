@@ -48,6 +48,7 @@
     "foreigner": "ต่างชาติ",
     "masterDegree": "ปริญญาโท",
     "doctoralDegree": "ปริญญาเอก",
+    "unknown": "ไม่ทราบ",
     "others": "อื่นๆ",
     "updateInfo": "แก้ไขข้อมูล"
 }

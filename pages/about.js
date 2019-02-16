@@ -8,6 +8,13 @@ import AboutContent from '@/about/local-components/AboutContent';
 import I18 from '@/core/i18n';
 
 class About extends React.Component {
+
+    static async getInitialProps() {
+        return {
+            namespacesRequired: ['common', 'about'],
+        }
+    }
+
     render() {
       const { t } = this.props;
         return (

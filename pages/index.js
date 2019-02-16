@@ -18,9 +18,9 @@ class App extends Component {
     const year = date.getFullYear();
     const announcementdataPromise = axios.get('/announcements/all/1')
     const statDataPromise = axios.get(`/commons/insights/blood-types/${year}`)
-    const FacebookPostsPromise = axios.get('https://api-dev.fives.cloud/v0/commons/facebook/posts')
-    const calendarEventsPromise = axios.get('https://api-dev.fives.cloud/v0/events/all/1')
-    const commonsDataPromise = axios.get('https://api-dev.fives.cloud/v0/commons');
+    const FacebookPostsPromise = axios.get('/commons/facebook/posts')
+    const calendarEventsPromise = axios.get('/events/all/1')
+    const commonsDataPromise = axios.get('/commons');
 
     const data = await Promise.all([announcementdataPromise, statDataPromise, FacebookPostsPromise, calendarEventsPromise, commonsDataPromise]
       .map(p => p
@@ -34,20 +34,21 @@ class App extends Component {
       statData: statData ? statData.result : undefined,
       facebookPosts: facebookPosts ? facebookPosts.result : undefined,
       calendarEvents: calendarEvents ? calendarEvents.result.data : undefined,
-      commonsData : commonsData ? commonsData.result  : undefined,
+      commonsData: commonsData ? commonsData.result : undefined,
       year,
+      namespacesRequired: ['common', 'index'],
     };
   }
 
   render() {
-    const { announcementData, statData, facebookPosts, calendarEvents, commonsData ,year } = this.props;
+    const { announcementData, statData, facebookPosts, calendarEvents, commonsData, year } = this.props;
     return (
       <div className="font-sans border-black flex flex-col content-center w-full" >
         <HomeHead />
         <UrgentAnnouncement commonsData={commonsData} />
         <Announcement announcementData={announcementData} />
-        <CalendarContainer calendarEvents={calendarEvents}/>
-        <Statistic statData={statData} year={year}/>
+        <CalendarContainer calendarEvents={calendarEvents} />
+        <Statistic statData={statData} year={year} />
         <FacebookContainer posts={facebookPosts} />
         <Footer />
       </div>

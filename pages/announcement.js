@@ -3,7 +3,7 @@ import AnnouncementHeader from '@/announcement/local-components/AnnouncementHead
 import AnnouncementCard from '@/announcement/local-components/AnnouncementCard'
 import Footer from '@/shared-components/Footer';
 import FacebookButton from '@/shared-components/FacebookButton';
-import axios from 'axios';
+import axios from '@/core/core';
 import map from 'lodash/map';
 
 class Notice extends React.Component {
@@ -20,31 +20,32 @@ class Notice extends React.Component {
 
     //get data from api
     static async getInitialProps() {
-        const announcementDataPromise = axios.get(`https://api-dev.fives.cloud/v0/announcements/all/1`);
+        const announcementDataPromise = axios.get('/announcements/all/1');
         const data = await Promise.all([announcementDataPromise]
             .map(p => p
-              .then(response => response.data)
-              .catch(e => null)))
+                .then(response => response.data)
+                .catch(e => null)))
             .catch(console.log);
         const [announcementData] = data;
-                return {
-                    announcementData: announcementData ? announcementData.result.data : undefined,
-                    numberOfPage: announcementData ? announcementData.result.pageCount : undefined
-                };
+        return {
+            announcementData: announcementData ? announcementData.result.data : undefined,
+            numberOfPage: announcementData ? announcementData.result.pageCount : undefined,
+            namespacesRequired: ['common', 'announcement'],
+        };
     }
-    
+
     getData = (myPage) => {
-        
-        axios.get(`https://api-dev.fives.cloud/v0/announcements/all/${myPage}`)
-        .then(response => {
-            const temp = response.data.result.data
-            this.setState({
-                dataFromApi: temp
+
+        axios.get(`/announcements/all/${myPage}`)
+            .then(response => {
+                const temp = response.data.result.data
+                this.setState({
+                    dataFromApi: temp
+                })
             })
-        })
-        
+
     }
-    
+
     update = (myPage) => {
         this.setState({
             // dataFromApi: data,
@@ -55,7 +56,7 @@ class Notice extends React.Component {
             top: 300,
             left: 0,
             behavior: 'smooth'
-          });
+        });
     }
 
     disabledButton = (myPage) => {
@@ -73,7 +74,7 @@ class Notice extends React.Component {
             this.setState({
                 isButtonDisabledLeft: false
             })
-        } 
+        }
         if (myPage <= 1) {
             this.setState({
                 isButtonDisabledLeft: true
@@ -87,20 +88,20 @@ class Notice extends React.Component {
         let myPage = this.state.currentPage + 1;
         this.disabledButton(myPage)
 
-            return (
-                this.update(myPage)
-            )
-        }    
+        return (
+            this.update(myPage)
+        )
+    }
 
 
     //go to previous page
     previousPage = () => {
         let myPage = this.state.currentPage - 1;
         this.disabledButton(myPage)
-            return (
-                this.update(myPage)
-            )
-        }
+        return (
+            this.update(myPage)
+        )
+    }
 
 
     render() {
@@ -118,8 +119,8 @@ class Notice extends React.Component {
         //array for cards
         const AnnouncementCardLoop = () => {
             let data = [];
-            for(let i = 0; i < lengthOfArray; i++) {
-                data.push(<AnnouncementCard key={i} text={announcementTitle[i]} date={announcementDate[i]} image={announcementImage[i]}/>);
+            for (let i = 0; i < lengthOfArray; i++) {
+                data.push(<AnnouncementCard key={i} text={announcementTitle[i]} date={announcementDate[i]} image={announcementImage[i]} />);
             }
 
             return data;
@@ -146,16 +147,16 @@ class Notice extends React.Component {
             )
         }
 
-        
+
 
 
         return (
             <div className="bg-grey-lightest">
                 <AnnouncementHeader />
                 <div className="flex flex-row flex-wrap pb-10 justify-center">
-                     <AnnouncementCardLoop />
+                    <AnnouncementCardLoop />
                 </div>
-                <Pager currentPage={this.state.currentPage} totalPage={this.state.totalPage} next={this.nextPage} previous={this.previousPage} isButtonDisabled={this.state.isButtonDisabled}/>
+                <Pager currentPage={this.state.currentPage} totalPage={this.state.totalPage} next={this.nextPage} previous={this.previousPage} isButtonDisabled={this.state.isButtonDisabled} />
                 <FacebookButton />
                 <Footer />
             </div>

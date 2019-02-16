@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-// import Link from 'next/link';
-import { Link } from '@/core/i18n'
 import '../../static/css/nav.css';
-
-// import i18n for changing langauge
-import I18 from '@/core/i18n';
 import { UserInfoConsumer } from '../core/UserInfoProvider';
+import I18, { Link } from '@/core/i18n'
 let i18n = I18.i18n;
 
 class Navbar extends Component {

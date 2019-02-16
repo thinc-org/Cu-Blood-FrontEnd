@@ -6,6 +6,13 @@ import FacebookButton from '@/shared-components/FacebookButton';
 // import I18 from '@/core/i18n';
 
 class Notice extends React.Component {
+
+    static async getInitialProps() {
+        return {
+            namespacesRequired: ['common', 'notice'],
+        }
+    }
+
     render() {
         return (
             <div>

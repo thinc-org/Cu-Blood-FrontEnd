@@ -16,7 +16,10 @@ class RegisterForm extends Component {
             .then(response => response.data.result)
             .catch(console.log)
 
-        return ({ commonsData });
+        return {
+            commonsData,
+            namespacesRequired: ['common', 'register', 'form'],
+        };
     }
 
     onSubmit = (e) => {
@@ -36,7 +39,7 @@ class RegisterForm extends Component {
                 bloodType += Number(value);
             } else if (!isNaN(value) && name !== "phoneNumber" && name !== "password") {
                 value = Number(value);
-            } else if(name === "password" && value === "") {
+            } else if (name === "password" && value === "") {
                 continue;
             }
             if (value === "on" || value === "off") {
@@ -46,7 +49,7 @@ class RegisterForm extends Component {
             data[name] = value;
         }
 
-        if(!data.isEnrolled) data.isEnrolled = 0;
+        if (!data.isEnrolled) data.isEnrolled = 0;
         data.bloodType = bloodType;
         axios.put('/profile/me/update', data)
             .then(() => redirectTo('/u/profile'))

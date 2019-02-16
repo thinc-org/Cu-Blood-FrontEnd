@@ -34,20 +34,21 @@ class App extends Component {
       statData: statData ? statData.result : undefined,
       facebookPosts: facebookPosts ? facebookPosts.result : undefined,
       calendarEvents: calendarEvents ? calendarEvents.result.data : undefined,
-      commonsData : commonsData ? commonsData.result  : undefined,
+      commonsData: commonsData ? commonsData.result : undefined,
       year,
+      namespacesRequired: ['common', 'index'],
     };
   }
 
   render() {
-    const { announcementData, statData, facebookPosts, calendarEvents, commonsData ,year } = this.props;
+    const { announcementData, statData, facebookPosts, calendarEvents, commonsData, year } = this.props;
     return (
       <div className="font-sans border-black flex flex-col content-center w-full" >
         <HomeHead />
         <UrgentAnnouncement commonsData={commonsData} />
         <Announcement announcementData={announcementData} />
-        <CalendarContainer calendarEvents={calendarEvents}/>
-        <Statistic statData={statData} year={year}/>
+        <CalendarContainer calendarEvents={calendarEvents} />
+        <Statistic statData={statData} year={year} />
         <FacebookContainer posts={facebookPosts} />
         <Footer />
       </div>

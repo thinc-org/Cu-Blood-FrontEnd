@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import FacebookContainer from '@/shared-components/FacebookContainer';
 import axios from '@/core/core';
 import Footer from '@/shared-components/Footer';
@@ -9,15 +9,18 @@ import ContactContent from '@/contact/local-components/ContactContent';
 class Contact extends Component {
     static async getInitialProps() {
         const facebookPosts = await axios.get('/commons/facebook/posts/')
-        .then(response => response.data)
-        .then(result => result.result)
-        .catch(console.log);
+            .then(response => response.data)
+            .then(result => result.result)
+            .catch(console.log);
 
-        return {facebookPosts};
+        return {
+            facebookPosts,
+            namespacesRequired: ['common', 'contact'],
+        };
     }
-    
+
     render() {
-        const {facebookPosts} = this.props
+        const { facebookPosts } = this.props
         return (
             <div>
                 <ContactHeader />

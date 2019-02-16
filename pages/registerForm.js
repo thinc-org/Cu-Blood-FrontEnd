@@ -11,6 +11,12 @@ import axios from '@/core/core';
 class RegisterForm extends Component {
 
     static async getInitialProps() {
+        return {
+            namespacesRequired: ['common', 'register', 'form'],
+        }
+    }
+
+    static async getInitialProps() {
         const commonsData = await axios.get('/commons/')
             .then(response => response.data.result)
             .catch(console.log)

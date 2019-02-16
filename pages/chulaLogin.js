@@ -19,6 +19,12 @@ class ChulaLogin extends Component {
         }
     }
 
+    static async getInitialProps() {
+        return {
+            namespacesRequired: ['common', 'login'],
+        }
+    }
+
     onSubmit = (e) => {
         e.preventDefault();
         const form = e.target;

@@ -48,7 +48,7 @@ class RegisterFillForm extends Component {
             bloodType: "",
             rh: "",
             isDonated: false,
-            accepted: false,
+            // accepted: false,
             moreThan3: false,
             requiresStudentlId: true,
         };
@@ -155,7 +155,7 @@ class RegisterFillForm extends Component {
     }
 
     validateForm = () => {
-        let isValid = this.state.accepted && ((this.state.nationality == 0) || this.state.moreThan3);
+        let isValid = (this.state.nationality == 0) || this.state.moreThan3;
         if (isValid) {
             for (const key in this.state) {
                 if ((key.toString().includes('Valid') && key.toString() !== 'formValid' && this.state[key] === false) || (!this.state[key + 'Valid'] && this.state[key] === "")) {
@@ -168,7 +168,7 @@ class RegisterFillForm extends Component {
     }
 
     render() {
-        const { onSubmit, isChulaId, commonsData, updateInfo, t } = this.props;
+        const { onSubmit, isChulaId, commonsData, updateInfo, submitErrorMessage ,t } = this.props;
         // const { onSubmit, isEmail, isChulaId, commonsData, updateInfo } = this.props; // leave isEmail for ldap implementation
         const inputClassName = `bg-cb-grey-light rounded-lg mt-2 px-4 py-4 font-cu-body`;
         return (
@@ -253,12 +253,13 @@ class RegisterFillForm extends Component {
                             <LiveMoreThan3yearsCheckBox nationality={this.state.nationality} moreThan={this.state.moreThan3} handleChange={this.handleChange} t={t}/>
                         </div>
                     </FormGroup>
-                    <div className="flex flex-col items-center justify-center mt-6 md:mt-12">
-                        <label className="flex font-cu-heading text-normal cursor-pointer check-box">
+                    <div className="flex flex-col items-center justify-center mt-0 md:mt-6">
+                        {/* <label className="flex font-cu-heading text-normal cursor-pointer check-box">
                             <input checked={this.state.accepted} onChange={this.handleChange} name="accepted" required type="checkbox" />
-                            <div className="check-text flex"><span>{t('accept1')}<a href="https://google.com" target="_blank" rel="noopener noreferrer" className="no-underline"><span className="text-cb-pink font-semibold">{t('accept2')}</span></a>{t('accept3')}<span className="text-cb-pink font-semibold">{t('accept4')}</span>.</span></div>
-                        </label>
-                        <button disabled={!this.state.formValid} className="px-10 pb-3 pt-4 text-white bg-cb-red rounded-lg mt-6 btn font-cu-heading " type="submit" id="confirm" >{t(updateInfo ? "updateInfo" : "register")}</button>
+                            <div className="check-text flex"><span>{t('accept1')}<a href="/notice" target="_blank" rel="noopener noreferrer" className="no-underline"><span className="text-cb-pink font-semibold">{t('accept2')}</span></a>{t('accept3')}<span className="text-cb-pink font-semibold">{t('accept4')}</span>.</span></div>
+                        </label> */}
+                        <button disabled={!this.state.formValid} className="px-10 pb-3 pt-4 text-white bg-cb-red rounded-lg btn font-cu-heading " type="submit" id="confirm" >{t(updateInfo ? "updateInfo" : "register")}</button>
+                        <span className="font-cu-body font-medium text-cb-red mt-2">{t(submitErrorMessage)}</span>
                     </div>
                 </div>
             </form>

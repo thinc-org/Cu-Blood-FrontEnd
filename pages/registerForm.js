@@ -10,6 +10,13 @@ import axios from '@/core/core';
 
 class RegisterForm extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            submitErrorMessage: "",
+        }
+    }
+
     static async getInitialProps() {
         const commonsData = await axios.get('/commons/')
             .then(response => response.data.result)
@@ -50,7 +57,10 @@ class RegisterForm extends Component {
         data.bloodType = bloodType;
         axios.post('/profile/create-account', data)
             .then(() => redirectTo('/chulaLogin'))
-            .catch(e => console.log(e))
+            .catch((e) => {
+                console.log(e)
+                this.setState({submitErrorMessage : "duplicateEmail"})
+            })
     }
 
     render() {
@@ -59,7 +69,7 @@ class RegisterForm extends Component {
             <div>
                 <div className="bg-cb-grey-lighter"><Header english={t('registerSmall')} thai={t('registerBig')} englishColor={`text-cb-pink`} borderColor={`border-cb-red`} /></div>
                 <div className="bg-white">
-                    <Form commonsData={commonsData} onSubmit={this.onSubmit} isChulaId={false} />
+                    <Form commonsData={commonsData} onSubmit={this.onSubmit} isChulaId={false} submitErrorMessage={this.state.submitErrorMessage} />
                 </div>
                 {/* <div className="flex flex-col items-center text-white py-10" style={{ backgroundColor: '#8e9dc0' }}><FacebookButton /></div> */}
                 <FacebookButton />

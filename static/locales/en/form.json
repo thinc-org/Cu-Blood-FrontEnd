@@ -50,5 +50,6 @@
     "doctoralDegree": "Doctoral Degree",
     "unknown": "Unknown",
     "others": "Others",
-    "updateInfo": "Submit"
+    "updateInfo": "Submit",
+    "duplicateEmail": "This email is already registered"
 }

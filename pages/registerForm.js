@@ -36,7 +36,7 @@ class RegisterForm extends Component {
                 bloodType += 3 * Number(value);
             } else if (name === "rh") {
                 bloodType += Number(value);
-            } else if (!isNaN(value) && name !== "phoneNumber" && name !== "password") {
+            } else if (!isNaN(value) && name !== "phoneNumber" && name !== "password" && name !== "studentId") {
                 value = Number(value);
             }
             if (value === "on" || value === "off") {

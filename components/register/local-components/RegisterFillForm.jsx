@@ -23,7 +23,15 @@ class RegisterFillForm extends Component {
             weightValid: false,
             // email: "",
             // emailValid: false,
-            formErrors: { phoneNumber: "", birthday: "", weight: "", username: "", password: "", studentId: "" },
+            formErrors: { 
+                phoneNumber: "",
+                birthday: "",
+                weight: "",
+                username: "",
+                password: "",
+                confirmedPassword: "",
+                studentId: "" 
+            },
             address: "",
             firstName: "",
             lastName: "",
@@ -52,7 +60,7 @@ class RegisterFillForm extends Component {
         let obj = {}
         let formErrors = {};
         for (const key in this.state) {
-            if (key in this.props.userInfo) {
+            if (key in this.props.userInfo && key !== 'studentId') {
                 let value = this.props.userInfo[key]
                 if (key === "bloodType") {
                     obj.bloodType = Math.floor(value / 3);
@@ -70,11 +78,14 @@ class RegisterFillForm extends Component {
                 }
             } else if (key === "schoolId" && this.props.userInfo.school) {
                 obj.schoolId = this.props.userInfo.school.id - 1;
-            }
+            } 
         }
         if (this.props.updateInfo) {
             obj.passwordValid = true;
             obj.confirmedPasswordValid = true;
+        }
+        if (this.state.studentId === "") {
+            obj.studentIdValid = true;
         }
         this.setState(obj)
     }
@@ -93,14 +104,12 @@ class RegisterFillForm extends Component {
         switch (name) {
             // formErrors is a key that will be used by i18n
             case "password":
-                isValid = true;
                 const isMatched = value === this.state.confirmedPassword;
                 isValid = value.length >= 8;
                 formErrors.confirmedPassword = isMatched ? "" : 'passwordNotMatch';
                 formErrors.password = isValid ? "" : 'passwordMustBeMoreThan8';
                 return { "passwordValid": isValid, "confirmedPasswordValid": isMatched, "formErrors": formErrors };
             case "confirmedPassword":
-                isValid = true;
                 isValid = value === this.state.password;
                 formErrors.confirmedPassword = isValid ? "" : 'passwordNotMatch';
                 break;

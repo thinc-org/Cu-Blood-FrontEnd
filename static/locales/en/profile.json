@@ -44,5 +44,13 @@
     "medicalInfoSmallHeader" : "โรคประจำตัว / ประวัติการแพ้ยา",
     "medicalInfoBigHeader" : "MEDICAL CONDITIONS",
     "enrollmentHistorySmallHeader" : "ประวัติการเข้าร่วมกิจกรรม",
-    "enrollmentHistoryBigHeader" : "ENROLLMENT HISTORY"    
+    "enrollmentHistoryBigHeader" : "ENROLLMENT HISTORY",
+    "year1":"Year 1",
+    "year2":"Year 2",
+    "year3":"Year 3",
+    "year4":"Year 4",
+    "year5":"Year 5",
+    "year6":"Year 6",
+    "masterDegree":"Master's Degree",
+    "doctorateDegree":"Doctorate Degree"
 }

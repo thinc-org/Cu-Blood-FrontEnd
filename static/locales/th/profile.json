@@ -11,7 +11,7 @@
     "enrollmentRegisterTimeOption" : "เริ่ม - จบ",
     "enrollmentChangeLocation" : "เปลี่ยนสถานที่",
     "enrollmentChangeLocationHeader" : "ยืนยันการลงทะเบียนสถานที่บริจาคโลหิต",
-    "enrollmentQRCodeClose" : "ปิดหน้าต่าง", 
+    "enrollmentQRCodeClose" : "ปิดหน้าต่าง",
     "enrollmentChangeDate" : "กรุณาเลือกวันที่และช่วงเวลาใหม่",
     "enrollmentRegisPeriod" : "วันลงทะเบียน",
     "enrollmentDonatePeriod" : "วันบริจาคโลหิต",
@@ -44,5 +44,13 @@
     "medicalInfoSmallHeader" : "MEDICAL CONDITIONS",
     "medicalInfoBigHeader" : "โรคประจำตัว / ประวัติการแพ้ยา",
     "enrollmentHistorySmallHeader" : "ENROLLMENT HISTORY",
-    "enrollmentHistoryBigHeader" : "ประวัติการเข้าร่วมกิจกรรม"     
+    "enrollmentHistoryBigHeader" : "ประวัติการเข้าร่วมกิจกรรม",
+    "year1":"ปี 1",
+    "year2":"ปี 1",
+    "year3":"ปี 1",
+    "year4":"ปี 1",
+    "year5":"ปี 1",
+    "year6":"ปี 1",
+    "masterDegree":"ปริญญาโท",
+    "doctorateDegree":"ปริญญาเอก"     
 }

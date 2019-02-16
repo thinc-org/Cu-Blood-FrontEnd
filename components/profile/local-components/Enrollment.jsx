@@ -6,6 +6,7 @@ import moment from 'moment-timezone';
 import I18 from '@/core/i18n';
 import axios from '@/core/core';
 import QRCode from 'qrcode.react';
+import { SmallCheckbox } from '@/shared-components/Form';
 let i18n = I18.i18n
 
 class Enrollment extends Component {
@@ -418,40 +419,16 @@ class Enrollment extends Component {
             <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 50 }}>
                 <div className="layout-wide flex justify-center">
                     <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{ minWidth: '250px', maxHeight: '75vh' }}>
-                        <div className="mb-6 px-4 sm:px-10 font-semibold">ข้อควรปฏิบัติก่อนไปบริจาคโลหิต</div>
-                        <div className="overflow-y-scroll scroll px-4">
-                            <label className="flex font-cu-heading text-normal cursor-pointer check-box">
-                                <input checked={this.state.agree1} onChange={this.handleCheckboxChange} name="agree1" type="checkbox" />
-                                <div className="check-text text-sm text-left">รับประทานอาหารก่อนมาบริจาคโลหิต โดยหลีกเลี่ยงอาหารที่มีไขมันสูง และอาหารที่ประกอบด้วยกะทิ เช่น ข้าวขาหมู ข้าวมันไก่ ข้าวเหนียวไก่ทอด กระเทียมเจียว เป็นต้น </div>
-                            </label>
-                            <label className="flex font-cu-heading text-normal cursor-pointer check-box">
-                                <input checked={this.state.agree2} onChange={this.handleCheckboxChange} name="agree2" type="checkbox" />
-                                <div className="check-text text-sm text-left">ดื่มน้ำอย่างน้อย 3-4 แก้ว ก่อนมาบริจาคโลหิต</div>
-                            </label>
-                            <label className="flex font-cu-heading text-normal cursor-pointer check-box">
-                                <input checked={this.state.agree3} onChange={this.handleCheckboxChange} name="agree3" type="checkbox" />
-                                <div className="check-text text-sm text-left">นอนหลับพักผ่อนให้เพียงพออย่างน้อย 6 ชั่วโมง ในคืนก่อนวันที่จะมาบริจาคโลหิต </div>
-                            </label>
-                            <label className="flex font-cu-heading text-normal cursor-pointer check-box">
-                                <input checked={this.state.agree4} onChange={this.handleCheckboxChange} name="agree4" type="checkbox" />
-                                <div className="check-text text-sm text-left">สุขภาพแข็งแรง ไม่เป็นไข้หวัด หรืออยู่ระหว่างรับประทานยาแก้อักเสบใดๆ </div>
-                            </label>
-                            <label className="flex font-cu-heading text-normal cursor-pointer check-box">
-                                <input checked={this.state.agree5} onChange={this.handleCheckboxChange} name="agree5" type="checkbox" />
-                                <div className="check-text text-sm text-left">งดดื่มเครื่องดื่มที่มีแอลกอฮอล์ ก่อนมาบริจาคอย่างน้อย 24 ชั่วโมง </div>
-                            </label>
-                            <label className="flex font-cu-heading text-normal cursor-pointer check-box">
-                                <input checked={this.state.agree6} onChange={this.handleCheckboxChange} name="agree6" type="checkbox" />
-                                <div className="check-text text-sm text-left">งดสูบบุหรี่ก่อนและหลังบริจาคโลหิต 1 ชั่วโมง</div>
-                            </label>
-                            <label className="flex font-cu-heading text-normal cursor-pointer check-box">
-                                <input checked={this.state.agree7} onChange={this.handleCheckboxChange} name="agree7" type="checkbox" />
-                                <div className="check-text text-sm text-left">ไม่ได้เจาะหู/สัก/ฝังเข็ม ในช่วง 1 ปีที่ผ่านมา </div>
-                            </label>
-                            <label className="flex font-cu-heading text-normal cursor-pointer check-box">
-                                <input checked={this.state.agree8} onChange={this.handleCheckboxChange} name="agree8" type="checkbox" />
-                                <div className="check-text text-sm text-left">ในช่วง 6 เดือนที่ผ่านมา ไม่ได้มีการผ่าตัดใหญ่</div>
-                            </label>
+                        <div className="mb-6 px-4 sm:px-10 font-semibold">{t('donateInstruction')}</div>
+                        <div className="overflow-y-scroll overflow-x-hidden scroll px-4">
+                            <SmallCheckbox checked={this.state.agree1} onChange={this.handleCheckboxChange} name="agree1" text={t('agree1')}/>
+                            <SmallCheckbox checked={this.state.agree2} onChange={this.handleCheckboxChange} name="agree2" text={t('agree2')}/>
+                            <SmallCheckbox checked={this.state.agree3} onChange={this.handleCheckboxChange} name="agree3" text={t('agree3')}/>
+                            <SmallCheckbox checked={this.state.agree4} onChange={this.handleCheckboxChange} name="agree4" text={t('agree4')}/>
+                            <SmallCheckbox checked={this.state.agree5} onChange={this.handleCheckboxChange} name="agree5" text={t('agree5')}/>
+                            <SmallCheckbox checked={this.state.agree6} onChange={this.handleCheckboxChange} name="agree6" text={t('agree6')}/>
+                            <SmallCheckbox checked={this.state.agree7} onChange={this.handleCheckboxChange} name="agree7" text={t('agree7')}/>
+                            <SmallCheckbox checked={this.state.agree8} onChange={this.handleCheckboxChange} name="agree8" text={t('agree8')}/>
                         </div>
                         <div className="pt-6 flex justify-between px-4 sm:px-10">
                             <button onClick={() => this.toggleModal(null, null)}>{t('enrollmentCancel')}</button>

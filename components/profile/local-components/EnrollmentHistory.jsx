@@ -56,10 +56,10 @@ class EnrollmentHistory extends Component {
         else if (sessionInfo[sessionInfo.length - 1].project.id === commonsInfo.id) {
             const sessionExceptCurrent = sessionInfo.slice(0, -1);
             return(
-                sessionExceptCurrent.map(element => this.contentFunc(element.project.name, moment(element.timeSlot).add('years', (i18n.language === 'th' ? 543 : 0)).format('D MMMM YYYY')))
+                sessionExceptCurrent.map(element => this.contentFunc(element.project.name, moment(element.timeSlot).add((i18n.language === 'th' ? 543 : 0), 'years').format('D MMMM YYYY')))
                 );
         }
-        return(sessionInfo.map(element => this.contentFunc(element.project.name, moment(element.timeSlot).add('years', (i18n.language === 'th' ? 543 : 0)).format('D MMMM YYYY'))));
+        return(sessionInfo.map(element => this.contentFunc(element.project.name, moment(element.timeSlot).add((i18n.language === 'th' ? 543 : 0), 'years').format('D MMMM YYYY'))));
     }
 }
 

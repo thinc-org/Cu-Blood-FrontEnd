@@ -102,8 +102,8 @@ class Enrollment extends Component {
                             {locationContent}
                         </div>
                         <div className="w-full flex flex-col sm:flex-row items-center sm:justify-between mt-8">
-                            <div className="mb-8 sm:mb-0 text-center sm:text-left"><Detail bigText={`${moment(commonsInfo.registrationStartDate).add('years', (i18n.language === 'th' ? 543 : 0)).format('D MMMM')} - ${moment(commonsInfo.registrationEndDate).add('years', (i18n.language === 'th' ? 543 : 0)).format('D MMMM')}`} smallText={t('enrollmentRegisPeriod')} isBold={true} /></div>
-                            <div className="text-center sm:text-right"><Detail bigText={`${moment(commonsInfo.startDate).add('years', (i18n.language === 'th' ? 543 : 0)).format('D MMMM')} - ${moment(commonsInfo.endDate).add('years', (i18n.language === 'th' ? 543 : 0)).format('D MMMM')}`} smallText={t('enrollmentDonatePeriod')} isBold={true} /></div>
+                            <div className="mb-8 sm:mb-0 text-center sm:text-left"><Detail bigText={`${moment(commonsInfo.registrationStartDate).add((i18n.language === 'th' ? 543 : 0), 'years').format('D MMMM')} - ${moment(commonsInfo.registrationEndDate).add((i18n.language === 'th' ? 543 : 0), 'years').format('D MMMM')}`} smallText={t('enrollmentRegisPeriod')} isBold={true} /></div>
+                            <div className="text-center sm:text-right"><Detail bigText={`${moment(commonsInfo.startDate).add((i18n.language === 'th' ? 543 : 0), 'years').format('D MMMM')} - ${moment(commonsInfo.endDate).add((i18n.language === 'th' ? 543 : 0), 'years').format('D MMMM')}`} smallText={t('enrollmentDonatePeriod')} isBold={true} /></div>
                         </div>
                     </Card>
                     {this.modalGenerator(this.state.modalStatus, datesDuringDonation, commonsInfo)}

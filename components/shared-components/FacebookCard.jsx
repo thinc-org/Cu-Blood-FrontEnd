@@ -20,7 +20,7 @@ class FacebookCard extends React.Component {
                     <div className="flex flex-row items-center px-6 bg-white my-5">
                         <img className="w-8" src='/static/logo/clock.svg' alt="clock" />
                         <p className="pl-2 font-semibold text-lg font-cu-body" style={{ color: '#8e9dc0' }}>
-                            {moment(created_time).add('years', (i18n.language === 'th' ? 543 : 0)).format('LL')}
+                            {moment(created_time).add((i18n.language === 'th' ? 543 : 0), 'years').format('LL')}
                         </p>
                     </div>
                     <div className="px-8 pb-3 bg-white text-sm mb-3">

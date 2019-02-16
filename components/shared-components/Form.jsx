@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 const select = {
     background: "url(../../static/icons/arrow-down.svg) right 5px center / 12px 15px no-repeat #efefef",
-    height: "40px"
+    height: "40px",
+    "line-height": "40px"
 }
 
 export default class extends Component {

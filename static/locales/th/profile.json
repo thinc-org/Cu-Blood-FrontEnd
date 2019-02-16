@@ -46,11 +46,11 @@
     "enrollmentHistorySmallHeader" : "ENROLLMENT HISTORY",
     "enrollmentHistoryBigHeader" : "ประวัติการเข้าร่วมกิจกรรม",
     "year1":"ปี 1",
-    "year2":"ปี 1",
-    "year3":"ปี 1",
-    "year4":"ปี 1",
-    "year5":"ปี 1",
-    "year6":"ปี 1",
+    "year2":"ปี 2",
+    "year3":"ปี 3",
+    "year4":"ปี 4",
+    "year5":"ปี 5",
+    "year6":"ปี 6",
     "masterDegree":"ปริญญาโท",
-    "doctorateDegree":"ปริญญาเอก"
+    "doctorateDegree":"ปริญญาเอก",
 }

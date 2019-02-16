@@ -53,5 +53,13 @@
     "agree5" : "Avoid alcoholic drinks at least 24 hours before donation.",
     "agree6" : "Avoid smoking 1 hour before and after donation.",
     "agree7" : "Not having ear or body piercings/tattoos/acupuncture in one year.",
-    "agree8" : "Not having major surgery in the past 6 months."
+    "agree8" : "Not having major surgery in the past 6 months.",
+    "year1":"Year 1",
+    "year2":"Year 2",
+    "year3":"Year 3",
+    "year4":"Year 4",
+    "year5":"Year 5",
+    "year6":"Year 6",
+    "masterDegree":"Master's Degree",
+    "doctorateDegree":"Doctorate Degree"
 }

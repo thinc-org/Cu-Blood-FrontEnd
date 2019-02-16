@@ -173,7 +173,6 @@ class RegisterFillForm extends Component {
         if (isValid) {
             for (const key in this.state) {
                 if ((key.toString().includes('Valid') && key.toString() !== 'formValid' && this.state[key] === false) || (!this.state[key + 'Valid'] && this.state[key] === "")) {
-                    console.log(key, this.state[key])
                     isValid = false;
                     break;
                 }

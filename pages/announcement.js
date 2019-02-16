@@ -3,7 +3,7 @@ import AnnouncementHeader from '@/announcement/local-components/AnnouncementHead
 import AnnouncementCard from '@/announcement/local-components/AnnouncementCard'
 import Footer from '@/shared-components/Footer';
 import FacebookButton from '@/shared-components/FacebookButton';
-import axios from 'axios';
+import axios from '@/core/core';
 import map from 'lodash/map';
 
 class Notice extends React.Component {
@@ -20,7 +20,7 @@ class Notice extends React.Component {
 
     //get data from api
     static async getInitialProps() {
-        const announcementDataPromise = axios.get(`/announcements/all/1`);
+        const announcementDataPromise = axios.get('/announcements/all/1');
         const data = await Promise.all([announcementDataPromise]
             .map(p => p
                 .then(response => response.data)

@@ -51,6 +51,7 @@ class RegisterFillForm extends Component {
             // accepted: false,
             moreThan3: false,
             requiresStudentlId: true,
+            requiresYear: true,
         };
     }
 
@@ -139,11 +140,24 @@ class RegisterFillForm extends Component {
                 break;
             case "status":
                 // alumni (options no.1) don't need school id
+                let requiresStudentlId = true;
+                let studentIdValid = this.state.studentIdValid;
+                let studentId = this.state.studentId;
+                let requiresYear = true;
+                let academicYear = this.state.academicYear;
                 if (value == 1) {
                     formErrors.studentId = ""
-                    return { requiresStudentlId: false, studentIdValid: true, studentId : "", "formErrors": formErrors }
-                };
-                return { requiresStudentlId: true, studentIdValid: false, studentId: "" };
+                    requiresStudentlId = false
+                    studentIdValid = true;
+                    studentId = ""
+                } else {
+                    studentIdValid = studentId && studentId.length  === 10 ? true : false;
+                }
+                if(value != 0) {
+                    requiresYear = false
+                    academicYear = 8;
+                }
+                return { requiresStudentlId, studentIdValid, studentId, requiresYear, academicYear, formErrors };
             case "studentId":
                 isValid = value.length === 10 && Number(value) == value;
                 formErrors.studentId = isValid ? "" : 'numberMustBe10Digit';
@@ -159,6 +173,7 @@ class RegisterFillForm extends Component {
         if (isValid) {
             for (const key in this.state) {
                 if ((key.toString().includes('Valid') && key.toString() !== 'formValid' && this.state[key] === false) || (!this.state[key + 'Valid'] && this.state[key] === "")) {
+                    console.log(key, this.state[key])
                     isValid = false;
                     break;
                 }
@@ -225,7 +240,7 @@ class RegisterFillForm extends Component {
                             <Selector value={this.state.nationality} onChange={this.handleChange} name="nationality" choices={[t('thai'), t('foreigner')]} />
                         </Form>
                         <Form text={t('year')} width="24">
-                            <Selector disabled={isChulaId} value={this.state.academicYear} onChange={this.handleChange} name="academicYear" choices={['1', '2', '3', '4', '5', '6', t('masterDegree'), t('doctoralDegree'), t('others')]} />
+                            <Selector disabled={isChulaId || !this.state.requiresYear} value={this.state.academicYear} onChange={this.handleChange} name="academicYear" choices={['1', '2', '3', '4', '5', '6', t('masterDegree'), t('doctoralDegree'), t('others')]} />
                         </Form>
                         <Form text={t('id')} width="full" smWidth="48">
                             <Input disabled={isChulaId || !this.state.requiresStudentlId} value={this.state.studentId} onChange={this.handleChange} name="studentId" type="text" error={t(this.state.formErrors.studentId)} />

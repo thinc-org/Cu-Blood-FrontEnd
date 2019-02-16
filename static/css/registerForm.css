@@ -52,6 +52,6 @@ select, input {
     box-shadow:none;
 }
 
-input:disabled {
-    background-color: rgb(185, 184, 190);
+input:disabled, select:disabled {
+    background-color: rgb(185, 184, 190) !important;
 }

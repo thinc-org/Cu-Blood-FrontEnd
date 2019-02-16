@@ -12,11 +12,14 @@ import redirectTo from '@/core/redirectTo';
 class RegisterForm extends Component {
 
     static async getInitialProps() {
-        const commonsData = await axios.get('https://api-dev.fives.cloud/v0/commons/')
+        const commonsData = await axios.get('/commons/')
             .then(response => response.data.result)
             .catch(console.log)
 
-        return ({ commonsData });
+        return {
+            commonsData,
+            namespacesRequired: ['common', 'register', 'form'],
+        };
     }
 
     onSubmit = (e) => {
@@ -31,12 +34,12 @@ class RegisterForm extends Component {
             if (element.tagName === 'BUTTON') {
                 continue;
             } else if (name === "bloodType") {
-                bloodType += 2 * Number(value);
+                bloodType += 3 * Number(value);
             } else if (name === "rh") {
                 bloodType += Number(value);
             } else if (!isNaN(value) && name !== "phoneNumber" && name !== "password") {
                 value = Number(value);
-            } else if(name === "password" && value === "") {
+            } else if (name === "password" && value === "") {
                 continue;
             }
             if (value === "on" || value === "off") {
@@ -46,9 +49,9 @@ class RegisterForm extends Component {
             data[name] = value;
         }
 
-        if(!data.isEnrolled) data.isEnrolled = 0;
+        if (!data.isEnrolled) data.isEnrolled = 0;
         data.bloodType = bloodType;
-        axios.put('https://api-dev.fives.cloud/v0/profile/me/update', data)
+        axios.put('/profile/me/update', data)
             .then(() => redirectTo('/u/profile'))
             .catch(e => console.log(e))
     }

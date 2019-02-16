@@ -19,6 +19,12 @@ class ChulaLogin extends Component {
         }
     }
 
+    static async getInitialProps() {
+        return {
+            namespacesRequired: ['common', 'login'],
+        }
+    }
+
     onSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -28,7 +34,7 @@ class ChulaLogin extends Component {
             if (element.tagName === 'BUTTON') { continue; }
             data[element.name] = element.value;
         }
-        axios.post('https://api-dev.fives.cloud/v0/profile/login', data)
+        axios.post('/profile/login', data)
             .then(() => {
                 // clear username password before proceed to next page as security failsafe
                 this.setState({

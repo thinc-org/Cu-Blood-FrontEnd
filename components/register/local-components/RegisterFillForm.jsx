@@ -55,8 +55,8 @@ class RegisterFillForm extends Component {
             if (key in this.props.userInfo) {
                 let value = this.props.userInfo[key]
                 if (key === "bloodType") {
-                    obj.bloodType = Math.floor(value / 2);
-                    obj.rh = value % 2 === 0 ? 1 : 0;
+                    obj.bloodType = Math.floor(value / 3);
+                    obj.rh = value % 3;
                 } else {
                     obj[key] = value
                 }
@@ -233,7 +233,7 @@ class RegisterFillForm extends Component {
                             <Selector value={this.state.bloodType} onChange={this.handleChange} name="bloodType" choices={['A', 'B', 'O', 'AB']} />
                         </Form>
                         <Form text="RH" width="32" smWidth="48">
-                            <Selector value={this.state.rh} onChange={this.handleChange} name="rh" choices={['+', '-']} />
+                            <Selector value={this.state.rh} onChange={this.handleChange} name="rh" choices={['+', '-', t('unknown')]} />
                         </Form>
                         <div className="check">
                             <label className="flex font-cu-heading text-normal cursor-pointer check-box">

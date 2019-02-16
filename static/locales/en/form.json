@@ -48,6 +48,7 @@
     "foreigner": "Foreigner",
     "masterDegree": "Master Degree",
     "doctoralDegree": "Doctoral Degree",
+    "unknown": "Unknown",
     "others": "Others",
     "updateInfo": "Submit"
 }

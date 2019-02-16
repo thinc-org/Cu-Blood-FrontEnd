@@ -30,7 +30,7 @@ class PersonalInfo extends Component {
                             <div className="w-full flex flex-row flex-wrap mb-2 special-mb-0">
                                 {this.content(`${userInfo.firstName} ${userInfo.lastName} (${userInfo.nickname})`, t('personalInfoName'), true)}
                                 {this.content(this.gender(userInfo.gender), t('personalInfoSex'))}
-                                {this.content(moment(userInfo.birthday).add('years', (i18n.language === 'th' ? 543 : 0)).format('D MMMM YYYY'), t('personalInfoBirthday'))}
+                                {this.content(moment(userInfo.birthday).add((i18n.language === 'th' ? 543 : 0), 'years').format('D MMMM YYYY'), t('personalInfoBirthday'))}
                                 {this.content(userInfo.username, t('personalInfoEmail'))}
                                 {this.content(userInfo.phoneNumber, t('personalInfoTel'))}
                                 {this.content(userInfo.address !== null && userInfo.address !== "-" ? userInfo.address : t('personalInfoNoAddress'), t('personalInfoAddress'))}
@@ -71,34 +71,36 @@ class PersonalInfo extends Component {
     }
 
     bloodType = (reference) => {
-        switch (reference) {
+        const bloodRef = Math.floor(reference / 3);
+        const rhRef = reference % 3;
+        let blood = null
+        switch (bloodRef) {
             case 0:
-                return "A Rh-";
-
+                blood = "A";
+                break;
             case 1:
-                return "A Rh+";
-
+                blood = "B";
+                break;
             case 2:
-                return "B Rh-";
-
+                blood = "O";
+                break;
             case 3:
-                return "B Rh+";
-
-            case 4:
-                return "O Rh-";
-
-            case 5:
-                return "O Rh+";
-
-            case 6:
-                return "AB Rh-";
-
-            case 7:
-                return "AB Rh+";
-
-            default:
-                return null;
+                blood = "AB";
+                break;
         }
+        let rh = null;
+        switch(rhRef) {
+            case 0:
+                rh = "Rh+";
+                break;
+            case 1:
+                rh = "Rh-";
+                break;
+            case 2:
+                rh = ""
+                break;
+        }
+        return `${blood} ${rh}`
     }
 
     gender = (reference) => {

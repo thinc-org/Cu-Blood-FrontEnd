@@ -64,5 +64,9 @@
     "masterDegree":"Master's Degree",
     "doctorateDegree":"Doctorate Degree",
     "sexMale" : "Male",
-    "sexFem" : "Female"
+    "sexFem" : "Female",
+    "currentStudent": "Current Student",
+    "alumni": "Alumni",
+    "faculty": "Faculty Member",
+    "staff": "Staff"
 }

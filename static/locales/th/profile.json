@@ -55,5 +55,9 @@
     "masterDegree":"ปริญญาโท",
     "doctorateDegree":"ปริญญาเอก",
     "sexMale": "ชาย",
-    "sexFem" : "หญิง"
+    "sexFem" : "หญิง",
+    "currentStudent":"นิสิตจุฬา",
+    "alumni":"นิสิตเก่า",
+    "faculty":"อาจารย์",
+    "staff": "บุคลากร"
 }

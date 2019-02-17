@@ -34,7 +34,7 @@ class PersonalInfo extends Component {
                                 {this.content(userInfo.username, t('personalInfoEmail'))}
                                 {this.content(userInfo.phoneNumber, t('personalInfoTel'))}
                                 {this.content(userInfo.address !== null && userInfo.address !== "-" ? userInfo.address : t('personalInfoNoAddress'), t('personalInfoAddress'))}
-                                {this.content(this.status(userInfo.status), t('personalInfoStatus'))}
+                                {this.content(t(this.status(userInfo.status)), t('personalInfoStatus'))}
                                 {this.content(userInfo.studentId, t('personalInfoStudentId'))}
                                 {this.content(userInfo.school.nameTH, t('personalInfoFaculty'))}
                                 {this.content(t(this.academicYear(userInfo.academicYear)), t('personalInfoYear'))}
@@ -172,16 +172,16 @@ class PersonalInfo extends Component {
     status = (reference) => {
         switch (reference) {
             case 0:
-                return "นิสิตจุฬา";
+                return "currentStudent";
 
             case 1:
-                return "นิสิตเก่า";
+                return "alumni";
 
             case 2:
-                return "บุคลากร";
+                return "staff";
 
             case 3:
-                return "อาจารย์";
+                return "faculty";
 
             default:
                 return null;

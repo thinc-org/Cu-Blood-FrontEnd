@@ -49,6 +49,7 @@ class RegisterFillForm extends Component {
             bloodType: "",
             rh: "",
             isDonated: false,
+            isEnrolled: true,
             // accepted: false,
             moreThan3: false,
             requiresStudentlId: true,
@@ -88,10 +89,14 @@ class RegisterFillForm extends Component {
             obj.passwordValid = true;
             obj.confirmedPasswordValid = true;
         }
-        if (this.state.studentId === "") {
+        if (this.props.userInfo.studentId === null) {
             obj.studentIdValid = true;
+            obj.studentId = "";
         }
-        this.setState(obj)
+        if(this.props.userInfo.nationality === 1) {
+            obj.moreThan3 = true;
+        }
+        this.setState(obj, this.validateForm)
     }
 
     handleChange = (e) => {
@@ -178,7 +183,7 @@ class RegisterFillForm extends Component {
                 }
                 return { requiresStudentlId, studentIdValid, studentId, requiresYear, academicYear, formErrors };
             case "studentId":
-                isValid = (this.props.userInfo && this.props.userInfo.status == 1) || (value && value.length === 10 && Number(value) == value);
+                isValid = (this.props.userInfo && this.props.userInfo.status == 1 && this.state.status === "") || (value && value.length === 10 && Number(value) == value);
                 formErrors.studentId = isValid ? "" : 'numberMustBe10Digit';
                 break;
             default:
@@ -193,6 +198,7 @@ class RegisterFillForm extends Component {
             for (const key in this.state) {
                 if ((key.toString().includes('Valid') && key.toString() !== 'formValid' && this.state[key] === false) || (!this.state[key + 'Valid'] && this.state[key] === "")) {
                     isValid = false;
+                    console.log(key, 'invalid')
                     break;
                 }
             }
@@ -290,7 +296,7 @@ class RegisterFillForm extends Component {
                                 <input checked={this.state.isDonated} onChange={this.handleChange} name="isDonated" type="checkbox" />
                                 <div className="check-text flex">{t('haveYouEverDonatedBlood')}</div>
                             </label>
-                            <DonatedWithCubloodCheckBox isDonated={this.state.isDonated} t={t} />
+                            <DonatedWithCubloodCheckBox isEnrolled={this.state.isEnrolled} handleChange={this.handleChange} isDonated={this.state.isDonated} t={t} />
                         </div>
                     </FormGroup>
                     <div className="flex flex-col items-center justify-center mt-0 md:mt-6">
@@ -298,7 +304,7 @@ class RegisterFillForm extends Component {
                             <input checked={this.state.accepted} onChange={this.handleChange} name="accepted" required type="checkbox" />
                             <div className="check-text flex"><span>{t('accept1')}<a href="/notice" target="_blank" rel="noopener noreferrer" className="no-underline"><span className="text-cb-pink font-semibold">{t('accept2')}</span></a>{t('accept3')}<span className="text-cb-pink font-semibold">{t('accept4')}</span>.</span></div>
                         </label> */}
-                        <LiveMoreThan3yearsCheckBox nationality={this.state.nationality} moreThan={this.state.moreThan3} handleChange={this.handleChange} t={t} />
+                        <LiveMoreThan3yearsCheckBox nationality={this.state.nationality} moreThan3={this.state.moreThan3} handleChange={this.handleChange} t={t} />
                         <button disabled={!this.state.formValid} className="px-10 pb-3 pt-4 text-white bg-cb-red rounded-lg btn font-cu-heading " type="submit" id="confirm" >{t(updateInfo ? "updateInfo" : "register")}</button>
                         <span className="font-cu-body font-medium text-cb-red mt-2">{t(submitErrorMessage)}</span>
                     </div>
@@ -309,13 +315,12 @@ class RegisterFillForm extends Component {
 
 }
 
-const DonatedWithCubloodCheckBox = ({ isDonated, t }) => {
+const DonatedWithCubloodCheckBox = ({ isDonated, isEnrolled, handleChange, t }) => {
     return (
         isDonated ?
             (
                 <label className="flex font-cu-heading text-normal cursor-pointer check-box">
-                    <input name="isEnrolled" type="checkbox" />
-                    {/*  ask five tommorow about the correct name */}
+                    <input checked={isEnrolled} onChange={handleChange} name="isEnrolled" type="checkbox" />
                     <div className="check-text flex"><span>{t('donatedWithCUBlood1')}<br /><span className="text-cb-red font-semibold">CU BLOOD</span>{t('donatedWithCUBlood2')}</span></div>
                 </label>
             )

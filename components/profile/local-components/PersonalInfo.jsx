@@ -29,15 +29,15 @@ class PersonalInfo extends Component {
                         return (
                             <div className="w-full flex flex-row flex-wrap mb-2 special-mb-0">
                                 {this.content(`${userInfo.firstName} ${userInfo.lastName} (${userInfo.nickname})`, t('personalInfoName'), true)}
-                                {this.content(this.gender(userInfo.gender), t('personalInfoSex'))}
+                                {this.content(t(this.gender(userInfo.gender)), t('personalInfoSex'))}
                                 {this.content(moment(userInfo.birthday).add((i18n.language === 'th' ? 543 : 0), 'years').format('D MMMM YYYY'), t('personalInfoBirthday'))}
                                 {this.content(userInfo.username, t('personalInfoEmail'))}
                                 {this.content(userInfo.phoneNumber, t('personalInfoTel'))}
                                 {this.content(userInfo.address !== null && userInfo.address !== "-" ? userInfo.address : t('personalInfoNoAddress'), t('personalInfoAddress'))}
-                                {this.content(this.status(userInfo.status), t('personalInfoStatus'))}
+                                {this.content(t(this.status(userInfo.status)), t('personalInfoStatus'))}
                                 {this.content(userInfo.studentId ? userInfo.studentId : '-', t('personalInfoStudentId'))}
                                 {this.content(userInfo.school.nameTH, t('personalInfoFaculty'))}
-                                {this.content(this.academicYear(userInfo.academicYear), t('personalInfoYear'))}
+                                {this.content(t(this.academicYear(userInfo.academicYear)), t('personalInfoYear'))}
                                 {this.content(this.bloodType(userInfo.bloodType), t('personalInfoBlood'))}
                                 {this.content(`${userInfo.weight} kg`, t('personalInfoWeight'))}
                                 {this.content(this.shirtSize(userInfo.shirtSize), t('personalInfoShirt'))}
@@ -106,10 +106,10 @@ class PersonalInfo extends Component {
     gender = (reference) => {
         switch (reference) {
             case 0:
-                return "Male";
+                return "sexMale";
 
             case 1:
-                return "Female";
+                return "sexFem";
 
             default:
                 return null;
@@ -138,31 +138,31 @@ class PersonalInfo extends Component {
     academicYear = (reference) => {
         switch (reference) {
             case 0:
-                return "ปี 1";
+                return "year1";
 
             case 1:
-                return "ปี 2";
+                return "year2";
 
             case 2:
-                return "ปี 3";
+                return "year3";
 
             case 3:
-                return "ปี 4";
+                return "year4";
 
             case 4:
-                return "ปี 5";
+                return "year5";
 
             case 5:
-                return "ปี 6";
+                return "year6";
 
             case 6:
-                return "ปริญญาโท";
+                return "masterDegree";
 
             case 7:
-                return "ปริญญาเอก";
+                return "doctorateDegree";
 
             case 8:
-                return "อื่นๆ"
+                return "other";
 
             default:
                 return null;
@@ -172,16 +172,16 @@ class PersonalInfo extends Component {
     status = (reference) => {
         switch (reference) {
             case 0:
-                return "นิสิตจุฬา";
+                return "currentStudent";
 
             case 1:
-                return "นิสิตเก่า";
+                return "alumni";
 
             case 2:
-                return "บุคลากร";
+                return "staff";
 
             case 3:
-                return "อาจารย์";
+                return "faculty";
 
             default:
                 return null;

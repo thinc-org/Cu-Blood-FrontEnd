@@ -30,7 +30,7 @@ class PersonalInfo extends Component {
                             <div className="w-full flex flex-row flex-wrap mb-2 special-mb-0">
                                 {this.content(`${userInfo.firstName} ${userInfo.lastName} (${userInfo.nickname})`, t('personalInfoName'), true)}
                                 {this.content(t(this.gender(userInfo.gender)), t('personalInfoSex'))}
-                                {this.content(moment(userInfo.birthday).add('years', (i18n.language === 'th' ? 543 : 0)).format('D MMMM YYYY'), t('personalInfoBirthday'))}
+                                {this.content(moment(userInfo.birthday).add((i18n.language === 'th' ? 543 : 0), 'years').format('D MMMM YYYY'), t('personalInfoBirthday'))}
                                 {this.content(userInfo.username, t('personalInfoEmail'))}
                                 {this.content(userInfo.phoneNumber, t('personalInfoTel'))}
                                 {this.content(userInfo.address !== null && userInfo.address !== "-" ? userInfo.address : t('personalInfoNoAddress'), t('personalInfoAddress'))}

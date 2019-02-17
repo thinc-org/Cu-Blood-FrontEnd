@@ -7,7 +7,7 @@ class HomeHead extends Component {
     return (
       <div className="bg-cover bg-center" style={{ backgroundImage: 'url(../../../static/home/homehead.jpg)' }}>
         <div style={{ background: 'rgba(0, 0, 0, 0.5)' }}>
-          <div className="layout-wide font-cu-heading py-20 md:items-start text-center md:text-left">
+          <div className="layout-wide font-cu-heading py-16 sm:py-20 md:items-start text-center md:text-left">
             <div className="text-6xl mb-6 text-white font-bold">
               CU Blood
           </div>

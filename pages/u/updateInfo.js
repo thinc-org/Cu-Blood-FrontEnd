@@ -67,6 +67,7 @@ class RegisterForm extends Component {
                 value = element.checked ? 1 : 0;
             }
             if (name === "schoolId") value++;
+            if(name === "studentId" && value === "") value = null;
             data[name] = value;
         }
 

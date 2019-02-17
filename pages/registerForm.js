@@ -7,6 +7,7 @@ import I18 from '@/core/i18n';
 import '../static/css/registerForm.css';
 import redirectTo from '@/core/redirectTo';
 import axios from '@/core/core';
+import moment from 'moment';
 
 class RegisterForm extends Component {
 
@@ -70,9 +71,10 @@ class RegisterForm extends Component {
                 value = element.checked ? 1 : 0;
             }
             if (name === "schoolId") value++;
+            if(name === "studentId" && value === "") value = null;
             data[name] = value;
         }
-        
+
         if (!data.isEnrolled) data.isEnrolled = 0;
         data.bloodType = bloodType;
         data.birthday = birthday.year + "-" + birthday.month + "-" + birthday.day;

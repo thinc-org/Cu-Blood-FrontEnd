@@ -4,7 +4,7 @@ import map from 'lodash/map';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
-import moment from 'moment';
+import moment, { max } from 'moment';
 import I18 from '@/core/i18n';
 let i18n = I18.i18n;
 
@@ -21,7 +21,7 @@ class RegisterFillForm extends Component {
             confirmedPasswordValid: false,
             phoneNumber: "",
             phoneNumberValid: false,
-            birthday: moment(),
+            birthday: null,
             birthdayValid: false,
             weight: "",
             weightValid: false,
@@ -102,19 +102,20 @@ class RegisterFillForm extends Component {
         let name = target.name;
         let value = target.type === 'checkbox' ? target.checked : target.value
         // handle birthday
-        const birthday = moment(this.state.birthday);;
+        const birthday = this.state.birthday;
+        const now = moment()
         switch (name) {
             case "day":
                 name = "birthday";
-                value = moment().year(birthday.year()).month(birthday.month()).date(Number(value) + 1);
+                value = moment().year(birthday ? birthday.year() : now.year()).month(birthday ? birthday.month() : now.month()).date(Number(value) + 1);
                 break;
             case "month":
                 name = "birthday";
-                value = moment().year(birthday.year()).month(value).date(birthday.date());
+                value = moment().year(birthday ? birthday.year() : now.year()).month(value).date(birthday ? birthday.date() : now.date());
                 break;
             case "year":
                 name = "birthday";
-                value = moment().year(moment().year() - Number(value)).month(birthday.month()).date(birthday.date());
+                value = moment().year(moment().year() - Number(value)).month(birthday ? birthday.month() : now.month()).date(birthday ? birthday.date() : now.date());
                 break;
             default:
                 break;
@@ -180,7 +181,7 @@ class RegisterFillForm extends Component {
                 }
                 return { requiresStudentlId, studentIdValid, studentId, requiresYear, academicYear, formErrors };
             case "studentId":
-                isValid = value.length === 10 && Number(value) == value;
+                isValid = this.props.userInfo && this.props.userInfo.status == 1 || value && value.length === 10 && Number(value) == value;
                 formErrors.studentId = isValid ? "" : 'numberMustBe10Digit';
                 break;
             default:
@@ -199,7 +200,7 @@ class RegisterFillForm extends Component {
                 }
             }
         }
-        this.setState({ formValid: isValid })
+        this.setState({ formValid: isValid }, () => console.log(this.state))
     }
 
     render() {
@@ -244,11 +245,11 @@ class RegisterFillForm extends Component {
                         </Form>
                         <Form text={t('birthDate')} width="full" smWidth="48">
                             <div className="flex">
-                                <Selector isBirthday={true} value={this.state.birthday.date() - 1} choices={createArrayOfDay(this.state.birthday.daysInMonth())} onChange={this.handleChange} name="day" />
+                                <Selector isBirthday={true} value={this.state.birthday ? this.state.birthday.date() - 1 : ""} choices={createArrayOfDay(this.state.birthday ? this.state.birthday.daysInMonth() : moment().daysInMonth())} onChange={this.handleChange} name="day" />
                                 <div className="w-5"></div>
-                                <Selector isBirthday={true} value={this.state.birthday.month()} choices={moment.monthsShort()} onChange={this.handleChange} name="month" />
+                                <Selector isBirthday={true} value={this.state.birthday ? this.state.birthday.month() : ""} choices={moment.monthsShort()} onChange={this.handleChange} name="month" />
                                 <div className="w-5"></div>
-                                <Selector isBirthday={true} value={moment().year() - this.state.birthday.year()} choices={createArrayOfYear(moment().year())} onChange={this.handleChange} name="year" />
+                                <Selector isBirthday={true} value={this.state.birthday ? moment().year() - this.state.birthday.year() : ""} choices={createArrayOfYear(moment().year())} onChange={this.handleChange} name="year" />
                             </div>
                             {/* <Input value={this.state.birthday} onChange={this.handleChange} name="birthday" type="date" error={t(this.state.formErrors.birthday)} /> */}
                             <span className="font-cu-body font-medium text-cb-red">{t(this.state.formErrors.birthday)}</span>
@@ -346,6 +347,7 @@ const LiveMoreThan3yearsCheckBox = ({ nationality, moreThan3, handleChange, t })
 }
 
 const createArrayOfDay = (maxDay) => {
+    maxDay = maxDay ? maxDay : 31
     let array = new Array(maxDay);
     for (let i = 0; i < maxDay; i++) {
         array[i] = i + 1;

@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import Form, { Selector, Input, FormGroup } from '@/shared-components/Form';
 import map from 'lodash/map';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+import moment from 'moment';
 import I18 from '@/core/i18n';
 let i18n = I18.i18n;
 
@@ -23,14 +27,14 @@ class RegisterFillForm extends Component {
             weightValid: false,
             // email: "",
             // emailValid: false,
-            formErrors: { 
+            formErrors: {
                 phoneNumber: "",
                 birthday: "",
                 weight: "",
                 username: "",
                 password: "",
                 confirmedPassword: "",
-                studentId: "" 
+                studentId: ""
             },
             address: "",
             firstName: "",
@@ -79,7 +83,7 @@ class RegisterFillForm extends Component {
                 }
             } else if (key === "schoolId" && this.props.userInfo.school) {
                 obj.schoolId = this.props.userInfo.school.id - 1;
-            } 
+            }
         }
         if (this.props.updateInfo) {
             obj.passwordValid = true;
@@ -93,8 +97,17 @@ class RegisterFillForm extends Component {
 
     handleChange = (e) => {
         const target = e.target;
-        const name = target.name;
-        const value = target.type === 'checkbox' ? target.checked : target.value
+        let name, value;
+        if (!target) {
+            // for birthDate only
+            name = 'birthday'
+            value = moment(e).format('YYYY-MM-DD');
+        } else {
+            // default
+            value = target.type === 'checkbox' ? target.checked : target.value
+            name = target.name;
+        }
+        console.log('name', name, 'value', value)
         this.setState({ [name]: value },
             () => this.setState(this.validate(name, value), () => this.validateForm()))
     }
@@ -151,9 +164,9 @@ class RegisterFillForm extends Component {
                     studentIdValid = true;
                     studentId = ""
                 } else {
-                    studentIdValid = studentId && studentId.length  === 10 ? true : false;
+                    studentIdValid = studentId && studentId.length === 10 ? true : false;
                 }
-                if(value != 0) {
+                if (value != 0) {
                     requiresYear = false
                     academicYear = 8;
                 }
@@ -178,13 +191,15 @@ class RegisterFillForm extends Component {
                 }
             }
         }
-        this.setState({ formValid: isValid })
+        this.setState({ formValid: isValid }, () => console.log(this.state))
     }
 
     render() {
-        const { onSubmit, isChulaId, commonsData, updateInfo, submitErrorMessage ,t } = this.props;
+        const { onSubmit, isChulaId, commonsData, updateInfo, submitErrorMessage, t } = this.props;
         // const { onSubmit, isEmail, isChulaId, commonsData, updateInfo } = this.props; // leave isEmail for ldap implementation
         const inputClassName = `bg-cb-grey-light rounded-lg mt-2 px-4 py-4 font-cu-body`;
+        const date = moment(this.state.birthday).toDate();
+        console.log(date, 'date', new Date())
         return (
             <form onSubmit={onSubmit} className="layout-wide flex flex-col items-center justify-center pb-10 sm:py-10">
                 <div>
@@ -221,7 +236,34 @@ class RegisterFillForm extends Component {
                             <Input value={this.state.nickname} onChange={this.handleChange} name="nickname" type="text" />
                         </Form>
                         <Form text={t('birthDate')} width="full" smWidth="48">
-                            <Input value={this.state.birthday} onChange={this.handleChange} name="birthday" type="date" error={t(this.state.formErrors.birthday)} />
+                            {/* <div className="flex">
+                                <Input value={this.state.birthday}  onChange={this.handleChange} name="birthday" error={t(this.state.formErrors.birthday)} />
+                                <div className="w-5"></div>
+                                <Input value={this.state.birthday}  onChange={this.handleChange} name="birthday" error={t(this.state.formErrors.birthday)} />
+                                <div className="w-5"></div>
+                                <Input value={this.state.birthday}  onChange={this.handleChange} name="birthday" error={t(this.state.formErrors.birthday)} />
+                            </div> */}
+                            {/* <Input value={this.state.birthday} onChange={this.handleChange} name="birthday" type="date" error={t(this.state.formErrors.birthday)} /> */}
+                            <DatePicker
+                                className="bg-cb-grey-light rounded-lg mt-2 px-4 font-cu-body w-full select"
+                                selected={date != "Invalid Date" ? date : null}
+                                onChange={this.handleChange}
+                                showYearDropdown
+                                // dropdownMode="select"
+                                showMonthDropdown
+                                renderCustomHeader={({
+                                    date,
+                                    changeYear,
+                                    changeMonth,
+                                    // decreaseMonth,
+                                    // increaseMonth,
+                                    // prevMonthButtonDisabled,
+                                    // nextMonthButtonDisabled
+                                  }) => ({date,
+                                    changeYear,
+                                    changeMonth,})}
+                            />
+                            <span className="font-cu-body font-medium text-cb-red">{t(this.state.formErrors.birthday)}</span>
                         </Form>
                         <Form text={t('sex')} width="24">
                             <Selector value={this.state.gender} onChange={this.handleChange} name="gender" choices={[t('male'), t('female')]} />
@@ -245,7 +287,7 @@ class RegisterFillForm extends Component {
                             <Input disabled={isChulaId || !this.state.requiresStudentlId} value={this.state.studentId} onChange={this.handleChange} name="studentId" type="text" error={t(this.state.formErrors.studentId)} />
                         </Form>
                         <Form text={t('faculty')} width="full" smWidth="48">
-                            <Selector disabled={isChulaId} value={this.state.schoolId} onChange={this.handleChange} name="schoolId" choices={map(commonsData.schools, i18n.language === 'th' ? 'nameTH' :  'nameEN')} />
+                            <Selector disabled={isChulaId} value={this.state.schoolId} onChange={this.handleChange} name="schoolId" choices={map(commonsData.schools, i18n.language === 'th' ? 'nameTH' : 'nameEN')} />
                         </Form>
                     </FormGroup>
                     <FormGroup text={t('medicalInfo')}>
@@ -263,8 +305,8 @@ class RegisterFillForm extends Component {
                                 <input checked={this.state.isDonated} onChange={this.handleChange} name="isDonated" type="checkbox" />
                                 <div className="check-text flex">{t('haveYouEverDonatedBlood')}</div>
                             </label>
-                            <DonatedWithCubloodCheckBox isDonated={this.state.isDonated} t={t}/>
-                            <LiveMoreThan3yearsCheckBox nationality={this.state.nationality} moreThan={this.state.moreThan3} handleChange={this.handleChange} t={t}/>
+                            <DonatedWithCubloodCheckBox isDonated={this.state.isDonated} t={t} />
+                            <LiveMoreThan3yearsCheckBox nationality={this.state.nationality} moreThan={this.state.moreThan3} handleChange={this.handleChange} t={t} />
                         </div>
                     </FormGroup>
                     <div className="flex flex-col items-center justify-center mt-0 md:mt-6">

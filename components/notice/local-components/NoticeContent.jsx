@@ -3,6 +3,22 @@ import TopicCenter from '@/shared-components/TopicCenter';
 import I18 from '@/core/i18n';
 
 class NoticeContent extends React.Component {
+
+    constructor(props) {
+        super(props)
+        this.ref1 = this.createAndStoreRef();
+        this.ref2 = this.createAndStoreRef();
+        this.ref3 = this.createAndStoreRef();
+    }
+
+
+    createAndStoreRef = () => {
+        const {myRefs} = this.props;
+        const ref = React.createRef();
+        myRefs.push(ref);
+        return ref;
+    }
+
     render() {
         const { t } = this.props;
         const context11 = t('context11t');
@@ -49,17 +65,13 @@ class NoticeContent extends React.Component {
         const contextPost9 = t('contextPost9t');
         const contextPost10 = t('contextPost10t');
 
-
-
-
-
         return (
             <div className="layout-wide">
-                <TopicCenter english={t('topic1Small')} englishColor="text-pink" thai={t('topic1Big')} borderColor="border-red" />
+                <TopicCenter key="0" ref={this.ref1} id="0" english={t('topic1Small')} englishColor="text-pink" thai={t('topic1Big')} borderColor="border-red" />
                 <BulletPoint bullet={1} context={context11} />
                 <BulletPoint bullet={2} context={context12} />
-                <Context13 bullet={3} context={context13} t={t}/>
-                <TopicCenter english={t('topic2Small')} englishColor="text-pink" thai={t('topic2Big')} borderColor="border-red" />
+                <Context13 bullet={3} context={context13} t={t} />
+                <TopicCenter key="1" ref={this.ref2} id="1" english={t('topic2Small')} englishColor="text-pink" thai={t('topic2Big')} borderColor="border-red" />
                 <BulletPoint bullet={1} context={context21} />
                 <BulletPoint bullet={2} context={context22} />
                 <BulletPoint bullet={3} context={context23} />
@@ -73,7 +85,7 @@ class NoticeContent extends React.Component {
                 <BulletPoint bullet={11} context={context211} />
                 <BulletPoint bullet={12} context={context212} />
                 <BulletPoint bullet={13} context={context213} />
-                <TopicCenter english={t('topic3Small')} englishColor="text-pink" thai={t('topic3Big')} borderColor="border-red" />
+                <TopicCenter key="2" ref={this.ref3} id="2" english={t('topic3Small')} englishColor="text-pink" thai={t('topic3Big')} borderColor="border-red" />
                 <BulletHeader header={preHeader} />
                 <BulletPoint bullet={1} context={context31} />
                 <BulletPoint bullet={2} context={context32} />
@@ -98,7 +110,7 @@ class NoticeContent extends React.Component {
                 <BulletPoint bullet={8} context={contextPost8} />
                 <BulletPoint bullet={9} context={contextPost9} />
                 <BulletPoint bullet={10} context={contextPost10} />
-                <NoticeContact t = {t}/>
+                <NoticeContact t={t} />
             </div>
         );
     }
@@ -110,7 +122,7 @@ const BulletPoint = (props) => {
     const { bullet, context } = props
     return (
         <div className="bg-white font-cu-heading text-xl py-4 layout-narrow flex flex-col md:flex-row items-start justify-start">
-            <div className="bg-pink-lightest w-16 h-16 text-pink-dark text-2xl p-4 rounded-full flex flex-col items-center justify-center mr-6 mb-4 md:mb-0" style={{minWidth: '64px'}}>
+            <div className="bg-pink-lightest w-16 h-16 text-pink-dark text-2xl p-4 rounded-full flex flex-col items-center justify-center mr-6 mb-4 md:mb-0" style={{ minWidth: '64px' }}>
                 {bullet}
             </div>
             <div className="flex flex-col">
@@ -131,7 +143,7 @@ const BulletHeader = (props) => {
 }
 
 const NoticeContact = (props) => {
-  const { t } = props
+    const { t } = props
     return (
         <div className="flex justify-center text-center font-cu-heading font-medium text-2xl p-8">
             {t('NoticeContact1')} <br />
@@ -147,7 +159,7 @@ const Context13 = (props) => {
     const { bullet, context, t } = props
     return (
         <div className="bg-white font-cu-heading text-xl py-4 layout-narrow flex flex-col md:flex-row items-start justify-start">
-            <div className="bg-pink-lightest w-16 h-16 text-pink-dark text-2xl p-4 rounded-full flex flex-col items-center justify-center mr-6 mb-4 md:mb-0" style={{minWidth: '64px'}}>
+            <div className="bg-pink-lightest w-16 h-16 text-pink-dark text-2xl p-4 rounded-full flex flex-col items-center justify-center mr-6 mb-4 md:mb-0" style={{ minWidth: '64px' }}>
                 {bullet}
             </div>
             <div className="flex flex-col">
@@ -156,7 +168,7 @@ const Context13 = (props) => {
                     <div className='py-4'>
                         <span className='text-pink font-bold'>3.1</span>
                         {t('context13_3_1_title')}
-                     </div>
+                    </div>
                     <span className=' font-semibold'>1.1 :</span> {t('context13_1_1')} <br />
                     <span className=' font-semibold'>1.2 :</span>{t('context13_1_2')}  <br />
                     <span className=' font-semibold'>1.3 :</span> {t('context13_1_3')}<br />

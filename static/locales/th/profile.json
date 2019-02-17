@@ -11,7 +11,7 @@
     "enrollmentRegisterTimeOption" : "เริ่ม - จบ",
     "enrollmentChangeLocation" : "เปลี่ยนสถานที่",
     "enrollmentChangeLocationHeader" : "ยืนยันการลงทะเบียนสถานที่บริจาคโลหิต",
-    "enrollmentQRCodeClose" : "ปิดหน้าต่าง", 
+    "enrollmentQRCodeClose" : "ปิดหน้าต่าง",
     "enrollmentChangeDate" : "กรุณาเลือกวันที่และช่วงเวลาใหม่",
     "enrollmentRegisPeriod" : "วันลงทะเบียน",
     "enrollmentDonatePeriod" : "วันบริจาคโลหิต",
@@ -53,6 +53,20 @@
     "agree5" : "งดดื่มเครื่องดื่มที่มีแอลกอฮอล์ ก่อนมาบริจาคอย่างน้อย 24 ชั่วโมง",
     "agree6" : "งดสูบบุหรี่ก่อนและหลังบริจาคโลหิต 1 ชั่วโมง",
     "agree7" : "ไม่ได้เจาะหู/สัก/ฝังเข็ม ในช่วง 1 ปีที่ผ่านมา",
-    "agree8" : "ในช่วง 6 เดือนที่ผ่านมา ไม่ได้มีการผ่าตัดใหญ่"
-    
+    "agree8" : "ในช่วง 6 เดือนที่ผ่านมา ไม่ได้มีการผ่าตัดใหญ่",
+    "year1":"ปี 1",
+    "year2":"ปี 2",
+    "year3":"ปี 3",
+    "year4":"ปี 4",
+    "year5":"ปี 5",
+    "year6":"ปี 6",
+    "other":"อื่นๆ",
+    "masterDegree":"ปริญญาโท",
+    "doctorateDegree":"ปริญญาเอก",
+    "sexMale": "ชาย",
+    "sexFem" : "หญิง",
+    "currentStudent":"นิสิตจุฬา",
+    "alumni":"นิสิตเก่า",
+    "faculty":"อาจารย์",
+    "staff": "บุคลากร"
 }

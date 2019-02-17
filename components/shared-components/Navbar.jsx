@@ -12,7 +12,7 @@ class Navbar extends Component {
                 <div className="layout-wide flex justify-between items-center md:justify-center py-1 sm:py-2 md:py-3">
                     <div className="flex justify-between w-full">
                         <div className="flex items-center">
-                            <Link href="/" prefetch><a><img src='/static/logo/logo1.svg' alt="logo" className="h-10 sm:h-16 w-16" /></a></Link>
+                            <Link href="/" prefetch><a><img src='/static/logo/logo1.svg' alt="logo" className="h-10 sm:h-16 w-10 sm:w-16" /></a></Link>
                             <div className="border-l mx-4 h-5 sm:h-8 block"></div>
                             <ul className="list-reset py-6 text-grey-darkest hidden md:flex">
                                 <Link href="/about" prefetch><a className="no-underline text-grey-darkest"><li className="mx-3">{t('about')}</li></a></Link>

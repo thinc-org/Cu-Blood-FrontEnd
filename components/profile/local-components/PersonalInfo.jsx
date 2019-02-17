@@ -35,7 +35,7 @@ class PersonalInfo extends Component {
                                 {this.content(userInfo.phoneNumber, t('personalInfoTel'))}
                                 {this.content(userInfo.address !== null && userInfo.address !== "-" ? userInfo.address : t('personalInfoNoAddress'), t('personalInfoAddress'))}
                                 {this.content(this.status(userInfo.status), t('personalInfoStatus'))}
-                                {this.content(userInfo.studentId, t('personalInfoStudentId'))}
+                                {this.content(userInfo.studentId ? userInfo.studentId : '-', t('personalInfoStudentId'))}
                                 {this.content(userInfo.school.nameTH, t('personalInfoFaculty'))}
                                 {this.content(this.academicYear(userInfo.academicYear), t('personalInfoYear'))}
                                 {this.content(this.bloodType(userInfo.bloodType), t('personalInfoBlood'))}

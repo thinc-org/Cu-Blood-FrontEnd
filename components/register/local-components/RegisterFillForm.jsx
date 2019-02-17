@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Form, { Selector, Input, FormGroup } from '@/shared-components/Form';
 import map from 'lodash/map';
-// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import moment from 'moment';
 import I18 from '@/core/i18n';
 let i18n = I18.i18n;

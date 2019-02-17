@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 const select = {
     background: "url(../../static/icons/arrow-down.svg) right 5px center / 12px 15px no-repeat #efefef",
-    height: "40px"
+    height: "40px",
+    lineHeight: "40px"
 }
 
 export default class extends Component {
@@ -17,7 +18,7 @@ export default class extends Component {
     }
 }
 
-export const Selector = ({ choices = [], value, name, onChange, disabled = false }) => {
+export const Selector = ({ choices = [], value, name, onChange, disabled = false, isBirthday }) => {
     const options = choices.map((choice, index) => {
         return (
             <option required key={index} value={index}>{choice}</option>
@@ -25,7 +26,7 @@ export const Selector = ({ choices = [], value, name, onChange, disabled = false
     })
     return (
         <React.Fragment>
-            <select disabled={disabled} value={value} name={name} onChange={onChange} required className="rounded-lg mt-2 px-4 w-full font-cu-body" style={select} >
+            <select disabled={disabled} value={value} name={name} onChange={onChange} required className={"rounded-lg mt-2 w-full font-cu-body " + (!isBirthday ? "px-4" : "pr-4 pl-2")} style={select} >
                 <option value=""></option>
                 {options}
             </select>

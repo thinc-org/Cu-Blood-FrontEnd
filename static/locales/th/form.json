@@ -50,5 +50,6 @@
     "doctoralDegree": "ปริญญาเอก",
     "unknown": "ไม่ทราบ",
     "others": "อื่นๆ",
-    "updateInfo": "แก้ไขข้อมูล"
+    "updateInfo": "แก้ไขข้อมูล",
+    "duplicateEmail": "อีเมลล์นี้มีผู้ลงทะเบียนแล้ว"
 }

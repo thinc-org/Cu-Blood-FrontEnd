@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Form, { Selector, Input, FormGroup } from '@/shared-components/Form';
 import map from 'lodash/map';
+import moment from 'moment';
 import I18 from '@/core/i18n';
 let i18n = I18.i18n;
 
@@ -17,13 +18,21 @@ class RegisterFillForm extends Component {
             confirmedPasswordValid: false,
             phoneNumber: "",
             phoneNumberValid: false,
-            birthday: "",
+            birthday: null,
             birthdayValid: false,
             weight: "",
             weightValid: false,
             // email: "",
             // emailValid: false,
-            formErrors: { phoneNumber: "", birthday: "", weight: "", username: "", password: "", studentId: "" },
+            formErrors: {
+                phoneNumber: "",
+                birthday: "",
+                weight: "",
+                username: "",
+                password: "",
+                confirmedPassword: "",
+                studentId: ""
+            },
             address: "",
             firstName: "",
             lastName: "",
@@ -40,9 +49,10 @@ class RegisterFillForm extends Component {
             bloodType: "",
             rh: "",
             isDonated: false,
-            accepted: false,
+            // accepted: false,
             moreThan3: false,
             requiresStudentlId: true,
+            requiresYear: true,
         };
     }
 
@@ -52,11 +62,13 @@ class RegisterFillForm extends Component {
         let obj = {}
         let formErrors = {};
         for (const key in this.state) {
-            if (key in this.props.userInfo) {
+            if (key in this.props.userInfo && (key !== 'studentId' || this.props.userInfo[key] !== "" )) {
                 let value = this.props.userInfo[key]
                 if (key === "bloodType") {
                     obj.bloodType = Math.floor(value / 3);
                     obj.rh = value % 3;
+                } else if (key === "birthday") {
+                    obj.birthday = moment(value)
                 } else {
                     obj[key] = value
                 }
@@ -76,13 +88,35 @@ class RegisterFillForm extends Component {
             obj.passwordValid = true;
             obj.confirmedPasswordValid = true;
         }
+        if (this.state.studentId === "") {
+            obj.studentIdValid = true;
+        }
         this.setState(obj)
     }
 
     handleChange = (e) => {
         const target = e.target;
-        const name = target.name;
-        const value = target.type === 'checkbox' ? target.checked : target.value
+        let name = target.name;
+        let value = target.type === 'checkbox' ? target.checked : target.value
+        // handle birthday
+        const birthday = this.state.birthday;
+        const now = moment()
+        switch (name) {
+            case "day":
+                name = "birthday";
+                value = moment().year(birthday ? birthday.year() : now.year()).month(birthday ? birthday.month() : now.month()).date(Number(value) + 1);
+                break;
+            case "month":
+                name = "birthday";
+                value = moment().year(birthday ? birthday.year() : now.year()).month(value).date(birthday ? birthday.date() : now.date());
+                break;
+            case "year":
+                name = "birthday";
+                value = moment().year(moment().year() - Number(value)).month(birthday ? birthday.month() : now.month()).date(birthday ? birthday.date() : now.date());
+                break;
+            default:
+                break;
+        }
         this.setState({ [name]: value },
             () => this.setState(this.validate(name, value), () => this.validateForm()))
     }
@@ -93,14 +127,12 @@ class RegisterFillForm extends Component {
         switch (name) {
             // formErrors is a key that will be used by i18n
             case "password":
-                isValid = true;
                 const isMatched = value === this.state.confirmedPassword;
                 isValid = value.length >= 8;
                 formErrors.confirmedPassword = isMatched ? "" : 'passwordNotMatch';
                 formErrors.password = isValid ? "" : 'passwordMustBeMoreThan8';
                 return { "passwordValid": isValid, "confirmedPasswordValid": isMatched, "formErrors": formErrors };
             case "confirmedPassword":
-                isValid = true;
                 isValid = value === this.state.password;
                 formErrors.confirmedPassword = isValid ? "" : 'passwordNotMatch';
                 break;
@@ -109,13 +141,10 @@ class RegisterFillForm extends Component {
                 formErrors.phoneNumber = isValid ? "" : 'phoneNumberIsNotCorrect';
                 break;
             case "birthday":
-                // please fix bug: day 31 verification problem
-                const end = new Date(this.props.commonsData.endDate);
-                const endAge = new Date(end.getFullYear(), end.getMonth(), end.getDate() + 7).getTime(); // three day as failsafe from actual date
-                const nowAge = Date.now();
-                const ageDifMs = ((endAge - nowAge > 0) ? endAge : nowAge) - new Date(value).getTime();
-                const ageDate = new Date(ageDifMs); // miliseconds from epoch
-                isValid = 17 <= Math.abs(ageDate.getUTCFullYear() - 1970);
+                const end = moment(this.props.commonsData.endDate).add(7, 'days');
+                const now = moment().add(7, 'days');
+                const ageDiff = end.diff(now) > 0 ? end.diff(value, 'years') : now.diff(value, 'years')
+                isValid = 17 <= ageDiff;
                 formErrors.birthday = isValid ? "" : 'mustBeMoreThan17';
                 break;
             case "weight":
@@ -130,13 +159,26 @@ class RegisterFillForm extends Component {
                 break;
             case "status":
                 // alumni (options no.1) don't need school id
+                let requiresStudentlId = true;
+                let studentIdValid = this.state.studentIdValid;
+                let studentId = this.state.studentId;
+                let requiresYear = true;
+                let academicYear = this.state.academicYear;
                 if (value == 1) {
                     formErrors.studentId = ""
-                    return { requiresStudentlId: false, studentIdValid: true, studentId : "", "formErrors": formErrors }
-                };
-                return { requiresStudentlId: true, studentIdValid: false, studentId: "" };
+                    requiresStudentlId = false
+                    studentIdValid = true;
+                    studentId = ""
+                } else {
+                    studentIdValid = studentId && studentId.length === 10 ? true : false;
+                }
+                if (value != 0) {
+                    requiresYear = false
+                    academicYear = 8;
+                }
+                return { requiresStudentlId, studentIdValid, studentId, requiresYear, academicYear, formErrors };
             case "studentId":
-                isValid = value.length === 10 && Number(value) == value;
+                isValid = (this.props.userInfo && this.props.userInfo.status == 1) || (value && value.length === 10 && Number(value) == value);
                 formErrors.studentId = isValid ? "" : 'numberMustBe10Digit';
                 break;
             default:
@@ -146,7 +188,7 @@ class RegisterFillForm extends Component {
     }
 
     validateForm = () => {
-        let isValid = this.state.accepted && ((this.state.nationality == 0) || this.state.moreThan3);
+        let isValid = (this.state.nationality == 0) || this.state.moreThan3;
         if (isValid) {
             for (const key in this.state) {
                 if ((key.toString().includes('Valid') && key.toString() !== 'formValid' && this.state[key] === false) || (!this.state[key + 'Valid'] && this.state[key] === "")) {
@@ -159,7 +201,8 @@ class RegisterFillForm extends Component {
     }
 
     render() {
-        const { onSubmit, isChulaId, commonsData, updateInfo, t } = this.props;
+        i18n.language === 'th' ? moment.locale('th') : moment.locale('en')
+        const { onSubmit, isChulaId, commonsData, updateInfo, submitErrorMessage, t } = this.props;
         // const { onSubmit, isEmail, isChulaId, commonsData, updateInfo } = this.props; // leave isEmail for ldap implementation
         const inputClassName = `bg-cb-grey-light rounded-lg mt-2 px-4 py-4 font-cu-body`;
         return (
@@ -198,7 +241,14 @@ class RegisterFillForm extends Component {
                             <Input value={this.state.nickname} onChange={this.handleChange} name="nickname" type="text" />
                         </Form>
                         <Form text={t('birthDate')} width="full" smWidth="48">
-                            <Input value={this.state.birthday} onChange={this.handleChange} name="birthday" type="date" error={t(this.state.formErrors.birthday)} />
+                            <div className="flex">
+                                <Selector isBirthday={true} value={this.state.birthday ? this.state.birthday.date() - 1 : ""} choices={createArrayOfDay(this.state.birthday ? this.state.birthday.daysInMonth() : moment().daysInMonth())} onChange={this.handleChange} name="day" />
+                                <div className="w-5"></div>
+                                <Selector isBirthday={true} value={this.state.birthday ? this.state.birthday.month() : ""} choices={moment.monthsShort()} onChange={this.handleChange} name="month" />
+                                <div className="w-5"></div>
+                                <Selector isBirthday={true} value={this.state.birthday ? moment().year() - this.state.birthday.year() : ""} choices={createArrayOfYear(moment().year())} onChange={this.handleChange} name="year" />
+                            </div>
+                            <span className="font-cu-body font-medium text-cb-red">{t(this.state.formErrors.birthday)}</span>
                         </Form>
                         <Form text={t('sex')} width="24">
                             <Selector value={this.state.gender} onChange={this.handleChange} name="gender" choices={[t('male'), t('female')]} />
@@ -216,13 +266,13 @@ class RegisterFillForm extends Component {
                             <Selector value={this.state.nationality} onChange={this.handleChange} name="nationality" choices={[t('thai'), t('foreigner')]} />
                         </Form>
                         <Form text={t('year')} width="24">
-                            <Selector disabled={isChulaId} value={this.state.academicYear} onChange={this.handleChange} name="academicYear" choices={['1', '2', '3', '4', '5', '6', t('masterDegree'), t('doctoralDegree'), t('others')]} />
+                            <Selector disabled={isChulaId || !this.state.requiresYear} value={this.state.academicYear} onChange={this.handleChange} name="academicYear" choices={['1', '2', '3', '4', '5', '6', t('masterDegree'), t('doctoralDegree'), t('others')]} />
                         </Form>
                         <Form text={t('id')} width="full" smWidth="48">
                             <Input disabled={isChulaId || !this.state.requiresStudentlId} value={this.state.studentId} onChange={this.handleChange} name="studentId" type="text" error={t(this.state.formErrors.studentId)} />
                         </Form>
                         <Form text={t('faculty')} width="full" smWidth="48">
-                            <Selector disabled={isChulaId} value={this.state.schoolId} onChange={this.handleChange} name="schoolId" choices={map(commonsData.schools, i18n.language === 'th' ? 'nameTH' :  'nameEN')} />
+                            <Selector disabled={isChulaId} value={this.state.schoolId} onChange={this.handleChange} name="schoolId" choices={map(commonsData.schools, i18n.language === 'th' ? 'nameTH' : 'nameEN')} />
                         </Form>
                     </FormGroup>
                     <FormGroup text={t('medicalInfo')}>
@@ -240,16 +290,17 @@ class RegisterFillForm extends Component {
                                 <input checked={this.state.isDonated} onChange={this.handleChange} name="isDonated" type="checkbox" />
                                 <div className="check-text flex">{t('haveYouEverDonatedBlood')}</div>
                             </label>
-                            <DonatedWithCubloodCheckBox isDonated={this.state.isDonated} t={t}/>
-                            <LiveMoreThan3yearsCheckBox nationality={this.state.nationality} moreThan={this.state.moreThan3} handleChange={this.handleChange} t={t}/>
+                            <DonatedWithCubloodCheckBox isDonated={this.state.isDonated} t={t} />
+                            <LiveMoreThan3yearsCheckBox nationality={this.state.nationality} moreThan={this.state.moreThan3} handleChange={this.handleChange} t={t} />
                         </div>
                     </FormGroup>
-                    <div className="flex flex-col items-center justify-center mt-6 md:mt-12">
-                        <label className="flex font-cu-heading text-normal cursor-pointer check-box">
+                    <div className="flex flex-col items-center justify-center mt-0 md:mt-6">
+                        {/* <label className="flex font-cu-heading text-normal cursor-pointer check-box">
                             <input checked={this.state.accepted} onChange={this.handleChange} name="accepted" required type="checkbox" />
-                            <div className="check-text flex"><span>{t('accept1')}<a href="https://google.com" target="_blank" rel="noopener noreferrer" className="no-underline"><span className="text-cb-pink font-semibold">{t('accept2')}</span></a>{t('accept3')}<span className="text-cb-pink font-semibold">{t('accept4')}</span>.</span></div>
-                        </label>
-                        <button disabled={!this.state.formValid} className="px-10 pb-3 pt-4 text-white bg-cb-red rounded-lg mt-6 btn font-cu-heading " type="submit" id="confirm" >{t(updateInfo ? "updateInfo" : "register")}</button>
+                            <div className="check-text flex"><span>{t('accept1')}<a href="/notice" target="_blank" rel="noopener noreferrer" className="no-underline"><span className="text-cb-pink font-semibold">{t('accept2')}</span></a>{t('accept3')}<span className="text-cb-pink font-semibold">{t('accept4')}</span>.</span></div>
+                        </label> */}
+                        <button disabled={!this.state.formValid} className="px-10 pb-3 pt-4 text-white bg-cb-red rounded-lg btn font-cu-heading " type="submit" id="confirm" >{t(updateInfo ? "updateInfo" : "register")}</button>
+                        <span className="font-cu-body font-medium text-cb-red mt-2">{t(submitErrorMessage)}</span>
                     </div>
                 </div>
             </form>
@@ -289,6 +340,23 @@ const LiveMoreThan3yearsCheckBox = ({ nationality, moreThan3, handleChange, t })
                 null
             )
     )
+}
+
+const createArrayOfDay = (maxDay) => {
+    maxDay = maxDay ? maxDay : 31
+    let array = new Array(maxDay);
+    for (let i = 0; i < maxDay; i++) {
+        array[i] = i + 1;
+    }
+    return array;
+}
+
+const createArrayOfYear = (targetYear) => {
+    let array = new Array(100);
+    for (let i = 0; i <= 99; i++) {
+        array[i] = targetYear - i;
+    }
+    return array;
 }
 
 export default I18.withNamespaces('form')(RegisterFillForm);

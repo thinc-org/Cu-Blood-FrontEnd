@@ -154,7 +154,7 @@ class Enrollment extends Component {
     //Function to toggle modal on/off
     toggleModal = (locationName, type) => {
         let regisDate, regisTimeId, location
-        if (locationName !== (this.state.modalStatus.location ? this.state.modalStatus.location.id : null)) {
+        if (locationName !== (this.state.modalStatus.location ? this.state.modalStatus.location.id : "")) {
             //default case
             regisDate = this.state.currentSessionInfo !== null ? this.state.currentSessionInfo.timeSlot : "";
             regisTimeId = this.state.currentSessionInfo !== null ? this.getTimeId(this.state.currentSessionInfo) : "";

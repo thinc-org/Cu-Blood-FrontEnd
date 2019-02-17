@@ -9,11 +9,11 @@ class Navbar extends Component {
         const { onExpandListener, t } = this.props;
         return (
             <div className="font-cu-heading text-base font-medium tracking-normal leading-none sticky pin-t pin-l w-full shadow z-40 bg-white">
-                <div className="layout-wide flex justify-between items-center md:justify-center py-2 md:py-3">
+                <div className="layout-wide flex justify-between items-center md:justify-center py-1 sm:py-2 md:py-3">
                     <div className="flex justify-between w-full">
                         <div className="flex items-center">
-                            <Link href="/" prefetch><a><img src='/static/logo/logo1.svg' alt="logo" className="h-16 w-16" /></a></Link>
-                            <div className="border-l mx-4 h-8 block"></div>
+                            <Link href="/" prefetch><a><img src='/static/logo/logo1.svg' alt="logo" className="h-10 sm:h-16 sm:w-16" /></a></Link>
+                            <div className="border-l mx-4 h-5 sm:h-8 block"></div>
                             <ul className="list-reset py-6 text-grey-darkest hidden md:flex">
                                 <Link href="/about" prefetch><a className="no-underline text-grey-darkest"><li className="mx-3">{t('about')}</li></a></Link>
                                 <Link href="/notice" prefetch><a className="no-underline text-grey-darkest"><li className="mx-3">{t('notice')}</li></a></Link>
@@ -33,7 +33,7 @@ class Navbar extends Component {
                             </button>
                         </div>
                     </div>
-                    <div className="cursor-pointer flex md:hidden flex-col py-5" onClick={onExpandListener}>
+                    <div className="cursor-pointer flex md:hidden flex-col sm:py-5" onClick={onExpandListener}>
                         <div className="border-b-2 border-black w-8"></div>
                         <div className="border-b-2 border-black w-8 pt-1"></div>
                         <div className="border-b-2 border-black w-8 pt-1"></div>

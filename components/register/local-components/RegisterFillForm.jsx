@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import Form, { Selector, Input, FormGroup } from '@/shared-components/Form';
 import map from 'lodash/map';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
-import moment, { max } from 'moment';
+import moment from 'moment';
 import I18 from '@/core/i18n';
 let i18n = I18.i18n;
 
@@ -181,7 +179,7 @@ class RegisterFillForm extends Component {
                 }
                 return { requiresStudentlId, studentIdValid, studentId, requiresYear, academicYear, formErrors };
             case "studentId":
-                isValid = this.props.userInfo && this.props.userInfo.status == 1 || value && value.length === 10 && Number(value) == value;
+                isValid = (this.props.userInfo && this.props.userInfo.status == 1) || (value && value.length === 10 && Number(value) == value);
                 formErrors.studentId = isValid ? "" : 'numberMustBe10Digit';
                 break;
             default:
@@ -200,7 +198,7 @@ class RegisterFillForm extends Component {
                 }
             }
         }
-        this.setState({ formValid: isValid }, () => console.log(this.state))
+        this.setState({ formValid: isValid })
     }
 
     render() {
@@ -251,7 +249,6 @@ class RegisterFillForm extends Component {
                                 <div className="w-5"></div>
                                 <Selector isBirthday={true} value={this.state.birthday ? moment().year() - this.state.birthday.year() : ""} choices={createArrayOfYear(moment().year())} onChange={this.handleChange} name="year" />
                             </div>
-                            {/* <Input value={this.state.birthday} onChange={this.handleChange} name="birthday" type="date" error={t(this.state.formErrors.birthday)} /> */}
                             <span className="font-cu-body font-medium text-cb-red">{t(this.state.formErrors.birthday)}</span>
                         </Form>
                         <Form text={t('sex')} width="24">

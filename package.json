@@ -19,7 +19,6 @@
     "next-purgecss": "^3.0.0",
     "qrcode.react": "^0.9.2",
     "react": "^16.7.0",
-    "react-datepicker": "^2.1.0",
     "react-dom": "^16.7.0",
     "react-scripts": "2.1.3",
     "react-text-truncate": "^0.13.1"

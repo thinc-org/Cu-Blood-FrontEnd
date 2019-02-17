@@ -21,7 +21,7 @@ class RegisterFillForm extends Component {
             confirmedPasswordValid: false,
             phoneNumber: "",
             phoneNumberValid: false,
-            birthday: moment().format('YYYY-MM-DD'),
+            birthday: moment(),
             birthdayValid: false,
             weight: "",
             weightValid: false,
@@ -65,11 +65,13 @@ class RegisterFillForm extends Component {
         let obj = {}
         let formErrors = {};
         for (const key in this.state) {
-            if (key in this.props.userInfo && key !== 'studentId') {
+            if (key in this.props.userInfo && (key !== 'studentId' || this.props.userInfo[key] !== "" )) {
                 let value = this.props.userInfo[key]
                 if (key === "bloodType") {
                     obj.bloodType = Math.floor(value / 3);
                     obj.rh = value % 3;
+                } else if (key === "birthday") {
+                    obj.birthday = moment(value)
                 } else {
                     obj[key] = value
                 }
@@ -97,29 +99,26 @@ class RegisterFillForm extends Component {
 
     handleChange = (e) => {
         const target = e.target;
-        // value = moment(e).format('YYYY-MM-DD');
         let name = target.name;
         let value = target.type === 'checkbox' ? target.checked : target.value
-        // console.log('name', name, 'value', value)
         // handle birthday
         const birthday = moment(this.state.birthday);;
         switch (name) {
             case "day":
                 name = "birthday";
-                value = moment().date(Number(value) + 1).month(birthday.month()).year(birthday.year()).format('YYYY-MM-DD');
+                value = moment().year(birthday.year()).month(birthday.month()).date(Number(value) + 1);
                 break;
             case "month":
                 name = "birthday";
-                value = moment().date(birthday.date()).month(value).year(birthday.year()).format('YYYY-MM-DD');
+                value = moment().year(birthday.year()).month(value).date(birthday.date());
                 break;
             case "year":
                 name = "birthday";
-                value = moment().date(birthday.date()).month(birthday.month()).year(moment().year() - Number(value)).format('YYYY-MM-DD');
+                value = moment().year(moment().year() - Number(value)).month(birthday.month()).date(birthday.date());
                 break;
-            default:   
+            default:
                 break;
         }
-        console.log(name, value , "name : value")
         this.setState({ [name]: value },
             () => this.setState(this.validate(name, value), () => this.validateForm()))
     }
@@ -144,13 +143,10 @@ class RegisterFillForm extends Component {
                 formErrors.phoneNumber = isValid ? "" : 'phoneNumberIsNotCorrect';
                 break;
             case "birthday":
-                // please fix bug: day 31 verification problem
-                const end = new Date(this.props.commonsData.endDate);
-                const endAge = new Date(end.getFullYear(), end.getMonth(), end.getDate() + 7).getTime(); // three day as failsafe from actual date
-                const nowAge = Date.now();
-                const ageDifMs = ((endAge - nowAge > 0) ? endAge : nowAge) - new Date(value).getTime();
-                const ageDate = new Date(ageDifMs); // miliseconds from epoch
-                isValid = 17 <= Math.abs(ageDate.getUTCFullYear() - 1970);
+                const end = moment(this.props.commonsData.endDate).add(7, 'days');
+                const now = moment().add(7, 'days');
+                const ageDiff = end.diff(now) > 0 ? end.diff(value, 'years') : now.diff(value, 'years')
+                isValid = 17 <= ageDiff;
                 formErrors.birthday = isValid ? "" : 'mustBeMoreThan17';
                 break;
             case "weight":
@@ -203,7 +199,7 @@ class RegisterFillForm extends Component {
                 }
             }
         }
-        this.setState({ formValid: isValid }, () => console.log(this.state))
+        this.setState({ formValid: isValid })
     }
 
     render() {
@@ -211,8 +207,6 @@ class RegisterFillForm extends Component {
         const { onSubmit, isChulaId, commonsData, updateInfo, submitErrorMessage, t } = this.props;
         // const { onSubmit, isEmail, isChulaId, commonsData, updateInfo } = this.props; // leave isEmail for ldap implementation
         const inputClassName = `bg-cb-grey-light rounded-lg mt-2 px-4 py-4 font-cu-body`;
-        const date = moment(this.state.birthday).toDate();
-        console.log(date, 'date', new Date())
         return (
             <form onSubmit={onSubmit} className="layout-wide flex flex-col items-center justify-center pb-10 sm:py-10">
                 <div>
@@ -250,11 +244,11 @@ class RegisterFillForm extends Component {
                         </Form>
                         <Form text={t('birthDate')} width="full" smWidth="48">
                             <div className="flex">
-                                <Selector isBirthday={true} value={moment(this.state.birthday).date()} choices={createArrayOfDay(moment(this.state.birthday).daysInMonth())} onChange={this.handleChange} name="day" />
+                                <Selector isBirthday={true} value={this.state.birthday.date() - 1} choices={createArrayOfDay(this.state.birthday.daysInMonth())} onChange={this.handleChange} name="day" />
                                 <div className="w-5"></div>
-                                <Selector isBirthday={true} value={moment(this.state.birthday).month()} choices={moment.monthsShort()}  onChange={this.handleChange} name="month"  />
+                                <Selector isBirthday={true} value={this.state.birthday.month()} choices={moment.monthsShort()} onChange={this.handleChange} name="month" />
                                 <div className="w-5"></div>
-                                <Selector isBirthday={true} value={moment().year() - moment(this.state.birthday).year()}  choices={createArrayOfYear(moment().year())} onChange={this.handleChange} name="year"/>
+                                <Selector isBirthday={true} value={moment().year() - this.state.birthday.year()} choices={createArrayOfYear(moment().year())} onChange={this.handleChange} name="year" />
                             </div>
                             {/* <Input value={this.state.birthday} onChange={this.handleChange} name="birthday" type="date" error={t(this.state.formErrors.birthday)} /> */}
                             <span className="font-cu-body font-medium text-cb-red">{t(this.state.formErrors.birthday)}</span>
@@ -353,7 +347,7 @@ const LiveMoreThan3yearsCheckBox = ({ nationality, moreThan3, handleChange, t })
 
 const createArrayOfDay = (maxDay) => {
     let array = new Array(maxDay);
-    for(let i = 0; i < maxDay; i++) {
+    for (let i = 0; i < maxDay; i++) {
         array[i] = i + 1;
     }
     return array;
@@ -361,10 +355,9 @@ const createArrayOfDay = (maxDay) => {
 
 const createArrayOfYear = (targetYear) => {
     let array = new Array(100);
-    for(let i = 0; i <= 99; i++) {
-        array[i] =  targetYear - i;
+    for (let i = 0; i <= 99; i++) {
+        array[i] = targetYear - i;
     }
-    console.log(array)
     return array;
 }
 

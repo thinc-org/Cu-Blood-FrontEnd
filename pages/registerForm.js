@@ -22,9 +22,9 @@ class RegisterForm extends Component {
             .then(response => response.data.result)
             .catch(console.log)
 
-        return ({ 
+        return ({
             commonsData,
-            namespacesRequired: ['common', 'register', 'form'], 
+            namespacesRequired: ['common', 'register', 'form'],
         });
     }
 
@@ -34,6 +34,11 @@ class RegisterForm extends Component {
         // convert form data to api format
         const data = {}
         let bloodType = 0;
+        let birthday = {
+            day: 0,
+            month: 0,
+            year: 0,
+        }
         for (let element of form.elements) {
             let value = element.value;
             const name = element.name;
@@ -41,10 +46,25 @@ class RegisterForm extends Component {
                 continue;
             } else if (name === "bloodType") {
                 bloodType += 3 * Number(value);
+                continue;
             } else if (name === "rh") {
                 bloodType += Number(value);
-            } else if (!isNaN(value) && name !== "phoneNumber" && name !== "password" && name !== "studentId") {
+                continue;
+            } else if (!isNaN(value) && name !== "phoneNumber" && name !== "password" && name !== "studentId" && name !== "year" && name !== "month" && name !== "day") {
                 value = Number(value);
+            } else if (name === 'day') {
+                let day = Number(value) + 1;
+                if (day <= 9) day = "0" + day;
+                birthday.day = day;
+                continue;
+            } else if (name === 'month') {
+                let month = Number(value) + 1;
+                if (month <= 9) month = "0" + month
+                birthday.month = month;
+                continue;
+            } else if (name === 'year') {
+                birthday.year = moment().year() - Number(value);
+                continue;
             }
             if (value === "on" || value === "off") {
                 value = element.checked ? 1 : 0;
@@ -52,14 +72,15 @@ class RegisterForm extends Component {
             if (name === "schoolId") value++;
             data[name] = value;
         }
-
+        
         if (!data.isEnrolled) data.isEnrolled = 0;
         data.bloodType = bloodType;
+        data.birthday = birthday.year + "-" + birthday.month + "-" + birthday.day;
         axios.post('/profile/create-account', data)
             .then(() => redirectTo('/chulaLogin'))
             .catch((e) => {
                 console.log(e)
-                this.setState({submitErrorMessage : "duplicateEmail"})
+                this.setState({ submitErrorMessage: "duplicateEmail" })
             })
     }
 

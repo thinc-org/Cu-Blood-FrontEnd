@@ -291,7 +291,6 @@ class RegisterFillForm extends Component {
                                 <div className="check-text flex">{t('haveYouEverDonatedBlood')}</div>
                             </label>
                             <DonatedWithCubloodCheckBox isDonated={this.state.isDonated} t={t} />
-                            <LiveMoreThan3yearsCheckBox nationality={this.state.nationality} moreThan={this.state.moreThan3} handleChange={this.handleChange} t={t} />
                         </div>
                     </FormGroup>
                     <div className="flex flex-col items-center justify-center mt-0 md:mt-6">
@@ -299,6 +298,7 @@ class RegisterFillForm extends Component {
                             <input checked={this.state.accepted} onChange={this.handleChange} name="accepted" required type="checkbox" />
                             <div className="check-text flex"><span>{t('accept1')}<a href="/notice" target="_blank" rel="noopener noreferrer" className="no-underline"><span className="text-cb-pink font-semibold">{t('accept2')}</span></a>{t('accept3')}<span className="text-cb-pink font-semibold">{t('accept4')}</span>.</span></div>
                         </label> */}
+                        <LiveMoreThan3yearsCheckBox nationality={this.state.nationality} moreThan={this.state.moreThan3} handleChange={this.handleChange} t={t} />
                         <button disabled={!this.state.formValid} className="px-10 pb-3 pt-4 text-white bg-cb-red rounded-lg btn font-cu-heading " type="submit" id="confirm" >{t(updateInfo ? "updateInfo" : "register")}</button>
                         <span className="font-cu-body font-medium text-cb-red mt-2">{t(submitErrorMessage)}</span>
                     </div>

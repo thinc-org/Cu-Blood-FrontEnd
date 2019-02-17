@@ -11,7 +11,7 @@ module.exports = withImages(withCSS(
     withPurgeCss(
     {
     purgeCss: {
-        whitelist: () => ['expand-menu', 'is-expanding', 'sm:w-24' ,'sm:w-48', 'w-32', 'w-48', 'sm:w-16', "text-grey-darker"],
+        whitelist: () => ['expand-menu', 'is-expanding', 'sm:w-24' ,'sm:w-48', 'w-32', 'w-48', 'sm:w-16', "text-grey-darker", "pr-4", "pl-2"],
         whitelistPatterns: [/^react-datepicker/],
         extractors: [
             {

@@ -49,7 +49,7 @@ class RegisterFillForm extends Component {
             bloodType: "",
             rh: "",
             isDonated: false,
-            isEnrolled: true,
+            isEnrolled: false,
             // accepted: false,
             moreThan3: false,
             requiresStudentlId: true,
@@ -198,7 +198,6 @@ class RegisterFillForm extends Component {
             for (const key in this.state) {
                 if ((key.toString().includes('Valid') && key.toString() !== 'formValid' && this.state[key] === false) || (!this.state[key + 'Valid'] && this.state[key] === "")) {
                     isValid = false;
-                    console.log(key, 'invalid')
                     break;
                 }
             }

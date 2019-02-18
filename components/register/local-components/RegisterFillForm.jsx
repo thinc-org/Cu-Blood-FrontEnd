@@ -320,7 +320,7 @@ const DonatedWithCubloodCheckBox = ({ isDonated, isEnrolled, handleChange, t }) 
             (
                 <label className="flex font-cu-heading text-normal cursor-pointer check-box">
                     <input checked={isEnrolled} onChange={handleChange} name="isEnrolled" type="checkbox" />
-                    <div className="check-text flex"><span>{t('donatedWithCUBlood1')}<br /><span className="text-cb-red font-semibold">CU BLOOD</span>{t('donatedWithCUBlood2')}</span></div>
+                    <div className="check-text flex"><span>{t('donatedWithCUBlood1')}<br /><span className="text-cb-red font-semibold"> CU BLOOD</span>{t('donatedWithCUBlood2')}</span></div>
                 </label>
             )
             :

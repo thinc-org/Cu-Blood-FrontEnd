@@ -80,10 +80,7 @@ class RegisterForm extends Component {
         data.birthday = birthday.year + "-" + birthday.month + "-" + birthday.day;
         axios.post('/profile/create-account', data)
             .then(() => redirectTo('/chulaLogin'))
-            .catch((e) => {
-                console.log(e)
-                this.setState({ submitErrorMessage: "duplicateEmail" })
-            })
+            .catch((e) => this.setState({ submitErrorMessage: "duplicateEmail" }))
     }
 
     render() {

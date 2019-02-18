@@ -7,8 +7,8 @@ class ProfileHeader extends Component {
         const { t } = this.props;
         return (
             <div className="bg-cb-pink-light">
-                <div className="layout-wide flex flex-col py-16 font-cu-heading text-center md:text-left">
-                    <div className="text-6xl text-black font-bold mb-6">{t('profileHeader')}</div>
+                <div className="layout-wide flex flex-col py-16 sm:py-20 font-cu-heading text-center md:text-left">
+                    <div className="text-4xl sm:text-6xl text-black font-bold mb-6">{t('profileHeader')}</div>
                     <UserInfoConsumer>
                         {({userInfo}) => {
                             if ((userInfo === null) || (userInfo === undefined)) {

@@ -67,11 +67,11 @@ class NoticeContent extends React.Component {
 
         return (
             <div className="layout-wide">
-                <TopicCenter ref={this.ref1} id="0" english={t('topic1Small')} englishColor="text-pink" thai={t('topic1Big')} borderColor="border-red" />
+                <TopicCenter ref={this.ref1} english={t('topic1Small')} englishColor="text-pink" thai={t('topic1Big')} borderColor="border-red" />
                 <BulletPoint bullet={1} context={context11} />
                 <BulletPoint bullet={2} context={context12} />
                 <Context13 bullet={3} context={context13} t={t} />
-                <TopicCenter ref={this.ref2} id="1" english={t('topic2Small')} englishColor="text-pink" thai={t('topic2Big')} borderColor="border-red" />
+                <TopicCenter ref={this.ref2} english={t('topic2Small')} englishColor="text-pink" thai={t('topic2Big')} borderColor="border-red" />
                 <BulletPoint bullet={1} context={context21} />
                 <BulletPoint bullet={2} context={context22} />
                 <BulletPoint bullet={3} context={context23} />
@@ -85,7 +85,7 @@ class NoticeContent extends React.Component {
                 <BulletPoint bullet={11} context={context211} />
                 <BulletPoint bullet={12} context={context212} />
                 <BulletPoint bullet={13} context={context213} />
-                <TopicCenter ref={this.ref3} id="2" english={t('topic3Small')} englishColor="text-pink" thai={t('topic3Big')} borderColor="border-red" />
+                <TopicCenter ref={this.ref3} english={t('topic3Small')} englishColor="text-pink" thai={t('topic3Big')} borderColor="border-red" />
                 <BulletHeader header={preHeader} />
                 <BulletPoint bullet={1} context={context31} />
                 <BulletPoint bullet={2} context={context32} />

@@ -21,9 +21,9 @@ class UserInfoProvider extends Component {
         }, () => this.setState({isUpdated: false}))
     }
 
-    logout = () => {
+    logout = (isReload = true) => {
         axios.post('/profile/logout')
-            .then(() => window.location.reload())
+            .then(() => isReload ? window.location.reload() : null)
     }
 
     deleteUserContext = () => {

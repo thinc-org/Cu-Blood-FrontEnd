@@ -33,7 +33,6 @@ class MyApp extends App {
     if (ctx.pathname.includes('/u/')) {
       response = await axios.get('/profile/me', { headers })
         .then(resp => { // add userinfo to context
-          // console.log('fetch from server', resp)
           return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, userInfo: resp.data.result, status: resp.status } };
         })
         .catch((err) => { // force logout then redirect to same page
@@ -45,16 +44,16 @@ class MyApp extends App {
         .then(resp => { // redirect if already login
           redirectTo('/', ctx);
         })
-        .catch((err) => { // allow user to access login page if not log in
+        .catch((err) => { // force logout with no redirect
           return null;
         })
-    } 
-    else if (ctx.res) { 
+    }
+    else if (ctx.res) {
       response = await axios.get('/profile/me', { headers })
         .then(resp => { // add userInfo to context when already log in
           return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, userInfo: resp.data.result, status: resp.status } };
         })
-        .catch((err) => { // 
+        .catch((err) => { // force logout with no redirect
           return null;
         })
     }
@@ -115,8 +114,12 @@ class ForceLogout extends Component {
 
   componentDidMount() {
     const { context } = this.props;
+    console.log(context, 'context')
     context.deleteUserContext();
-    if(!this.props.noRedirect) redirectTo('/chulaLogin');
+    context.logout(false);
+    if (!this.props.noRedirect) {
+      redirectTo('/chulaLogin')
+    };
   }
 
   render() {

@@ -11,7 +11,7 @@ export default class extends Component {
         const { children, text, width = "auto", smWidth = "auto" } = this.props
         return (
             <div className={`w-${width} sm:w-${smWidth} mb-6`}>
-                <div className="font-cu-body font-bold text-grey-darker">{text}</div>
+                <div className="font-cu-heading font-bold text-grey-darker">{text}</div>
                 {children}
             </div>
         );

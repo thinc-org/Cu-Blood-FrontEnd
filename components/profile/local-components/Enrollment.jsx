@@ -140,7 +140,7 @@ class Enrollment extends Component {
         //Check if user is during an event time
         const eventStartDate = this.state.commonsInfo !== null ? moment(this.state.commonsInfo.startDate).format('MM/DD/YYYY') : null;
         const userDate = moment().tz('Asia/Bangkok').format('MM/DD/YYYY');
-        const inEventDate = (this.state.currentSessionInfo !== null) && (Date.parse(userDate) >= Date.parse(eventStartDate));
+        const inEventDate = (Date.parse(userDate) >= Date.parse(eventStartDate));
 
         //Choose what kind of button will show = register / change location / show QR
         const button = this.chooseButton(alreadyRegistered, isLocationPick, element, inEventDate);
@@ -264,6 +264,10 @@ class Enrollment extends Component {
                 return (<button className="text-base bg-cb-grey-light rounded-lg px-6 py-2 font-semibold opacity-50 cursor-not-allowed">{t('enrollmentExpire')}</button>);
             }
             return (<button onClick={() => this.toggleModal(locationModal, "putEnrollModal")} className="text-base bg-cb-grey-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#696969" }}>{t('enrollmentChangeLocation')}</button>);
+        }
+
+        else if (inEventCondition) {
+            return (<button className="text-base bg-cb-grey-light rounded-lg px-6 py-2 font-semibold opacity-50 cursor-not-allowed">{t('enrollmentExpire')}</button>);
         }
 
         return (

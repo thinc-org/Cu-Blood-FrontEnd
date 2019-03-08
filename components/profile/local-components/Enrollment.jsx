@@ -140,7 +140,7 @@ class Enrollment extends Component {
         //Check if user is during an event time
         const eventStartDate = this.state.commonsInfo !== null ? moment(this.state.commonsInfo.startDate).format('MM/DD/YYYY') : null;
         const userDate = moment().tz('Asia/Bangkok').format('MM/DD/YYYY');
-        const inEventDate = (Date.parse(userDate) >= Date.parse(eventStartDate));
+        const inEventDate = eventStartDate !== null ? (Date.parse(userDate) >= Date.parse(eventStartDate)) : false;
 
         //Choose what kind of button will show = register / change location / show QR
         const button = this.chooseButton(alreadyRegistered, isLocationPick, element, inEventDate);

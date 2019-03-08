@@ -63,9 +63,9 @@ class Enrollment extends Component {
         }
 
         const regisStartDate = moment(commonsInfo.registrationStartDate).format('MM/DD/YYYY');
-        const regisEndDate = moment(commonsInfo.registrationEndDate).format('MM/DD/YYYY');
+        const eventEndDate = moment(commonsInfo.endDate).format('MM/DD/YYYY');
         const userDate = moment().tz('Asia/Bangkok').format('MM/DD/YYYY');
-        if (Date.parse(userDate) <= Date.parse(regisStartDate) || Date.parse(userDate) >= Date.parse(regisEndDate)) {
+        if (Date.parse(userDate) <= Date.parse(regisStartDate) || Date.parse(userDate) >= Date.parse(eventEndDate)) {
             return (
                 <div className="bg-cb-grey-lighter pb-10">
                     <div className="layout-wide">
@@ -136,9 +136,14 @@ class Enrollment extends Component {
         const { t } = this.props;
         const alreadyRegistered = this.state.currentSessionInfo !== null;
         const isLocationPick = (this.state.currentSessionInfo !== null) && (this.state.currentSessionInfo.locationId === element.id)
+        
+        //Check if user is during an event time
+        const eventStartDate = this.state.commonsInfo !== null ? moment(this.state.commonsInfo.startDate).format('MM/DD/YYYY') : null;
+        const userDate = moment().tz('Asia/Bangkok').format('MM/DD/YYYY');
+        const inEventDate = (this.state.currentSessionInfo !== null) && (Date.parse(userDate) >= Date.parse(eventStartDate));
 
         //Choose what kind of button will show = register / change location / show QR
-        const button = this.chooseButton(alreadyRegistered, isLocationPick, element);
+        const button = this.chooseButton(alreadyRegistered, isLocationPick, element, inEventDate);
 
         return (
             <div key={engName} className="flex flex-col md:flex-row items-center justify-between mb-8">
@@ -249,11 +254,14 @@ class Enrollment extends Component {
     }
 
     //Function to choose the type of button in content
-    chooseButton = (registeredCondition, locationCondition, locationModal) => {
+    chooseButton = (registeredCondition, locationCondition, locationModal, inEventCondition) => {
         const { t } = this.props;
         if (registeredCondition) {
             if (locationCondition) {
                 return (<button onClick={() => this.toggleModal(locationModal, "QRCodeModal")} className="text-base bg-cb-pink-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#de5c8e" }}>QR Code</button>);
+            }
+            else if (inEventCondition) {
+                return (<button className="text-base bg-cb-grey-light rounded-lg px-6 py-2 font-semibold opacity-50 cursor-not-allowed">{t('enrollmentExpire')}</button>);
             }
             return (<button onClick={() => this.toggleModal(locationModal, "putEnrollModal")} className="text-base bg-cb-grey-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#696969" }}>{t('enrollmentChangeLocation')}</button>);
         }

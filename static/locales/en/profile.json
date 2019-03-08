@@ -17,6 +17,7 @@
     "enrollmentDonatePeriod" : "Blood Donation Period",
     "enrollmentCancel" : "Cancel",
     "enrollmentConfirm" : "Confirm",
+    "enrollmentExpire" : "Expire",
     "personalInfoSmallHeader" : "ข้อมูลส่วนตัว",
     "personalInfoBigHeader" : "PERSONAL INFORMATION",
     "personalInfoName" : "Full Name (NickName)",

@@ -147,7 +147,8 @@ const NoticeContact = (props) => {
     return (
         <div className="flex justify-center text-center font-cu-heading font-medium text-2xl p-8">
             {t('NoticeContact1')} <br />
-            {t('NoticeContact2')}
+            {t('NoticeContact2')} <br />
+            {t('NoticeContact3')} 
         </div>
     )
 }
@@ -170,15 +171,15 @@ const Context13 = (props) => {
                         {t('context13_3_1_title')}
                     </div>
                     <span className=' font-semibold'>1.1 :</span> {t('context13_1_1')} <br />
-                    <span className=' font-semibold'>1.2 :</span>{t('context13_1_2')}  <br />
-                    <span className=' font-semibold'>1.3 :</span> {t('context13_1_3')}<br />
+                    <span className=' font-semibold'>1.2 :</span> {t('context13_1_2')} <br />
+                    <span className=' font-semibold'>1.3 :</span> {t('context13_1_3')} <br />
                     <div className='pt-4'>
                         <span className='text-pink font-bold'>3.2</span> {t('context13_3_2_title')}
                     </div>
                     <span className=' font-semibold'>2.1 :</span> {t('context13_2_1')} <br />
-                    <span className=' font-semibold'>2.2 :</span>{t('context13_2_2')}  <br />
-                    <span className=' font-semibold'>2.3 :</span> {t('context13_2_3')}<br />
-                    <span className=' font-semibold'>2.4 :</span> {t('context13_2_4')}<br />
+                    <span className=' font-semibold'>2.2 :</span> {t('context13_2_2')} <br />
+                    <span className=' font-semibold'>2.3 :</span> {t('context13_2_3')} <br />
+                    <span className=' font-semibold'>2.4 :</span> {t('context13_2_4')} <br />
 
                 </div>
             </div>

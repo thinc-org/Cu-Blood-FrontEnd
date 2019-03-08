@@ -54,6 +54,8 @@
     "agree6" : "Avoid smoking 1 hour before and after donation.",
     "agree7" : "Not having ear or body piercings/tattoos/acupuncture in one year.",
     "agree8" : "Not having major surgery in the past 6 months.",
+    "enrollmentHistoryDonation" : "Date of donation",
+    "enrollmentHistoryNoDonation" : "No history of donation for this event",
     "year1":"Year 1",
     "year2":"Year 2",
     "year3":"Year 3",

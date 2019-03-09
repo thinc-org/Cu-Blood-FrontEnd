@@ -63,22 +63,27 @@ class Enrollment extends Component {
         }
 
         const regisStartDate = moment(commonsInfo.registrationStartDate).format('MM/DD/YYYY');
+        const eventEndDate = moment(commonsInfo.endDate).format('MM/DD/YYYY');
         const regisEndDate = moment(commonsInfo.registrationEndDate).format('MM/DD/YYYY');
         const userDate = moment().tz('Asia/Bangkok').format('MM/DD/YYYY');
-        if (Date.parse(userDate) <= Date.parse(regisStartDate) || Date.parse(userDate) >= Date.parse(regisEndDate)) {
+        if (Date.parse(userDate) < Date.parse(regisStartDate) || Date.parse(userDate) > Date.parse(eventEndDate)) {
             return (
                 <div className="bg-cb-grey-lighter pb-10">
                     <div className="layout-wide">
                         <Header english={t('enrollmentSmallHeader')} thai={t('enrollmentBigHeader')} englishColor="text-cb-pink" borderColor="border-cb-red" />
                         <Card>
                             <Detail bigText="ขณะนี้ไม่ได้อยู่ในช่วงเปิดให้ลงทะเบียน" smallText="Currently, it is not in the registration period." />
+                            <div className="w-full flex flex-col sm:flex-row items-center sm:justify-between mt-8">
+                                <div className="mb-8 sm:mb-0 text-center sm:text-left"><Detail bigText={`${moment(commonsInfo.registrationStartDate).add((i18n.language === 'th' ? 543 : 0), 'years').format('D MMMM')} - ${moment(commonsInfo.registrationEndDate).add((i18n.language === 'th' ? 543 : 0), 'years').format('D MMMM')}`} smallText={t('enrollmentRegisPeriod')} isBold={true} /></div>
+                                <div className="text-center sm:text-right"><Detail bigText={`${moment(commonsInfo.startDate).add((i18n.language === 'th' ? 543 : 0), 'years').format('D MMMM')} - ${moment(commonsInfo.endDate).add((i18n.language === 'th' ? 543 : 0), 'years').format('D MMMM')}`} smallText={t('enrollmentDonatePeriod')} isBold={true} /></div>
+                            </div>
                         </Card>
                     </div>
                 </div>
             );
         }
         //Create fix date button if the user already registered for the current event
-        const fixDateButton = this.state.currentSessionInfo !== null ? <button className="ml-2" onClick={() => this.toggleModal(null, 'fixDateModal')}><img className="w-6" src="/static/icons/fix.svg" alt="Fix logo" /></button> : null;
+        const fixDateButton = (this.state.currentSessionInfo !== null) && (Date.parse(userDate) <= Date.parse(regisEndDate)) ? <button className="ml-2" onClick={() => this.toggleModal(null, 'fixDateModal')}><img className="w-6" src="/static/icons/fix.svg" alt="Fix logo" /></button> : null;
         //Create the location content where there is the location name + link to map + button to open modal
         const locationContent = commonsInfo.locations.map(element => this.content(element.nameTH, element.nameEN, element.googleMapsURL, element));
         //Mapping to create the register modal
@@ -136,9 +141,14 @@ class Enrollment extends Component {
         const { t } = this.props;
         const alreadyRegistered = this.state.currentSessionInfo !== null;
         const isLocationPick = (this.state.currentSessionInfo !== null) && (this.state.currentSessionInfo.locationId === element.id)
+        
+        //Check if user is during an event time
+        const regisEndDate = this.state.commonsInfo !== null ? moment(this.state.commonsInfo.registrationEndDate).format('MM/DD/YYYY') : null;
+        const userDate = moment().tz('Asia/Bangkok').format('MM/DD/YYYY');
+        const inEventDate = regisEndDate !== null ? (Date.parse(userDate) > Date.parse(regisEndDate)) : false;
 
         //Choose what kind of button will show = register / change location / show QR
-        const button = this.chooseButton(alreadyRegistered, isLocationPick, element);
+        const button = this.chooseButton(alreadyRegistered, isLocationPick, element, inEventDate);
 
         return (
             <div key={engName} className="flex flex-col md:flex-row items-center justify-between mb-8">
@@ -249,13 +259,20 @@ class Enrollment extends Component {
     }
 
     //Function to choose the type of button in content
-    chooseButton = (registeredCondition, locationCondition, locationModal) => {
+    chooseButton = (registeredCondition, locationCondition, locationModal, inEventCondition) => {
         const { t } = this.props;
         if (registeredCondition) {
             if (locationCondition) {
                 return (<button onClick={() => this.toggleModal(locationModal, "QRCodeModal")} className="text-base bg-cb-pink-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#de5c8e" }}>QR Code</button>);
             }
+            else if (inEventCondition) {
+                return (<button className="text-base bg-cb-grey-light rounded-lg px-6 py-2 font-semibold opacity-50 cursor-not-allowed">{t('enrollmentExpire')}</button>);
+            }
             return (<button onClick={() => this.toggleModal(locationModal, "putEnrollModal")} className="text-base bg-cb-grey-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#696969" }}>{t('enrollmentChangeLocation')}</button>);
+        }
+
+        else if (inEventCondition) {
+            return (<button className="text-base bg-cb-grey-light rounded-lg px-6 py-2 font-semibold opacity-50 cursor-not-allowed">{t('enrollmentExpire')}</button>);
         }
 
         return (

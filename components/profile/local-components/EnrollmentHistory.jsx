@@ -57,7 +57,6 @@ class EnrollmentHistory extends Component {
       );
     }
     // const content = (commonsInfo !== null) && (sessionInfo !== null) ? this.chooseContent(sessionInfo, commonsInfo) : null
-    console.log(sessionInfo);
     const content = sessionInfo.map(element =>
       element.checkOut !== null
         ? this.contentFunc(

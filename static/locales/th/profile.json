@@ -17,6 +17,7 @@
     "enrollmentDonatePeriod" : "วันบริจาคโลหิต",
     "enrollmentCancel" : "ยกเลิก",
     "enrollmentConfirm" : "ยืนยัน",
+    "enrollmentExpire" : "หมดเขต",
     "personalInfoSmallHeader" : "PERSONAL INFORMATION",
     "personalInfoBigHeader" : "ข้อมูลส่วนตัว",
     "personalInfoName" : "ชื่อ - นามสกุล (ชื่อเล่น)",

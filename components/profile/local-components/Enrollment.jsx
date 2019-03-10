@@ -209,7 +209,7 @@ class Enrollment extends Component {
             .then(() => this.getSessionInfo())
             .then(() => this.toggleModal(null, null))
             .catch(() => this.setState({
-                wrongPincodeMessage: "wrong passcode",
+                wrongPincodeMessage: "wrongPasscode",
                 pinCode: "",
                 pinCodeValid: false,
             }))
@@ -301,12 +301,12 @@ class Enrollment extends Component {
             return (
                 <React.Fragment>
                     {
-                         isDuringEventDate ?
-                        <button onClick={() => this.toggleModal(locationModal, 'firstEnrollModal')} className="text-base bg-cb-pink-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#de5c8e" }}>{t("ลงทะเบียนหน้างาน")}</button>
+                        isDuringEventDate 
+                        ?
+                        <button onClick={() => this.toggleModal(locationModal, 'firstEnrollModal')} className="text-base bg-cb-pink-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#de5c8e" }}>{t("walkInRegistration")}</button>
                         :
                         <button className="text-base bg-cb-grey-light rounded-lg px-6 py-2 font-semibold opacity-50 cursor-not-allowed">{t('enrollmentExpire')}</button>
                     }
-                    
                 </React.Fragment>
             );
         }
@@ -487,8 +487,7 @@ class Enrollment extends Component {
                             <SmallCheckbox checked={this.state.agree7} onChange={this.handleCheckboxChange} name="agree7" text={t('agree7')} />
                             <SmallCheckbox checked={this.state.agree8} onChange={this.handleCheckboxChange} name="agree8" text={t('agree8')} />
                         </div>
-                        {/* ({ type, notRequired, value, name, onChange, error, disabled = false }) */}
-                        {isDuringEventDate ? (<div> Passcode for late registration <Input type="password" value={this.state.pinCode} error={this.state.wrongPincodeMessage} onChange={this.handlePinCodeChange} name="pinCode" /> </div>) : null}
+                        {isDuringEventDate ? (<div> {t('enterPasscode')} <Input type="password" value={this.state.pinCode} error={t(this.state.wrongPincodeMessage)} onChange={this.handlePinCodeChange} name="pinCode" /> </div>) : null}
                         <div className="pt-6 flex justify-between px-4 sm:px-10">
                             <button onClick={() => this.toggleModal(null, null)}>{t('enrollmentCancel')}</button>
                             <button className={!this.state.agree.allAgree || (isDuringEventDate && !this.state.pinCodeValid) ? "text-grey cursor-not-allowed" : "text-cb-pink"} onClick={() => this.postEnroll(locationId, projectId)} disabled={!this.state.agree.allAgree || (isDuringEventDate && !this.state.pinCodeValid)}>{t('enrollmentConfirm')}</button>

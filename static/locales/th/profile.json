@@ -72,5 +72,8 @@
     "currentStudent":"นิสิตจุฬา",
     "alumni":"นิสิตเก่า",
     "faculty":"อาจารย์",
-    "staff": "บุคลากร"
+    "staff": "บุคลากร",
+    "enterPasscode": "รหัสลงทะเบียหน้างาน",
+    "walkInRegistration": "ลงทะเบียนหน้างาน",
+    "wrongPasscode": "รหัสลงทะเบียนไม่ถูกต้อง"
 }

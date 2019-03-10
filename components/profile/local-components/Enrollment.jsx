@@ -64,7 +64,7 @@ class Enrollment extends Component {
 
         const regisStartDate = moment(commonsInfo.registrationStartDate).format('MM/DD/YYYY');
         const eventEndDate = moment(commonsInfo.endDate).format('MM/DD/YYYY');
-        const regisEndDate = moment(commonsInfo.registrationEndDate).format('MM/DD/YYYY');
+        const revisionEndDate = moment(commonsInfo.revisionEndDate).format('MM/DD/YYYY');
         const userDate = moment().tz('Asia/Bangkok').format('MM/DD/YYYY');
         if (Date.parse(userDate) < Date.parse(regisStartDate) || Date.parse(userDate) > Date.parse(eventEndDate)) {
             return (
@@ -79,7 +79,7 @@ class Enrollment extends Component {
             );
         }
         //Create fix date button if the user already registered for the current event
-        const fixDateButton = (this.state.currentSessionInfo !== null) && (Date.parse(userDate) <= Date.parse(regisEndDate)) ? <button className="ml-2" onClick={() => this.toggleModal(null, 'fixDateModal')}><img className="w-6" src="/static/icons/fix.svg" alt="Fix logo" /></button> : null;
+        const fixDateButton = (this.state.currentSessionInfo !== null) && (Date.parse(userDate) <= Date.parse(revisionEndDate)) ? <button className="ml-2" onClick={() => this.toggleModal(null, 'fixDateModal')}><img className="w-6" src="/static/icons/fix.svg" alt="Fix logo" /></button> : null;
         //Create the location content where there is the location name + link to map + button to open modal
         const locationContent = commonsInfo.locations.map(element => this.content(element.nameTH, element.nameEN, element.googleMapsURL, element));
         //Mapping to create the register modal
@@ -138,13 +138,15 @@ class Enrollment extends Component {
         const alreadyRegistered = this.state.currentSessionInfo !== null;
         const isLocationPick = (this.state.currentSessionInfo !== null) && (this.state.currentSessionInfo.locationId === element.id)
         
-        //Check if user is during an event time
+        //Check what date the user is in
         const regisEndDate = this.state.commonsInfo !== null ? moment(this.state.commonsInfo.registrationEndDate).format('MM/DD/YYYY') : null;
+        const revisionEndDate = this.state.commonsInfo !== null ? moment(this.state.commonsInfo.revisionEndDate).format('MM/DD/YYYY') : null;
         const userDate = moment().tz('Asia/Bangkok').format('MM/DD/YYYY');
-        const inEventDate = regisEndDate !== null ? (Date.parse(userDate) > Date.parse(regisEndDate)) : false;
+        const afterRegis = regisEndDate !== null ? (Date.parse(userDate) > Date.parse(regisEndDate)) : false;
+        const afterRevisionEnd = revisionEndDate !== null ? (Date.parse(userDate) > Date.parse(revisionEndDate)) : false;
 
         //Choose what kind of button will show = register / change location / show QR
-        const button = this.chooseButton(alreadyRegistered, isLocationPick, element, inEventDate);
+        const button = this.chooseButton(alreadyRegistered, isLocationPick, element, afterRegis, afterRevisionEnd);
 
         return (
             <div key={engName} className="flex flex-col md:flex-row items-center justify-between mb-8">
@@ -255,19 +257,19 @@ class Enrollment extends Component {
     }
 
     //Function to choose the type of button in content
-    chooseButton = (registeredCondition, locationCondition, locationModal, inEventCondition) => {
+    chooseButton = (registeredCondition, locationCondition, locationModal, afterRegisCondition, afterRevisionEndCondition) => {
         const { t } = this.props;
         if (registeredCondition) {
             if (locationCondition) {
                 return (<button onClick={() => this.toggleModal(locationModal, "QRCodeModal")} className="text-base bg-cb-pink-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#de5c8e" }}>QR Code</button>);
             }
-            else if (inEventCondition) {
+            else if (afterRevisionEndCondition) {
                 return (<button className="text-base bg-cb-grey-light rounded-lg px-6 py-2 font-semibold opacity-50 cursor-not-allowed">{t('enrollmentExpire')}</button>);
             }
             return (<button onClick={() => this.toggleModal(locationModal, "putEnrollModal")} className="text-base bg-cb-grey-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#696969" }}>{t('enrollmentChangeLocation')}</button>);
         }
 
-        else if (inEventCondition) {
+        else if (afterRegisCondition) {
             return (<button className="text-base bg-cb-grey-light rounded-lg px-6 py-2 font-semibold opacity-50 cursor-not-allowed">{t('enrollmentExpire')}</button>);
         }
 

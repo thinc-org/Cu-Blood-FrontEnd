@@ -16,7 +16,7 @@ class HomeHead extends Component {
               <span className="text font-bold">{t('homeHeaderTextBold')}</span>
               {t('homeHeaderText2')}
             </div>
-            <Link href="/u/profile">
+            <Link href="/registerForm" prefetch>
               <button className="text-2xl bg-cb-red rounded-lg text-white px-20 py-4 mb-8 leading-none">{t('registerButton')}</button>
             </Link>
             <div className="w-auto flex justify-center md:justify-start">

@@ -39,10 +39,10 @@ class MyApp extends App {
           return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, status: 401 } };
         })
     }
-    else if (ctx.pathname.includes('/chulaLogin')) { //
+    else if (ctx.pathname.includes('/chulaLogin') || ctx.pathname.includes('/registerForm')) { //
       response = await axios.get('/profile/me', { headers })
         .then(resp => { // redirect if already login
-          redirectTo('/', ctx);
+          redirectTo('/u/profile', ctx);
         })
         .catch((err) => { // force logout with no redirect
           return null;

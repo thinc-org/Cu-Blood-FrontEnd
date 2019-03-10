@@ -15,6 +15,7 @@
     "enrollmentChangeDate" : "Please Select New Date and Time Period",
     "enrollmentRegisPeriod" : "Registration Period",
     "enrollmentDonatePeriod" : "Blood Donation Period",
+    "enrollmentLastRevisionDate" : "Last Enrollment Revision Date",
     "enrollmentCancel" : "Cancel",
     "enrollmentConfirm" : "Confirm",
     "enrollmentExpire" : "Expire",

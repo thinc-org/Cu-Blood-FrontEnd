@@ -15,6 +15,7 @@
     "enrollmentChangeDate" : "กรุณาเลือกวันที่และช่วงเวลาใหม่",
     "enrollmentRegisPeriod" : "วันลงทะเบียน",
     "enrollmentDonatePeriod" : "วันบริจาคโลหิต",
+    "enrollmentLastRevisionDate" : "วันสุดท้ายของการเปลี่ยนข้อมูลลงทะเบียน",
     "enrollmentCancel" : "ยกเลิก",
     "enrollmentConfirm" : "ยืนยัน",
     "enrollmentExpire" : "หมดเขต",

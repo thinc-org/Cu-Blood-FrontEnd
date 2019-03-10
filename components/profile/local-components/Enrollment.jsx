@@ -63,6 +63,7 @@ class Enrollment extends Component {
         }
 
         const regisStartDate = moment(commonsInfo.registrationStartDate).format('MM/DD/YYYY');
+        const regisEndDate = moment(commonsInfo.registrationEndDate).format('MM/DD/YYYY');
         const eventEndDate = moment(commonsInfo.endDate).format('MM/DD/YYYY');
         const revisionEndDate = moment(commonsInfo.revisionEndDate).format('MM/DD/YYYY');
         const userDate = moment().tz('Asia/Bangkok').format('MM/DD/YYYY');
@@ -88,7 +89,11 @@ class Enrollment extends Component {
         const locationContent = commonsInfo.locations.map(element => this.content(element.nameTH, element.nameEN, element.googleMapsURL, element));
         //Mapping to create the register modal
         const datesDuringDonation = commonsInfo !== null ? commonsInfo.timeSlots : null;
-        //Create modal that can change date
+        //Display registration period or last revision day information
+        console.log(userDate);
+        const leftDateContent = Date.parse(userDate) <= Date.parse(regisEndDate) ? 
+        <div className="mb-8 sm:mb-0 text-center sm:text-left"><Detail bigText={`${moment(commonsInfo.registrationStartDate).add((i18n.language === 'th' ? 543 : 0), 'years').format('D MMMM')} - ${moment(commonsInfo.registrationEndDate).add((i18n.language === 'th' ? 543 : 0), 'years').format('D MMMM')}`} smallText={t('enrollmentRegisPeriod')} isBold={true} /></div>
+        : <div className="mb-8 sm:mb-0 text-center sm:text-left"><Detail bigText={`${moment(commonsInfo.revisionEndDate).add((i18n.language === 'th' ? 543 : 0), 'years').format('D MMMM')}`} smallText={t('enrollmentLastRevisionDate')} isBold={true} /></div>
 
         return (
             <div className="bg-cb-grey-lighter pb-10">
@@ -108,7 +113,7 @@ class Enrollment extends Component {
                             {locationContent}
                         </div>
                         <div className="w-full flex flex-col sm:flex-row items-center sm:justify-between mt-8">
-                            <div className="mb-8 sm:mb-0 text-center sm:text-left"><Detail bigText={`${moment(commonsInfo.registrationStartDate).add((i18n.language === 'th' ? 543 : 0), 'years').format('D MMMM')} - ${moment(commonsInfo.registrationEndDate).add((i18n.language === 'th' ? 543 : 0), 'years').format('D MMMM')}`} smallText={t('enrollmentRegisPeriod')} isBold={true} /></div>
+                            {leftDateContent}
                             <div className="text-center sm:text-right"><Detail bigText={`${moment(commonsInfo.startDate).add((i18n.language === 'th' ? 543 : 0), 'years').format('D MMMM')} - ${moment(commonsInfo.endDate).add((i18n.language === 'th' ? 543 : 0), 'years').format('D MMMM')}`} smallText={t('enrollmentDonatePeriod')} isBold={true} /></div>
                         </div>
                     </Card>

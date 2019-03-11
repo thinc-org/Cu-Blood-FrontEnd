@@ -23,12 +23,21 @@ class About extends React.Component {
                 <AboutContent/>
                 <PageHeader english={t('staffHeaderSmall')} englishColor="text-pink" thai={t('staffHeaderBig')} borderColor="border-red" />
                 <div className="layout-wide flex flex-wrap flex-row justify-center pb-10">
-                    <AboutCard englishName="Boom" myRole="Front-end" picture="/static/logo/ios-globe.svg" />
-                    <AboutCard englishName="New" myRole="Front-end" picture="/static/logo/ios-globe.svg" />
-                    <AboutCard englishName="Poom" myRole="Front-end" picture="/static/logo/ios-globe.svg" />
-                    <AboutCard englishName="Five" myRole="Consultant" picture="/static/logo/ios-globe.svg" />
-                    <AboutCard englishName="Pond" myRole="Dev-ops" picture="/static/logo/ios-globe.svg" />
-                    <AboutCard englishName="Jean" myRole="Back-end" picture="/static/logo/ios-globe.svg" />
+                    <AboutCard englishName={t('person1')} myRole={'role1'} picture="/static/logo/logo1.png" />
+                    <AboutCard englishName={t('person2')} myRole={'role2'} picture="/static/logo/logo1.png" />
+                    <AboutCard englishName={t('person3')} myRole={'role3'} picture="/static/logo/logo1.png" />
+                    <AboutCard englishName={t('person4')} myRole={'role4'} picture="/static/logo/logo1.png" />
+                    <AboutCard englishName={t('person5')} myRole={'role5'} picture="/static/logo/logo1.png" />
+                    <AboutCard englishName={t('person6')} myRole={'role6'} picture="/static/logo/logo1.png" />
+                    <AboutCard englishName={t('person7')} myRole={'role7'} picture="/static/logo/logo1.png" />
+                    <AboutCard englishName={t('person8')} myRole={'role8'} picture="/static/logo/logo1.png" />
+                    <AboutCard englishName={t('person9')} myRole={'role9'} picture="/static/logo/logo1.png" />
+                    <AboutCard englishName={t('person10')} myRole={'role10'} picture="/static/logo/logo1.png" />
+                    <AboutCard englishName={t('person11')} myRole={'role11'} picture="/static/logo/logo1.png" />
+                    <AboutCard englishName={t('person12')} myRole={'role12'} picture="/static/logo/logo1.png" />
+                    <AboutCard englishName={t('person13')} myRole={'role13'} picture="/static/logo/logo1.png" />
+                    <AboutCard englishName={t('person14')} myRole={'role14'} picture="/static/logo/logo1.png" />
+                        
                 </div>
                 <FacebookButton />
                 <Footer />

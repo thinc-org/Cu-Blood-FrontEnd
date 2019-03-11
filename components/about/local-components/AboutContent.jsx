@@ -33,7 +33,7 @@ class AboutContent extends React.Component {
                     <div className="w-full flex w-64 h-64 justify-center">
                         <img src='/static/logo/logo1.png' className="w-64"></img>
                     </div>
-                    <span> </span>{t('logoText')}
+                    <span className="mt-8"> {t('logoText')} </span>
                 </div>
 
 

@@ -28,7 +28,7 @@ class AboutContent extends React.Component {
                 } />
 
 
-                <div className="flex flex-col font-cu-heading text-2xl">
+                <div className="flex flex-col font-cu-heading text-2xl py-4">
                     <span className="text-4xl font-bold"> {t('logo')}</span>
                     <div className="w-full flex w-64 h-64 justify-center">
                         <img src='/static/logo/logo1.png' className="w-64" alt="logo"></img>
@@ -37,7 +37,7 @@ class AboutContent extends React.Component {
                 </div>
 
 
-                <div className="flex flex-col font-cu-heading text-2xl">
+                <div className="flex flex-col font-cu-heading text-2xl py-4">
                     <span className="text-4xl font-bold"> {t('mascot')}</span>
                     <div className="w-full flex w-64 h-64 justify-center">
                         <img src='/static/logo/mascot.png' className="w-64 " alt="mascot"></img>

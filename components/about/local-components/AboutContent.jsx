@@ -27,6 +27,13 @@ class AboutContent extends React.Component {
                     </div>
                 } />
 
+                <div className="flex flex-col">
+                    <span className="text-4xl font-bold"> {t('mascot')}</span>
+                    <img src='/static/logo/mascot.png' className="w-64"></img>
+                    {t('mascotText')}
+                </div>
+                
+
                 <hr className="border-solid border-grey w-full mt-8" style={{ borderBottomWidth: '0.05rem', maxWidth: '600px' }} />
             </div>
         )

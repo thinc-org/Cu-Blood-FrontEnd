@@ -166,7 +166,7 @@ const Context13 = (props) => {
                 {context}
                 <div>
                     <div className='py-4'>
-                        <span className='text-pink font-bold'>3.1</span>
+                        <span className='text-pink font-bold'>3.1 </span>
                         {t('context13_3_1_title')}
                     </div>
                     <span className=' font-semibold'>1.1 :</span> {t('context13_1_1')} <br />

@@ -74,7 +74,6 @@ class PersonalInfo extends Component {
         const bloodRef = Math.floor(reference / 4);
         const rhRef = reference % 4;
         let blood = null;
-        const { t } = this.props;
         switch (bloodRef) {
             case 0:
                 blood = "A";

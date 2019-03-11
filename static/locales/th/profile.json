@@ -73,7 +73,9 @@
     "alumni":"นิสิตเก่า",
     "faculty":"อาจารย์",
     "staff": "บุคลากร",
-    "enterPasscode": "รหัสลงทะเบียหน้างาน",
+    "enterPasscode": "รหัสลงทะเบียนหน้างาน",
     "walkInRegistration": "ลงทะเบียนหน้างาน",
-    "wrongPasscode": "รหัสลงทะเบียนไม่ถูกต้อง"
+    "wrongPasscode": "รหัสลงทะเบียนไม่ถูกต้อง",
+    "registerSuccess": "ลงทะเบียนสำเร็จ",
+    "unknown": "ไม่ทราบ"
 }

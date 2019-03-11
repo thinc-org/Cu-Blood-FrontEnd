@@ -221,11 +221,16 @@ class Enrollment extends Component {
             sessionId: this.state.currentSessionInfo.id,
             locationId: locationId,
             timeSlot: this.state.regisDate,
-            timeId: this.state.regisTimeId
+            timeId: this.state.regisTimeId,
+            passcode: this.state.pinCode,
         })
             .then(() => this.getSessionInfo())
             .then(() => this.toggleModal(null, null))
-            .catch(console.log)
+            .catch(() => this.setState({
+                wrongPincodeMessage: "wrongPasscode",
+                pinCode: "",
+                pinCodeValid: false,
+            }))
     }
 
     //Get session information from API and set it to the states
@@ -292,8 +297,17 @@ class Enrollment extends Component {
                 return (<button onClick={() => this.toggleModal(locationModal, "QRCodeModal")} className="text-base bg-cb-pink-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#de5c8e" }}>QR Code</button>);
             }
             else if (afterRevisionEndCondition) {
-                return (<button className="text-base bg-cb-grey-light rounded-lg px-6 py-2 font-semibold opacity-50 cursor-not-allowed">{t('enrollmentExpire')}</button>);
-            }
+                return (
+                    <React.Fragment>
+                        {
+                            isDuringEventDate ?
+                            <button onClick={() => this.toggleModal(locationModal, 'putEnrollModal')} className="text-base bg-cb-grey-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#696969" }}>{t("enrollmentChangeLocation")}</button>
+                            :
+                            <button className="text-base bg-cb-grey-light rounded-lg px-6 py-2 font-semibold opacity-50 cursor-not-allowed">{t('enrollmentExpire')}</button>
+                        }
+                    </React.Fragment>
+                );
+            } 
             return (<button onClick={() => this.toggleModal(locationModal, "putEnrollModal")} className="text-base bg-cb-grey-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#696969" }}>{t('enrollmentChangeLocation')}</button>);
         }
 
@@ -389,7 +403,11 @@ class Enrollment extends Component {
     //Function that takes care of modal when user wants to change location
     putEnrollModal = (thaiName, engName, locationId) => {
         const { t } = this.props;
-
+        const eventStartDate = this.state.commonsInfo !== null ? moment(this.state.commonsInfo.startDate).format('MM/DD/YYYY') : null;
+        const eventEndDate = this.state.commonsInfo !== null ? moment(this.state.commonsInfo.endDate).format('MM/DD/YYYY') : null;
+        const userDate = moment().tz('Asia/Bangkok').format('MM/DD/YYYY');
+        const isDuringEventDate = eventEndDate != null && eventStartDate != null && Date.parse(userDate) < Date.parse(eventEndDate) && Date.parse(userDate) > Date.parse(eventStartDate);
+        
         return (
             <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 50 }}>
                 <div className="layout-wide flex justify-center">
@@ -398,9 +416,10 @@ class Enrollment extends Component {
                         <div className="bg-cb-grey-lighter py-6 w-full px-4 sm:px-10 flex flex-col justify-center items-center">
                             <Detail bigText={`${thaiName}`} smallText={`${engName}`} />
                         </div>
+                        {isDuringEventDate ? (<div> {t('enterPasscode')} <Input type="password" value={this.state.pinCode} error={t(this.state.wrongPincodeMessage)} onChange={this.handlePinCodeChange} name="pinCode" /> </div>) : null}
                         <div className="pt-6 flex justify-between px-4 sm:px-10">
                             <button onClick={() => this.toggleModal(null, null)}>{t('enrollmentCancel')}</button>
-                            <button className="text-cb-pink" onClick={() => this.putEnroll(locationId)}>{t('enrollmentConfirm')}</button>
+                            <button className={isDuringEventDate && !this.state.pinCodeValid ? "text-grey cursor-not-allowed" : "text-cb-pink"} onClick={() => this.putEnroll(locationId)} disabled={isDuringEventDate && !this.state.pinCodeValid}>{t('enrollmentConfirm')}</button>
                         </div>
                     </div>
                 </div>

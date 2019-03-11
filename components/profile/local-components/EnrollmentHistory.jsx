@@ -57,15 +57,16 @@ class EnrollmentHistory extends Component {
       );
     }
     // const content = (commonsInfo !== null) && (sessionInfo !== null) ? this.chooseContent(sessionInfo, commonsInfo) : null
-    const content = sessionInfo.map(element =>
+    const content = sessionInfo.map((element, index) =>
       element.checkOut !== null
         ? this.contentFunc(
             element.project.name,
             moment(element.checkOut)
               .add(i18n.language === "th" ? 543 : 0, "years")
-              .format("D MMMM YYYY")
+              .format("D MMMM YYYY"),
+            index
           )
-        : this.contentFunc(element.project.name, null)
+        : this.contentFunc(element.project.name, null, index)
     );
     return (
       <div className="bg-cb-grey-lighter">
@@ -82,11 +83,11 @@ class EnrollmentHistory extends Component {
     );
   }
 
-  contentFunc = (projectName, timeSlot) => {
+  contentFunc = (projectName, timeSlot, key) => {
     const { t } = this.props;
     if (timeSlot === null) {
       return (
-        <div className="mb-8">
+        <div className="mb-8" key={key}>
           <Card>
             <Detail
               bigText={projectName}

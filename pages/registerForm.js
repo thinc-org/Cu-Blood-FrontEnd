@@ -32,6 +32,7 @@ class RegisterForm extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
+        const { t } = this.props;
         // convert form data to api format
         const data = {}
         let bloodType = 0;
@@ -46,7 +47,7 @@ class RegisterForm extends Component {
             if (element.tagName === 'BUTTON') {
                 continue;
             } else if (name === "bloodType") {
-                bloodType += 3 * Number(value);
+                bloodType += 4 * Number(value);
                 continue;
             } else if (name === "rh") {
                 bloodType += Number(value);
@@ -79,7 +80,10 @@ class RegisterForm extends Component {
         data.bloodType = bloodType;
         data.birthday = birthday.year + "-" + birthday.month + "-" + birthday.day;
         axios.post('/profile/create-account', data)
-            .then(() => redirectTo('/chulaLogin'))
+            .then(() => {
+                alert(t('registerSuccess'));
+                redirectTo('/chulaLogin');
+            })
             .catch((e) => this.setState({ submitErrorMessage: "duplicateEmail" }))
     }
 

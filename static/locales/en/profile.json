@@ -75,5 +75,7 @@
     "staff": "Staff",
     "enterPasscode": "Passcode for Walk-In Registration",
     "walkInRegistration": "Walk-In Registration",
-    "wrongPasscode": "Wrong Passcode"
+    "wrongPasscode": "Wrong Passcode",
+    "registerSuccess": "Register Success",
+    "unknown": "unknown"
 }

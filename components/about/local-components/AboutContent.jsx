@@ -31,7 +31,7 @@ class AboutContent extends React.Component {
                 <div className="flex flex-col font-cu-heading text-2xl">
                     <span className="text-4xl font-bold"> {t('logo')}</span>
                     <div className="w-full flex w-64 h-64 justify-center">
-                        <img src='/static/logo/logo1.png' className="w-64"></img>
+                        <img src='/static/logo/logo1.png' className="w-64" alt="logo"></img>
                     </div>
                     <span className="mt-8"> {t('logoText')} </span>
                 </div>
@@ -40,7 +40,7 @@ class AboutContent extends React.Component {
                 <div className="flex flex-col font-cu-heading text-2xl">
                     <span className="text-4xl font-bold"> {t('mascot')}</span>
                     <div className="w-full flex w-64 h-64 justify-center">
-                        <img src='/static/logo/mascot.png' className="w-64 "></img>
+                        <img src='/static/logo/mascot.png' className="w-64 " alt="mascot"></img>
                     </div>
                     {t('mascotText')}
                 </div>

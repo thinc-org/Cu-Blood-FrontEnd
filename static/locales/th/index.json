@@ -1,5 +1,5 @@
 {
-    "homeHeaderText1" : "โครงการรณรงค์ให้นิสิตปัจจุบัน นิสิตเก่า คณาจารย์ และบุคลากร ของ ",
+    "homeHeaderText1" : "โครงการที่รณรงค์ให้นิสิตปัจจุบัน นิสิตเก่า คณาจารย์ และบุคลากร ของ ",
     "homeHeaderTextBold" : "จุฬาลงกรณ์มหาวิทยาลัย",
     "homeHeaderText2" : " ร่วมกันบริจาคโลหิตให้แก่สภากาชาดไทย",
     "registerButton" : "ลงทะเบียน",
@@ -17,6 +17,7 @@
     "bloodTypeAB": "หมู่โลหิต AB",
     "totalDonors": "จำนวนผู้บริจาคทั้งหมด",
     "donationDate": "วันบริจาคเลือด",
+    "startOfRegistrationDate": "เปิดลงทะเบียนวันแรก",
     "endOfRegistrationDate": "ปิดการลงทะเบียน",
     "left": "อีก",
     "days": "วัน"

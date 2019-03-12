@@ -1,5 +1,5 @@
 {
-    "homeHeaderText1" : "An organization that encourages current students, alumnis, faculty members, and staff of ",
+    "homeHeaderText1" : "A project that encourages current students, alumnis, faculty members, and staff of ",
     "homeHeaderTextBold" : "Chulalongkorn University",
     "homeHeaderText2" : " to donate blood to the Thai Red Cross Society.",
     "registerButton" : "Register",
@@ -17,6 +17,7 @@
     "bloodTypeAB": "BloodType AB",
     "totalDonors": "Total Donors",
     "donationDate": "Donation date",
+    "startOfRegistrationDate": "Start of Registration",
     "endOfRegistrationDate": "End of Registration",
     "left": "",
     "days": "days left"

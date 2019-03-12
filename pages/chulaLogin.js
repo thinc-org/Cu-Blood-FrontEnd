@@ -36,11 +36,6 @@ class ChulaLogin extends Component {
         }
         axios.post('/profile/login', data)
             .then(() => {
-                // clear username password before proceed to next page as security failsafe
-                this.setState({
-                    username: "",
-                    password: "",
-                })
                 redirectTo('/u/profile')
             })
             .catch((e) => {

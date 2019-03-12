@@ -40,7 +40,7 @@ class RegisterForm extends Component {
             if (element.tagName === 'BUTTON') {
                 continue;
             } else if (name === "bloodType") {
-                bloodType += 3 * Number(value);
+                bloodType += 4 * Number(value);
                 continue;
             } else if (name === "rh") {
                 bloodType += Number(value);

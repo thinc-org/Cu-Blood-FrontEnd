@@ -66,8 +66,8 @@ class RegisterFillForm extends Component {
             if (key in this.props.userInfo && (key !== 'studentId' || this.props.userInfo[key] !== "" )) {
                 let value = this.props.userInfo[key]
                 if (key === "bloodType") {
-                    obj.bloodType = Math.floor(value / 3);
-                    obj.rh = value % 3;
+                    obj.bloodType = Math.floor(value / 4);
+                    obj.rh = obj.bloodType !== 4 ? value % 4 : 2;
                 } else if (key === "birthday") {
                     obj.birthday = moment(value)
                 } else {
@@ -285,7 +285,7 @@ class RegisterFillForm extends Component {
                             <textarea value={this.state.medicalCondition} onChange={this.handleChange} name="medicalCondition" style={{ height: "100px", resize: "none" }} className={`${inputClassName} w-full`} />
                         </Form>
                         <Form text={t('bloodType')} width="32" smWidth="48">
-                            <Selector value={this.state.bloodType} onChange={this.handleChange} name="bloodType" choices={['A', 'B', 'O', 'AB']} />
+                            <Selector value={this.state.bloodType} onChange={this.handleChange} name="bloodType" choices={['A', 'B', 'O', 'AB', t('unknown')]} />
                         </Form>
                         <Form text="RH" width="32" smWidth="48">
                             <Selector value={this.state.rh} onChange={this.handleChange} name="rh" choices={['+', '-', t('unknown')]} />
@@ -320,7 +320,7 @@ const DonatedWithCubloodCheckBox = ({ isDonated, isEnrolled, handleChange, t }) 
             (
                 <label className="flex font-cu-heading text-normal cursor-pointer check-box">
                     <input checked={isEnrolled} onChange={handleChange} name="isEnrolled" type="checkbox" />
-                    <div className="check-text flex"><span>{t('donatedWithCUBlood1')}<br /><span className="text-cb-red font-semibold">CU BLOOD</span>{t('donatedWithCUBlood2')}</span></div>
+                    <div className="check-text flex"><span>{t('donatedWithCUBlood1')}<br /><span className="text-cb-red font-semibold"> CU BLOOD</span>{t('donatedWithCUBlood2')}</span></div>
                 </label>
             )
             :

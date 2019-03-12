@@ -148,11 +148,14 @@ class Notice extends React.Component {
         }
 
 
-
+        console.log(announcementTitle[0])
 
         return (
             <div className="bg-grey-lightest">
-                <AnnouncementHeader />
+                <AnnouncementHeader
+                    text={announcementTitle ? announcementTitle[0] : null}
+                // date={announcementTitle ? announcementDate[0] : null} 
+                />
                 <div className="flex flex-row flex-wrap pb-10 justify-center">
                     <AnnouncementCardLoop />
                 </div>

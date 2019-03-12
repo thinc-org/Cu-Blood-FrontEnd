@@ -38,11 +38,11 @@ class MyApp extends App {
         .catch((err) => { // force logout then redirect to same page
           return { ...pageProps, ...{ query: ctx.query, authtoken: c.authtoken, status: 401 } };
         })
-    } 
-    else if (ctx.pathname.includes('/chulaLogin')) { //
+    }
+    else if (ctx.pathname.includes('/chulaLogin') || ctx.pathname.includes('/registerForm')) { //
       response = await axios.get('/profile/me', { headers })
         .then(resp => { // redirect if already login
-          redirectTo('/', ctx);
+          redirectTo('/u/profile', ctx);
         })
         .catch((err) => { // force logout with no redirect
           return null;
@@ -114,7 +114,6 @@ class ForceLogout extends Component {
 
   componentDidMount() {
     const { context } = this.props;
-    console.log(context, 'context')
     context.deleteUserContext();
     context.logout(false);
     if (!this.props.noRedirect) {

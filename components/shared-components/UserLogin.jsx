@@ -21,7 +21,7 @@ class UserLogin extends Component {
                     <input autoComplete="new-password" className="bg-cb-grey-light rounded-lg mt-2 w-full h-8 mb-10 p-6" value={password} onChange={onChange} type="password" name="password" />
                     <div className="flex flex-row justify-between items-center">
                         <Link href="/registerForm"><a className="no-underline"><span className="font-cu-heading text-grey underline">{t('userLoginRegister')}</span></a></Link>
-                        <button disabled={!formValid} type="submit" className="px-10 py-3 text-white bg-cb-pink rounded-lg btn" id="confirm">{t('userLoginLogin')}</button>
+                        <button disabled={!formValid} type="submit" className="font-cu-heading px-10 py-3 text-white bg-cb-pink rounded-lg btn" id="confirm">{t('userLoginLogin')}</button>
                     </div>
                 </form>
             </div>

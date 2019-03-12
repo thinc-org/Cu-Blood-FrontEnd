@@ -38,7 +38,7 @@ class PersonalInfo extends Component {
                                 {this.content(userInfo.studentId ? userInfo.studentId : '-', t('personalInfoStudentId'))}
                                 {this.content(userInfo.school.nameTH, t('personalInfoFaculty'))}
                                 {this.content(t(this.academicYear(userInfo.academicYear)), t('personalInfoYear'))}
-                                {this.content(this.bloodType(userInfo.bloodType), t('personalInfoBlood'))}
+                                {this.content(t(this.bloodType(t(userInfo.bloodType))), t('personalInfoBlood'))}
                                 {this.content(`${userInfo.weight} kg`, t('personalInfoWeight'))}
                                 {this.content(this.shirtSize(userInfo.shirtSize), t('personalInfoShirt'))}
                                 {this.content(userInfo.isDonated === 1 ? t('personalInfoDid') : t('personalInfoDidNot'), t('personalInfoDonateBefore'))}
@@ -71,9 +71,9 @@ class PersonalInfo extends Component {
     }
 
     bloodType = (reference) => {
-        const bloodRef = Math.floor(reference / 3);
-        const rhRef = reference % 3;
-        let blood = null
+        const bloodRef = Math.floor(reference / 4);
+        const rhRef = reference % 4;
+        let blood = null;
         switch (bloodRef) {
             case 0:
                 blood = "A";
@@ -87,20 +87,23 @@ class PersonalInfo extends Component {
             case 3:
                 blood = "AB";
                 break;
+            case 4:
+                blood = "unknown";
+                break;
         }
         let rh = null;
-        switch(rhRef) {
+        switch (rhRef) {
             case 0:
                 rh = "Rh+";
                 break;
             case 1:
-                rh = "Rh-";
+                rh = " Rh-";
                 break;
             case 2:
                 rh = ""
                 break;
         }
-        return `${blood} ${rh}`
+        return `${blood}${rh}`
     }
 
     gender = (reference) => {

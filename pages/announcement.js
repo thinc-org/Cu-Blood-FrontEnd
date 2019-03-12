@@ -1,10 +1,12 @@
 import React from 'react';
 import AnnouncementHeader from '@/announcement/local-components/AnnouncementHeader'
 import AnnouncementCard from '@/announcement/local-components/AnnouncementCard'
+import AnnouncementContent from '@/announcement/local-components/AnnouncementContent'
 import Footer from '@/shared-components/Footer';
 import FacebookButton from '@/shared-components/FacebookButton';
 import axios from '@/core/core';
 import map from 'lodash/map';
+import { Link } from '@/core/i18n';
 
 class Notice extends React.Component {
     constructor(props) {
@@ -19,7 +21,7 @@ class Notice extends React.Component {
     }
 
     //get data from api
-    static async getInitialProps() {
+    static async getInitialProps({ query: { id } }) {
         const announcementDataPromise = axios.get('/announcements/all/1');
         const data = await Promise.all([announcementDataPromise]
             .map(p => p
@@ -31,6 +33,7 @@ class Notice extends React.Component {
             announcementData: announcementData ? announcementData.result.data : undefined,
             numberOfPage: announcementData ? announcementData.result.pageCount : undefined,
             namespacesRequired: ['common', 'announcement'],
+            currentId: id,
         };
     }
 
@@ -80,14 +83,12 @@ class Notice extends React.Component {
                 isButtonDisabledLeft: true
             })
         }
-
     }
 
     //go to next page
     nextPage = () => {
         let myPage = this.state.currentPage + 1;
         this.disabledButton(myPage)
-
         return (
             this.update(myPage)
         )
@@ -110,9 +111,9 @@ class Notice extends React.Component {
         const announcementTitle = map(announcementData, 'title');
         const announcementDate = map(announcementData, 'updatedAt');
         const announcementImage = map(announcementData, 'displayImage');
+        const announcementIds = map(announcementData, 'id');
         // console.log('page' + this.state.currentPage);
         // console.log(this.state.isButtonDisabledLeft);
-
 
         const lengthOfArray = this.state.totalPage;
 
@@ -120,9 +121,18 @@ class Notice extends React.Component {
         const AnnouncementCardLoop = () => {
             let data = [];
             for (let i = 0; i < lengthOfArray; i++) {
-                data.push(<AnnouncementCard key={i} text={announcementTitle[i]} date={announcementDate[i]} image={announcementImage[i]} />);
+                data.push(
+                    <Link key={i} href={'/announcement/' + announcementIds[i]}>
+                        <a className="no-underline flex">
+                            <AnnouncementCard 
+                                text={announcementTitle[i]} 
+                                date={announcementDate[i]} 
+                                image={announcementImage[i]} 
+                            />
+                        </a>
+                    </Link>
+                );
             }
-
             return data;
         }
 
@@ -130,8 +140,6 @@ class Notice extends React.Component {
         //page chooser
         const Pager = (props) => {
             const { currentPage, totalPage, next, previous } = props
-
-
             return (
                 <div className='flex flex-row justify-center items-center pb-10 text-pink font-cu-heading text-2xl'>
                     <button disabled={this.state.isButtonDisabledLeft} onClick={previous} className='bg-pink-lightest w-10 h-10 text-pink-dark rounded-full items-center justify-center flex'> {"<"} </button>
@@ -147,19 +155,31 @@ class Notice extends React.Component {
             )
         }
 
-
-        console.log(announcementTitle[0])
-
+        const { currentId } = this.props;
         return (
             <div className="bg-grey-lightest">
-                <AnnouncementHeader
-                    text={announcementTitle ? announcementTitle[0] : null}
-                // date={announcementTitle ? announcementDate[0] : null} 
-                />
-                <div className="flex flex-row flex-wrap pb-10 justify-center">
-                    <AnnouncementCardLoop />
-                </div>
-                <Pager currentPage={this.state.currentPage} totalPage={this.state.totalPage} next={this.nextPage} previous={this.previousPage} isButtonDisabled={this.state.isButtonDisabled} />
+                {
+                    currentId ?
+                        (
+                            <AnnouncementContent id={currentId}/>
+                        )
+                        :
+                        (
+                            <React.Fragment>
+                                <AnnouncementHeader text={announcementTitle ? announcementTitle[0] : null} />
+                                <div className="flex flex-row flex-wrap pb-10 justify-center">
+                                    <AnnouncementCardLoop />
+                                </div>
+                                <Pager
+                                    currentPage={this.state.currentPage}
+                                    totalPage={this.state.totalPage}
+                                    next={this.nextPage}
+                                    previous={this.previousPage}
+                                    isButtonDisabled={this.state.isButtonDisabled}
+                                />
+                            </React.Fragment>
+                        )
+                }
                 <FacebookButton />
                 <Footer />
             </div>

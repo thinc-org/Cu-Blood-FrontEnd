@@ -8,7 +8,7 @@ class AnnouncementContent extends Component {
         i18n.language === 'th' ? moment.locale('th') : moment.locale('en')
         const { data = [], t } = this.props;
         const content = data.slice(0, 5).map(
-            (dataContent, index) => this.contentForm(dataContent.title, dataContent.updatedAt, `py-6`, index, i18n.language)
+            (dataContent, index) => this.contentForm(dataContent.title, dataContent.updatedAt, `py-6`, index, i18n.language, dataContent.id)
         )
 
         return (
@@ -28,15 +28,19 @@ class AnnouncementContent extends Component {
         );
     }
 
-    contentForm = (title, date, padding, index, lang) => {
+    contentForm = (title, date, padding, index, lang, id) => {
         return (title && date) ?
             (
                 <div key={index} className={`border-cb-grey border-b flex items-start ${padding}`}>
                     <img src='/static/home/megaphone.svg' alt="Megaphone" className="w-8 mr-6" />
-                    <div>
-                        <div className="text-xl font-medium mb-1" style={{ color: "#333333" }}>{title}</div>
-                        <div className="text-cb-pink font-normal font-cu-body">{moment(date).add((lang === 'th' ? 543 : 0), 'years').format('dddd, D MMMM YYYY')}</div>
-                    </div>
+                    <Link href={"/announcement/" + id}>
+                        <a className="no-underline">
+                            <div>
+                                <div className="text-xl font-medium mb-1" style={{ color: "#333333" }}>{title}</div>
+                                <div className="text-cb-pink font-normal font-cu-body">{moment(date).add((lang === 'th' ? 543 : 0), 'years').format('dddd, D MMMM YYYY')}</div>
+                            </div>
+                        </a>
+                    </Link>
                 </div>
             )
             :

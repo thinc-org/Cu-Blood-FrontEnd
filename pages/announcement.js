@@ -80,14 +80,12 @@ class Notice extends React.Component {
                 isButtonDisabledLeft: true
             })
         }
-
     }
 
     //go to next page
     nextPage = () => {
         let myPage = this.state.currentPage + 1;
         this.disabledButton(myPage)
-
         return (
             this.update(myPage)
         )
@@ -113,7 +111,6 @@ class Notice extends React.Component {
         // console.log('page' + this.state.currentPage);
         // console.log(this.state.isButtonDisabledLeft);
 
-
         const lengthOfArray = this.state.totalPage;
 
         //array for cards
@@ -122,7 +119,6 @@ class Notice extends React.Component {
             for (let i = 0; i < lengthOfArray; i++) {
                 data.push(<AnnouncementCard key={i} text={announcementTitle[i]} date={announcementDate[i]} image={announcementImage[i]} />);
             }
-
             return data;
         }
 
@@ -130,8 +126,6 @@ class Notice extends React.Component {
         //page chooser
         const Pager = (props) => {
             const { currentPage, totalPage, next, previous } = props
-
-
             return (
                 <div className='flex flex-row justify-center items-center pb-10 text-pink font-cu-heading text-2xl'>
                     <button disabled={this.state.isButtonDisabledLeft} onClick={previous} className='bg-pink-lightest w-10 h-10 text-pink-dark rounded-full items-center justify-center flex'> {"<"} </button>
@@ -147,19 +141,16 @@ class Notice extends React.Component {
             )
         }
 
-
-        console.log(announcementTitle[0])
-
         return (
             <div className="bg-grey-lightest">
-                <AnnouncementHeader
+                {/* <AnnouncementHeader
                     text={announcementTitle ? announcementTitle[0] : null}
                 // date={announcementTitle ? announcementDate[0] : null} 
                 />
                 <div className="flex flex-row flex-wrap pb-10 justify-center">
                     <AnnouncementCardLoop />
                 </div>
-                <Pager currentPage={this.state.currentPage} totalPage={this.state.totalPage} next={this.nextPage} previous={this.previousPage} isButtonDisabled={this.state.isButtonDisabled} />
+                <Pager currentPage={this.state.currentPage} totalPage={this.state.totalPage} next={this.nextPage} previous={this.previousPage} isButtonDisabled={this.state.isButtonDisabled} /> */}
                 <FacebookButton />
                 <Footer />
             </div>

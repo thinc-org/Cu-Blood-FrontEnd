@@ -90,7 +90,6 @@ class Enrollment extends Component {
         //Mapping to create the register modal
         const datesDuringDonation = commonsInfo !== null ? commonsInfo.timeSlots : null;
         //Display registration period or last revision day information
-        console.log(userDate);
         const leftDateContent = Date.parse(userDate) <= Date.parse(regisEndDate) ? 
         <div className="mb-8 sm:mb-0 text-center sm:text-left"><Detail bigText={`${moment(commonsInfo.registrationStartDate).add((i18n.language === 'th' ? 543 : 0), 'years').format('D MMMM')} - ${moment(commonsInfo.registrationEndDate).add((i18n.language === 'th' ? 543 : 0), 'years').format('D MMMM')}`} smallText={t('enrollmentRegisPeriod')} isBold={true} /></div>
         : <div className="mb-8 sm:mb-0 text-center sm:text-left"><Detail bigText={`${moment(commonsInfo.revisionEndDate).add((i18n.language === 'th' ? 543 : 0), 'years').format('D MMMM')}`} smallText={t('enrollmentLastRevisionDate')} isBold={true} /></div>

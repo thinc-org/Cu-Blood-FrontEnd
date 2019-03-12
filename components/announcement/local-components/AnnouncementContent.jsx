@@ -28,7 +28,7 @@ export default class extends Component {
                     <h1 className="font-cu-heading font-bold text-3xl sm:text-5xl mb-3">{data.title}</h1>
                     <div className="flex flex-col items-center mb-5">
                         <img
-                            alt="header image"
+                            alt="announcement header"
                             src={data.displayImage}
                             style={{
                                 "height": "100%",

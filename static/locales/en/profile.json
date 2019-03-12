@@ -23,7 +23,7 @@
     "personalInfoBigHeader" : "PERSONAL INFORMATION",
     "personalInfoName" : "Full Name (NickName)",
     "personalInfoSex" : "Sex",
-    "personalInfoBirthday" : "Birthday",
+    "personalInfoBirthday" : "Birthdate",
     "personalInfoEmail" : "Email",
     "personalInfoTel" : "Contact Number",
     "personalInfoNoAddress" : "Unavailable",
@@ -72,5 +72,10 @@
     "currentStudent": "Current Student",
     "alumni": "Alumni",
     "faculty": "Faculty Member",
-    "staff": "Staff"
+    "staff": "Staff",
+    "enterPasscode": "Passcode for Walk-In Registration",
+    "walkInRegistration": "Walk-In Registration",
+    "wrongPasscode": "Wrong Passcode",
+    "registerSuccess": "Register Success",
+    "unknown": "unknown"
 }

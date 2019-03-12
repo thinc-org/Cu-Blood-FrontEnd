@@ -20,7 +20,6 @@ class Notice extends React.Component {
     }
 
     scrollToTopic = (id) => {
-        console.log(id, 'id', this.myRefs)
         const element = this.myRefs[id];
         const reactDom = ReactDOM.findDOMNode(element.current)
         const isIE = /*@cc_on!@*/false || !!document.documentMode;

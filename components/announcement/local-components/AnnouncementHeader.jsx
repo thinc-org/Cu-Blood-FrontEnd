@@ -4,7 +4,7 @@ import I18 from '@/core/i18n';
 class AnnouncementHeader extends React.Component {
 
     render() {
-      const { t } = this.props;
+      const { t, text } = this.props;
         return (
             <div className="font-cu-heading bg-cb-pink-light">
                 <div className="layout-wide py-16 sm:py-20 text-center md:text-left" >
@@ -12,8 +12,9 @@ class AnnouncementHeader extends React.Component {
                         {t('announcementTitle')}
                     </div>
                     <div className="text-3xl text-grey-darkest" >
-                        {t('announcementIntroBody1')}<br/>
-                        {t('announcementIntroBody2')}
+                        {/* {t('announcementIntroBody1')}<br/>
+                        {t('announcementIntroBody2')} */}
+                        {text}
                     </div>
                 </div>
             </div>

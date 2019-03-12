@@ -58,3 +58,24 @@
         border-color: rgba(255,255,255,0.1);
     }
 }
+
+.facebookImage {
+    height: 300px;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    background-color: #b8c2cc;
+}
+
+.facebookCard {
+    border-radius: 1rem;
+    width: 300px;
+}
+
+@media (min-width: 576px) and (max-width:992px){
+    .facebookImage {
+        height: 500px;
+    }
+	.facebookCard {
+        width: 500px;
+    }
+}

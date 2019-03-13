@@ -13,7 +13,8 @@ class Notice extends React.Component {
         super(props);
         this.myRefs = [];
         this.state = {
-            showDropDownStat: false
+            showDropDownStat: false,
+            year: (new Date()).getFullYear() - 0,
         }
     }
 
@@ -38,8 +39,13 @@ class Notice extends React.Component {
             });
     }
 
+    handleYearSelect = (e) => {
+        const value = e.target.value;
+        this.setState({year: (new Date()).getFullYear() - value});
+    }
+
     render() {
-        const displayDropDownStat = this.state.showDropDownStat ? <DropDownStat /> : null;
+        const displayDropDownStat = this.state.showDropDownStat ? <DropDownStat onYearChange={this.handleYearSelect} year={this.state.year} /> : null;
         const { t } = this.props;
         return (
             <div>

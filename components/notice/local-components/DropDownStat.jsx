@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import I18 from '@/core/i18n';
+import Form, { Selector } from '@/shared-components/Form';
 import '../../../static/css/notice.css';
 
 class DropDownStat extends Component {
@@ -8,11 +9,15 @@ class DropDownStat extends Component {
     }
 
     render() {
-        const { t } = this.props;
+        const { t, year, data, onYearChange } = this.props;
         return(
-            <div className="bg-cb-grey-lighter py-10">
+            <div className="bg-cb-grey-lighter pb-10 pt-5">
                 <div className="layout-narrow font-cu-heading text-2xl">
-                    <div className="mb-6 text-cb-pink">{t("statNumDonators")}</div>
+                    <Form text={t('year')} width="full" smWidth="24">
+                        <Selector choices={[2019, 2018, 2017]} name="year" value={(new Date()).getFullYear() - year} onChange={onYearChange}/>
+                    </Form>
+                    {/* Selector = ({ choices = [], value, name, onChange, disabled = false, isBirthday }) */}
+                    <div className="mb-6 text-cb-pink mt-5">{t("statNumDonators")}</div>
                     <div className="flex items-center justify-center flex-wrap">
                         {this.numberList("100", `${t("statBloodGroup")} A`, "blood")}
                         {this.numberList("100", `${t("statBloodGroup")} B `, "blood")}

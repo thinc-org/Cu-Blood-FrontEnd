@@ -167,7 +167,6 @@ class Announcement extends React.Component {
         }
 
         const { currentId } = this.props;
-        console.log(this.props.data)
         return (
             <div className="bg-grey-lightest">
                 {

@@ -6,9 +6,9 @@ import Footer from '@/shared-components/Footer';
 import FacebookButton from '@/shared-components/FacebookButton';
 import axios from '@/core/core';
 import map from 'lodash/map';
-import { Link } from '@/core/i18n';
+import I18, { Link } from '@/core/i18n';
 
-class Notice extends React.Component {
+class Announcement extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -120,7 +120,7 @@ class Notice extends React.Component {
         //array for cards
         const AnnouncementCardLoop = () => {
             let data = [];
-            for (let i = 0; i < lengthOfArray; i++) {
+            for (let i = 0; i < announcementIds.length; i++) {
                 data.push(
                     <Link key={i} href={'/announcement/' + announcementIds[i]}>
                         <a className="no-underline flex">
@@ -187,4 +187,4 @@ class Notice extends React.Component {
     }
 }
 
-export default Notice;
+export default I18.withNamespaces('announcement')(Announcement);

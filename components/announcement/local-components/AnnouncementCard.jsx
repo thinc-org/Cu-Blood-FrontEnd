@@ -3,7 +3,7 @@ import moment from 'moment';
 import I18 from '@/core/i18n';
 let i18n = I18.i18n;
 
-export default class AnnouncementCard extends Component {
+class AnnouncementCard extends Component {
     render() {
         const { text, date, image } = this.props
         i18n.language === 'th' ? moment.locale('th') : moment.locale('en');
@@ -24,3 +24,5 @@ export default class AnnouncementCard extends Component {
         )
     }
 }
+
+export default I18.withNamespaces('announcement')(AnnouncementCard);

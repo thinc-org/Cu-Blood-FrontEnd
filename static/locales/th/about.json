@@ -49,6 +49,18 @@
   "role11" : "ประธานฝ่ายทรัพยากรบุคคล",
   "role12" : "ประธานฝ่ายทะเบียน",
   "role13" : "ประธานฝ่ายปฏิคม",
-  "role14" : "ประธานฝ่ายประชาสัมพันธ์"
+  "role14" : "ประธานฝ่ายประชาสัมพันธ์",
+
+  "aboutButtonDropDown" : "แสดงข้อมูลสถิติรายปี",
+  "statNumDonators" : "จำนวนผู้บริจาคโลหิต",
+  "statBloodGroup" : "หมู่โลหิต",
+  "statDonatorTotal" : "รวม",
+  "statBloodTotal" : "จำนวนโลหิตที่ได้รับบริจาค",
+  "statNumEnroll" : "จำนวนผู้ลงทะเบียนในแต่ละช่วงเวลา",
+  "statMorning" : "เช้า",
+  "statNoon" : "กลางวัน",
+  "statAfternoon" : "เย็น",
+  "statNewDonators" : "จำนวนผู้บริจาคหน้าใหม่",
+  "statPeople" : "คน"
 
 }

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Statistic from "@/home/local-components/Statistic";
-
 import HomeHead from '@/home/local-components/HomeHead';
 import FacebookContainer from '@/shared-components/FacebookContainer';
 import Footer from '@/shared-components/Footer';

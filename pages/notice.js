@@ -4,7 +4,7 @@ import NoticeContent from '@/notice/local-components/NoticeContent'
 import Footer from '@/shared-components/Footer';
 import FacebookButton from '@/shared-components/FacebookButton';
 import ReactDOM from 'react-dom';
-// import I18 from '@/core/i18n';
+import I18 from '@/core/i18n';
 
 class Notice extends React.Component {
 
@@ -46,5 +46,4 @@ class Notice extends React.Component {
     }
 }
 
-
-export default Notice;
+export default I18.withNamespaces('notice')(Notice);

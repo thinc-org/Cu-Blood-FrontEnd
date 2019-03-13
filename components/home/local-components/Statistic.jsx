@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from '@/core/core'
 import StatisticContent from "./StatisticContent";
 import Header from "@/shared-components/TopicCenter";
 import find from 'lodash/find';
@@ -10,9 +9,9 @@ class Statistic extends Component {
     convertStatToData(statData) {
         let obj = {};
         let data = [0, 0, 0, 0];
-        for(let i = 0; i < 11; i++) {
+        for(let i = 0; i < 16; i++) {
             obj = find(statData, ['bloodType', i]);
-            data[Math.floor(i/3)] += obj ? Number(obj.count) : 0;
+            data[Math.floor(i/4)] += obj ? Number(obj.count) : 0;
         }
         return data;
     }

@@ -49,7 +49,17 @@
   "role11" : "Head of Human Resources",
   "role12" : "Head of Administration",
   "role13" : "Head of Receptions",
-  "role14" : "Head of Public Relations"
+  "role14" : "Head of Public Relations",
 
-
+  "aboutButtonDropDown" : "View Yearly Statistic",
+  "statNumDonators" : "Number of Donators",
+  "statBloodGroup" : "Group",
+  "statDonatorTotal" : "Total",
+  "statBloodTotal" : "Total Volume of Blood Donated",
+  "statNumEnroll" : "Number of People Enrolled in Each Time Period",
+  "statMorning" : "Morning",
+  "statNoon" : "Noon",
+  "statAfternoon" : "Afternoon",
+  "statNewDonators" : "Number of New Donators",
+  "statPeople" : "People"
 }

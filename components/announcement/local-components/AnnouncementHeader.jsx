@@ -2,7 +2,6 @@ import React from 'react';
 import I18 from '@/core/i18n';
 
 class AnnouncementHeader extends React.Component {
-
     render() {
       const { t, text } = this.props;
         return (
@@ -12,8 +11,6 @@ class AnnouncementHeader extends React.Component {
                         {t('announcementTitle')}
                     </div>
                     <div className="text-3xl text-grey-darkest" >
-                        {/* {t('announcementIntroBody1')}<br/>
-                        {t('announcementIntroBody2')} */}
                         {text}
                     </div>
                 </div>

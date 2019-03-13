@@ -1,0 +1,5 @@
+@media screen and (min-width: 300px) {
+    .special-third-width {
+        width: 33.333333333333%;
+    }
+}

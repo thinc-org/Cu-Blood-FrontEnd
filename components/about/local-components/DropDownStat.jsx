@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import I18 from '@/core/i18n';
 import Form, { Selector } from '@/shared-components/Form';
 import find from 'lodash/find';
-import '../../../static/css/notice.css';
 
 class DropDownStat extends Component {
     constructor(props) {

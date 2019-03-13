@@ -8,6 +8,7 @@ import AboutContent from '@/about/local-components/AboutContent';
 import DropDownStat from '@/about/local-components/DropDownStat';
 import I18 from '@/core/i18n';
 import axios from '@/core/core';
+import '../static/css/about.css';
 
 class About extends React.Component {
 

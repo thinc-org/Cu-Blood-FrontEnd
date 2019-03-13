@@ -79,3 +79,13 @@
         width: 500px;
     }
 }
+
+.announcement-picture {
+    width: 45vw;
+}
+
+@media (min-width: 768px) {
+    .announcement {
+        width: 55vw;
+    }
+}

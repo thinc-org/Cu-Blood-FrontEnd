@@ -9,18 +9,6 @@ select, input {
     -moz-appearance: none;
     -webkit-appearance: none;
 }
-  
-/* :-moz-submit-invalid {
-    box-shadow: none;
-}
-  
-:-moz-ui-invalid {
-    box-shadow:none;
-} */
-
-/* input:disabled, select:disabled {
-    background-color: rgb(185, 184, 190) !important;
-} */
 
 .select  {
     background: url(../../static/icons/arrow-down.svg) right 5px center / 12px 15px no-repeat #efefef;

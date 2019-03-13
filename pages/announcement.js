@@ -40,7 +40,6 @@ class Announcement extends React.Component {
                     .catch(e => null)))
                 .catch(console.log);
             const [announcementData] = data;
-
             return {
                 announcementData: announcementData ? announcementData.result.data : undefined,
                 numberOfPage: announcementData ? announcementData.result.pageCount : undefined,
@@ -119,7 +118,6 @@ class Announcement extends React.Component {
 
 
     render() {
-
         const announcementData = this.state.dataFromApi;
         const announcementTitle = map(announcementData, 'title');
         const announcementDate = map(announcementData, 'updatedAt');
@@ -167,6 +165,9 @@ class Announcement extends React.Component {
         }
 
         const { currentId } = this.props;
+        if(!announcementData && !currentId) {
+            this.getData(1);
+        }
         return (
             <div className="bg-grey-lightest">
                 {

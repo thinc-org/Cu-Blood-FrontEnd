@@ -12,7 +12,7 @@ class Statistic extends Component {
         let data = [0, 0, 0, 0];
         for(let i = 0; i < 11; i++) {
             obj = find(statData, ['bloodType', i]);
-            data[Math.floor(i/3)] += obj ? Number(obj.count) : 0;
+            data[Math.floor(i/4)] += obj ? Number(obj.count) : 0;
         }
         return data;
     }

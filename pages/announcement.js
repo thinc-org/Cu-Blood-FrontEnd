@@ -120,7 +120,7 @@ class Notice extends React.Component {
         //array for cards
         const AnnouncementCardLoop = () => {
             let data = [];
-            for (let i = 0; i < lengthOfArray; i++) {
+            for (let i = 0; i <= lengthOfArray; i++) {
                 data.push(
                     <Link key={i} href={'/announcement/' + announcementIds[i]}>
                         <a className="no-underline flex">

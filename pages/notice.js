@@ -3,7 +3,6 @@ import NoticeHeader from '@/notice/local-components/NoticeHeader'
 import NoticeContent from '@/notice/local-components/NoticeContent'
 import Footer from '@/shared-components/Footer';
 import FacebookButton from '@/shared-components/FacebookButton';
-import DropDownStat from '@/notice/local-components/DropDownStat';
 import ReactDOM from 'react-dom';
 import I18 from '@/core/i18n';
 
@@ -12,10 +11,6 @@ class Notice extends React.Component {
     constructor(props) {
         super(props);
         this.myRefs = [];
-        this.state = {
-            showDropDownStat: false,
-            year: (new Date()).getFullYear() - 0,
-        }
     }
 
     static async getInitialProps() {
@@ -39,31 +34,16 @@ class Notice extends React.Component {
             });
     }
 
-    handleYearSelect = (e) => {
-        const value = e.target.value;
-        this.setState({year: (new Date()).getFullYear() - value});
-    }
-
     render() {
-        const displayDropDownStat = this.state.showDropDownStat ? <DropDownStat onYearChange={this.handleYearSelect} year={this.state.year} /> : null;
-        const { t } = this.props;
         return (
             <div>
                 <NoticeHeader scrollToTopic={this.scrollToTopic} />
                 <NoticeContent myRefs={this.myRefs} />
-                <div className="layout-narrow pb-10 text-center sm:text-left"><button onClick={this.triggerDropDownStat} className="text-cu-heading bg-cb-red text-white px-4 py-2 rounded-lg">{t("noticeButtonDropDown")}</button></div>
-                {displayDropDownStat}
                 <FacebookButton />
                 <Footer />
             </div>
         );
     }
-
-    triggerDropDownStat = () => {
-        const state = !this.state.showDropDownStat;
-        this.setState({showDropDownStat: state})
-    }
 }
-
 
 export default I18.withNamespaces('notice')(Notice);

@@ -86,17 +86,5 @@
   "contextPost7t" : "Rest adequately, avoid prolonged activities, such as shopping for a long time, staying in crowded areas or poorly ventilated areas.",
   "contextPost8t" : "For those whose work involves climbing or machinery, take at least 1 day off after donating the blood.",
   "contextPost9t" : "Consume the normal amount of food, there is not need to consume more food to compensate for donated blood.",
-  "contextPost10t" : "Consume 1 tablet of the issued iron supplement daily in order to compensate for the iron loss during blood donation and prevent iron deficiency. This is so you can constantly donate blood. It is recommended that you consume it with high-vitamin drinks such as orange, guava or tomato juice to increase iron absorbtion. Don't consume it with green tea.",
-  
-  "noticeButtonDropDown" : "View Yearly Statistic",
-  "statNumDonators" : "Number of Donators",
-  "statBloodGroup" : "Group",
-  "statDonatorTotal" : "Total",
-  "statBloodTotal" : "Total Volume of Blood Donated",
-  "statNumEnroll" : "Number of People Enrolled in Each Time Period",
-  "statMorning" : "Morning",
-  "statNoon" : "Noon",
-  "statAfternoon" : "Afternoon",
-  "statNewDonators" : "Number of New Donators",
-  "statPeople" : "People"
+  "contextPost10t" : "Consume 1 tablet of the issued iron supplement daily in order to compensate for the iron loss during blood donation and prevent iron deficiency. This is so you can constantly donate blood. It is recommended that you consume it with high-vitamin drinks such as orange, guava or tomato juice to increase iron absorbtion. Don't consume it with green tea."
 }

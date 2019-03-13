@@ -45,7 +45,7 @@ const MinorEvent = (props) => {
                     <div className="flex flex-col text-pink-dark items-center" >
                         <CalendarDate startMonth={startMonth} endMonth={endMonth} startDay={startDay} endDay={endDay} />
                     </div>
-                    <div className="flex flex-col text-wrap text-center text-left">
+                    <div className="flex flex-col text-wrap text-center sm:text-left">
                         {title}
                         <div className="text-pink-dark flex flex-row justify-center sm:justify-start">
                             <img className="w-5 h-5 mr-4" src='/static/logo/location.png' alt="clock"></img>

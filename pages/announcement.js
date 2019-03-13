@@ -22,19 +22,32 @@ class Announcement extends React.Component {
 
     //get data from api
     static async getInitialProps({ query: { id } }) {
-        const announcementDataPromise = axios.get('/announcements/all/1');
-        const data = await Promise.all([announcementDataPromise]
-            .map(p => p
+        if (id) {
+            const data = await axios.get('/announcements/' + id)
                 .then(response => response.data)
-                .catch(e => null)))
-            .catch(console.log);
-        const [announcementData] = data;
-        return {
-            announcementData: announcementData ? announcementData.result.data : undefined,
-            numberOfPage: announcementData ? announcementData.result.pageCount : undefined,
-            namespacesRequired: ['common', 'announcement'],
-            currentId: id,
-        };
+                .then(data => data.result)
+                .catch(() => null)
+            return {
+                namespacesRequired: ['common', 'announcement'],
+                currentId: id,
+                data,
+            }
+        } else {
+            const announcementDataPromise = axios.get('/announcements/all/1');
+            const data = await Promise.all([announcementDataPromise]
+                .map(p => p
+                    .then(response => response.data)
+                    .catch(e => null)))
+                .catch(console.log);
+            const [announcementData] = data;
+
+            return {
+                announcementData: announcementData ? announcementData.result.data : undefined,
+                numberOfPage: announcementData ? announcementData.result.pageCount : undefined,
+                namespacesRequired: ['common', 'announcement'],
+            };
+        }
+
     }
 
     getData = (myPage) => {
@@ -115,19 +128,17 @@ class Announcement extends React.Component {
         // console.log('page' + this.state.currentPage);
         // console.log(this.state.isButtonDisabledLeft);
 
-        const lengthOfArray = this.state.totalPage;
-
         //array for cards
         const AnnouncementCardLoop = () => {
             let data = [];
             for (let i = 0; i < announcementIds.length; i++) {
                 data.push(
-                    <Link key={i} href={'/announcement/' + announcementIds[i]}>
+                    <Link key={i} href={'/announcement?id=' + announcementIds[i]}>
                         <a className="no-underline flex">
-                            <AnnouncementCard 
-                                text={announcementTitle[i]} 
-                                date={announcementDate[i]} 
-                                image={announcementImage[i]} 
+                            <AnnouncementCard
+                                text={announcementTitle[i]}
+                                date={announcementDate[i]}
+                                image={announcementImage[i]}
                             />
                         </a>
                     </Link>
@@ -161,7 +172,9 @@ class Announcement extends React.Component {
                 {
                     currentId ?
                         (
-                            <AnnouncementContent id={currentId}/>
+                            <React.Fragment>
+                                <AnnouncementContent data={this.props.data} />
+                            </React.Fragment>
                         )
                         :
                         (

@@ -33,7 +33,7 @@ class AnnouncementContent extends Component {
             (
                 <div key={index} className={`border-cb-grey border-b flex items-start ${padding}`}>
                     <img src='/static/home/megaphone.svg' alt="Megaphone" className="w-8 mr-6" />
-                    <Link href={"/announcement/" + id}>
+                    <Link href={"/announcement?id=" + id}>
                         <a className="no-underline">
                             <div>
                                 <div className="text-xl font-medium mb-1" style={{ color: "#333333" }}>{title}</div>

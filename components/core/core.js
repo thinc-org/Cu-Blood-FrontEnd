@@ -1,7 +1,7 @@
 import axios from 'axios'
 let baseURL = 'http://localhost:3000/v0'
 if( process.env.NODE_ENV === "production" ) {
-    baseURL = 'http://localhost:5555/v0/';
+    baseURL = '/api-v0';
 }
 const instance = axios.create({    
     baseURL,
@@ -13,6 +13,6 @@ instance.interceptors.request.use(function (config) {
     return config
 }, function (error) {
     return Promise.reject(error)
-})
+})status
 
 export default instance; 

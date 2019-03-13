@@ -33,7 +33,7 @@ const handle = app.getRequestHandler();
   }
 
   nextI18NextMiddleware(nextI18next, app, server)
-  server.get('/announcement/:id', (req, res) => app.render(req, res, '/announcement', { id: req.params.id }));
+  // server.get('/announcement/:id', (req, res) => app.render(req, res, '/announcement', { id: req.params.id }));
   server.get('*', (req, res) => handle(req, res))
 
   await server.listen(process.env.PORT || 3000)

@@ -9,10 +9,12 @@ class Statistic extends Component {
 
     convertStatToData(statData) {
         let obj = {};
-        let data = [0, 0, 0, 0];
+        let data = [0, 0, 0, 0, 0];
         for(let i = 0; i < 11; i++) {
             obj = find(statData, ['bloodType', i]);
-            data[Math.floor(i/4)] += obj ? Number(obj.count) : 0;
+            const number = obj ? Number(obj.count) : 0;
+            data[Math.floor(i/4)] += number;
+            data[4] += number;
         }
         return data;
     }
@@ -52,7 +54,7 @@ class Statistic extends Component {
                             <div className="sm:absolute w-full h-full">
                                 <div className="flex justify-center items-center w-full h-full">
                                     <div className="bg-white shadow py-2 px-8 sm:px-0 md:px-8  rounded-lg mt-10 sm:mt-0 mb-10 sm:mb-10">
-                                        <StatisticContent number={data[0] + data[1] + data[2] + data[3]} content={t('totalDonors')} />
+                                        <StatisticContent number={data[4]} content={t('totalDonors')} />
                                     </div>
                                 </div>
                             </div>

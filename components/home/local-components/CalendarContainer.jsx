@@ -75,7 +75,7 @@ const MajorEvent = (props) => {
     if (title && startDate && endDate) {
 
         return (
-            <div className="bg-white layout-narrow rounded-lg font-cu-heading text-3xl py-8 shadow-md flex flex-col sm:flex-row" style={{ maxWidth: '800px', paddingLeft: '0', paddingRight: '0', marginBottom: '2rem', marginTop: '2rem' }}>
+            <div className="bg-white layout-narrow rounded-lg font-cu-heading text-3xl py-8 shadow-md flex flex-col sm:flex-row" style={{ maxWidth: '800px', paddingLeft: '0', paddingRight: '0', marginBottom: '2rem'}}>
                 <CalendarDate startMonth={startMonth} endMonth={endMonth} startDay={startDay} endDay={endDay} />
                 <div className="flex flex-col px-8 sm:px-0 sm:pr-8 text-wrap w-full ">
                     {title}

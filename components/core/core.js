@@ -1,7 +1,7 @@
 import axios from 'axios'
 let baseURL = 'http://localhost:3000/v0'
 if( process.env.NODE_ENV === "production" ) {
-    baseURL = '/api-v0';
+    baseURL = 'https://cublood.clubs.chula.ac.th/api-v0';
 }
 const instance = axios.create({    
     baseURL,

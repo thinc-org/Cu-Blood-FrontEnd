@@ -61,5 +61,6 @@
   "statNoon" : "Noon",
   "statAfternoon" : "Afternoon",
   "statNewDonators" : "Number of New Donators",
-  "statPeople" : "People"
+  "statPeople" : "People",
+  "year": "Year"
 }

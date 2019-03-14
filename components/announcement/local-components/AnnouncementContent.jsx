@@ -12,10 +12,10 @@ export default ({ data }) => {
                     alt="announcement header"
                     src={data.displayImage}
                     style={{
-                        "height": "100%",
-                        "maxHeight": "500px",
+                        "height": "auto",
                         "maxWidth": "500px",
-                        "width": "100%"
+                        "width": "100%",
+                        "margin": "0 auto",
                     }}
                 />
             </div>

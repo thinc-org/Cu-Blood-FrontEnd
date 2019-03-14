@@ -14,8 +14,9 @@ class ExpandedMenu extends Component {
     render() {
         const { onCloseListener, className, t } = this.props;
         return (
-            <div className={className}>
-                <div style={{ width: "280px" }} className={"bg-white shadow-md h-screen fixed pin-r pin-t z-50 flex flex-col md:hidden font-cu-heading font-medium tracking-wide leading-none "}>
+            <div className={className + " flex flex-row justify-end w-full pin-r pin-t"}>
+                <div onClick={onCloseListener} onTap={onCloseListener} className="flex w-full"></div>
+                <div style={{ minWidth: "280px" }} className={"bg-white shadow-md w-full h-screen flex flex-col md:hidden font-cu-heading font-medium tracking-wide leading-none "}>
                     <div className="flex flex-row justify-between items-center py-6 ml-5 mr-6 border-b">
                         <div onClick={onCloseListener} className="cursor-pointer flex items-center justify-center rounded-full bg-cb-grey-light" style={{ width: "36px", height: "36px" }}>
                             <img src="/static/icons/ios-close.svg" alt="Close Panel" style={{ width: "30px", height: "30px" }} />

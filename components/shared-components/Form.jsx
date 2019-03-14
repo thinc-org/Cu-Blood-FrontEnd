@@ -34,18 +34,18 @@ export const Selector = ({ choices = [], value, name, onChange, disabled = false
     );
 }
 
-export const Input = ({ type, notRequired, value, name, onChange, error, disabled = false }) => {
+export const Input = ({ type, notRequired, value, name, onChange, error, disabled = false, onKeyPress }) => {
     return type === 'date' ?
         (
             <React.Fragment>
-                <input value={value} autoComplete={type === "password" ? "new-password" : "on"} name={name} onChange={onChange} disabled={disabled} className="bg-cb-grey-light rounded-lg mt-2 px-4 font-cu-body w-full" style={select} type={type} required={notRequired ? null : true} />
+                <input value={value} autoComplete={type === "password" ? "new-password" : "on"} name={name} onKeyPress={onKeyPress} onChange={onChange} disabled={disabled} className="bg-cb-grey-light rounded-lg mt-2 px-4 font-cu-body w-full" style={select} type={type} required={notRequired ? null : true} />
                 <span className="font-cu-body font-medium text-cb-red">{error}</span>
             </React.Fragment>
 
         ) :
         (
             <React.Fragment>
-                <input value={value} autoComplete={type === "password" ? "new-password" : "on"} name={name} onChange={onChange} disabled={disabled} className="bg-cb-grey-light rounded-lg mt-2 px-4 font-cu-body w-full" style={{ height: "40px" }} type={type} required={notRequired ? null : true} />
+                <input value={value} autoComplete={type === "password" ? "new-password" : "on"} name={name} onKeyPress={onKeyPress} onChange={onChange} disabled={disabled} className="bg-cb-grey-light rounded-lg mt-2 px-4 font-cu-body w-full" style={{ height: "40px" }} type={type} required={notRequired ? null : true} />
                 <span className="font-cu-body font-medium text-cb-red">{error}</span>
             </React.Fragment>
         )

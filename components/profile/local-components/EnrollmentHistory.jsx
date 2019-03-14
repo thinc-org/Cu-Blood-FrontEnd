@@ -98,7 +98,7 @@ class EnrollmentHistory extends Component {
       );
     }
     return (
-      <div className="mb-8">
+      <div className="mb-8" key={key}>
         <Card>
           <Detail
             bigText={projectName}

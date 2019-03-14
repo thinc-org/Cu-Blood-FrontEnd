@@ -261,13 +261,23 @@ class Enrollment extends Component {
         }, () => this.validateConfirmModal())
     }
 
-    handlePinCodeChange = (e) => {
+    handlePinCodeChange = (e, locationId, projectId) => {
         const target = e.target;
+        if (e.key === 'Enter') {
+            switch (target.name) {
+                case "pinCodePostEnroll":
+                    this.postEnroll(locationId, projectId);
+                    return;
+                case "pinCodePutEnroll":
+                    this.putEnroll(locationId);
+                    return;
+            }
+        }
         const value = target.value;
         this.setState({
             pinCode: value,
             pinCodeValid: value != "",
-        })
+        });
     }
 
     validateConfirmModal = () => {
@@ -301,13 +311,13 @@ class Enrollment extends Component {
                     <React.Fragment>
                         {
                             isDuringEventDate ?
-                            <button onClick={() => this.toggleModal(locationModal, 'putEnrollModal')} className="text-base bg-cb-grey-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#696969" }}>{t("enrollmentChangeLocation")}</button>
-                            :
-                            <button className="text-base bg-cb-grey-light rounded-lg px-6 py-2 font-semibold opacity-50 cursor-not-allowed">{t('enrollmentExpire')}</button>
+                                <button onClick={() => this.toggleModal(locationModal, 'putEnrollModal')} className="text-base bg-cb-grey-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#696969" }}>{t("enrollmentChangeLocation")}</button>
+                                :
+                                <button className="text-base bg-cb-grey-light rounded-lg px-6 py-2 font-semibold opacity-50 cursor-not-allowed">{t('enrollmentExpire')}</button>
                         }
                     </React.Fragment>
                 );
-            } 
+            }
             return (<button onClick={() => this.toggleModal(locationModal, "putEnrollModal")} className="text-base bg-cb-grey-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#696969" }}>{t('enrollmentChangeLocation')}</button>);
         }
 
@@ -315,11 +325,11 @@ class Enrollment extends Component {
             return (
                 <React.Fragment>
                     {
-                        isDuringEventDate 
-                        ?
-                        <button onClick={() => this.toggleModal(locationModal, 'firstEnrollModal')} className="text-base bg-cb-pink-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#de5c8e" }}>{t("walkInRegistration")}</button>
-                        :
-                        <button className="text-base bg-cb-grey-light rounded-lg px-6 py-2 font-semibold opacity-50 cursor-not-allowed">{t('enrollmentExpire')}</button>
+                        isDuringEventDate
+                            ?
+                            <button onClick={() => this.toggleModal(locationModal, 'firstEnrollModal')} className="text-base bg-cb-pink-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#de5c8e" }}>{t("walkInRegistration")}</button>
+                            :
+                            <button className="text-base bg-cb-grey-light rounded-lg px-6 py-2 font-semibold opacity-50 cursor-not-allowed">{t('enrollmentExpire')}</button>
                     }
                 </React.Fragment>
             );
@@ -368,7 +378,8 @@ class Enrollment extends Component {
 
         return (
             <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 50 }}>
-                <div className="layout-wide flex justify-center">
+                <div onClick={() => this.toggleModal(null, null)} onTap={() => this.toggleModal(null, null)} className="fixed pin-t pin-l w-full h-full z-0"></div>
+                <div className="fixed px-8 flex justify-center z-10">
                     <form className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{ minWidth: '250px' }}>
                         <div className="mb-6 px-4 sm:px-10 font-semibold">{t('enrollmentRegisterHeader')}</div>
                         <div className="bg-cb-grey-lighter py-6 w-full px-4 sm:px-10 flex flex-col justify-center items-center">
@@ -407,16 +418,17 @@ class Enrollment extends Component {
         const eventEndDate = this.state.commonsInfo !== null ? moment(this.state.commonsInfo.endDate).format('MM/DD/YYYY') : null;
         const userDate = moment().tz('Asia/Bangkok').format('MM/DD/YYYY');
         const isDuringEventDate = eventEndDate != null && eventStartDate != null && Date.parse(userDate) < Date.parse(eventEndDate) && Date.parse(userDate) > Date.parse(eventStartDate);
-        
+
         return (
             <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 50 }}>
-                <div className="layout-wide flex justify-center">
+                <div onClick={() => this.toggleModal(null, null)} onTap={() => this.toggleModal(null, null)} className="fixed pin-t pin-l w-full h-full z-0"></div>
+                <div className="fixed px-8 flex justify-center z-10">
                     <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{ minWidth: '250px' }}>
                         <div className="mb-6 px-4 sm:px-10 font-semibold">{t('enrollmentChangeLocationHeader')}</div>
                         <div className="bg-cb-grey-lighter py-6 w-full px-4 sm:px-10 flex flex-col justify-center items-center">
                             <Detail bigText={`${thaiName}`} smallText={`${engName}`} />
                         </div>
-                        {isDuringEventDate ? (<div> {t('enterPasscode')} <Input type="password" value={this.state.pinCode} error={t(this.state.wrongPincodeMessage)} onChange={this.handlePinCodeChange} name="pinCode" /> </div>) : null}
+                        {isDuringEventDate ? (<div> {t('enterPasscode')} <Input type="password" value={this.state.pinCode} error={t(this.state.wrongPincodeMessage)} onKeyPress={(e) => this.handlePinCodeChange(e, locationId)} onChange={this.handlePinCodeChange} name="pinCodePutEnroll" /> </div>) : null}
                         <div className="pt-6 flex justify-between px-4 sm:px-10">
                             <button onClick={() => this.toggleModal(null, null)}>{t('enrollmentCancel')}</button>
                             <button className={isDuringEventDate && !this.state.pinCodeValid ? "text-grey cursor-not-allowed" : "text-cb-pink"} onClick={() => this.putEnroll(locationId)} disabled={isDuringEventDate && !this.state.pinCodeValid}>{t('enrollmentConfirm')}</button>
@@ -433,7 +445,8 @@ class Enrollment extends Component {
 
         return (
             <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 50 }}>
-                <div className="layout-wide flex justify-center">
+                <div onClick={() => this.toggleModal(null, null)} onTap={() => this.toggleModal(null, null)} className="fixed pin-t pin-l w-full h-full z-0"></div>
+                <div className="fixed px-8 flex justify-center z-10">
                     <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{ minWidth: '250px' }}>
                         <div className="mb-6 px-4 sm:px-10 font-semibold">QR Code</div>
                         <div className="bg-cb-grey-lighter py-6 w-full px-4 sm:px-10 flex flex-col justify-center items-center">
@@ -462,7 +475,8 @@ class Enrollment extends Component {
 
         return (
             <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 50 }}>
-                <div className="layout-wide flex justify-center">
+                <div onClick={() => this.toggleModal(null, null)} onTap={() => this.toggleModal(null, null)} className="fixed pin-t pin-l w-full h-full z-0"></div>
+                <div className="fixed px-8 flex justify-center z-10">
                     <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{ minWidth: '250px' }}>
                         <div className="mb-6 px-4 sm:px-10 font-semibold">{t('enrollmentChangeDate')}</div>
                         <div className="bg-cb-grey-lighter py-6 w-full px-4 sm:px-10 flex flex-col justify-center items-center">
@@ -493,7 +507,8 @@ class Enrollment extends Component {
         const isDuringEventDate = eventEndDate != null && eventStartDate != null && Date.parse(userDate) < Date.parse(eventEndDate) && Date.parse(userDate) > Date.parse(eventStartDate);
         return (
             <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: !isDuringEventDate ? 50 : 30 }}>
-                <div className="layout-wide flex justify-center">
+                <div onClick={() => this.toggleModal(null, null)} onTap={() => this.toggleModal(null, null)} className="fixed pin-t pin-l w-full h-full z-0"></div>
+                <div className="fixed px-8 flex justify-center z-10">
                     <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{ minWidth: '250px', maxHeight: !isDuringEventDate ? '75vh' : '85vh' }}>
                         <div className="mb-6 px-4 sm:px-10 font-semibold">{t('donateInstruction')}</div>
                         <div className="overflow-y-scroll overflow-x-hidden scroll px-4">
@@ -506,7 +521,7 @@ class Enrollment extends Component {
                             <SmallCheckbox checked={this.state.agree7} onChange={this.handleCheckboxChange} name="agree7" text={t('agree7')} />
                             <SmallCheckbox checked={this.state.agree8} onChange={this.handleCheckboxChange} name="agree8" text={t('agree8')} />
                         </div>
-                        {isDuringEventDate ? (<div> {t('enterPasscode')} <Input type="password" value={this.state.pinCode} error={t(this.state.wrongPincodeMessage)} onChange={this.handlePinCodeChange} name="pinCode" /> </div>) : null}
+                        {isDuringEventDate ? (<div> {t('enterPasscode')} <Input type="password" value={this.state.pinCode} error={t(this.state.wrongPincodeMessage)} onKeyPress={(e) => this.handlePinCodeChange(e, locationId, projectId)} onChange={this.handlePinCodeChange} name="pinCodePostEnroll" /> </div>) : null}
                         <div className="pt-6 flex justify-between px-4 sm:px-10">
                             <button onClick={() => this.toggleModal(null, null)}>{t('enrollmentCancel')}</button>
                             <button className={!this.state.agree.allAgree || (isDuringEventDate && !this.state.pinCodeValid) ? "text-grey cursor-not-allowed" : "text-cb-pink"} onClick={() => this.postEnroll(locationId, projectId)} disabled={!this.state.agree.allAgree || (isDuringEventDate && !this.state.pinCodeValid)}>{t('enrollmentConfirm')}</button>

@@ -7,5 +7,8 @@
   "userLoginTitleSmall": "เข้าสู่ระบบ",
   "userLoginTitleBig": "LOGIN",
   "wrongPassword": "Wrong password",
-  "userNotFound": "User not found"
+  "userNotFound": "User not found",
+  "chulaLoginDoYouKnow": "รู้หรือไม่?",
+  "chulaLoginDYKfirstLine": "การบริจาคโลหิตลดความเสี่ยงจากโรคต่าง ๆ",
+  "chulaLoginDYKBody": "ไม่ว่าจะเป็นโรคมะเร็งชนิดต่างๆ เช่น มะเร็งตับ มะเร็งปอด มะเร็งลําไส้ใหญ่ มะเร็งกระเพาะอาหาร และอื่นๆ ทั้งยังช่วยลดปริมาณธาตุเหล็กส่วนเกิน ในร่างกาย อันเป็นปัจจัยของการเกิดโรค \"เส้นเลือดหัวใจอุดตัน\""
 }

@@ -378,7 +378,7 @@ class Enrollment extends Component {
 
         return (
             <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 50 }}>
-                <div onClick={() => this.toggleModal(null, null)} onTap={() => this.toggleModal(null, null)} className="fixed pin-t pin-l w-full h-full z-0"></div>
+                <div onClick={() => this.toggleModal(null, null)} className="fixed pin-t pin-l w-full h-full z-0"></div>
                 <div className="fixed px-8 flex justify-center z-10">
                     <form className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{ minWidth: '250px' }}>
                         <div className="mb-6 px-4 sm:px-10 font-semibold">{t('enrollmentRegisterHeader')}</div>
@@ -421,7 +421,7 @@ class Enrollment extends Component {
 
         return (
             <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 50 }}>
-                <div onClick={() => this.toggleModal(null, null)} onTap={() => this.toggleModal(null, null)} className="fixed pin-t pin-l w-full h-full z-0"></div>
+                <div onClick={() => this.toggleModal(null, null)} className="fixed pin-t pin-l w-full h-full z-0"></div>
                 <div className="fixed px-8 flex justify-center z-10">
                     <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{ minWidth: '250px' }}>
                         <div className="mb-6 px-4 sm:px-10 font-semibold">{t('enrollmentChangeLocationHeader')}</div>
@@ -445,7 +445,7 @@ class Enrollment extends Component {
 
         return (
             <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 50 }}>
-                <div onClick={() => this.toggleModal(null, null)} onTap={() => this.toggleModal(null, null)} className="fixed pin-t pin-l w-full h-full z-0"></div>
+                <div onClick={() => this.toggleModal(null, null)} className="fixed pin-t pin-l w-full h-full z-0"></div>
                 <div className="fixed px-8 flex justify-center z-10">
                     <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{ minWidth: '250px' }}>
                         <div className="mb-6 px-4 sm:px-10 font-semibold">QR Code</div>
@@ -475,7 +475,7 @@ class Enrollment extends Component {
 
         return (
             <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 50 }}>
-                <div onClick={() => this.toggleModal(null, null)} onTap={() => this.toggleModal(null, null)} className="fixed pin-t pin-l w-full h-full z-0"></div>
+                <div onClick={() => this.toggleModal(null, null)} className="fixed pin-t pin-l w-full h-full z-0"></div>
                 <div className="fixed px-8 flex justify-center z-10">
                     <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{ minWidth: '250px' }}>
                         <div className="mb-6 px-4 sm:px-10 font-semibold">{t('enrollmentChangeDate')}</div>
@@ -507,7 +507,7 @@ class Enrollment extends Component {
         const isDuringEventDate = eventEndDate != null && eventStartDate != null && Date.parse(userDate) < Date.parse(eventEndDate) && Date.parse(userDate) > Date.parse(eventStartDate);
         return (
             <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: !isDuringEventDate ? 50 : 30 }}>
-                <div onClick={() => this.toggleModal(null, null)} onTap={() => this.toggleModal(null, null)} className="fixed pin-t pin-l w-full h-full z-0"></div>
+                <div onClick={() => this.toggleModal(null, null)} className="fixed pin-t pin-l w-full h-full z-0"></div>
                 <div className="fixed px-8 flex justify-center z-10">
                     <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{ minWidth: '250px', maxHeight: !isDuringEventDate ? '75vh' : '85vh' }}>
                         <div className="mb-6 px-4 sm:px-10 font-semibold">{t('donateInstruction')}</div>

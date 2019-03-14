@@ -7,6 +7,7 @@ import FacebookButton from '@/shared-components/FacebookButton';
 import axios from '@/core/core';
 import map from 'lodash/map';
 import I18, { Link } from '@/core/i18n';
+import Head from 'next/head';
 
 class Announcement extends React.Component {
     constructor(props) {
@@ -165,21 +166,33 @@ class Announcement extends React.Component {
         }
 
         const { currentId } = this.props;
-        if(!announcementData && !currentId) {
+        if (!announcementData && !currentId) {
             this.getData(1);
         }
+        const { t } = this.props;
         return (
             <div className="bg-grey-lightest">
+
                 {
                     currentId ?
                         (
                             <React.Fragment>
                                 <AnnouncementContent data={this.props.data} />
+                                <Head>
+                                    <title>
+                                        {this.props.data.title}
+                                    </title>
+                                </Head>
                             </React.Fragment>
                         )
                         :
                         (
                             <React.Fragment>
+                                <Head>
+                                    <title>
+                                        {t('announcementTitle')}
+                                    </title>
+                                </Head>
                                 <AnnouncementHeader text={announcementTitle ? announcementTitle[0] : null} />
                                 <div className="flex flex-row flex-wrap pb-10 justify-center">
                                     <AnnouncementCardLoop />

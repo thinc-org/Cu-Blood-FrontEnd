@@ -1,4 +1,5 @@
 {
     "registerSmall": "ลงทะเบียน",
-    "registerBig": "REGISTER"
+    "registerBig": "REGISTER",
+    "registerSuccess": "Register Success"
 }

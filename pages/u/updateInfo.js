@@ -9,6 +9,7 @@ import { UserInfoConsumer } from '@/core/UserInfoProvider';
 import axios from '@/core/core';
 import redirectTo from '@/core/redirectTo';
 import moment from 'moment';
+import Head from 'next/head';
 
 class RegisterForm extends Component {
 
@@ -49,17 +50,17 @@ class RegisterForm extends Component {
                 value = Number(value);
             } else if (name === "password" && value === "") {
                 continue;
-            } else if(name === 'day') {
+            } else if (name === 'day') {
                 let day = Number(value) + 1;
-                if(day <= 9) day = "0" + day;
+                if (day <= 9) day = "0" + day;
                 birthday.day = day;
                 continue;
-            } else if(name === 'month') {
+            } else if (name === 'month') {
                 let month = Number(value) + 1;
-                if(month <= 9) month = "0" + month
+                if (month <= 9) month = "0" + month
                 birthday.month = month;
                 continue;
-            } else if(name === 'year') {
+            } else if (name === 'year') {
                 birthday.year = moment().year() - Number(value);
                 continue;
             }
@@ -67,7 +68,7 @@ class RegisterForm extends Component {
                 value = element.checked ? 1 : 0;
             }
             if (name === "schoolId") value++;
-            if(name === "studentId" && value === "") value = null;
+            if (name === "studentId" && value === "") value = null;
             data[name] = value;
         }
 
@@ -83,6 +84,11 @@ class RegisterForm extends Component {
         const { commonsData, t } = this.props;
         return (
             <div>
+                <Head>
+                    <title>
+                        {t('editInfoBig')}
+                    </title>
+                </Head>
                 <div className="bg-cb-grey-lighter"><Header english={t('editInfoSmall')} thai={t('editInfoBig')} englishColor={`text-cb-pink`} borderColor={`border-cb-red`} /></div>
                 <div className="bg-white">
                     <UserInfoConsumer>

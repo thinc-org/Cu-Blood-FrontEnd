@@ -7,6 +7,8 @@ import FacebookButton from '@/shared-components/FacebookButton';
 import Footer from '@/shared-components/Footer';
 import '../../static/css/profile.css';
 import axios from '@/core/core';
+import Head from 'next/head';
+import I18 from '@/core/i18n';
 
 
 class Profile extends Component {
@@ -33,12 +35,17 @@ class Profile extends Component {
     }
 
     render() {
-        const { commonsData, sessionData } = this.props;
+        const { commonsData, sessionData, t } = this.props;
         const commonsInfo = commonsData ? commonsData.result : null;
         const sessionInfo = commonsData && sessionData ? sessionData.result : null;
 
         return (
             <div>
+                <Head>
+                    <title>
+                        {t('profileHeader')}
+                    </title>
+                </Head>
                 <ProfileHeader />
                 <Enrollment commonsInfo={commonsInfo} sessionInfo={sessionInfo} />
                 <PersonalInfo />
@@ -50,4 +57,4 @@ class Profile extends Component {
     }
 }
 
-export default Profile;
+export default I18.withNamespaces('profile')(Profile);

@@ -6,6 +6,7 @@ import '../static/css/login.css'
 import axios from '@/core/core';
 import redirectTo from '@/core/redirectTo';
 import I18 from '@/core/i18n';
+import Head from 'next/head';
 
 class ChulaLogin extends Component {
 
@@ -88,6 +89,11 @@ class ChulaLogin extends Component {
         const { t } = this.props;
         return (
             <div className="flex flex-col special-height">
+                <Head>
+                    <title>
+                        {t('userLoginLogin')}
+                    </title>
+                </Head>
                 <div className="layout-wide flex flex-row items-center special-height">
                     <div className="w-full mr-12 md:mr-32 hidden sm:flex sm:flex-col">
                         <img src="../static/icons/bulb.svg" alt="bulb" style={{ height: "40px", width: "35px" }} />
@@ -115,4 +121,4 @@ class ChulaLogin extends Component {
     }
 }
 
-export default I18.withNamespaces('common')(ChulaLogin);
+export default I18.withNamespaces('login')(ChulaLogin);

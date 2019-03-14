@@ -9,6 +9,7 @@ import DropDownStat from '@/about/local-components/DropDownStat';
 import I18 from '@/core/i18n';
 import axios from '@/core/core';
 import '../static/css/about.css';
+import Head from 'next/head';
 
 class About extends React.Component {
 
@@ -46,6 +47,11 @@ class About extends React.Component {
       const displayDropDownStat = this.state.showDropDownStat ? <DropDownStat data={this.state.data} onYearChange={this.handleYearSelect} year={this.state.year} /> : null;
         return (
             <div>
+                <Head>
+                    <title>
+                        {t('aboutHeader')}
+                    </title>
+                </Head>
                 <AboutHeader />
                 <AboutContent/>
                 <PageHeader english={t('staffHeaderSmall')} englishColor="text-pink" thai={t('staffHeaderBig')} borderColor="border-red" />

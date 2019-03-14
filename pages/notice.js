@@ -5,6 +5,7 @@ import Footer from '@/shared-components/Footer';
 import FacebookButton from '@/shared-components/FacebookButton';
 import ReactDOM from 'react-dom';
 import I18 from '@/core/i18n';
+import Head from 'next/head';
 
 class Notice extends React.Component {
 
@@ -35,8 +36,14 @@ class Notice extends React.Component {
     }
 
     render() {
+        const { t } = this.props;
         return (
             <div>
+                <Head>
+                    <title>
+                        {t('noticeHeader')}
+                    </title>
+                </Head>
                 <NoticeHeader scrollToTopic={this.scrollToTopic} />
                 <NoticeContent myRefs={this.myRefs} />
                 <FacebookButton />

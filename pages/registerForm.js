@@ -8,6 +8,7 @@ import '../static/css/registerForm.css';
 import redirectTo from '@/core/redirectTo';
 import axios from '@/core/core';
 import moment from 'moment';
+import Head from 'next/head';
 
 class RegisterForm extends Component {
 
@@ -72,7 +73,7 @@ class RegisterForm extends Component {
                 value = element.checked ? 1 : 0;
             }
             if (name === "schoolId") value++;
-            if(name === "studentId" && value === "") value = null;
+            if (name === "studentId" && value === "") value = null;
             data[name] = value;
         }
 
@@ -91,6 +92,11 @@ class RegisterForm extends Component {
         const { commonsData, t } = this.props;
         return (
             <div>
+                <Head>
+                    <title>
+                        {t('registerBig')}
+                    </title>
+                </Head>
                 <div className="bg-cb-grey-lighter"><Header english={t('registerSmall')} thai={t('registerBig')} englishColor={`text-cb-pink`} borderColor={`border-cb-red`} /></div>
                 <div className="bg-white">
                     <Form commonsData={commonsData} onSubmit={this.onSubmit} isChulaId={false} submitErrorMessage={this.state.submitErrorMessage} />

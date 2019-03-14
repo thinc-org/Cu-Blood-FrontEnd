@@ -6,8 +6,5 @@
     "contact": "Contact",
     "logout": "Logout",
     "login": "Login",
-    "profile": "Profile",
-    "chulaLoginDoYouKnow" : "Do you Know?",
-    "chulaLoginDYKfirstLine" : "Donating blood decreases your vulnerability to many diseases",
-    "chulaLoginDYKBody": "including the various types of cancer, such as liver cancer, lung cancer, colon cancer, stomach cancer, etc. It also helps get rid of excess iron in the body, which is a factor for \"Coronary Artery Disease\"."
+    "profile": "Profile"
 }

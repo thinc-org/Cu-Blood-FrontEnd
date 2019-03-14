@@ -8,6 +8,7 @@ import UrgentAnnouncement from '@/home/local-components/UrgentAnnouncement';
 import axios from '@/core/core';
 import '../static/css/index.css';
 import CalendarContainer from '@/home/local-components/CalendarContainer';
+import Head from 'next/head';
 
 class App extends Component {
 
@@ -43,6 +44,11 @@ class App extends Component {
     const { announcementData, statData, facebookPosts, calendarEvents, commonsData, year } = this.props;
     return (
       <div className="font-sans border-black flex flex-col content-center w-full" >
+        <Head>
+          <title>
+            CU BLOOD
+          </title>
+        </Head>
         <HomeHead />
         <UrgentAnnouncement commonsData={commonsData} />
         <Announcement announcementData={announcementData} />

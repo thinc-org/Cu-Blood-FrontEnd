@@ -7,5 +7,8 @@
   "userLoginTitleBig": "เข้าสู่ระบบ",
   "userLoginTitleSmall": "LOGIN",
   "wrongPassword": "รหัสผ่านไม่ถูกต้อง",
-  "userNotFound": "ไม่พบชื่อผู้ใช้นี้"
+  "userNotFound": "ไม่พบชื่อผู้ใช้นี้",
+  "chulaLoginDoYouKnow" : "Do you Know?",
+  "chulaLoginDYKfirstLine" : "Donating blood decreases your vulnerability to many diseases",
+  "chulaLoginDYKBody": "Including the various types of cancer, such as liver cancer, lung cancer, colon cancer, stomach cancer, etc. It also helps get rid of excess iron in the body, which is a factor for \"Coronary Artery Disease\"."
 }

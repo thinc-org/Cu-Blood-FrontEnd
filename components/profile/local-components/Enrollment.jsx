@@ -252,7 +252,7 @@ class Enrollment extends Component {
                 return onValid < 0;
             }) : {},
         }
-        if(resetTimeId) state["regisTimeId"] = "";
+        if (resetTimeId) state["regisTimeId"] = "";
         this.setState(state);
     }
 
@@ -499,7 +499,7 @@ class Enrollment extends Component {
                         </div>
                         <div className="bg-cb-grey-lighter pb-6 w-full px-4 sm:px-10 flex flex-col justify-center items-center">
                             <select style={select} className="w-32" value={String(this.state.regisTimeId)} onChange={this.handleChangeTimeId}>
-                                <option value="">YYYY-MM-DD</option>
+                                <option value="">{t('enrollmentRegisterTimeOption')}</option>
                                 {timeSlotsOption}
                             </select>
                         </div>

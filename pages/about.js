@@ -71,7 +71,7 @@ class About extends React.Component {
                     <AboutCard englishName={t('person13')} myRole={t('role13')} picture={image} />
                     <AboutCard englishName={t('person14')} myRole={t('role14')} picture={image} />         
                 </div>
-                <div className="layout-narrow pb-10 text-center sm:text-left"><button onClick={this.triggerDropDownStat} className="text-cu-heading bg-cb-red text-white px-4 py-2 rounded-lg">{t("aboutButtonDropDown")}</button></div>
+                <div className="layout-narrow pb-10 text-center sm:text-left"><button onClick={this.triggerDropDownStat} className="font-cu-heading bg-cb-red text-white px-4 py-2 rounded-lg">{t("aboutButtonDropDown")}</button></div>
                 {displayDropDownStat}
                 <FacebookButton />
                 <Footer />

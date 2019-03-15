@@ -36,6 +36,7 @@ class Enrollment extends Component {
             pinCode: "",
             pinCodeValid: false,
             wrongPincodeMessage: "",
+            disabledTimeSlot: this.props.commonsInfo != null ? this.props.commonsInfo.timeSlots : {},
         };
     }
 
@@ -244,7 +245,14 @@ class Enrollment extends Component {
 
     //Function to setState to regisDate for when date option is pick
     handleChangeDate = (event) => {
-        this.setState({ regisDate: event.target.value })
+        this.setState({
+            regisDate: event.target.value,
+            disabledTimeSlot: this.state.commonsInfo != null ? this.state.commonsInfo.times.map(slot => {
+                const onValid = slot[moment(event.target.value).lang('en').format('dddd').toLowerCase()];
+                return onValid < 0;
+            }) : {},
+            regisTimeId: "",
+        })
     }
 
     //Function setState to regisTimeId for when time slot option is pick
@@ -373,7 +381,9 @@ class Enrollment extends Component {
 
         // Turn the array of dates into options to select
         const datesOption = dates !== null ? dates.map(date => <option key={date} value={moment(date).format('YYYY-MM-DD')}>{moment(date).format('D MMMM')}</option>) : null;
-        const timeSlotsOption = this.state.commonsInfo !== null ? this.state.commonsInfo.times.map(time => <option key={time.id} value={time.id}>{moment(time.startTime, 'HH:mm:ss').format('HH:mm')} - {moment(time.endTime, 'HH:mm:ss').format('HH:mm')}</option>) : null;
+        const timeSlotsOption = this.state.commonsInfo !== null ? this.state.commonsInfo.times.map((time, index) => {
+            return (<option disabled={this.state.disabledTimeSlot[index]} key={time.id} value={time.id}>{moment(time.startTime, 'HH:mm:ss').format('HH:mm')} - {moment(time.endTime, 'HH:mm:ss').format('HH:mm')}</option>)
+        }) : null;
         const formUnfilled = !this.state.regisDate || !this.state.regisTimeId;
 
         return (

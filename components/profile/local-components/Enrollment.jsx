@@ -7,6 +7,7 @@ import I18 from '@/core/i18n';
 import axios from '@/core/core';
 import QRCode from 'qrcode.react';
 import { SmallCheckbox, Input } from '@/shared-components/Form';
+import find from 'lodash/find';
 let i18n = I18.i18n
 
 class Enrollment extends Component {
@@ -351,26 +352,23 @@ class Enrollment extends Component {
 
     //Function to show the timeId on the enrollment
     showTimeId = () => {
-        const timeId = Number(this.state.regisTimeId);
-        switch (timeId) {
-            case 2:
-                return "09:00 - 12:00";
-            case 3:
-                return "13:00 - 16:00";
-            default:
-                return null;
+        // const timeId = Number(this.state.regisTimeId);
+        const { commonsInfo, currentSessionInfo } = this.state;
+        if(currentSessionInfo && commonsInfo) {
+            const timeLabel = currentSessionInfo.time.label;
+            const time = find(commonsInfo.times, ["label", timeLabel]);
+            return time.startTime.substring(0, time.startTime.length - 3) + " - " + time.endTime.substring(0, time.endTime.length - 3);
+        } else {
+            return null;
         }
     }
 
     //Function to turn time label from /profile/session to timeId
     getTimeId = (currentSessionInfo) => {
-        if (currentSessionInfo.time.label === "ช่วงเช้า") {
-            return 2;
-        }
-
-        else if (currentSessionInfo.time.label === "ช่วงบ่าย") {
-            return 3;
-        }
+        const label = currentSessionInfo.time.label;
+        const commonsInfo = this.state.commonsInfo;
+        const time = find(commonsInfo.times, ["label", label]);
+        return time.id;
     }
 
     // Function takes care of popup for first enrollment

@@ -8,6 +8,7 @@ import axios from '@/core/core';
 import QRCode from 'qrcode.react';
 import { SmallCheckbox, Input } from '@/shared-components/Form';
 import find from 'lodash/find';
+import '../../../static/css/profile.css';
 let i18n = I18.i18n
 
 class Enrollment extends Component {
@@ -386,12 +387,12 @@ class Enrollment extends Component {
         const formUnfilled = !this.state.regisDate || !this.state.regisTimeId;
 
         return (
-            <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 50 }}>
+            <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 30}}>
                 <div onClick={() => this.toggleModal(null, null)} className="fixed pin-t pin-l w-full h-full z-0"></div>
                 <div className="fixed px-8 flex justify-center z-10">
-                    <form className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{ minWidth: '250px' }}>
+                    <form className="bg-white py-4 sm:py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{ minWidth: '250px' }}>
                         <div className="mb-6 px-4 sm:px-10 font-semibold">{t('enrollmentRegisterHeader')}</div>
-                        <div className="bg-cb-grey-lighter py-6 w-full px-4 sm:px-10 flex flex-col justify-center items-center">
+                        <div className="bg-cb-grey-lighter py-2 sm:py-4 w-full px-4 sm:px-10 flex flex-col justify-center items-center">
                             <Detail bigText={`${thaiName}`} smallText={`${engName}`} />
                             <div className="mt-4 flex flex-col items-end">
                                 <div className="flex items-center">
@@ -409,8 +410,10 @@ class Enrollment extends Component {
                                     </select>
                                 </div>
                             </div>
+                            <div className="mt-2 sm:mt-4 text-cb-pink text-xs" style={{maxWidth: "30rem"}}>{t('enrollmentMahitClose1')}</div>
+                            <div className="mt-2 text-cb-pink text-xs" style={{maxWidth: "30rem"}}>{t('enrollmentMahitClose2')}</div>
                         </div>
-                        <div className="pt-6 flex justify-between px-4 sm:px-10">
+                        <div className="pt-4 sm:pt-6 flex justify-between px-4 sm:px-10">
                             <button onClick={() => this.toggleModal(null, null)}>{t('enrollmentCancel')}</button>
                             <button className={formUnfilled ? "text-grey cursor-not-allowed" : "text-cb-pink"} onClick={() => this.toggleModal(locationId, "confirmModal")} disabled={formUnfilled}>{t('enrollmentConfirm')}</button>
                         </div>
@@ -429,13 +432,15 @@ class Enrollment extends Component {
         const isDuringEventDate = eventEndDate != null && eventStartDate != null && Date.parse(userDate) < Date.parse(eventEndDate) && Date.parse(userDate) > Date.parse(eventStartDate);
 
         return (
-            <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 50 }}>
+            <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 30 }}>
                 <div onClick={() => this.toggleModal(null, null)} className="fixed pin-t pin-l w-full h-full z-0"></div>
                 <div className="fixed px-8 flex justify-center z-10">
                     <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{ minWidth: '250px' }}>
                         <div className="mb-6 px-4 sm:px-10 font-semibold">{t('enrollmentChangeLocationHeader')}</div>
                         <div className="bg-cb-grey-lighter py-6 w-full px-4 sm:px-10 flex flex-col justify-center items-center">
                             <Detail bigText={`${thaiName}`} smallText={`${engName}`} />
+                            <div className="mt-2 sm:mt-4 text-cb-pink text-xs" style={{maxWidth: "30rem"}}>{t('enrollmentMahitClose1')}</div>
+                            <div className="mt-2 text-cb-pink text-xs" style={{maxWidth: "30rem"}}>{t('enrollmentMahitClose2')}</div>
                         </div>
                         {isDuringEventDate ? (<div> {t('enterPasscode')} <Input type="password" value={this.state.pinCode} error={t(this.state.wrongPincodeMessage)} onKeyPress={(e) => this.handlePinCodeChange(e, locationId)} onChange={this.handlePinCodeChange} name="pinCodePutEnroll" /> </div>) : null}
                         <div className="pt-6 flex justify-between px-4 sm:px-10">
@@ -453,7 +458,7 @@ class Enrollment extends Component {
         const { t } = this.props;
 
         return (
-            <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 50 }}>
+            <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 30 }}>
                 <div onClick={() => this.toggleModal(null, null)} className="fixed pin-t pin-l w-full h-full z-0"></div>
                 <div className="fixed px-8 flex justify-center z-10">
                     <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{ minWidth: '250px' }}>
@@ -485,7 +490,7 @@ class Enrollment extends Component {
         }) : null;
         const formUnfilled = !this.state.regisDate || !this.state.regisTimeId;
         return (
-            <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 50 }}>
+            <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 30 }}>
                 <div onClick={() => this.toggleModal(null, null)} className="fixed pin-t pin-l w-full h-full z-0"></div>
                 <div className="fixed px-8 flex justify-center z-10">
                     <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{ minWidth: '250px' }}>
@@ -500,6 +505,8 @@ class Enrollment extends Component {
                                 <option value="">{t('enrollmentRegisterTimeOption')}</option>
                                 {timeSlotsOption}
                             </select>
+                            <div className="mt-4 text-cb-pink text-xs" style={{maxWidth: "30rem"}}>{t('enrollmentMahitClose1')}</div>
+                            <div className="mt-2 text-cb-pink text-xs" style={{maxWidth: "30rem"}}>{t('enrollmentMahitClose2')}</div>
                         </div>
                         <div className="pt-6 flex justify-between px-4 sm:px-10">
                             <button onClick={() => this.toggleModal(null, null)}>{t('enrollmentCancel')}</button>
@@ -518,7 +525,7 @@ class Enrollment extends Component {
         const userDate = moment().tz('Asia/Bangkok').format('MM/DD/YYYY');
         const isDuringEventDate = eventEndDate != null && eventStartDate != null && Date.parse(userDate) < Date.parse(eventEndDate) && Date.parse(userDate) > Date.parse(eventStartDate);
         return (
-            <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: !isDuringEventDate ? 50 : 30 }}>
+            <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 30 }}>
                 <div onClick={() => this.toggleModal(null, null)} className="fixed pin-t pin-l w-full h-full z-0"></div>
                 <div className="fixed px-8 flex justify-center z-10">
                     <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{ minWidth: '250px', maxHeight: !isDuringEventDate ? '75vh' : '85vh' }}>

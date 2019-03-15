@@ -19,6 +19,8 @@
     "enrollmentCancel" : "Cancel",
     "enrollmentConfirm" : "Confirm",
     "enrollmentExpire" : "Expire",
+    "enrollmentMahitClose1" : ">>On 25 and 29, registration at Mahittalathibet will close on 16:00, and donors can continue to register at Thai Red Cross Society till 16:30.",
+    "enrollmentMahitClose2" : ">>On 26 - 28, registration at Mahittalathibet will close on 18:30, and donors can continue to register at Thai Red Cross Society till 19:30.",
     "personalInfoSmallHeader" : "ข้อมูลส่วนตัว",
     "personalInfoBigHeader" : "PERSONAL INFORMATION",
     "personalInfoName" : "Full Name (NickName)",

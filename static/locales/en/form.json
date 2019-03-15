@@ -1,9 +1,9 @@
 {
     "passwordNotMatch": "Password is not matched.",
     "passwordMustBeMoreThan8": "Password must be more than 8 characters.",
-    "phoneNumberIsNotCorrect": "Phone number is not valid.",
+    "phoneNumberIsNotCorrect": "Phone number is not valid. 0XXXXXXXXX",
     "mustBeMoreThan17": "The minimum age for donation is 17 years or older at donation date.",
-    "pleaseSpecifyCorrectWeight": "Please specify the correct weight.",
+    "pleaseSpecifyCorrectWeight": "Weight must be more than 45 kg.",
     "emailNotCorrect": "Email address is not valid.",
     "numberMustBe10Digit": "ID must be 10 digits.",
     "userCredentials": "User Credentials",

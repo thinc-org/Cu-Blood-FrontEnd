@@ -355,7 +355,7 @@ class Enrollment extends Component {
     showTimeId = () => {
         // const timeId = Number(this.state.regisTimeId);
         const { commonsInfo, currentSessionInfo } = this.state;
-        if(currentSessionInfo && commonsInfo) {
+        if (currentSessionInfo && commonsInfo) {
             const timeLabel = currentSessionInfo.time.label;
             const time = find(commonsInfo.times, ["label", timeLabel]);
             return time.startTime.substring(0, time.startTime.length - 3) + " - " + time.endTime.substring(0, time.endTime.length - 3);
@@ -387,7 +387,7 @@ class Enrollment extends Component {
         const formUnfilled = !this.state.regisDate || !this.state.regisTimeId;
 
         return (
-            <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 30}}>
+            <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 30 }}>
                 <div onClick={() => this.toggleModal(null, null)} className="fixed pin-t pin-l w-full h-full z-0"></div>
                 <div className="fixed px-8 flex justify-center z-10">
                     <form className="bg-white py-4 sm:py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{ minWidth: '250px' }}>
@@ -410,8 +410,18 @@ class Enrollment extends Component {
                                     </select>
                                 </div>
                             </div>
-                            <div className="mt-2 sm:mt-4 text-cb-pink text-xs" style={{maxWidth: "30rem"}}>{t('enrollmentMahitClose1')}</div>
-                            <div className="mt-2 text-cb-pink text-xs" style={{maxWidth: "30rem"}}>{t('enrollmentMahitClose2')}</div>
+                            {(moment("2019-03-30") > moment())
+                                ?
+                                (
+                                    <React.Fragment>
+                                        <div className="mt-2 sm:mt-4 text-cb-red text-xs text-left" style={{ maxWidth: "30rem" }}>{t('enrollmentMahitClose1')}</div>
+                                        <div className="mt-2 text-cb-red text-xs text-left" style={{ maxWidth: "30rem" }}>{t('enrollmentMahitClose2')}</div>
+                                    </React.Fragment>
+                                )
+                                :
+                                null
+                            }
+
                         </div>
                         <div className="pt-4 sm:pt-6 flex justify-between px-4 sm:px-10">
                             <button onClick={() => this.toggleModal(null, null)}>{t('enrollmentCancel')}</button>
@@ -439,8 +449,17 @@ class Enrollment extends Component {
                         <div className="mb-6 px-4 sm:px-10 font-semibold">{t('enrollmentChangeLocationHeader')}</div>
                         <div className="bg-cb-grey-lighter py-6 w-full px-4 sm:px-10 flex flex-col justify-center items-center">
                             <Detail bigText={`${thaiName}`} smallText={`${engName}`} />
-                            <div className="mt-2 sm:mt-4 text-cb-pink text-xs" style={{maxWidth: "30rem"}}>{t('enrollmentMahitClose1')}</div>
-                            <div className="mt-2 text-cb-pink text-xs" style={{maxWidth: "30rem"}}>{t('enrollmentMahitClose2')}</div>
+                            {(moment("2019-03-30") > moment())
+                                ?
+                                (
+                                    <React.Fragment>
+                                        <div className="mt-2 sm:mt-4 text-cb-red text-xs text-left" style={{ maxWidth: "30rem" }}>{t('enrollmentMahitClose1')}</div>
+                                        <div className="mt-2 text-cb-red text-xs text-left" style={{ maxWidth: "30rem" }}>{t('enrollmentMahitClose2')}</div>
+                                    </React.Fragment>
+                                )
+                                :
+                                null
+                            }
                         </div>
                         {isDuringEventDate ? (<div> {t('enterPasscode')} <Input type="password" value={this.state.pinCode} error={t(this.state.wrongPincodeMessage)} onKeyPress={(e) => this.handlePinCodeChange(e, locationId)} onChange={this.handlePinCodeChange} name="pinCodePutEnroll" /> </div>) : null}
                         <div className="pt-6 flex justify-between px-4 sm:px-10">
@@ -505,8 +524,17 @@ class Enrollment extends Component {
                                 <option value="">{t('enrollmentRegisterTimeOption')}</option>
                                 {timeSlotsOption}
                             </select>
-                            <div className="mt-4 text-cb-pink text-xs" style={{maxWidth: "30rem"}}>{t('enrollmentMahitClose1')}</div>
-                            <div className="mt-2 text-cb-pink text-xs" style={{maxWidth: "30rem"}}>{t('enrollmentMahitClose2')}</div>
+                            {(moment("2019-03-30") > moment())
+                                ?
+                                (
+                                    <React.Fragment>
+                                        <div className="mt-4 text-cb-red text-xs text-left" style={{ maxWidth: "30rem" }}>{t('enrollmentMahitClose1')}</div>
+                                        <div className="mt-2 text-cb-red text-xs text-left" style={{ maxWidth: "30rem" }}>{t('enrollmentMahitClose2')}</div>
+                                    </React.Fragment>
+                                )
+                                :
+                                null
+                            }
                         </div>
                         <div className="pt-6 flex justify-between px-4 sm:px-10">
                             <button onClick={() => this.toggleModal(null, null)}>{t('enrollmentCancel')}</button>

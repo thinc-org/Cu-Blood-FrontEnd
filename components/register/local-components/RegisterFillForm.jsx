@@ -153,7 +153,7 @@ class RegisterFillForm extends Component {
                 formErrors.birthday = isValid ? "" : 'mustBeMoreThan17';
                 break;
             case "weight":
-                isValid = 20 < value;
+                isValid = 45 <= value;
                 formErrors.weight = isValid ? "" : 'pleaseSpecifyCorrectWeight';
                 break;
             case "username":
@@ -259,7 +259,7 @@ class RegisterFillForm extends Component {
                             <Selector value={this.state.gender} onChange={this.handleChange} name="gender" choices={[t('male'), t('female')]} />
                         </Form>
                         <Form text={t('shirtSize')} width="24">
-                            <Selector value={this.state.shirtSize} onChange={this.handleChange} name="shirtSize" choices={['M (38")', 'L (40")', 'XL (42")', 'XXL (44")']} />
+                            <Selector value={this.state.shirtSize} onChange={this.handleChange} name="shirtSize" choices={['M (36")', 'L (40")', 'XL (44")', 'XXL (48")']} />
                         </Form>
                         <Form text={t('weight')} width="24">
                             <Input value={this.state.weight} onChange={this.handleChange} name="weight" type="text" error={t(this.state.formErrors.weight)} />

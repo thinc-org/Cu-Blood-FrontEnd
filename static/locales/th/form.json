@@ -1,9 +1,9 @@
 {
     "passwordNotMatch" : "รหัสผ่านไม่ตรงกัน",
     "passwordMustBeMoreThan8": "รหัสผ่านต้องมากกว่า 8 อักษร",
-    "phoneNumberIsNotCorrect": "เลขโทรศัพท์ไม่ถูกต้อง",
+    "phoneNumberIsNotCorrect": "เลขโทรศัพท์ไม่ถูกต้อง 0XXXXXXXXX",
     "mustBeMoreThan17": "คุณต้องมีอายุมากกว่า 17 ปี ในวันที่บริจาคเลือด",
-    "pleaseSpecifyCorrectWeight": "กรุณากรอกน้ำหนักให้ถูกต้อง",
+    "pleaseSpecifyCorrectWeight": "คุณต้องมีน้ำหนักมากกว่า 45 กิโลกรัม",
     "emailNotCorrect": "อีเมลล์ของคุณไม่ถูกต้อง",
     "numberMustBe10Digit": "กรุณากรอกรหัสให้ครบ 10 หลัก",
     "userCredentials": "ข้อมูลในการเข้าสู่ระบบ",

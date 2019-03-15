@@ -250,7 +250,7 @@ class Enrollment extends Component {
             disabledTimeSlot: this.state.commonsInfo != null ? this.state.commonsInfo.times.map(slot => {
                 const onValid = slot[moment(event.target.value).lang('en').format('dddd').toLowerCase()];
                 return onValid < 0;
-            }) : null,
+            }) : {},
             regisTimeId: "",
         })
     }

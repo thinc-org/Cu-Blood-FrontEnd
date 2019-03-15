@@ -195,7 +195,7 @@ class Enrollment extends Component {
                 location,
                 type: type,
             }
-        });
+        }, () => this.state.modalStatus.type === "fixDateModal" && this.handleChangeDate({ target: { value: this.state.regisDate } }, false));
     }
 
     //Function to post information needed for enroll to API when click accepts
@@ -244,15 +244,16 @@ class Enrollment extends Component {
     }
 
     //Function to setState to regisDate for when date option is pick
-    handleChangeDate = (event) => {
-        this.setState({
+    handleChangeDate = (event, resetTimeId = true) => {
+        const state = {
             regisDate: event.target.value,
             disabledTimeSlot: this.state.commonsInfo != null ? this.state.commonsInfo.times.map(slot => {
-                const onValid = slot[moment(event.target.value).lang('en').format('dddd').toLowerCase()];
+                const onValid = slot[moment(event.target.value).locale('en').format('dddd').toLowerCase()];
                 return onValid < 0;
             }) : {},
-            regisTimeId: "",
-        })
+        }
+        if(resetTimeId) state["regisTimeId"] = "";
+        this.setState(state);
     }
 
     //Function setState to regisTimeId for when time slot option is pick
@@ -481,8 +482,10 @@ class Enrollment extends Component {
         }
 
         const datesOption = dates !== null ? dates.map(date => <option key={date} value={moment(date).format('YYYY-MM-DD')}>{moment(date).format('D MMMM')}</option>) : null;
-        const timeSlotsOption = this.state.commonsInfo !== null ? this.state.commonsInfo.times.map(time => <option key={time.id} value={time.id}>{moment(time.startTime, 'HH:mm:ss').format('HH:mm')} - {moment(time.endTime, 'HH:mm:ss').format('HH:mm')}</option>) : null;
-
+        const timeSlotsOption = this.state.commonsInfo !== null ? this.state.commonsInfo.times.map((time, index) => {
+            return (<option disabled={this.state.disabledTimeSlot[index]} key={time.id} value={time.id}>{moment(time.startTime, 'HH:mm:ss').format('HH:mm')} - {moment(time.endTime, 'HH:mm:ss').format('HH:mm')}</option>)
+        }) : null;
+        const formUnfilled = !this.state.regisDate || !this.state.regisTimeId;
         return (
             <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 50 }}>
                 <div onClick={() => this.toggleModal(null, null)} className="fixed pin-t pin-l w-full h-full z-0"></div>
@@ -496,12 +499,13 @@ class Enrollment extends Component {
                         </div>
                         <div className="bg-cb-grey-lighter pb-6 w-full px-4 sm:px-10 flex flex-col justify-center items-center">
                             <select style={select} className="w-32" value={String(this.state.regisTimeId)} onChange={this.handleChangeTimeId}>
+                                <option value="">YYYY-MM-DD</option>
                                 {timeSlotsOption}
                             </select>
                         </div>
                         <div className="pt-6 flex justify-between px-4 sm:px-10">
                             <button onClick={() => this.toggleModal(null, null)}>{t('enrollmentCancel')}</button>
-                            <button className="text-cb-pink" onClick={() => this.putEnroll(this.state.currentSessionInfo.locationId)}>{t('enrollmentConfirm')}</button>
+                            <button className={formUnfilled ? "text-grey cursor-not-allowed" : "text-cb-pink"} onClick={() => this.putEnroll(this.state.currentSessionInfo.locationId)} disabled={formUnfilled}>{t('enrollmentConfirm')}</button>
                         </div>
                     </div>
                 </div>

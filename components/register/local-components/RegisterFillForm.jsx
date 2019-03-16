@@ -183,7 +183,7 @@ class RegisterFillForm extends Component {
                 }
                 return { requiresStudentlId, studentIdValid, studentId, requiresYear, academicYear, formErrors };
             case "studentId":
-                isValid = (this.props.userInfo && this.props.userInfo.status == 1 && this.state.status === "") || (value && value.length === 10 && Number(value) == value);
+                isValid = (this.props.userInfo && (this.props.userInfo.status == 1 || this.props.userInfo.status == 2 || this.props.userInfo.status == 3) && this.state.status === "") || (value && value.length === 10 && Number(value) == value);
                 formErrors.studentId = isValid ? "" : 'numberMustBe10Digit';
                 break;
             default:

@@ -122,16 +122,17 @@ class PersonalInfo extends Component {
     shirtSize = (reference) => {
         switch (reference) {
             case 0:
-                return "M (38\")";
+            // M 36, L 40, XL 44, XXL 
+                return "M (36\")";
 
             case 1:
                 return "L (40\")";
 
             case 2:
-                return "XL (42\")";
+                return "XL (44\")";
 
             case 3:
-                return "XXL (44\")";
+                return "XXL (48\")";
 
             default:
                 return null;

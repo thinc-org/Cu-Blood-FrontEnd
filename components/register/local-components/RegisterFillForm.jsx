@@ -169,7 +169,7 @@ class RegisterFillForm extends Component {
                 let studentId = this.state.studentId;
                 let requiresYear = true;
                 let academicYear = this.state.academicYear;
-                if (value == 1) {
+                if (value == 1 || value == 2 || value == 3) {
                     formErrors.studentId = ""
                     requiresStudentlId = false
                     studentIdValid = true;

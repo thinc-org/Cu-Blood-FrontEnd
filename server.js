@@ -4,7 +4,7 @@ const nextI18NextMiddleware = require('next-i18next/middleware')
 
 const devProxy = {
   '/v0': {
-    target: 'https://api-dev.fives.cloud/v0/',
+    target: 'https://cublood.clubs.chula.ac.th/api-v0/',
     pathRewrite: { '^/v0': '/' },
     changeOrigin: true,
     cookieDomainRewrite: "localhost:3000",

@@ -68,12 +68,12 @@ class Enrollment extends Component {
             );
         }
 
-        const regisStartDate = moment(commonsInfo.registrationStartDate).format('MM/DD/YYYY');
-        const regisEndDate = moment(commonsInfo.registrationEndDate).format('MM/DD/YYYY');
-        const eventEndDate = moment(commonsInfo.endDate).format('MM/DD/YYYY');
-        const revisionEndDate = moment(commonsInfo.revisionEndDate).format('MM/DD/YYYY');
-        const userDate = moment().tz('Asia/Bangkok').format('MM/DD/YYYY');
-        if (Date.parse(userDate) < Date.parse(regisStartDate) || Date.parse(userDate) > Date.parse(eventEndDate)) {
+        const regisStartTime = moment(commonsInfo.registrationStartDate);
+        const regisEndTime = moment(commonsInfo.registrationEndDate);
+        const eventEndTime = moment(commonsInfo.endDate);
+        const revisionEndTime = moment(commonsInfo.revisionEndDate);
+        const userTime = moment().tz('Asia/Bangkok');
+        if (userTime <= regisStartTime || userTime >= eventEndTime) {
             return (
                 <div className="bg-cb-grey-lighter pb-10">
                     <div className="layout-wide">
@@ -90,13 +90,13 @@ class Enrollment extends Component {
             );
         }
         //Create fix date button if the user already registered for the current event
-        const fixDateButton = (this.state.currentSessionInfo !== null) && (Date.parse(userDate) <= Date.parse(revisionEndDate)) ? <button className="ml-2" onClick={() => this.toggleModal(null, 'fixDateModal')}><img className="w-6" src="/static/icons/fix.svg" alt="Fix logo" /></button> : null;
+        const fixDateButton = (this.state.currentSessionInfo !== null) && (userTime <= revisionEndTime) ? <button className="ml-2" onClick={() => this.toggleModal(null, 'fixDateModal')}><img className="w-6" src="/static/icons/fix.svg" alt="Fix logo" /></button> : null;
         //Create the location content where there is the location name + link to map + button to open modal
         const locationContent = commonsInfo.locations.map(element => this.content(element.nameTH, element.nameEN, element.googleMapsURL, element));
         //Mapping to create the register modal
         const datesDuringDonation = commonsInfo !== null ? commonsInfo.timeSlots : null;
         //Display registration period or last revision day information
-        const leftDateContent = Date.parse(userDate) <= Date.parse(regisEndDate) ?
+        const leftDateContent = userTime <= regisEndTime ?
             <div className="mb-8 sm:mb-0 text-center sm:text-left"><Detail bigText={`${moment(commonsInfo.registrationStartDate).add((i18n.language === 'th' ? 543 : 0), 'years').format('D MMMM')} - ${moment(commonsInfo.registrationEndDate).add((i18n.language === 'th' ? 543 : 0), 'years').format('D MMMM')}`} smallText={t('enrollmentRegisPeriod')} isBold={true} /></div>
             : <div className="mb-8 sm:mb-0 text-center sm:text-left"><Detail bigText={`${moment(commonsInfo.revisionEndDate).add((i18n.language === 'th' ? 543 : 0), 'years').format('D MMMM')}`} smallText={t('enrollmentLastRevisionDate')} isBold={true} /></div>
 
@@ -153,17 +153,16 @@ class Enrollment extends Component {
         const isLocationPick = (this.state.currentSessionInfo !== null) && (this.state.currentSessionInfo.locationId === element.id)
 
         //Check what date the user is in
-        const regisEndDate = this.state.commonsInfo !== null ? moment(this.state.commonsInfo.registrationEndDate).format('MM/DD/YYYY') : null;
-        const revisionEndDate = this.state.commonsInfo !== null ? moment(this.state.commonsInfo.revisionEndDate).format('MM/DD/YYYY') : null;
-        const eventStartDate = this.state.commonsInfo !== null ? moment(this.state.commonsInfo.startDate).format('MM/DD/YYYY') : null;
-        const eventEndDate = this.state.commonsInfo !== null ? moment(this.state.commonsInfo.endDate).format('MM/DD/YYYY') : null;
-        const userDate = moment().tz('Asia/Bangkok').format('MM/DD/YYYY');
-        const afterRegis = regisEndDate !== null ? (Date.parse(userDate) > Date.parse(regisEndDate)) : false;
-        const afterRevisionEnd = revisionEndDate !== null ? (Date.parse(userDate) > Date.parse(revisionEndDate)) : false;
-        const isDuringEventDate = eventEndDate != null && eventStartDate != null && Date.parse(userDate) < Date.parse(eventEndDate) && Date.parse(userDate) > Date.parse(eventStartDate);
-
+        const regisEndTime = this.state.commonsInfo !== null ? moment(this.state.commonsInfo.registrationEndDate) : null; 
+        const revisionEndTime = this.state.commonsInfo !== null ? moment(this.state.commonsInfo.revisionEndDate) : null; 
+        const eventStartTime = this.state.commonsInfo !== null ? moment(this.state.commonsInfo.startDate) : null; 
+        const eventEndTime = this.state.commonsInfo !== null ? moment(this.state.commonsInfo.endDate) : null;
+        const userTime = moment().tz('Asia/Bangkok'); 
+        const afterRegis = regisEndTime !== null ? (userTime >= regisEndTime) : false;
+        const afterRevisionEnd = revisionEndTime !== null ? (userTime >= revisionEndTime) : false;
+        const isDuringEventTime = eventEndTime != null && eventStartTime != null && (userTime <= eventEndTime) && (userTime >= eventStartTime);
         //Choose what kind of button will show = register / change location / show QR
-        const button = this.chooseButton(alreadyRegistered, isLocationPick, element, afterRegis, afterRevisionEnd, isDuringEventDate);
+        const button = this.chooseButton(alreadyRegistered, isLocationPick, element, afterRegis, afterRevisionEnd, isDuringEventTime);
 
         return (
             <div key={engName} className="flex flex-col md:flex-row items-center justify-between mb-8">
@@ -311,7 +310,7 @@ class Enrollment extends Component {
     }
 
     //Function to choose the type of button in content
-    chooseButton = (registeredCondition, locationCondition, locationModal, afterRegisCondition, afterRevisionEndCondition, isDuringEventDate) => {
+    chooseButton = (registeredCondition, locationCondition, locationModal, afterRegisCondition, afterRevisionEndCondition, isDuringEventTime) => {
         const { t } = this.props;
         if (registeredCondition) {
             if (locationCondition) {
@@ -321,7 +320,7 @@ class Enrollment extends Component {
                 return (
                     <React.Fragment>
                         {
-                            isDuringEventDate ?
+                            isDuringEventTime ?
                                 <button onClick={() => this.toggleModal(locationModal, 'putEnrollModal')} className="text-base bg-cb-grey-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#696969" }}>{t("enrollmentChangeLocation")}</button>
                                 :
                                 <button className="text-base bg-cb-grey-light rounded-lg px-6 py-2 font-semibold opacity-50 cursor-not-allowed">{t('enrollmentExpire')}</button>
@@ -336,7 +335,7 @@ class Enrollment extends Component {
             return (
                 <React.Fragment>
                     {
-                        isDuringEventDate
+                        isDuringEventTime
                             ?
                             <button onClick={() => this.toggleModal(locationModal, 'firstEnrollModal')} className="text-base bg-cb-pink-light rounded-lg px-6 py-2 font-semibold" style={{ color: "#de5c8e" }}>{t("walkInRegistration")}</button>
                             :
@@ -436,10 +435,10 @@ class Enrollment extends Component {
     //Function that takes care of modal when user wants to change location
     putEnrollModal = (thaiName, engName, locationId) => {
         const { t } = this.props;
-        const eventStartDate = this.state.commonsInfo !== null ? moment(this.state.commonsInfo.startDate).format('MM/DD/YYYY') : null;
-        const eventEndDate = this.state.commonsInfo !== null ? moment(this.state.commonsInfo.endDate).format('MM/DD/YYYY') : null;
-        const userDate = moment().tz('Asia/Bangkok').format('MM/DD/YYYY');
-        const isDuringEventDate = eventEndDate != null && eventStartDate != null && Date.parse(userDate) < Date.parse(eventEndDate) && Date.parse(userDate) > Date.parse(eventStartDate);
+        const eventStartTime = this.state.commonsInfo !== null ? moment(this.state.commonsInfo.startDate).format('MM/DD/YYYY') : null;
+        const eventEndTime = this.state.commonsInfo !== null ? moment(this.state.commonsInfo.endDate) : null;
+        const userTime = moment().tz('Asia/Bangkok');
+        const isDuringEventTime = eventEndTime != null && eventStartTime != null && (userTime <= eventEndTime) && (userTime >= eventStartTime);
 
         return (
             <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 30 }}>
@@ -461,10 +460,10 @@ class Enrollment extends Component {
                                 null
                             }
                         </div>
-                        {isDuringEventDate ? (<div> {t('enterPasscode')} <Input type="password" value={this.state.pinCode} error={t(this.state.wrongPincodeMessage)} onKeyPress={(e) => this.handlePinCodeChange(e, locationId)} onChange={this.handlePinCodeChange} name="pinCodePutEnroll" /> </div>) : null}
+                        {isDuringEventTime ? (<div> {t('enterPasscode')} <Input type="password" value={this.state.pinCode} error={t(this.state.wrongPincodeMessage)} onKeyPress={(e) => this.handlePinCodeChange(e, locationId)} onChange={this.handlePinCodeChange} name="pinCodePutEnroll" /> </div>) : null}
                         <div className="pt-6 flex justify-between px-4 sm:px-10">
                             <button onClick={() => this.toggleModal(null, null)}>{t('enrollmentCancel')}</button>
-                            <button className={isDuringEventDate && !this.state.pinCodeValid ? "text-grey cursor-not-allowed" : "text-cb-pink"} onClick={() => this.putEnroll(locationId)} disabled={isDuringEventDate && !this.state.pinCodeValid}>{t('enrollmentConfirm')}</button>
+                            <button className={isDuringEventTime && !this.state.pinCodeValid ? "text-grey cursor-not-allowed" : "text-cb-pink"} onClick={() => this.putEnroll(locationId)} disabled={isDuringEventTime && !this.state.pinCodeValid}>{t('enrollmentConfirm')}</button>
                         </div>
                     </div>
                 </div>
@@ -548,15 +547,15 @@ class Enrollment extends Component {
 
     confirmModal = (locationId, projectId) => {
         const { t } = this.props;
-        const eventStartDate = this.state.commonsInfo !== null ? moment(this.state.commonsInfo.startDate).format('MM/DD/YYYY') : null;
-        const eventEndDate = this.state.commonsInfo !== null ? moment(this.state.commonsInfo.endDate).format('MM/DD/YYYY') : null;
-        const userDate = moment().tz('Asia/Bangkok').format('MM/DD/YYYY');
-        const isDuringEventDate = eventEndDate != null && eventStartDate != null && Date.parse(userDate) < Date.parse(eventEndDate) && Date.parse(userDate) > Date.parse(eventStartDate);
+        const eventStartTime = this.state.commonsInfo !== null ? moment(this.state.commonsInfo.startDate) : null;
+        const eventEndTime = this.state.commonsInfo !== null ? moment(this.state.commonsInfo.endDate) : null;
+        const userTime = moment().tz('Asia/Bangkok');
+        const isDuringEventTime = eventEndTime != null && eventStartTime != null && (userTime <= eventEndTime) && (userTime >= eventStartTime);
         return (
             <div className="fixed pin-l w-full h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.3)', top: 30 }}>
                 <div onClick={() => this.toggleModal(null, null)} className="fixed pin-t pin-l w-full h-full z-0"></div>
                 <div className="fixed px-8 flex justify-center z-10">
-                    <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{ minWidth: '250px', maxHeight: !isDuringEventDate ? '75vh' : '85vh' }}>
+                    <div className="bg-white py-6 sm:py-10 flex flex-col rounded-lg shadow text-center font-cu-heading text-base sm:text-lg" style={{ minWidth: '250px', maxHeight: !isDuringEventTime ? '75vh' : '85vh' }}>
                         <div className="mb-6 px-4 sm:px-10 font-semibold">{t('donateInstruction')}</div>
                         <div className="overflow-y-scroll overflow-x-hidden scroll px-4">
                             <SmallCheckbox checked={this.state.agree1} onChange={this.handleCheckboxChange} name="agree1" text={t('agree1')} />
@@ -568,10 +567,10 @@ class Enrollment extends Component {
                             <SmallCheckbox checked={this.state.agree7} onChange={this.handleCheckboxChange} name="agree7" text={t('agree7')} />
                             <SmallCheckbox checked={this.state.agree8} onChange={this.handleCheckboxChange} name="agree8" text={t('agree8')} />
                         </div>
-                        {isDuringEventDate ? (<div> {t('enterPasscode')} <Input type="password" value={this.state.pinCode} error={t(this.state.wrongPincodeMessage)} onKeyPress={(e) => this.handlePinCodeChange(e, locationId, projectId)} onChange={this.handlePinCodeChange} name="pinCodePostEnroll" /> </div>) : null}
+                        {isDuringEventTime ? (<div> {t('enterPasscode')} <Input type="password" value={this.state.pinCode} error={t(this.state.wrongPincodeMessage)} onKeyPress={(e) => this.handlePinCodeChange(e, locationId, projectId)} onChange={this.handlePinCodeChange} name="pinCodePostEnroll" /> </div>) : null}
                         <div className="pt-6 flex justify-between px-4 sm:px-10">
                             <button onClick={() => this.toggleModal(null, null)}>{t('enrollmentCancel')}</button>
-                            <button className={!this.state.agree.allAgree || (isDuringEventDate && !this.state.pinCodeValid) ? "text-grey cursor-not-allowed" : "text-cb-pink"} onClick={() => this.postEnroll(locationId, projectId)} disabled={!this.state.agree.allAgree || (isDuringEventDate && !this.state.pinCodeValid)}>{t('enrollmentConfirm')}</button>
+                            <button className={!this.state.agree.allAgree || (isDuringEventTime && !this.state.pinCodeValid) ? "text-grey cursor-not-allowed" : "text-cb-pink"} onClick={() => this.postEnroll(locationId, projectId)} disabled={!this.state.agree.allAgree || (isDuringEventTime && !this.state.pinCodeValid)}>{t('enrollmentConfirm')}</button>
                         </div>
                     </div>
                 </div>

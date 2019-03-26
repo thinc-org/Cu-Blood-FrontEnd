@@ -25,8 +25,8 @@ class DropDownStat extends Component {
         insightData && insightData.map(obj => {
             totalVolume += obj.totalVolume ? Number(obj.totalVolume) : 0;
             firstEnrollmentCount += obj.firstEnrollmentCount ? Number(obj.firstEnrollmentCount) : 0;
-            popularTimes[0] += (obj.popularTimes && obj.popularTimes[0]) ? Number(obj.popularTimes[0].count) : 0;
-            popularTimes[1] += (obj.popularTimes && obj.popularTimes[1]) ? Number(obj.popularTimes[1].count) : 0;
+            popularTimes[0] += (obj.popularTimes && obj.popularTimes[1]) ? Number(obj.popularTimes[1].count) : 0;
+            popularTimes[1] += (obj.popularTimes && obj.popularTimes[0]) ? Number(obj.popularTimes[0].count) : 0;
             popularTimes[2] += (obj.popularTimes && obj.popularTimes[2]) ? Number(obj.popularTimes[2].count) : 0;
         })
         return {

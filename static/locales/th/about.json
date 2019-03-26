@@ -62,8 +62,8 @@
   "statBloodTotal" : "จำนวนโลหิตที่ได้รับบริจาค",
   "statNumEnroll" : "จำนวนผู้ลงทะเบียนในแต่ละช่วงเวลา",
   "statMorning" : "เช้า",
-  "statNoon" : "กลางวัน",
-  "statAfternoon" : "เย็น",
+  "statAfternoon" : "บ่าย",
+  "statEvening" : "เย็น",
   "statNewDonators" : "จำนวนผู้บริจาคหน้าใหม่",
   "statPeople" : "คน",
   "year": "ปี"

@@ -21,12 +21,13 @@ class DropDownStat extends Component {
     convertInsightToData(insightData) {
         let totalVolume = 0;
         let firstEnrollmentCount = 0;
-        let popularTimes = [0, 0];
+        let popularTimes = [0, 0, 0];
         insightData && insightData.map(obj => {
             totalVolume += obj.totalVolume ? Number(obj.totalVolume) : 0;
             firstEnrollmentCount += obj.firstEnrollmentCount ? Number(obj.firstEnrollmentCount) : 0;
             popularTimes[0] += (obj.popularTimes && obj.popularTimes[0]) ? Number(obj.popularTimes[0].count) : 0;
             popularTimes[1] += (obj.popularTimes && obj.popularTimes[1]) ? Number(obj.popularTimes[1].count) : 0;
+            popularTimes[2] += (obj.popularTimes && obj.popularTimes[2]) ? Number(obj.popularTimes[2].count) : 0;
         })
         return {
             totalVolume,
@@ -44,10 +45,10 @@ class DropDownStat extends Component {
         const { popularTimes, firstEnrollmentCount, totalVolume } = projectInsights;
 
         const choices = [];
-        for(let i = (new Date()).getFullYear(); i >= 2019 ; i--) {
+        for (let i = (new Date()).getFullYear(); i >= 2019; i--) {
             choices.push(i);
         }
-         
+
         return (
             <div className="bg-cb-grey-lighter pb-10 pt-5">
                 <div className="layout-narrow font-cu-heading text-2xl">
@@ -62,16 +63,17 @@ class DropDownStat extends Component {
                         {this.numberList(bloodTypes[3], `${t("statBloodGroup")} AB`, "blood")}
                         {this.numberList(bloodTypes[0] + bloodTypes[1] + bloodTypes[2] + bloodTypes[3], t("statDonatorTotal"), "blood")}
                     </div>
-                    <div className="text-cb-pink mb-6">{t("statBloodTotal")}</div>
-                    <div className="w-full text-center text-cb-red text-4xl mb-6">{totalVolume} CC</div>
+                    <div className="mb-6 text-cb-pink">{t("statNumEnroll")}</div>
+                    <div className="sm:flex justify-between px-4">
+                        {this.numberList(popularTimes[0] + " " + t("statPeople"), t("statMorning"), "enroll")}
+                        {this.numberList(popularTimes[1] + " " + t("statPeople"), t("statAfternoon"), "enroll")}
+                        {this.numberList(popularTimes[2] + " " + t("statPeople"), t("statEvening"), "enroll")}
+                    </div>
                     <div className="flex justify-center items-center flex-wrap">
                         <div className="flex flex-col sm:flex-row w-full justify-between">
                             <div>
-                                <div className="mb-6 text-cb-pink">{t("statNumEnroll")}</div>
-                                <div className="flex justify-between px-4">
-                                    {this.numberList(popularTimes[0] + " " + t("statPeople"), t("statMorning"), "enroll")}
-                                    {this.numberList(popularTimes[1] + " " + t("statPeople"), t("statAfternoon"), "enroll")}
-                                </div>
+                                <div className="text-cb-pink mb-6">{t("statBloodTotal")}</div>
+                                <div className="w-full text-center text-cb-red text-4xl mb-6">{totalVolume} CC</div>
                             </div>
                             <div>
                                 <div className="mb-6 text-cb-pink">{t("statNewDonators")}</div>

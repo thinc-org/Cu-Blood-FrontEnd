@@ -62,8 +62,8 @@
   "statBloodTotal" : "Total Volume of Blood Donated",
   "statNumEnroll" : "Number of People Enrolled in Each Time Period",
   "statMorning" : "Morning",
-  "statNoon" : "Noon",
   "statAfternoon" : "Afternoon",
+  "statEvening" : "Evening",
   "statNewDonators" : "Number of New Donators",
   "statPeople" : "People",
   "year": "Year"

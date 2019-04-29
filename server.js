@@ -1,6 +1,7 @@
 const express = require('express')
 const next = require('next')
 const nextI18NextMiddleware = require('next-i18next/middleware')
+const compression = require('compression');
 
 const devProxy = {
   '/v0': {
@@ -23,7 +24,8 @@ const handle = app.getRequestHandler();
 (async () => {
   await app.prepare()
   const server = express()
-  server.enable('trust proxy');
+  .use(compression())
+  .enable('trust proxy');
 
   if (dev && devProxy) {
     const proxyMiddleware = require('http-proxy-middleware')
